@@ -2,6 +2,8 @@ import os
 import shutil
 import json
 import inspect
+from .enum import axis, anchor, dimension
+from .selector import Selector
 
 class Commands:
     def __init__(self, datapack_path, override=False):
@@ -78,7 +80,88 @@ class Commands:
             return function
         return wrapper()
 
-    def execute(self, command):
+    class execute:
+        def __init__(self):
+            self.command = "execute "
+
+        def align(self, *args):
+            axes = []
+            for arg in args:
+                if not isinstance(arg, axis):
+                    raise ValueError(f"Unknown value: {axis}")
+                elif arg.value not in args:
+                    axes.append(arg.value)    
+            self.command += f"align {''.join(axes)}"
+            return self
+
+        def anchored(self, anchor_point):
+            if not isinstance(anchor_point, anchor):
+                raise ValueError(f"Unknown value for 'anchored': {anchor_point}")
+            self.command += f"anchored {anchor_point.value} "
+            return self
+
+        # "as" is a reserved keyword used in opening files
+        def As(self, entity):
+            if not isinstance(entity, Selector):
+                raise ValueError("'entity' must be a selector object")
+            self.command += f"as {entity.build()} "
+            return self
+
+        def at(self, entity):
+            if not isinstance(entity, Selector):
+                raise ValueError("'entity' must be a selector object")
+            self.command += f"at {entity.build()} "
+            return self
+
+        def as_at(self, entity):
+            if not isinstance(entity, Selector):
+                raise ValueError("'entity' must be a selector object")
+            self.command += f"as {entity.build()} at {entity.build()} "
+            return self
+
+        def facing(self, entity=None, pos=None):
+            if entity:
+                if pos:
+                    raise ValueError("You can't provide both an entity and position")
+                if not isinstance(entity, Selector):
+                    raise ValueError("'entity' must be a selector object")
+                self.command += f"facing entity {entity.build()} "
+            elif pos:
+                if not type(pos) is tuple or not len(pos) == 3:
+                    raise ValueError("'pos' must be a tuple of 3 values")
+                self.command += f"facing {' '.join(pos)} "
+            return self
+
+        # "in" is a reserved keyword used for checking lists, tuples, etc.
+        def In(self, dimension_name):
+            if not isinstance(dimension_name, dimension):
+                raise ValueError(f"Unknown value for 'dimension': {dimension_name}")
+            self.command += f"in minecraft:{dimension_name.value} "
+            return self
+
+        def positioned(self, pos):
+            if type(pos) is not tuple or len(pos) != 3:
+                raise ValueError("'pos' must be a tuple of 3 values")
+            self.command += f"positioned {' '.join(pos)} "
+            return self
+
+        def rotated(self, entity=None, rot=None):
+            if entity:
+                if rot:
+                    raise ValueError("You can't provide both an entity and rotation values")
+                if not isinstance(entity, Selector):
+                    raise ValueError("'entity' must be a selector object")
+                self.command += f"rotated as {entity.build()} "
+            elif rot:
+                if type(rot) is not tuple or len(rot) != 2:
+                    raise ValueError("'rot' must be a tuple of 2 values")
+                self.command += f"rotated {' '.join(rot)} "
+            else:
+                raise ValueError("You must specify either an entity or rotation values")
+            return self
+
+
+    def send(self, command):
         with open(os.path.join(self.working_path, inspect.stack()[1][3] + ".mcfunction"), "a") as function_file:
             function_file.write(f"{command}\n")
 

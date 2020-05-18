@@ -18,3 +18,17 @@ class at(enum.Enum):
     nearest_player = "@p"
     random_player = "@r"
     selected_entity = "@s"
+
+class axis(enum.Enum):
+    x = "x"
+    y = "y"
+    z = "z"
+
+class anchor(enum.Enum):
+    feet = "feet"
+    eyes = "eyes"
+
+class dimension(enum.Enum):
+    overworld = "overworld"
+    nether = "the_nether"
+    end = "the_end"
