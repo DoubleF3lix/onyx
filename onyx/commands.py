@@ -80,10 +80,16 @@ class Commands:
             return function
         return wrapper()
 
+    # Each method returns self to allow for method chaining
+    # Method chaining allows execute statements to be reused multiple times
     class execute:
+        # Starting command
         def __init__(self):
             self.command = "execute "
 
+        # execute align (axes)
+        # Merges multiple enum values into one clump. (axis.x, axis.y) => xy
+        # Thanks to PeerHeer for coming up with a shorer method.
         def align(self, *args):
             axes = []
             for arg in args:
@@ -94,31 +100,42 @@ class Commands:
             self.command += f"align {''.join(axes)}"
             return self
 
+        # execute anchored
         def anchored(self, anchor_point):
             if not isinstance(anchor_point, anchor):
                 raise ValueError(f"Unknown value for 'anchored': {anchor_point}")
             self.command += f"anchored {anchor_point.value} "
             return self
 
-        # "as" is a reserved keyword used in opening files
+        # execute as
+        # Automatically builds the selector
+        # "as" is a reserved keyword used in opening files, which is why the A is capitalized
         def As(self, entity):
             if not isinstance(entity, Selector):
                 raise ValueError("'entity' must be a selector object")
             self.command += f"as {entity.build()} "
             return self
 
+        # execute at
+        # Automatically builds the selector
         def at(self, entity):
             if not isinstance(entity, Selector):
                 raise ValueError("'entity' must be a selector object")
             self.command += f"at {entity.build()} "
             return self
 
+        # execute as (entity) at (entity)
+        # Automatically builds the selector
+        # Thanks to Mulv for this suggestion
         def as_at(self, entity):
             if not isinstance(entity, Selector):
                 raise ValueError("'entity' must be a selector object")
             self.command += f"as {entity.build()} at {entity.build()} "
             return self
 
+        # execute facing
+        # Automatically builds the selector if "entity" is passed
+        # Doesn't allow for "entity" and "pos" to both be passed
         def facing(self, entity=None, pos=None):
             if entity:
                 if pos:
@@ -132,6 +149,7 @@ class Commands:
                 self.command += f"facing {' '.join(pos)} "
             return self
 
+        # execute in
         # "in" is a reserved keyword used for checking lists, tuples, etc.
         def In(self, dimension_name):
             if not isinstance(dimension_name, dimension):
@@ -139,12 +157,16 @@ class Commands:
             self.command += f"in minecraft:{dimension_name.value} "
             return self
 
+        # execute positioned
         def positioned(self, pos):
             if type(pos) is not tuple or len(pos) != 3:
                 raise ValueError("'pos' must be a tuple of 3 values")
             self.command += f"positioned {' '.join(pos)} "
             return self
 
+        # execute rotated
+        # Automatically builds the selector if "entity" is passed
+        # Doesn't allow for "entity" and "rot" to both be passed
         def rotated(self, entity=None, rot=None):
             if entity:
                 if rot:
