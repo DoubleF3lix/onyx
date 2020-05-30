@@ -49,6 +49,7 @@ class trait(enum.Enum):
 	style = "style"         		# set
 	progress = "value"      		# set and get ("value" is used to access enum values, so I used "progress")
 
+# Used for bossbars
 class style(enum.Enum):
 	six_segments = "notched_6" 
 	ten_segments = "notched_10" 
@@ -77,6 +78,7 @@ class color(enum.Enum):
 	white = "white"                 # bossbar compatible
 	reset = "reset"
 
+# Used for text component "clickEvent" and "hoverEvent"
 # show_entity is not supported since it requires an external generate to convert the UUIDs, and it's just a broken mess all around.
 class action(enum.Enum):
 	change_page = "change_page"		# clickEvent exclusive
@@ -87,6 +89,7 @@ class action(enum.Enum):
 	show_text = "show_text"			# hoverEvent exclusive
 	show_item = "show_item"			# hoverEvent exclusive
 
+# Used for text component "keybind"
 class key(enum.Enum):
 	jump = "jump"
 	sneak = "sneak"
@@ -119,3 +122,17 @@ class key(enum.Enum):
 	cinematic_camera = "smoothCamera"
 	fullscreen = "fullscreen"
 	toggle_perspective = "togglePerspective"
+
+# Used for advancements
+class advancement_action(enum.Enum):
+	grant = "grant"
+	revoke = "revoke"
+
+# Used for advancements
+# "from" is a reserved keywored
+class selection(enum.Enum):
+	everything = "everything"
+	From = "from"
+	only = "only"
+	through = "through"
+	until = "until"

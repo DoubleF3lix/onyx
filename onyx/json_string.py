@@ -3,7 +3,7 @@ import traceback
 from .enum import color as color_enum
 from .enum import action, key
 from .selector import Selector
-from .commands import Commands
+from .handler import Handler
 
 class json_string:
 	def __init__(self):
@@ -26,16 +26,16 @@ class json_string:
 			if not isinstance(With, list):
 				raise ValueError(f"Expected list for 'with', got {type(With)}")
 			if not translate:
-				Commands._warn("Parameter 'with' specified without 'translate'")
+				Handler._warn("Parameter 'with' specified without 'translate'")
 			element["with"] = With
 
 		if score:
 			if text:
-				Commands._warn(f"'score' will not display with specified 'text' parameter")
+				Handler._warn(f"'score' will not display with specified 'text' parameter")
 			if not isinstance(score, dict):
 				raise ValueError(f"Expected dictionary for 'score', got {type(score)}")
 			if not "signature18" in score:
-				Commands._warn("'score' is missing siganture. Consider using 'Scoreboard()' to avoid errors.")
+				Handler._warn("'score' is missing siganture. Consider using 'Scoreboard()' to avoid errors.")
 				if isinstance(score["player"], Selector):
 					score["player"] = score["player"].build()
 			element["score"] = {"name": score["player"], "objective": score["objective"]}
@@ -59,28 +59,28 @@ class json_string:
 			if not isinstance(interpret, bool):
 				raise ValueError(f"Expected boolean for 'interpret', got {type(interpret)}")
 			if not nbt:
-				Commands._warn("Parameter 'interpet' specified without 'nbt'")
+				Handler._warn("Parameter 'interpet' specified without 'nbt'")
 			element["interpret"] = str(interpret).lower()
 		
 		if block:
 			if not isinstance(block, tuple) or len(tuple) != 3:
 				raise ValueError("'block' must be a tuple with 3 elements")
 			if not nbt:
-				Commands._warn("Parameter 'block' specified without 'nbt'")
+				Handler._warn("Parameter 'block' specified without 'nbt'")
 			element["block"] = " ".join(block)
 
 		if entity:
 			if not isinstance(entity, Selector):
 				raise ValueError(f"Expected Selector object, got {type(entity)}")
 			if not nbt:
-				Commands._warn("Parameter 'entity' specified without 'nbt'")
+				Handler._warn("Parameter 'entity' specified without 'nbt'")
 			element["selector"] = entity.build()
 
 		if storage:
 			if not isinstance(storage, str):
 				raise ValueError(f"Expected string for 'storage', got {type(storage)}")
 			if not nbt:
-				Commands._warn("Parameter 'storage' specified without 'nbt'")
+				Handler._warn("Parameter 'storage' specified without 'nbt'")
 			element["storage"] = storage
 
 		if extra:
@@ -143,11 +143,11 @@ class json_string:
 
 			# Warn the user if it's missing a signature, otherwise remove it
 			if "signature5" not in clickEvent:
-				Commands._warn("'clickEvent' is missing siganture. Consider using 'click_event()' to avoid errors.")
+				Handler._warn("'clickEvent' is missing siganture. Consider using 'click_event()' to avoid errors.")
 			else:
 				del clickEvent["signature5"]
 			if not text and not score:
-				Commands._warn("Parameter 'clickEvent' specified without 'text' or 'score'")
+				Handler._warn("Parameter 'clickEvent' specified without 'text' or 'score'")
 			element["clickEvent"] = clickEvent
 
 		if hoverEvent:
@@ -163,11 +163,11 @@ class json_string:
 
 			# Warn the user if it's missing a signature, otherwise remove it
 			if "signature42" not in hoverEvent:
-				Commands._warn("'hoverEvent' is missing siganture. Consider using 'hover_event()' to avoid errors.")
+				Handler._warn("'hoverEvent' is missing siganture. Consider using 'hover_event()' to avoid errors.")
 			else:
 				del hoverEvent["signature42"]
 			if not text and not score:
-				Commands._warn("Parameter 'hoverEvent' specified without 'text' or 'score'")
+				Handler._warn("Parameter 'hoverEvent' specified without 'text' or 'score'")
 			element["hoverEvent"] = hoverEvent
 
 		# Add the dictionary to a list element

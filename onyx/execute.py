@@ -28,7 +28,7 @@ class Execute:
 
 	# execute as
 	# Automatically builds the selector
-	# "as" is a reserved keyword used in opening files, which is why the A is capitalized
+	# "as" is a reserved keyword
 	def As(self, entity:Selector) -> "execute":
 		if not isinstance(entity, Selector):
 			raise ValueError(f"Expected Selector object, got {type(entity)}")
