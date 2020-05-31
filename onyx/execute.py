@@ -3,7 +3,7 @@ from .selector import Selector
 
 # Each method returns self to allow for method chaining
 # Method chaining allows execute statements to be reused multiple times
-class Execute:
+class execute:
 	def __init__(self) -> None:
 		self.output = "execute "
 
@@ -12,17 +12,13 @@ class Execute:
 	def align(self, *args:axis) -> "execute":
 		axes = []
 		for arg in args:
-			if not isinstance(arg, axis):
-				raise ValueError(f"Unknown value for 'axis': {axis}")
-			elif arg.value not in args:
+			if arg.value not in args:
 				axes.append(arg.value)    
 		self.output += f"align {''.join(axes)}"
 		return self
 
 	# execute anchored
 	def anchored(self, anchor_point:anchor) -> "execute":
-		if not isinstance(anchor_point, anchor):
-			raise ValueError(f"Unknown value for 'anchored': {anchor_point}")
 		self.output += f"anchored {anchor_point.value} "
 		return self
 
@@ -71,8 +67,6 @@ class Execute:
 	# execute in
 	# "in" is a reserved keyword used for checking lists, tuples, etc.
 	def In(self, dimension_name:dimension) -> "execute":
-		if not isinstance(dimension_name, dimension) or not isinstance(dimension_name, str):
-			raise ValueError(f"Unknown value for 'dimension': {dimension_name}")
 		self.output += f"in minecraft:{dimension_name.value} "
 		return self
 

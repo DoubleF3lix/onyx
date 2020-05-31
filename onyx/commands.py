@@ -1,23 +1,48 @@
 import os
 import inspect
-from .enum import advancement_action, selection
-from .execute import Execute
+import enum
+from .enum import advancement_action, selection, mode
+from .execute import execute
 from .handler import Handler
 from .selector import Selector
 from .json_string import json_string
 
-def say(text:str) -> None:
-    Handler._write(inspect.stack()[1][3], f"say {text}")
-
 # Send any command
 def send(cmd:str) -> None:
+    if not isinstance(cmd, str):
+        raise ValueError(f"Expected string for 'cmd', got {type(cmd)}")
     Handler._write(inspect.stack()[1][3], cmd)
 
-# Writes "function <datapack name>:<path>"" to the working path
-def call(function:callable) -> None:
-    # Get the function path, split it, and then keep only everything past /data/namespace/functions/
-    function_path = Handler._get_function_path(function.__name__)
-    Handler._write(f"function {Handler._datapack_name}:{function_path}") 
+def advancement(action:advancement_action, targets:Selector, advancement_selection:selection, advancement:str) -> None:
+    if not isinstance(targets, Selector):
+        raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
+    if not isinstance(advancement, str):
+        raise ValueError(f"Expected string for 'advancement', got {type(advancement)}")
+    Handler._write(inspect.stack()[1][3], f"advancement {action.value} {targets.build()} {advancement_selection.value} {advancement}")
+    
+def ban(player:str, reason:str=None, ip:bool=False):
+    if not isinstance(player, str):
+        raise ValueError(f"Expected string for 'player', got {type(player)}")
+    if reason:
+        if not isinstance(reason, str):
+            raise ValueError(f"Expected string for 'reason', got {type(reason)}")
+
+    # Write "ban-ip" if ip == True, otherwise just write "ban"
+    nothing, ip_txt = "", "-ip"
+    Handler._write(f"ban{nothing if ip else ip_txt} {player} {reason or ''}")
+
+def clear(targets:Selector, item:str, count:int=None, auto_namespace:bool=True) -> None:
+    if not isinstance(targets, Selector):
+        raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
+    if not isinstance(item, str):
+        raise ValueError(f"Expected string for 'item', got {type(item)}")
+    if not count and not isinstance(count, int):
+        raise ValueError(f"Expected None or integer for 'count', got {type(count)}")
+    if not item.startswith("minecraft:"):
+        if auto_namespace:
+            item = f"minecraft:{item}"
+            Handler._warn("'item' was not namespaced with 'minecraft:' so it has been done for you. You can disable this with 'auto_namespace=False'.")
+    Handler._write(inspect.stack()[1][3], f"clear {targets.build()} {item} {count or ''}")
 
 # Adds a comment to the function file with a custom amount of blank lines before and after
 def comment(text:str, preline:int=0, postline:int=0) -> None:
@@ -25,13 +50,25 @@ def comment(text:str, preline:int=0, postline:int=0) -> None:
         Handler._write(inspect.stack()[1][3], "")
     Handler._write(inspect.stack()[1][3], f"# {text}")
     for x in range(postline):
-        Handler._write(inspect.stack()[1][3], "")		
+        Handler._write(inspect.stack()[1][3], "")	
 
-# Execute presets (everyone in /execute except if and unless)
-def using(execute_preset:Execute, cmds:tuple) -> None:
+# Writes "function <datapack name>:<path>"" to the working path
+def call(function:callable) -> None:
+    # Get the function path, split it, and then keep only everything past /data/namespace/functions/
+    function_path = Handler._get_function_path(function.__name__)
+    Handler._write(inspect.stack()[1][3], f"function {Handler._datapack_name}:{function_path}") 
+
+def defaultgamemode(gamemode:mode):
+    Handler._write(inspect.stack()[1][3], f"defaultgamemode {gamemode.value}")
+
+def difficulty(level:difficulty):
+    Handler._write(inspect.stack()[1][3], f"difficulty {level.value}")
+
+# Execute presets (everyone for /execute except if and unless)
+def using(execute_preset:execute, cmds:tuple) -> None:
     # Type checking
-    if not isinstance(execute_preset, Execute):
-        raise ValueError(f"Expected Execute object, got {type(execute_preset)}")
+    if not isinstance(execute_preset, execute):
+        raise ValueError(f"Expected execute object, got {type(execute_preset)}")
 
     # Get the file contents and seperate the commands and everything else
     with open(os.path.join(Handler._working_path, inspect.stack()[1][3] + ".mcfunction"), "r") as _file:
@@ -71,26 +108,5 @@ def tellraw(targets:Selector, text:json_string) -> None:
         raise ValueError(f"Expected json_string object for 'text', got {type(text)}")
     Handler._write(inspect.stack()[1][3], f"tellraw {targets.build()} {text.output}")
 
-def advancement(action:advancement_action, targets:Selector, advancement_selection:selection, advancement:str) -> None:
-    if not isinstance(action, advancement_action):
-        raise ValueError(f"Unknown value for 'action': {action}")
-    if not isinstance(targets, Selector):
-        raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
-    if not isinstance(advancement_selection, selection):
-        raise ValueError(f"Unknown value for 'advancement_selection': {advancement_selection}")
-    if not isinstance(advancement, str):
-        raise ValueError(f"Expected string for 'advancement', got {type(advancement)}")
-    Handler._write(inspect.stack()[1][3], f"advancement {action.value} {targets.build()} {advancement_selection.value} {advancement}")
-    
-def clear(targets:Selector, item:str, count:int=None, auto_namespace:bool=True) -> None:
-    if not isinstance(targets, Selector):
-        raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
-    if not isinstance(item, str):
-        raise ValueError(f"Expected string for 'item', got {type(item)}")
-    if not count and not isinstance(count, int):
-        raise ValueError(f"Expected None or integer for 'count', got {type(count)}")
-    if not item.startswith("minecraft:"):
-        if auto_namespace:
-            item = f"minecraft:{item}"
-            Handler._warn("'item' was not namespaced with 'minecraft:' so it has been done for you. You can disable this with 'auto_namespace=False'.")
-    Handler._write(inspect.stack()[1][3], f"clear {targets.build()} {item} {count or ''}")
+def say(text:str) -> None:
+    Handler._write(inspect.stack()[1][3], f"say {text}")

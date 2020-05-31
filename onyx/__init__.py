@@ -1,9 +1,11 @@
 from .handler import Handler
 from .commands import *
 from .selector import Selector
-from .execute import Execute
-from .bossbar import Bossbar
+from .execute import execute
+import onyx.bossbar
+import onyx.effect
 from .json_string import json_string
+import onyx.datapack
 from .enum import *
 from .util import *
 

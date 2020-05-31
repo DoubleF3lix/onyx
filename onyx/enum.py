@@ -2,17 +2,17 @@ import enum
 
 # Gamemodes
 class mode(enum.Enum):
-	survival = 0
-	creative = 1
-	adventure = 2
-	spectator = 3
+	survival = "survival"
+	creative = "creative"
+	adventure = "adventure"
+	spectator = "spectator"
 
 # Used for "sort" property of selectors
 class sort(enum.Enum):
-	arbitrary = 0
-	furthest = 1
-	nearest = 2
-	random = 3
+	arbitrary = "arbitrary"
+	furthest = "furthest"
+	nearest = "nearest"
+	random = "random"
 
 # Used for selector types
 class at(enum.Enum):
@@ -123,12 +123,12 @@ class key(enum.Enum):
 	fullscreen = "fullscreen"
 	toggle_perspective = "togglePerspective"
 
-# Used for advancements
+# Used for advancement
 class advancement_action(enum.Enum):
 	grant = "grant"
 	revoke = "revoke"
 
-# Used for advancements
+# Used for advancement
 # "from" is a reserved keywored
 class selection(enum.Enum):
 	everything = "everything"
@@ -136,3 +136,51 @@ class selection(enum.Enum):
 	only = "only"
 	through = "through"
 	until = "until"
+
+# Used for datapack enable
+class position(enum.Enum):
+	after = "after"
+	before = "before"
+	first = "first"
+	last = "last"
+
+# Used for difficulty
+class difficult(enum.Enum):
+	peaceful = "peaceful"
+	easy = "easy"
+	normal = "normal"
+	hard = "hard"
+
+class effect(enum.Enum):
+	absorption = "absorption"
+	bad_omen = "bad_omen"
+	blindness = "blindness"
+	conduit_power = "conduit_power"
+	dolphins_grace = "dolphins_grace"
+	fire_resistance = "fire_resistance"
+	glowing = "glowing"
+	haste = "haste"
+	health_boost = "health_boost"
+	hero_of_the_village = "hero_of_the_village"
+	hunger = "hunger"
+	instant_damage = "instant_damage"
+	instant_health = "instant_health"
+	invisibility = "invisibility"
+	jump_boost = "jump_boost"
+	levitation = "levitation"
+	luck = "luck"
+	mining_fatigue = "mining_fatigue"
+	nausea = "nausea"
+	night_vision = "night_vision"
+	poison = "poison"
+	regeneration = "regeneration"
+	resistance = "resistance"
+	saturation = "saturation"
+	slow_falling = "slow_falling"
+	slowness = "slowness"
+	speed = "speed"
+	strength = "strength"
+	unluck = "unluck"
+	water_breathing = "water_breathing"
+	weakness = "weakness"
+	wither = "wither"

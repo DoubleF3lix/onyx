@@ -46,8 +46,6 @@ class json_string:
 			element["selector"] = selector.build()
 
 		if keybind:
-			if not isinstance(keybind, key):
-				raise ValueError(f"Unknown value for 'keybind': {keybind}")
 			element["key"] = key.value
 
 		if nbt:
@@ -89,10 +87,8 @@ class json_string:
 			element["extra"] = extra
 
 		if color:
-			if not isinstance(color, color_enum):
-				raise ValueError(f"Unknown value for 'color': {color}")
 			if color.value not in {"black", "dark_blue", "dark_green", "dark_aqua", "dark_red", "dark_purple", "gold", "gray", "dark_gray", "blue", "green", "aqua", "red", "light_purple", "yellow", "white", "reset"}:
-				raise ValueError(f"Color {color.value} is exclusive to bossbars")
+				raise ValueError(f"Invalid color: {color.value}. (Did you set a bossbar exclusive color?)")
 			element["color"] = color.value
 
 		if font:

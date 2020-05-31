@@ -31,7 +31,7 @@ class Selector:
 					else: 
 						raise ValueError(f"Expected integer for '{key}', got {type(key)}")
 				elif isinstance(arg, enum.Enum): 
-					self._args[key] = arg.name
+					self._args[key] = arg.value
 				elif isinstance(arg, str) and arg.startswith("!"): 
 						self._args[key] = arg
 				elif key == "level":
