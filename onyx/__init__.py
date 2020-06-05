@@ -6,6 +6,7 @@ import onyx.bossbar
 import onyx.effect
 from .json_string import json_string
 import onyx.datapack
+import onyx.data
 from .enum import *
 from .util import *
 

@@ -145,13 +145,20 @@ class position(enum.Enum):
 	last = "last"
 
 # Used for difficulty
-class difficult(enum.Enum):
+class difficulty(enum.Enum):
 	peaceful = "peaceful"
 	easy = "easy"
 	normal = "normal"
 	hard = "hard"
 
-class effect(enum.Enum):
+# Used for debug
+class debug_mode(enum.Enum):
+	start = "start"
+	stop = "stop"
+	report = "report"
+
+class effects(enum.Enum):
+	all = "all"
 	absorption = "absorption"
 	bad_omen = "bad_omen"
 	blindness = "blindness"
@@ -184,3 +191,50 @@ class effect(enum.Enum):
 	water_breathing = "water_breathing"
 	weakness = "weakness"
 	wither = "wither"
+
+class data_operator(enum.Enum):
+	append = "append"
+	insert = "insert"
+	merge = "merge"
+	prepend = "prepend"
+	set = "set"
+
+class enchant(enum.Enum):
+	aqua_affinity = "aqua_affinity"
+	bane_of_arthropods = "bane_of_arthropods"
+	binding_curse = "binding_curse"
+	blast_protection = "blast_protection"
+	channeling = "channeling"
+	depth_strider = "depth_strider"
+	efficiency = "efficiency"
+	feather_falling = "feather_falling"
+	fire_aspect = "fire_aspect"
+	fire_protection = "fire_protection"
+	flame = "flame"
+	fortune = "fortune"
+	frost_walker = "frost_walker"
+	impaling = "impaling"
+	infinity = "infinity"
+	knockback = "knockback"
+	looting = "looting"
+	loyalty = "loyalty"
+	luck_of_the_sea = "luck_of_the_sea"
+	lure = "lure"
+	mending = "mending"
+	multishot = "multishot"
+	piercing = "piercing"
+	power = "power"
+	projectile_protection = "projectile_protection"
+	protection = "protection"
+	punch = "punch"
+	quick_charge = "quick_charge"
+	respiration = "respiration"
+	riptide = "riptide"
+	sharpness = "sharpness"
+	silk_touch = "silk_touch"
+	smite = "smite"
+	soul_speed = "soul_speed"
+	sweeping = "sweeping"
+	thorns = "thorns"
+	unbreaking = "unbreaking"
+	vanishing_curse = "vanishing_curse"

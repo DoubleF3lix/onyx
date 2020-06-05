@@ -5,6 +5,25 @@ from typing import Union
 import enum
 import ast
 
+# index is used for "insert"
+def set_from(target:Union[str, tuple, Selector], path:str, index:int=None):
+	if isinstance(target, str):
+		container_type = "storage"
+	if isinstance(target, tuple):
+		container_type = "block"
+		target = ' '.join(target)
+	if isinstance(target, Selector):
+		container_type = "entity"
+		target = target.build()
+	if index is not None:
+		return {"output": f"{index} from {container_type} {target} {path}", "signature7": 0}
+	return {"output": f"from {container_type} {target} {path}", "signature1": 0}
+	
+def set_to(data:str, index:int=None) -> str:
+	if index is not None:
+		return {"output": f"{index} value {data}", "signature33": 0}
+	return {"output": f"value {data}", "signature44": 0}
+
 def Negate(arg:str) -> str:
 	if isinstance(arg, enum.Enum): 
 		return f"!{str(arg.name)}"
