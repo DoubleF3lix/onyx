@@ -1,0 +1,9 @@
+execute store result score #current_points onyx.xp_points run experience query @s[type=player] points
+execute store result score #current_levels onyx.xp_points run experience query @s[type=player] levels
+execute store result score #temp1 onyx.xp_points run experience query @s[type=player] levels
+execute store result score #temp2 onyx.xp_points run experience query @s[type=player] levels
+execute if score #current_levels onyx.xp_points matches ..16 run function :datapack_name::lib/calc_xp_points/below16
+execute if score #current_levels onyx.xp_points matches 17..31 run function :datapack_name::lib/calc_xp_points/17to31
+execute if score #current_levels onyx.xp_points matches 32.. run function :datapack_name::lib/calc_xp_points/above32
+scoreboard players operation #temp1 onyx.xp_points += #current_points onyx.xp_points
+scoreboard players operation @s[type=player] onyx.xp_points = #temp1 onyx.xp_points

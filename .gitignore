@@ -2,3 +2,12 @@
 **.egg-info/**
 *.pyc
 **__pycache__
+index.rst
+make.bat
+Makefile
+build/
+_build/
+_static/
+.idea/
+_templates/
+conf.py

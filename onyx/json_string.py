@@ -1,173 +1,213 @@
 import json
-import traceback
+import enum
 from .enum import color as color_enum
-from .enum import action, key
+from .enum import key
 from .selector import Selector
 from .handler import Handler
 
+
 class json_string:
-	def __init__(self):
-		self.component_text = [""]
+    def __init__(self):
+        self.component_text = [""]
 
-	# "with" is a reserved keyword
-	def component(self, text:str=None, translate:str=None, With:list=None, score:tuple=None, selector:Selector=None, keybind:key=None, nbt:str=None, interpret:bool=None, block:tuple=None, entity:Selector=None, storage:str=None, extra:list=None, color:color_enum=None, font:str=None, bold:bool=None, italic:bool=None, underlined:bool=None, strikethrough:bool=None, obfuscated:bool=None, insertion:str=None, clickEvent:dict=None, hoverEvent:dict=None) -> "json_string":
-		element = {}
-		if text:
-			if not isinstance(text, str):
-				raise ValueError(f"Expected string for 'text', got {type(text)}")
-			element["text"] = text
+    # "with" is a reserved keyword
+    def component(self, text: str = None, translate: str = None, With: list = None, score: tuple = None, selector: Selector = None,
+                        keybind: key = None, nbt: str = None, interpret: bool = None, block: tuple = None, entity: Selector = None,
+                        storage: str = None, extra: list = None, color: color_enum = None, font: str = None, bold: bool = None,
+                        italic: bool = None, underlined: bool = None, strikethrough: bool = None, obfuscated: bool = None,
+                        insertion: str = None, clickEvent: dict = None, hoverEvent: dict = None):
+        """component - Defines a json_string 
 
-		if translate:
-			if not isinstance(translate, str):
-				raise ValueError(f"Expected string for 'translate', got {type(translate)}")
-			element["translate"] = translate
+        Args:
+            text (str, optional): Defaults to None.
+            translate (str, optional): Defaults to None.
+            With (list, optional): Defaults to None.
+            score (tuple, optional): Defaults to None.
+            selector (Selector, optional): Defaults to None.
+            keybind (key, optional): Defaults to None.
+            nbt (str, optional): Defaults to None.
+            interpret (bool, optional): Defaults to None.
+            block (tuple, optional): Defaults to None.
+            entity (Selector, optional): Defaults to None.
+            storage (str, optional): Defaults to None.
+            extra (list, optional): Defaults to None.
+            color (color_enum, optional): Defaults to None.
+            font (str, optional): Defaults to None.
+            bold (bool, optional): Defaults to None.
+            italic (bool, optional): Defaults to None.
+            underlined (bool, optional): Defaults to None.
+            strikethrough (bool, optional): Defaults to None.
+            obfuscated (bool, optional): Defaults to None.
+            insertion (str, optional): Defaults to None.
+            clickEvent (dict, optional): Defaults to None.
+            hoverEvent (dict, optional): Defaults to None.
 
-		if With:
-			if not isinstance(With, list):
-				raise ValueError(f"Expected list for 'with', got {type(With)}")
-			if not translate:
-				Handler._warn("Parameter 'with' specified without 'translate'")
-			element["with"] = With
+        Raises:
+            ValueError: Raised if the argument isn't the right type.
 
-		if score:
-			if text:
-				Handler._warn(f"'score' will not display with specified 'text' parameter")
-			if not isinstance(score, dict):
-				raise ValueError(f"Expected dictionary for 'score', got {type(score)}")
-			if not "signature18" in score:
-				Handler._warn("'score' is missing siganture. Consider using 'Scoreboard()' to avoid errors.")
-				if isinstance(score["player"], Selector):
-					score["player"] = score["player"].build()
-			element["score"] = {"name": score["player"], "objective": score["objective"]}
+        Returns:
+            self: Used to stack multiple components into a single element.
+        """
+        element = {}
+        if text:
+            if not isinstance(text, str):
+                raise ValueError(f"Expected string for 'text', got {type(text)}")
+            element["text"] = text
 
-		if selector:
-			if not isinstance(selector, Selector):
-				raise ValueError(f"Expected Selector object, got {type(selector)}")
-			element["selector"] = selector.build()
+        if translate:
+            if not isinstance(translate, str):
+                raise ValueError(f"Expected string for 'translate', got {type(translate)}")
+            element["translate"] = translate
 
-		if keybind:
-			element["key"] = key.value
+        if With:
+            if not isinstance(With, list):
+                raise ValueError(f"Expected list for 'with', got {type(With)}")
+            if not translate:
+                Handler._warn("Parameter 'with' specified without 'translate'")
+            element["with"] = With
 
-		if nbt:
-			if not isinstance(nbt, str):
-				raise ValueError(f"Expected string for 'nbt', got {type(nbt)}")
-			element["nbt"] = nbt
+        if score:
+            if text:
+                Handler._warn(f"'score' will not display with specified 'text' parameter")
+            if not isinstance(score, dict):
+                raise ValueError(f"Expected dictionary for 'score', got {type(score)}")
+            if "signature18" not in score:
+                Handler._warn("'score' is missing siganture. Consider using 'Scoreboard()' to avoid errors.")
+                if isinstance(score["player"], Selector):
+                    score["player"] = score["player"].build()
+            element["score"] = {"name": score["player"], "objective": score["objective"]}
 
-		if interpret:
-			if not isinstance(interpret, bool):
-				raise ValueError(f"Expected boolean for 'interpret', got {type(interpret)}")
-			if not nbt:
-				Handler._warn("Parameter 'interpet' specified without 'nbt'")
-			element["interpret"] = str(interpret).lower()
-		
-		if block:
-			if not isinstance(block, tuple) or len(tuple) != 3:
-				raise ValueError("'block' must be a tuple with 3 elements")
-			if not nbt:
-				Handler._warn("Parameter 'block' specified without 'nbt'")
-			element["block"] = " ".join(block)
+        if selector:
+            if not isinstance(selector, Selector):
+                raise ValueError(f"Expected Selector object, got {type(selector)}")
+            element["selector"] = selector.build()
 
-		if entity:
-			if not isinstance(entity, Selector):
-				raise ValueError(f"Expected Selector object, got {type(entity)}")
-			if not nbt:
-				Handler._warn("Parameter 'entity' specified without 'nbt'")
-			element["selector"] = entity.build()
+        if keybind:
+            element["key"] = key.value
 
-		if storage:
-			if not isinstance(storage, str):
-				raise ValueError(f"Expected string for 'storage', got {type(storage)}")
-			if not nbt:
-				Handler._warn("Parameter 'storage' specified without 'nbt'")
-			element["storage"] = storage
+        if nbt:
+            if not isinstance(nbt, str):
+                raise ValueError(f"Expected string for 'nbt', got {type(nbt)}")
+            element["nbt"] = nbt
 
-		if extra:
-			if not isinstance(extra, list):
-				raise ValueError(f"Expected list for 'extra', got {type(extra)}")
-			element["extra"] = extra
+        if interpret:
+            if not isinstance(interpret, bool):
+                raise ValueError(f"Expected boolean for 'interpret', got {type(interpret)}")
+            if not nbt:
+                Handler._warn("Parameter 'interpet' specified without 'nbt'")
+            element["interpret"] = str(interpret).lower()
 
-		if color:
-			if color.value not in {"black", "dark_blue", "dark_green", "dark_aqua", "dark_red", "dark_purple", "gold", "gray", "dark_gray", "blue", "green", "aqua", "red", "light_purple", "yellow", "white", "reset"}:
-				raise ValueError(f"Invalid color: {color.value}. (Did you set a bossbar exclusive color?)")
-			element["color"] = color.value
+        if block:
+            if not isinstance(block, tuple) or len(tuple) != 3:
+                raise ValueError("'block' must be a tuple with 3 elements")
+            if not nbt:
+                Handler._warn("Parameter 'block' specified without 'nbt'")
+            element["block"] = " ".join(block)
 
-		if font:
-			if not isinstance(font, str):
-				raise ValueError(f"Expected string for 'font', got {type(font)}")
-			element["font"] = font
+        if entity:
+            if not isinstance(entity, Selector):
+                raise ValueError(f"Expected Selector object, got {type(entity)}")
+            if not nbt:
+                Handler._warn("Parameter 'entity' specified without 'nbt'")
+            element["selector"] = entity.build()
 
-		if bold:
-			if not isinstance(bold, bool):
-				raise ValueError(f"Expected boolean for 'bold', got {type(bold)}")
-			element["bold"] = str(bold).lower()
+        if storage:
+            if not isinstance(storage, str):
+                raise ValueError(f"Expected string for 'storage', got {type(storage)}")
+            if not nbt:
+                Handler._warn("Parameter 'storage' specified without 'nbt'")
+            element["storage"] = storage
 
-		if italic:
-			if not isinstance(italic, bool):
-				raise ValueError(f"Expected boolean for 'italic', got {type(italic)}")
-			element["italic"] = str(italic).lower()
+        if extra:
+            if not isinstance(extra, list):
+                raise ValueError(f"Expected list for 'extra', got {type(extra)}")
+            element["extra"] = extra
 
-		if underlined:
-			if not isinstance(underlined, bool):
-				raise ValueError(f"Expected boolean for 'underlined', got {type(underlined)}")
-			element["underlined"] = str(underlined).lower()
+        if color:
+            if isinstance(color, enum.Enum):
+                if color.value not in {"black", "dark_blue", "dark_green", "dark_aqua", "dark_red", "dark_purple", "gold", "gray", "dark_gray", "blue", "green", "aqua", "red", "light_purple", "yellow", "white", "reset"}:
+                    raise ValueError(f"Invalid color: {color.value}. (Did you set a bossbar exclusive color?)")
+                element["color"] = color.value
+            elif isinstance(color, str):
+                element["color"] = color
 
-		if strikethrough:
-			if not isinstance(strikethrough, bool):
-				raise ValueError(f"Expected boolean for 'strikethrough', got {type(strikethrough)}")
-			element["strikrethrough"] = str(strikethrough).lower()
+        if font:
+            if not isinstance(font, str):
+                raise ValueError(f"Expected string for 'font', got {type(font)}")
+            element["font"] = font
 
-		if obfuscated:
-			if not isinstance(obfuscated, bool):
-				raise ValueError(f"Expected boolean for 'obfuscated', got {type(obfuscated)}")
-			element["obfuscated"] = str(obfuscated).lower()
+        if bold:
+            if not isinstance(bold, bool):
+                raise ValueError(f"Expected boolean for 'bold', got {type(bold)}")
+            element["bold"] = str(bold).lower()
 
-		if insertion:
-			if not isinstance(insertion, str):
-				raise ValueError(f"Expected string for 'insertion', got {type(insertion)}")
-			element["insertion"] = insertion
+        if italic:
+            if not isinstance(italic, bool):
+                raise ValueError(f"Expected boolean for 'italic', got {type(italic)}")
+            element["italic"] = str(italic).lower()
 
-		if clickEvent:
-			# Type checking
-			if not isinstance(clickEvent, dict):
-				raise ValueError(f"Expected dict for 'clickEvent', got {type(clickEvent)}")
-			
-			# Check if clickEvent has all the elements
-			if "action" not in clickEvent:
-				raise ValueError("Missing 'action' in 'clickEvent'")
-			if "value" not in clickEvent:
-				raise ValueError("Missing 'value' in 'clickEvent'")
+        if underlined:
+            if not isinstance(underlined, bool):
+                raise ValueError(f"Expected boolean for 'underlined', got {type(underlined)}")
+            element["underlined"] = str(underlined).lower()
 
-			# Warn the user if it's missing a signature, otherwise remove it
-			if "signature5" not in clickEvent:
-				Handler._warn("'clickEvent' is missing siganture. Consider using 'click_event()' to avoid errors.")
-			else:
-				del clickEvent["signature5"]
-			if not text and not score:
-				Handler._warn("Parameter 'clickEvent' specified without 'text' or 'score'")
-			element["clickEvent"] = clickEvent
+        if strikethrough:
+            if not isinstance(strikethrough, bool):
+                raise ValueError(f"Expected boolean for 'strikethrough', got {type(strikethrough)}")
+            element["strikrethrough"] = str(strikethrough).lower()
 
-		if hoverEvent:
-			# Type checking
-			if not isinstance(hoverEvent, dict):
-				raise ValueError(f"Expected dict for 'hoverEvent', got {type(hoverEvent)}")
-			
-			# Check if clickEvent has all the elements
-			if "action" not in hoverEvent:
-				raise ValueError("Missing 'action' in 'hoverEvent'")
-			if "contents" not in hoverEvent:
-				raise ValueError("Missing 'contents' in 'hoverEvent'")
+        if obfuscated:
+            if not isinstance(obfuscated, bool):
+                raise ValueError(f"Expected boolean for 'obfuscated', got {type(obfuscated)}")
+            element["obfuscated"] = str(obfuscated).lower()
 
-			# Warn the user if it's missing a signature, otherwise remove it
-			if "signature42" not in hoverEvent:
-				Handler._warn("'hoverEvent' is missing siganture. Consider using 'hover_event()' to avoid errors.")
-			else:
-				del hoverEvent["signature42"]
-			if not text and not score:
-				Handler._warn("Parameter 'hoverEvent' specified without 'text' or 'score'")
-			element["hoverEvent"] = hoverEvent
+        if insertion:
+            if not isinstance(insertion, str):
+                raise ValueError(f"Expected string for 'insertion', got {type(insertion)}")
+            element["insertion"] = insertion
 
-		# Add the dictionary to a list element
-		self.component_text.append(element)
-		# Turn ' into "
-		self.output = json.dumps(self.component_text)
-		return self
+        if clickEvent:
+            # Type checking
+            if not isinstance(clickEvent, dict):
+                raise ValueError(f"Expected dict for 'clickEvent', got {type(clickEvent)}")
+
+            # Check if clickEvent has all the elements
+            if "action" not in clickEvent:
+                raise ValueError("Missing 'action' in 'clickEvent'")
+            if "value" not in clickEvent:
+                raise ValueError("Missing 'value' in 'clickEvent'")
+
+            # Warn the user if it's missing a signature, otherwise remove it
+            if "signature5" not in clickEvent:
+                Handler._warn("'clickEvent' is missing siganture. Consider using 'click_event()' to avoid errors.")
+            else:
+                del clickEvent["signature5"]
+            if not text and not score:
+                Handler._warn("Parameter 'clickEvent' specified without 'text' or 'score'")
+            element["clickEvent"] = clickEvent
+
+        if hoverEvent:
+            # Type checking
+            if not isinstance(hoverEvent, dict):
+                raise ValueError(f"Expected dict for 'hoverEvent', got {type(hoverEvent)}")
+
+            # Check if clickEvent has all the elements
+            if "action" not in hoverEvent:
+                raise ValueError("Missing 'action' in 'hoverEvent'")
+            if "contents" not in hoverEvent:
+                raise ValueError("Missing 'contents' in 'hoverEvent'")
+
+            # Warn the user if it's missing a signature, otherwise remove it
+            if "signature42" not in hoverEvent:
+                Handler._warn("'hoverEvent' is missing siganture. Consider using 'hover_event()' to avoid errors.")
+            else:
+                del hoverEvent["signature42"]
+            if not text and not score:
+                Handler._warn("Parameter 'hoverEvent' specified without 'text' or 'score'")
+            element["hoverEvent"] = hoverEvent
+
+        # Add the dictionary to a list element
+        self.component_text.append(element)
+        # Turn ' into "
+        self.output = json.dumps(self.component_text)
+        return self

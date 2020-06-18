@@ -1,0 +1,4 @@
+execute store result entity @s Rotation[0] float 0.1 run scoreboard players get $input onyx.math
+execute positioned 0.0 0.0 0.0 rotated as @s rotated ~ 0 run tp @s ^ ^ ^-1
+execute store result score $output onyx.math run data get entity @s Pos[0] 10000
+kill @s

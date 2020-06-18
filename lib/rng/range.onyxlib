@@ -1,0 +1,12 @@
+execute if score #seed onyx.rng matches 0 run scoreboard players set #seed onyx.rng :random_num1:
+execute if score #multiplier onyx.rng matches 0 run scoreboard players set #multiplier onyx.rng :random_num2:
+execute if score #increment onyx.rng matches 0 run scoreboard players set #increment onyx.rng :random_num3:
+execute if score #modulo onyx.rng matches 0 run scoreboard players set #modulo onyx.rng :random_num4:
+scoreboard players operation #seed onyx.rng *= #multiplier onyx.rng
+scoreboard players operation #seed onyx.rng += #increment onyx.rng
+scoreboard players operation #seed onyx.rng %= #modulo onyx.rng
+scoreboard players operation #range_diff onyx.rng = $upper_bound onyx.rng
+scoreboard players operation #range_diff onyx.rng -= $lower_bound onyx.rng
+scoreboard players operation $output onyx.rng = #seed onyx.rng
+scoreboard players operation $output onyx.rng %= #range_diff onyx.rng
+scoreboard players operation $output onyx.rng += $lower_bound onyx.rng
