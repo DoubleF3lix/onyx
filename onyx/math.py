@@ -1,4 +1,3 @@
-import inspect
 from typing import Union
 import math
 from .handler import Handler
@@ -12,29 +11,37 @@ def rand_int(lower_bound: int = None, upper_bound: int = None):
         lower_bound (int, optional): The minimum value that should be set. Defaults to None.
         upper_bound (int, optional): The maximum value that should be set. Defaults to None.
     """
+    cmds = []
+
     if isinstance(lower_bound, float):
         lower_bound = math.floor(lower_bound)
     if isinstance(upper_bound, float):
         upper_bound = math.floor(upper_bound)
 
-    Handler._load_lib(lib.rng)
-    Handler._add_to_init("scoreboard objectives add onyx.rng dummy")
+    if Handler.load_lib(lib.rng):
+        Handler._add_to_init("scoreboard objectives add onyx.rng dummy")
 
     if lower_bound:
-        Handler._write(inspect.stack()[1][3], f"scoreboard players set $lower_bound onyx.rng {lower_bound}")
+        Handler._write(f"scoreboard players set $lower_bound onyx.rng {lower_bound}")
+        cmds.append(f"scoreboard players set $lower_bound onyx.rng {lower_bound}")
         if not upper_bound:
-            Handler._write(inspect.stack()[1][3], f"scoreboard players set $upper_bound onyx.rng 2147483647")
+            Handler._write(f"scoreboard players set $upper_bound onyx.rng 2147483647")
+            cmds.append(f"scoreboard players set $upper_bound onyx.rng 2147483647")
     if upper_bound:
-        Handler._write(inspect.stack()[1][3], f"scoreboard players set $upper_bound onyx.rng {upper_bound}")
+        Handler._write(f"scoreboard players set $upper_bound onyx.rng {upper_bound}")
+        cmds.append(f"scoreboard players set $upper_bound onyx.rng {upper_bound}")
         if not lower_bound:
-            Handler._write(inspect.stack()[1][3], f"scoreboard players set $lower_bound onyx.rng 0")
+            Handler._write(f"scoreboard players set $lower_bound onyx.rng 0")
+            cmds.append(f"scoreboard players set $lower_bound onyx.rng 0")
 
     if lower_bound or upper_bound:
-        Handler._write(inspect.stack()[1][3], f"function {Handler._datapack_name}:lib/rng/range")
-        return f"function {Handler._datapack_name}:lib/rng/range"
+        Handler._write(f"function {Handler._datapack_name}:lib/rng/range")
+        cmds.append(f"function {Handler._datapack_name}:lib/rng/range")
+        return cmds
     else:
-        Handler._write(inspect.stack()[1][3], f"function {Handler._datapack_name}:lib/rng/no_range")
-        return f"function {Handler._datapack_name}:lib/rng/no_range"
+        Handler._write(f"function {Handler._datapack_name}:lib/rng/no_range")
+        cmds.append(f"function {Handler._datapack_name}:lib/rng/no_range")
+        return cmds
 
 
 def sin(theta: Union[int, float]):
@@ -44,15 +51,14 @@ def sin(theta: Union[int, float]):
         theta (int or float): The angle to calculate.
     """
 
-    Handler._load_lib(lib.math)
-
-    Handler._add_to_init("scoreboard objectives add onyx.math dummy")
-    Handler._write(inspect.stack()[1][3], [
+    if Handler.load_lib(lib.math):
+        Handler._add_to_init("scoreboard objectives add onyx.math dummy")
+    Handler._write([
         f"scoreboard players set $input onyx.math {math.floor(theta * 10)}",
         f"function {Handler._datapack_name}:lib/math/sin/main"
 
     ])
-    return f"function {Handler._datapack_name}:lib/math/sine/main"
+    return [f"scoreboard players set $input onyx.math {math.floor(theta * 10)}", f"function {Handler._datapack_name}:lib/math/sine/main"]
 
 
 def cos(theta: Union[int, float]):
@@ -62,14 +68,14 @@ def cos(theta: Union[int, float]):
         theta (int or float): The angle to calculate.
     """
 
-    Handler._load_lib(lib.math)
-    Handler._add_to_init("scoreboard objectives add onyx.math dummy")
+    if Handler.load_lib(lib.math):
+        Handler._add_to_init("scoreboard objectives add onyx.math dummy")
 
-    Handler._write(inspect.stack()[1][3], [
+    Handler._write([
         f"scoreboard players set $input onyx.math {math.floor(theta * 10)}",
         f"function {Handler._datapack_name}:lib/math/cos/main"
     ])
-    return f"function {Handler._datapack_name}:lib/math/cosine/main"
+    return [f"scoreboard players set $input onyx.math {math.floor(theta * 10)}", f"function {Handler._datapack_name}:lib/math/cosine/main"]
 
 
 def tan(theta: Union[int, float]):
@@ -79,14 +85,14 @@ def tan(theta: Union[int, float]):
         theta (int or float): The angle to calculate.
     """
 
-    Handler._load_lib(lib.math)
-    Handler._add_to_init("scoreboard objectives add onyx.math dummy")
+    if Handler.load_lib(lib.math):
+        Handler._add_to_init("scoreboard objectives add onyx.math dummy")
 
-    Handler._write(inspect.stack()[1][3], [
+    Handler._write([
         f"scoreboard players set $input onyx.math {math.floor(theta * 10)}",
         f"function {Handler._datapack_name}:lib/math/tan/main"
     ])
-    return f"function {Handler._datapack_name}:lib/math/tangent/main"
+    return [f"scoreboard players set $input onyx.math {math.floor(theta * 10)}", f"function {Handler._datapack_name}:lib/math/tangent/main"]
 
 
 def asin(ratio: Union[int, float]):
@@ -96,17 +102,17 @@ def asin(ratio: Union[int, float]):
         ratio (Union[int, float]): The ratio to calculate. Limited from -1 to 1.
     """
 
-    if ratio < 1 or ratio > -1:
+    if ratio >= 1 or ratio <= -1:
         raise ValueError("'ratio' must be between -1 and 1")
 
-    Handler._load_lib(lib.math)
-    Handler._add_to_init("scoreboard objectives add onyx.math dummy")
+    if Handler.load_lib(lib.math):
+        Handler._add_to_init("scoreboard objectives add onyx.math dummy")
 
-    Handler._write(inspect.stack()[1][3], [
+    Handler._write([
         f"scoreboard players set $input onyx.math {math.floor(ratio * 10)}",
         f"function {Handler._datapack_name}:lib/math/asin/main"
     ])
-    return f"function {Handler._datapack_name}:lib/math/asin/main"
+    return [f"scoreboard players set $input onyx.math {math.floor(ratio * 10)}", f"function {Handler._datapack_name}:lib/math/asin/main"]
 
 
 def acos(ratio: Union[int, float]):
@@ -116,17 +122,17 @@ def acos(ratio: Union[int, float]):
         ratio (Union[int, float]): The ratio to calculate. Limited from -1 to 1.
     """
 
-    if ratio < 1 or ratio > -1:
+    if ratio >= 1 or ratio <= -1:
         raise ValueError("'ratio' must be between -1 and 1")
 
-    Handler._load_lib(lib.math)
-    Handler._add_to_init("scoreboard objectives add onyx.math dummy")
+    if Handler.load_lib(lib.math):
+        Handler._add_to_init("scoreboard objectives add onyx.math dummy")
 
-    Handler._write(inspect.stack()[1][3], [
+    Handler._write([
         f"scoreboard players set $input onyx.math {math.floor(ratio * 10)}",
         f"function {Handler._datapack_name}:lib/math/acos/main"
     ])
-    return f"function {Handler._datapack_name}:lib/math/acos/main"
+    return [f"scoreboard players set $input onyx.math {math.floor(ratio * 10)}", f"function {Handler._datapack_name}:lib/math/acos/main"]
 
 
 def atan(ratio: Union[int, float]):
@@ -136,14 +142,14 @@ def atan(ratio: Union[int, float]):
         ratio (Union[int, float]): The ratio to calculate. Limited from -1 to 1.
     """
 
-    if ratio <= -1 or ratio >= 1:
+    if ratio >= 1 or ratio <= -1:
         raise ValueError("'ratio' must be between -1 and 1")
 
-    Handler._load_lib(lib.math)
-    Handler._add_to_init("scoreboard objectives add onyx.math dummy")
+    if Handler.load_lib(lib.math):
+        Handler._add_to_init("scoreboard objectives add onyx.math dummy")
 
-    Handler._write(inspect.stack()[1][3], [
+    Handler._write([
         f"scoreboard players set $input onyx.math {math.floor(ratio * 10)}",
         f"function {Handler._datapack_name}:lib/math/atan/main"
     ])
-    return f"function {Handler._datapack_name}:lib/math/atan/main"
+    return [f"scoreboard players set $input onyx.math {math.floor(ratio * 10)}", f"function {Handler._datapack_name}:lib/math/atan/main"]

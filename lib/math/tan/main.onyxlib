@@ -1,4 +1,3 @@
-# TODO
 function :datapack_name::lib/math/cos/main
 scoreboard players operation #temp1 onyx.math = $output onyx.math
 function :datapack_name::lib/math/sin/main

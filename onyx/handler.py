@@ -22,6 +22,7 @@ class Handler:
         # Initalize the path list and the loaded library list
         Handler._path_list = {}
         Handler._loaded_libs = []
+        Handler._current_func = ""
 
         if override:
             shutil.rmtree(Handler._datapack_path, ignore_errors=True)
@@ -59,6 +60,8 @@ class Handler:
             # Assigns and registers the path in a list to be used by other methods
             Handler._working_path = new_path
             Handler._path_list[function.__name__] = Handler._working_path
+
+            Handler._current_func = function.__name__
 
             # Generate the mcfunction
             function()
@@ -105,14 +108,15 @@ class Handler:
     # Private method so I don't have to make a new "with" block with each file.
     # Special cases may still use "with open() as ..." (like "using")
     @staticmethod
-    def _write(func_name, text):
+    def _write(text):
         """_write - Writes a command to a file
 
         Args:
-            func_name: The function to write to. Should almost always be 'inspect.stack()[1][3]'.
             text: The command to write
         """
-        path = os.path.join(Handler._working_path, func_name + ".mcfunction")
+        path = os.path.join(Handler._working_path, Handler._current_func + ".mcfunction")
+        if not os.path.exists(Handler._working_path):
+            os.makedirs(Handler._working_path)
         with open(path, "a") as _file:
             if isinstance(text, str):
                 _file.write(f"{text}\n")
@@ -135,7 +139,7 @@ class Handler:
 
         print(f"Warning: {text}")
         # Remove the last newline, then print the location and the warning text
-        print(traceback_loc[:len(traceback_loc)-1])
+        print(traceback_loc[:len(traceback_loc) - 1])
 
     # Method is to make it more clear that it is for status messages
     @staticmethod
@@ -150,7 +154,7 @@ class Handler:
 
     # Used internally (mostly for _status)
     @staticmethod
-    def _get_function_path(function):
+    def _get_function_path(function, keep_function_name=True):
         """_get_function_path - Fetches the function path that was registered when '@path()' was used
 
         Args:
@@ -161,7 +165,9 @@ class Handler:
         """
         function_path = Handler._path_list[function].split(os.sep)
         function_path = function_path[function_path.index('functions') + 1:]
-        return f"{'/'.join(function_path)}/{function}"
+        if not keep_function_name:
+            return f"{f'/'.join(function_path)}"
+        return f"{f'/'.join(function_path)}/{function}"
 
     # Used internally for presets
     @staticmethod
@@ -177,15 +183,18 @@ class Handler:
         lib_dir.reverse()
         lib_dir.remove("onyx")
         lib_dir.reverse()
-        return '/'.join(lib_dir)
+        return f'{os.sep}'.join(lib_dir)
 
     # Used internally for presets
     @staticmethod
-    def _load_lib(lib_name):
-        """_load_lib - Loads an Onyx library from the 'pkg_dir/lib' folder
+    def load_lib(lib_name):
+        """load_lib - Loads an Onyx library from the 'pkg_dir/lib' folder
 
         Args:
             lib_name: The library to load (specified by enum value)
+
+        Returns:
+            bool: Whether or not the library was loaded
         """
         lib_files = []
 
@@ -225,21 +234,23 @@ class Handler:
                     _file.write(''.join(contents))
         # The library file already exists
         except FileExistsError:
-            pass
+            return False
+        Handler._loaded_libs.append(lib_name.value)
+        return True
 
     @staticmethod
-    def _get_differentiator(func_name):
+    def _get_differentiator():
         # Find the number to put at the end of the mcfunction name by looping through all numbers and checking if it exists
         for differentiator in range(1, 10000):
             # Keep searching for a new differentiator until one that is not in use is found
-            if os.path.exists(os.path.join(Handler._working_path, "generated", f"{func_name}{differentiator}.mcfunction")):
+            if os.path.exists(os.path.join(Handler._working_path, "generated", f"{Handler._current_func}{differentiator}.mcfunction")):
                 continue
             # The loop will only exit if it finds a differentiator that isn't in use
             break
         return str(differentiator)
 
     @staticmethod
-    def _move_commands(func_name, preset, cmds):
+    def _move_commands(preset, cmds):
         command_count = 0
         for cmd in cmds:
             if isinstance(cmd, str):
@@ -248,20 +259,20 @@ class Handler:
                 command_count += len(cmd)
 
         # Remove the commands that are part of the block
-        with open(os.path.join(Handler._working_path, func_name + ".mcfunction"), "r") as _file:
+        with open(os.path.join(Handler._working_path, Handler._current_func + ".mcfunction"), "r") as _file:
             contents = _file.readlines()
             contents_without_commands = contents[:-command_count]
 
-        with open(os.path.join(Handler._working_path, func_name + ".mcfunction"), "w") as _file:
+        with open(os.path.join(Handler._working_path, Handler._current_func + ".mcfunction"), "w") as _file:
             _file.write(''.join(contents_without_commands))
 
         # Make the generated folder if it doesn't exist
         os.makedirs(os.path.join(Handler._working_path, "generated"), exist_ok=True)
 
-        differentiator = Handler._get_differentiator(func_name)
+        differentiator = Handler._get_differentiator()
 
         # Write the seperated commands to the other file
-        with open(os.path.join(Handler._working_path, "generated", f"{func_name}{differentiator}.mcfunction"), "w") as _file:
+        with open(os.path.join(Handler._working_path, "generated", f"{Handler._current_func}{differentiator}.mcfunction"), "w") as _file:
             for cmd in cmds:
                 if isinstance(cmd, str):
                     _file.write(cmd + "\n")
@@ -270,13 +281,19 @@ class Handler:
                         _file.write(q + "\n")
 
         # Get the function path and write the function call to the file
-        function_path = Handler._get_function_path(func_name)
+        function_path = Handler._get_function_path(Handler._current_func, keep_function_name=False)
         if isinstance(preset, execute):
             preset = preset.output
         prefix = f"{preset}run " if preset else ""
-        Handler._write(func_name, f"{prefix}function {Handler._datapack_name}:{function_path}/generated/{func_name}{differentiator}")
+        Handler._write(f"{prefix}function {Handler._datapack_name}:{function_path}/generated/{Handler._current_func}{differentiator}")
 
-        Handler._status(f"Generated new function: {Handler._datapack_name}:{function_path}/generated/{func_name}{differentiator}")
+        # Add the newly generated function to the path list
+        new_path = os.path.join(Handler._datapack_path, "data", Handler._datapack_name, function_path, "generated", Handler._current_func + differentiator)
+        os.makedirs(new_path)
+        Handler._working_path = new_path
+        Handler._path_list[Handler._current_func + differentiator] = Handler._working_path
+
+        Handler._status(f"Generated new function: {Handler._datapack_name}:{function_path}/generated/{Handler._current_func}{differentiator}")
 
     @staticmethod
     def _add_to_init(cmd):

@@ -1,5 +1,5 @@
-import inspect
 import enum
+import os
 from typing import Union
 from .enum import advancement_action, selection, mode, difficulty, debug_mode
 from .execute import execute
@@ -23,7 +23,7 @@ def send(cmd: str):
     """
     if not isinstance(cmd, str):
         raise ValueError(f"Expected string for 'cmd', got {type(cmd)}")
-    Handler._write(inspect.stack()[1][3], cmd)
+    Handler._write(cmd)
     return cmd
 
 
@@ -46,7 +46,7 @@ def advancement(action: advancement_action, targets: Selector, advancement_selec
         raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
     if not isinstance(advancement, str):
         raise ValueError(f"Expected string for 'advancement', got {type(advancement)}")
-    Handler._write(inspect.stack()[1][3], f"advancement {action.value} {targets.build()} {advancement_selection.value} {advancement}")
+    Handler._write(f"advancement {action.value} {targets.build()} {advancement_selection.value} {advancement}")
     return f"advancement {action.value} {targets.build()} {advancement_selection.value} {advancement}"
 
 
@@ -101,7 +101,7 @@ def clear(targets: Selector, item: str, count: int = None, auto_namespace: bool 
         if auto_namespace:
             item = f"minecraft:{item}"
             Handler._warn("'item' was not namespaced with 'minecraft:' so it has been done for you. You can disable this with 'auto_namespace=False'.")
-    Handler._write(inspect.stack()[1][3], f"clear {targets.build()} {item} {count or ''}")
+    Handler._write(f"clear {targets.build()} {item} {count or ''}")
     return f"clear {targets.build()} {item} {count or ''}"
 
 
@@ -119,12 +119,12 @@ def comment(text: str, preline: int = 1, postline: int = 0):
     """
     cmds = []
     for x in range(preline):
-        Handler._write(inspect.stack()[1][3], "")
+        Handler._write("")
         cmds.append("")
-    Handler._write(inspect.stack()[1][3], f"# {text}")
+    Handler._write(f"# {text}")
     cmds.append(f"# {text}")
     for x in range(postline):
-        Handler._write(inspect.stack()[1][3], "")
+        Handler._write("")
         cmds.append("")
     return cmds
 
@@ -140,7 +140,7 @@ def call(function: callable):
     """
     # Get the function path, split it, and then keep only everything past /data/namespace/functions/
     function_path = Handler._get_function_path(function.__name__)
-    Handler._write(inspect.stack()[1][3], f"function {Handler._datapack_name}:{function_path}")
+    Handler._write(f"function {Handler._datapack_name}:{function_path}")
     return f"function {Handler._datapack_name}:{function_path}"
 
 
@@ -153,7 +153,7 @@ def debug(mode: debug_mode):
     Returns:
         str: The command to be written.
     """
-    Handler._write(inspect.stack()[1][3], f"debug {mode.value}")
+    Handler._write(f"debug {mode.value}")
     return f"debug {mode.value}"
 
 
@@ -166,7 +166,7 @@ def defaultgamemode(gamemode: mode):
     Returns:
         str: The command to be written.
     """
-    Handler._write(inspect.stack()[1][3], f"defaultgamemode {gamemode.value}")
+    Handler._write(f"defaultgamemode {gamemode.value}")
     return f"defaultgamemode {gamemode.value}"
 
 
@@ -179,7 +179,7 @@ def difficulty(level: difficulty):
     Returns:
         str: The command to be written.
     """
-    Handler._write(inspect.stack()[1][3], f"difficulty {level.value}")
+    Handler._write(f"difficulty {level.value}")
     return f"difficulty {level.value}"
 
 
@@ -201,15 +201,13 @@ def enchant(targets: Selector, enchant_list: Union[list, enum.Enum], level: int 
     if not isinstance(targets, Selector):
         raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
     if isinstance(enchant_list, enum.Enum):
-        Handler._write(inspect.stack()[1][3], f"enchant {targets.build()} {enchant_list.value} {level or ''}")
+        Handler._write(f"enchant {targets.build()} {enchant_list.value} {level or ''}")
         return f"enchant {targets.build()} {enchant_list.value} {level or ''}"
     elif isinstance(enchant_list, list):
         for enchant in enchant_list:
-            Handler._write(inspect.stack()[1][3], f"enchant {targets.build()} {enchant.value} {level or ''}")
+            Handler._write(f"enchant {targets.build()} {enchant.value} {level or ''}")
             cmds.append(f"enchant {targets.build()} {enchant.value} {level or ''}")
         return cmds
-
-# TODO: fill, forceload, gamemode, gamerule, give, kick, locate, locatebiome, loot, particle, playsound, recipe, replaceitem, schedule, setblock, setworldspawn, spawnpoint, spectate, spreadplayers, stopsound, summon, tag, team, tp, title, trigger, weather, worldborder
 
 
 # Execute presets (everyone for /execute except if, unless, and store)
@@ -227,10 +225,25 @@ def using(execute_preset: execute, cmds: list):
     if not isinstance(execute_preset, execute):
         raise ValueError(f"Expected execute object, got {type(execute_preset)}")
 
-    Handler._move_commands(inspect.stack()[1][3], execute_preset, cmds)
+    Handler._move_commands(execute_preset, cmds)
 
 
-def gamerule(rule: enum.Enum, value):
+def gamemode(targets: Selector, mode: mode):
+    """gamemode - gamemode command
+
+    Args:
+        targets (Selector): The players whose gamemode should be set.
+        mode (mode): The gamemode that should be set.
+
+    Raises:
+        ValueError: Raised when targets is not a selector object
+    """
+    if not isinstance(targets, Selector):
+        raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
+    Handler._write(f"gamemode {mode.value} {targets.build()}")
+
+
+def gamerule(rule: enum.Enum, value: str):
     """gamerule - gamerule command
 
     Args:
@@ -240,11 +253,10 @@ def gamerule(rule: enum.Enum, value):
     Returns:
         str: The command to be written.
     """
-    Handler._write(inspect.stack()[1][3], f"gamerule {rule.value} {value}")
+    Handler._write(f"gamerule {rule.value} {value}")
     return f"gamerule {rule.value} {value}"
 
 
-# TODO
 def if_block(block: str, position: tuple = None, cmds: tuple = None, radius: int = 0):
     if radius > 16:
         raise ValueError("'radius' cannot exceed 16")
@@ -267,7 +279,7 @@ def kill(targets: Selector):
     """
     if not isinstance(targets, Selector):
         raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
-    Handler._write(inspect.stack()[1][3], f"kill {targets.build()}")
+    Handler._write(f"kill {targets.build()}")
     return f"kill {targets.build()}"
 
 
@@ -280,7 +292,7 @@ def say(text: str):
     Returns:
         str: The command to be written.
     """
-    Handler._write(inspect.stack()[1][3], f"say {text}")
+    Handler._write(f"say {text}")
     return f"say {text}"
 
 
@@ -301,5 +313,33 @@ def tellraw(targets: Selector, text: json_string):
         raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
     if not isinstance(text, json_string):
         raise ValueError(f"Expected json_string object for 'text', got {type(text)}")
-    Handler._write(inspect.stack()[1][3], f"tellraw {targets.build()} {text.output}")
+    Handler._write(f"tellraw {targets.build()} {text.output}")
     return f"tellraw {targets.build()} {text.output}"
+
+
+def wait(length: str):
+    if isinstance(length, (int, float)):
+        length = str(length)
+    else:
+        if length.endswith("t"):
+            length = length[:-1]
+        elif length.endswith("s"):
+            length = int(length[:-1]) * 20
+        elif length.endswith("m"):
+            length = int(length[:-1]) * 20 * 60
+        elif length.endswith("h"):
+            length = int(length[:-1]) * 20 * 60 * 60
+        elif length.endswith("d"):
+            length = int(length[:-1]) * 20 * 60 * 60 * 24
+        elif length.endswith("w"):
+            length = int(length[:-1]) * 20 * 60 * 60 * 24 * 7
+        elif length.endswith("mo"):
+            length = int(length[:-1]) * 20 * 60 * 60 * 24 * 7 * 30
+        elif length.endswith("y"):
+            length = int(length[:-1]) * 20 * 60 * 60 * 24 * 365
+
+    differentiator = Handler._get_differentiator()
+    Handler._write(f"schedule function {Handler._datapack_name}:{Handler._get_function_path(Handler._current_func, keep_function_name=False)}/generated/{Handler._current_func}{differentiator} {length}t")
+    Handler._working_path = os.path.join(Handler._working_path, "generated")
+    Handler._current_func = Handler._current_func + differentiator
+    Handler._path_list[Handler._current_func] = Handler._working_path

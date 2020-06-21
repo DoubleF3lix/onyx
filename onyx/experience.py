@@ -1,4 +1,3 @@
-import inspect
 import enum
 from .handler import Handler
 from .selector import Selector
@@ -21,14 +20,14 @@ def add(targets: Selector, amount: str):
     if not isinstance(targets, Selector):
         raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
     if amount.lower().startswith("p"):
-        Handler._write(inspect.stack()[1][3], f"experience add {targets.build()} {amount[:-1]} points")
+        Handler._write(f"experience add {targets.build()} {amount[:-1]} points")
         return f"experience add {targets.build()} {amount[:-1]} points"
     elif amount.lower().startswith("l"):
-        Handler._write(inspect.stack()[1][3], f"experience add {targets.build()} {amount[:-1]} levels")
+        Handler._write(f"experience add {targets.build()} {amount[:-1]} levels")
         return f"experience add {targets.build()} {amount[:-1]} levels"
     else:
         Handler._warn("No valid suffix provided, assuming levels")
-        Handler._write(inspect.stack()[1][3], f"experience add {targets.build()} {amount} levels")
+        Handler._write(f"experience add {targets.build()} {amount} levels")
         return f"experience add {targets.build()} {amount} levels"
 
 
@@ -49,14 +48,14 @@ def remove(targets: Selector, amount: str):
     if not isinstance(targets, Selector):
         raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
     if amount.lower().startswith("p"):
-        Handler._write(inspect.stack()[1][3], f"experience add {targets.build()} -{amount[:-1]} points")
+        Handler._write(f"experience add {targets.build()} -{amount[:-1]} points")
         return f"experience add {targets.build()} -{amount[:-1]} points"
     elif amount.lower().startswith("l"):
-        Handler._write(inspect.stack()[1][3], f"experience add {targets.build()} -{amount[:-1]} levels")
+        Handler._write(f"experience add {targets.build()} -{amount[:-1]} levels")
         return f"experience add {targets.build()} -{amount[:-1]} levels"
     else:
         Handler._warn("No valid suffix provided, assuming levels")
-        Handler._write(inspect.stack()[1][3], f"experience add {targets.build()} -{amount} levels")
+        Handler._write(f"experience add {targets.build()} -{amount} levels")
         return f"experience add {targets.build()} -{amount} levels"
 
 
@@ -76,14 +75,14 @@ def set(targets: Selector, amount: str):
     if not isinstance(targets, Selector):
         raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
     if amount.lower().startswith("p"):
-        Handler._write(inspect.stack()[1][3], f"experience set {targets.build()} {amount[:-1]} points")
+        Handler._write(f"experience set {targets.build()} {amount[:-1]} points")
         f"experience set {targets.build()} {amount[:-1]} points"
     elif amount.lower().startswith("l"):
-        Handler._write(inspect.stack()[1][3], f"experience set {targets.build()} {amount[:-1]} levels")
+        Handler._write(f"experience set {targets.build()} {amount[:-1]} levels")
         return f"experience set {targets.build()} {amount[:-1]} levels"
     else:
         Handler._warn("No valid suffix provided, assuming levels")
-        Handler._write(inspect.stack()[1][3], f"experience set {targets.build()} {amount} levels")
+        Handler._write(f"experience set {targets.build()} {amount} levels")
         return f"experience set {targets.build()} {amount} levels"
 
 
@@ -124,9 +123,9 @@ def get(targets: Selector, query_type: enum.Enum):
         raise ValueError(f"Expected selector object for 'targets', got {type(targets)}")
     if not isinstance(query_type, enum.Enum):
         Handler._warn("Invalid query type provided, assuming levels")
-        Handler._write(inspect.stack()[1][3], f"experience query {targets.build()} levels")
+        Handler._write(f"experience query {targets.build()} levels")
         return f"experience query {targets.build()} levels"
-    Handler._write(inspect.stack()[1][3], f"experience query {targets.build()} {query_type.value}")
+    Handler._write(f"experience query {targets.build()} {query_type.value}")
     return f"experience query {targets.build()} {query_type.value}"
 
 
@@ -139,18 +138,18 @@ def get_total_points(targets: Selector):
     Returns:
         str: The command to be written.
     """
-    Handler._load_lib(lib.calc_xp_points)
-    Handler._add_to_init([
-        "scoreboard objectives add onyx.xp_points dummy",
-        "scoreboard objectives add onyx.const dummy",
-        "scoreboard players set $6 onyx.const 6",
-        "scoreboard players set $10 onyx.const 10",
-        "scoreboard players set $25 onyx.const 25",
-        "scoreboard players set $45 onyx.const 45",
-        "scoreboard players set $360 onyx.const 360",
-        "scoreboard players set $405 onyx.const 405",
-        "scoreboard players set $1625 onyx.const 1625",
-        "scoreboard players set $2220 onyx.const 2220"
-    ])
-    Handler._write(inspect.stack()[1][3], f"function {Handler._datapack_name}:lib/calc_xp_points/main")
+    if Handler.load_lib(lib.calc_xp_points):
+        Handler._add_to_init([
+            "scoreboard objectives add onyx.xp_points dummy",
+            "scoreboard objectives add onyx.const dummy",
+            "scoreboard players set $6 onyx.const 6",
+            "scoreboard players set $10 onyx.const 10",
+            "scoreboard players set $25 onyx.const 25",
+            "scoreboard players set $45 onyx.const 45",
+            "scoreboard players set $360 onyx.const 360",
+            "scoreboard players set $405 onyx.const 405",
+            "scoreboard players set $1625 onyx.const 1625",
+            "scoreboard players set $2220 onyx.const 2220"
+        ])
+    Handler._write(f"function {Handler._datapack_name}:lib/calc_xp_points/main")
     return f"function {Handler._datapack_name}:lib/calc_xp_points/main"

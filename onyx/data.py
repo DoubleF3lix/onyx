@@ -1,4 +1,3 @@
-import inspect
 from typing import Union
 from .handler import Handler
 from .enum import data_operator
@@ -24,7 +23,7 @@ def get(target: Union[str, tuple, Selector], path: str = None, scale: Union[floa
     if isinstance(target, Selector):
         container_type = "entity"
         target = target.build()
-    Handler._write(inspect.stack()[1][3], f"data get {container_type} {target} {path or ''} {scale or ''}")
+    Handler._write(f"data get {container_type} {target} {path or ''} {scale or ''}")
     return f"data get {container_type} {target} {path or ''} {scale or ''}"
 
 
@@ -46,7 +45,7 @@ def merge(target: Union[str, tuple, Selector], nbt: str):
     if isinstance(target, Selector):
         container_type = "entity"
         target = target.build()
-    Handler._write(inspect.stack()[1][3], f"data merge {container_type} {target} {nbt}")
+    Handler._write(f"data merge {container_type} {target} {nbt}")
     return f"data merge {container_type} {target} {nbt}"
 
 
@@ -84,14 +83,14 @@ def modify(target: Union[str, tuple, Selector], path: str, operation: data_opera
         raise ValueError(f"Specified 'index' but the operation is {operation.value}, not 'insert'")
 
     if "signature44" or "signature33" in data_location:
-        Handler._write(inspect.stack()[1][3], f"data modify {container_type} {target} {path} {operation.value} {data_location['output']}")
+        Handler._write(f"data modify {container_type} {target} {path} {operation.value} {data_location['output']}")
         return f"data modify {container_type} {target} {path} {operation.value} {data_location['output']}"
     elif "signature7" or "signature1" in data_location:
-        Handler._write(inspect.stack()[1][3], f"data modify {container_type} {target} {path} {operation.value} {data_location['output']}")
+        Handler._write(f"data modify {container_type} {target} {path} {operation.value} {data_location['output']}")
         return f"data modify {container_type} {target} {path} {operation.value} {data_location['output']}"
     else:
         Handler._warn("Missing signature for 'data_location'. Consider using 'set_to()' or 'set_from()' to avoid errors.")
-        Handler._write(inspect.stack()[1][3], f"data modify {container_type} {target} {path} {operation.value} {data_location['output']}")
+        Handler._write(f"data modify {container_type} {target} {path} {operation.value} {data_location['output']}")
         return f"data modify {container_type} {target} {path} {operation.value} {data_location['output']}"
 
 
@@ -113,5 +112,5 @@ def remove(target: Union[str, tuple, Selector], path: str):
     if isinstance(target, Selector):
         container_type = "entity"
         target = target.build()
-    Handler._write(inspect.stack()[1][3], f"data remove {container_type} {target} {path}")
+    Handler._write(f"data remove {container_type} {target} {path}")
     return f"data remove {container_type} {target} {path}"

@@ -1,5 +1,8 @@
-import inspect
-from onyx.handler import Handler
+from .handler import Handler
+from .selector import Selector
 
 
-# TODO
+def add_objective(name, critera, display):
+    if not isinstance(display, Selector):
+        Handler._warn("display is not a selector object. Consider using the selector builder to avoid errors.")
+    Handler._write()

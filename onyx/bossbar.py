@@ -1,4 +1,3 @@
-import inspect
 import enum
 from typing import Union
 from .handler import Handler
@@ -23,7 +22,7 @@ def create(bossbar_id: str, bossbar_name: json_string):
     """
     if not isinstance(bossbar_name, json_string):
         raise ValueError("'bossbar_name' must be a json_string object")
-    Handler._write(inspect.stack()[1][3], f"bossbar add {bossbar_id} {bossbar_name.output}")
+    Handler._write(f"bossbar add {bossbar_id} {bossbar_name.output}")
     return f"bossbar add {bossbar_id} {bossbar_name.output}"
 
 
@@ -36,7 +35,7 @@ def delete(bossbar_id: str):
     Returns:
         str: The command to be written.
     """
-    Handler._write(inspect.stack()[1][3], f"bossbar remove {bossbar_id}")
+    Handler._write(f"bossbar remove {bossbar_id}")
     return f"bossbar remove {bossbar_id}"
 
 
@@ -46,7 +45,7 @@ def list():
     Returns:
         str: The command to be written.
     """
-    Handler._write(inspect.stack()[1][3], "bossbar list")
+    Handler._write("bossbar list")
     return "bossbar list"
 
 
@@ -66,7 +65,7 @@ def get_trait(bossbar_id: str, attribute: trait_enum = trait_enum.progress):
     """
     if attribute.name in {"color", "name", "players", "style"}:
         raise ValueError(f"'{attribute.name}' is exclusive to 'set_trait'")
-    Handler._write(inspect.stack()[1][3], f"bossbar get {bossbar_id} {attribute.value}")
+    Handler._write(f"bossbar get {bossbar_id} {attribute.value}")
     return f"bossbar get {bossbar_id} {attribute.value}"
 
 
@@ -101,38 +100,38 @@ def set_trait(bossbar_id: str, color: Union[color_enum, str] = None, max: int = 
                 if isinstance(key, enum.Enum):
                     if arg.value not in {"blue", "green", "pink", "purple", "yellow", "white"}:
                         raise ValueError(f"Unknown value for 'color': {arg} (Did you set it to an incompatible color?")
-                    Handler._write(inspect.stack()[1][3], f"bossbar set minecraft:{bossbar_id} color {arg.value}")
+                    Handler._write(f"bossbar set minecraft:{bossbar_id} color {arg.value}")
                     cmds.append(f"bossbar set minecraft:{bossbar_id} color {arg.value}")
                 elif isinstance(key, str):
-                    Handler._write(inspect.stack()[1][3], f"bossbar set minecraft:{bossbar_id} color {arg}")
+                    Handler._write(f"bossbar set minecraft:{bossbar_id} color {arg}")
                     cmds.append(f"bossbar set minecraft:{bossbar_id} color {arg}")
             elif key == "max":
                 if not isinstance(arg, int):
                     raise ValueError("'max' must be an int")
-                Handler._write(inspect.stack()[1][3], f"bossbar set {bossbar_id} max {arg}")
+                Handler._write(f"bossbar set {bossbar_id} max {arg}")
                 cmds.append(f"bossbar set {bossbar_id} max {arg}")
             elif key == "name":
                 if not isinstance(arg, json_string):
                     raise ValueError("'name' must be a json_string object")
-                Handler._write(inspect.stack()[1][3], f"bossbar set minecraft:{bossbar_id} name {arg.output}")
+                Handler._write(f"bossbar set minecraft:{bossbar_id} name {arg.output}")
                 cmds.append(f"bossbar set minecraft:{bossbar_id} name {arg.output}")
             elif key == "players":
                 if not isinstance(arg, Selector):
                     raise ValueError("'players' must be a selector object")
-                Handler._write(inspect.stack()[1][3], f"bossbar set minecraft:{bossbar_id} players {arg.build()}")
+                Handler._write(f"bossbar set minecraft:{bossbar_id} players {arg.build()}")
                 cmds.append(f"bossbar set minecraft:{bossbar_id} players {arg.build()}")
             elif key == "style":
-                Handler._write(inspect.stack()[1][3], f"bossbar set minecraft:{bossbar_id} style {arg.value}")
+                Handler._write(f"bossbar set minecraft:{bossbar_id} style {arg.value}")
                 cmds.append(f"bossbar set minecraft:{bossbar_id} style {arg.value}")
             elif key == "value":
                 if not isinstance(arg, int):
                     raise ValueError("'value' must be an int")
-                Handler._write(inspect.stack()[1][3], f"bossbar set minecraft:{bossbar_id} value {arg}")
+                Handler._write(f"bossbar set minecraft:{bossbar_id} value {arg}")
                 cmds.append(f"bossbar set minecraft:{bossbar_id} value {arg}")
             elif key == "visible":
                 if not isinstance(arg, bool):
                     raise ValueError("'visible' must be True or False")
                 # str(arg).lower() is used to turn it from "True" to "true" or "False" to "false"
-                Handler._write(inspect.stack()[1][3], f"bossbar set minecraft:{bossbar_id} max {str(arg).lower()}")
+                Handler._write(f"bossbar set minecraft:{bossbar_id} max {str(arg).lower()}")
                 cmds.append(f"bossbar set minecraft:{bossbar_id} max {str(arg).lower()}")
     return cmds
