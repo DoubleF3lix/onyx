@@ -166,13 +166,6 @@ class difficulty(enum.Enum):
     hard = "hard"
 
 
-# Used for debug
-class debug_mode(enum.Enum):
-    start = "start"
-    stop = "stop"
-    report = "report"
-
-
 # Used for effect
 class effects(enum.Enum):
     all = "all"

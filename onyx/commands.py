@@ -50,32 +50,6 @@ def advancement(action: advancement_action, targets: Selector, advancement_selec
     return f"advancement {action.value} {targets.build()} {advancement_selection.value} {advancement}"
 
 
-def ban(player: str, reason: str = None, ip: bool = False):
-    """ban - ban command. Requires modification of function permission levels to work.
-
-    Args:
-        player (str): The player to ban
-        reason (str, optional): The reason for the ban. Defaults to None.
-        ip (bool, optional): Whether or not the player should be banned by IP. Defaults to False.
-
-    Raises:
-        ValueError: Raised if the argument isn't the right type.
-
-    Returns:
-        str: The command to be written.
-    """
-    if not isinstance(player, str):
-        raise ValueError(f"Expected string for 'player', got {type(player)}")
-    if reason:
-        if not isinstance(reason, str):
-            raise ValueError(f"Expected string for 'reason', got {type(reason)}")
-
-    # Write "ban-ip" if ip is True, otherwise just write "ban"
-    nothing, ip_txt = "", "-ip"
-    Handler._write(f"ban{nothing if ip else ip_txt} {player} {reason or ''}")
-    return f"ban{nothing if ip else ip_txt} {player} {reason or ''}"
-
-
 def clear(targets: Selector, item: str, count: int = None, auto_namespace: bool = True):
     """clear - clear command
 
@@ -142,19 +116,6 @@ def call(function: callable):
     function_path = Handler._get_function_path(function.__name__)
     Handler._write(f"function {Handler._datapack_name}:{function_path}")
     return f"function {Handler._datapack_name}:{function_path}"
-
-
-def debug(mode: debug_mode):
-    """debug - debug command
-
-    Args:
-        mode (debug_mode): The debug mode (start, stop, and report).
-
-    Returns:
-        str: The command to be written.
-    """
-    Handler._write(f"debug {mode.value}")
-    return f"debug {mode.value}"
 
 
 def defaultgamemode(gamemode: mode):
@@ -318,28 +279,17 @@ def tellraw(targets: Selector, text: json_string):
 
 
 def wait(length: str):
-    if isinstance(length, (int, float)):
-        length = str(length)
-    else:
-        if length.endswith("t"):
-            length = length[:-1]
-        elif length.endswith("s"):
-            length = int(length[:-1]) * 20
-        elif length.endswith("m"):
-            length = int(length[:-1]) * 20 * 60
-        elif length.endswith("h"):
-            length = int(length[:-1]) * 20 * 60 * 60
-        elif length.endswith("d"):
-            length = int(length[:-1]) * 20 * 60 * 60 * 24
-        elif length.endswith("w"):
-            length = int(length[:-1]) * 20 * 60 * 60 * 24 * 7
-        elif length.endswith("mo"):
-            length = int(length[:-1]) * 20 * 60 * 60 * 24 * 7 * 30
-        elif length.endswith("y"):
-            length = int(length[:-1]) * 20 * 60 * 60 * 24 * 365
+    lookup_table = {"t": 1, "s": 20, "m": 1200, "h": 72000}
+    if str(length)[-1] in lookup_table:
+        length = int(str(length)[:-1]) * int(lookup_table[length[-1]])
 
+    # Add to the working path
     differentiator = Handler._get_differentiator()
     Handler._write(f"schedule function {Handler._datapack_name}:{Handler._get_function_path(Handler._current_func, keep_function_name=False)}/generated/{Handler._current_func}{differentiator} {length}t")
     Handler._working_path = os.path.join(Handler._working_path, "generated")
     Handler._current_func = Handler._current_func + differentiator
+
+    # Register the new path in the list
     Handler._path_list[Handler._current_func] = Handler._working_path
+
+    return f"schedule function {Handler._datapack_name}:{Handler._get_function_path(Handler._current_func, keep_function_name=False)}/generated/{Handler._current_func}{differentiator} {length}t"
