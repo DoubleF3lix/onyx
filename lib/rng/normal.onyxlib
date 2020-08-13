@@ -1,0 +1,9 @@
+function :datapack_name::lib/rng/lcg_raw
+execute if score $output onyx.rng matches 0.. run scoreboard players operation $output onyx.rng /= $2 onyx.const
+execute if score $output onyx.rng matches ..-1 run function :datapack_name::lib/rng/shift_right
+scoreboard players operation $output onyx.rng /= #discard onyx.rng
+scoreboard players operation #temp1 onyx.rng = $output onyx.rng
+scoreboard players operation $output onyx.rng %= $range onyx.rng
+scoreboard players operation #temp1 oynx.rng -= $output onyx.rng
+scoreboard players operation #temp1 onyx.rng += #temp onyx.rng
+execute if score #temp1 onyx.rng matches ..-1 run function :datapack_name::lib/rng/normal

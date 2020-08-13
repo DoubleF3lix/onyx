@@ -1,0 +1,4 @@
+scoreboard players operation #temp onyx.rng = $range onyx.rng
+scoreboard players remove #temp onyx.rng 1
+function :datapack_name::lib/rng/normal
+scoreboard players operation $output onyx.rng += $min onyx.rng

@@ -1,2 +1,2 @@
-execute at Double_Felix align xz run summon armor_stand ~ ~ ~ {Tags:["trig"]}
+execute at @p align xz run summon armor_stand ~ ~ ~ {Tags:["trig"]}
 execute as @e[tag=trig] run function :datapack_name::lib/math/cos/calc

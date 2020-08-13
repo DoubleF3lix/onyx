@@ -1,0 +1,6 @@
+scoreboard players operation #temp onyx.math = $output onyx.math
+scoreboard players operation #temp onyx.math += #increment onyx.math
+scoreboard players operation #temp onyx.math *= #temp onyx.math
+execute if score #temp onyx.math <= $input onyx.math run scoreboard players operation $output onyx.math += #increment onyx.math
+scoreboard players operation #increment onyx.math /= $2 onyx.const
+execute if score #increment onyx.math matches 1.. run function :datapack_name::lib/math/sqrt/loop

@@ -48,13 +48,13 @@ class dimension(enum.Enum):
 
 # Used for bossbars
 # "property" has special highlighting in VSCode and attribute is used to refer to another command, so I used trait
-class trait(enum.Enum):
+class bossbar_trait(enum.Enum):
     color = "color"         		# set
     max_value = "max"       		# set and get
     name = "name"           		# set
-    players = "players"     		# set (get is only useful when run from chat)
+    players = "players"     		# set and get
     style = "style"         		# set
-    progress = "value"      		# set and get ("value" is used to access enum values, so I used "progress")
+    value = "value"      		    # set and get
 
 
 # Used for bossbars
@@ -88,7 +88,7 @@ class color(enum.Enum):
 
 
 # Used for text component "clickEvent" and "hoverEvent"
-# show_entity is not supported since it requires an external generate to convert the UUIDs, and it's just a broken mess all around.
+# show_entity is not supported since it requires an external generator to convert the UUIDs, and it's just a broken mess all around.
 class action(enum.Enum):
     change_page = "change_page"		 # clickEvent exclusive
     copy = "copy_to_clipboard"    	 # clickEvent exclusive
@@ -301,3 +301,14 @@ class lib(enum.Enum):
     rng = "rng"
     calc_xp_points = "calc_xp_points"
     math = "math"
+    bitwise = "bitwise"
+
+
+class scoreboard_trait(enum.Enum):
+    displayname = "displayname"
+    rendertype = "rendertype"
+
+
+class rendertype(enum.Enum):
+    hearts = "hearts"
+    integer = "integer"

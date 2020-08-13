@@ -1,4 +1,4 @@
-execute if score $input onyx.math matches -1 run scoreboard players set $output onyx.math -785
+execute if score $input onyx.math matches -10 run scoreboard players set $output onyx.math -785
 execute if score $input onyx.math matches -9 run scoreboard players set $output onyx.math -733
 execute if score $input onyx.math matches -8 run scoreboard players set $output onyx.math -675
 execute if score $input onyx.math matches -7 run scoreboard players set $output onyx.math -611

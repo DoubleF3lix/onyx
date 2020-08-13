@@ -1,5 +1,5 @@
-from .enum import axis, anchor, dimension
-from .selector import Selector
+from onyx.enums import axis, anchor, dimension
+from onyx.selector import selector
 
 
 # Each method returns self to allow for method chaining
@@ -26,37 +26,37 @@ class execute:
     # execute as
     # Automatically builds the selector
     # "as" is a reserved keyword
-    def As(self, entity: Selector):
-        if not isinstance(entity, Selector):
-            raise ValueError(f"Expected Selector object, got {type(entity)}")
+    def As(self, entity: selector):
+        if not isinstance(entity, selector):
+            raise ValueError(f"Expected selector object, got {type(entity)}")
         self.output += f"as {entity.build()} "
         return self
 
     # execute at
     # Automatically builds the selector
-    def at(self, entity: Selector):
-        if not isinstance(entity, Selector):
-            raise ValueError(f"Expected Selector object, got {type(entity)}")
+    def at(self, entity: selector):
+        if not isinstance(entity, selector):
+            raise ValueError(f"Expected selector object, got {type(entity)}")
         self.output += f"at {entity.build()} "
         return self
 
     # execute as (entity) at (entity)
     # Automatically builds the selector
-    def as_at(self, entity: Selector):
-        if not isinstance(entity, Selector):
-            raise ValueError(f"Expected Selector object, got {type(entity)}")
+    def as_at(self, entity: selector):
+        if not isinstance(entity, selector):
+            raise ValueError(f"Expected selector object, got {type(entity)}")
         self.output += f"as {entity.build()} at @s "
         return self
 
     # execute facing
     # Automatically builds the selector if "entity" is passed
     # Doesn't allow for "entity" and "pos" to both be passed
-    def facing(self, entity: Selector = None, pos: tuple = None):
+    def facing(self, entity: selector = None, pos: tuple = None):
         if entity:
             if pos:
                 raise ValueError("You can't provide both an entity and position")
-            if not isinstance(entity, Selector):
-                raise ValueError(f"Expected Selector object, got {type(entity)}")
+            if not isinstance(entity, selector):
+                raise ValueError(f"Expected selector object, got {type(entity)}")
             self.output += f"facing entity {entity.build()} "
         elif pos:
             if not type(pos) is tuple or not len(pos) == 3:
@@ -80,12 +80,12 @@ class execute:
     # execute rotated
     # Automatically builds the selector if "entity" is passed
     # Doesn't allow for "entity" and "rot" to both be passed
-    def rotated(self, entity: Selector = None, rot: tuple = None):
+    def rotated(self, entity: selector = None, rot: tuple = None):
         if entity:
             if rot:
                 raise ValueError("You can't provide both an entity and rotation values")
-            if not isinstance(entity, Selector):
-                raise ValueError(f"Expected Selector object, got {type(entity)}")
+            if not isinstance(entity, selector):
+                raise ValueError(f"Expected selector object, got {type(entity)}")
             self.output += f"rotated as {entity.build()} "
         elif rot:
             if type(rot) is not tuple or len(rot) != 2:

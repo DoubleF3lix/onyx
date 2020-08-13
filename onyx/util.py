@@ -1,128 +1,244 @@
-from .selector import Selector
-from .json_string import json_string
-from .enum import action as action_enum
 from typing import Union
 import enum
-import ast
+import json
+import nbtlib
+from nbtlib.tag import *
+from onyx.selector import selector
+from onyx.enums import action as action_enum
+from onyx.handler import Handler, _buildable, _position
 
 
-# Used for data
-# index is used for "insert"
-def set_from(target: Union[str, tuple, Selector], path: str, index: int = None):
-    if isinstance(target, str):
-        container_type = "storage"
-    if isinstance(target, tuple):
-        container_type = "block"
-        target = ' '.join(target)
-    if isinstance(target, Selector):
-        container_type = "entity"
-        target = target.build()
-    if index is not None:
-        return {"output": f"{index} from {container_type} {target} {path}", "signature7": 0}
-    return {"output": f"from {container_type} {target} {path}", "signature1": 0}
+class SetFrom(_buildable):
+    """Used with data.modify() when setting from an entity
+
+    Args:
+        target (Union[str, tuple, selector]): The entity that the data should be retrieved from
+        path (str): The data location
+        index (int, optional): [description]. The index of the data. Only use if the path is a list. Defaults to None.
+        container_type (str, optional): Override for container type (entity, storage, or block). If unspecified, the container type will be assumed based off the value for "target". Defaults to None.
+    """
+    def __init__(self, target: Union[str, tuple, selector], path: str, index: int = None, container_type: str = None):
+        if container_type:
+            self.container_type = container_type
+        else:
+            if isinstance(target, str):
+                self.container_type = "storage"
+            elif isinstance(target, tuple):
+                self.container_type = "block"
+                self.target = ' '.join(target)
+            elif isinstance(target, selector):
+                self.container_type = "entity"
+                self.target = target.build()
+
+    def build(self):
+        if self.index is not None:
+            return f"{self.index} from {self.container_type} {self.target} {self.path}"
+        else:
+            return f"from {self.container_type} {self.target} {self.path}"
 
 
-# Used for data
-def set_to(data: str, index: int = None):
-    if index is not None:
-        return {"output": f"{index} value {data}", "signature33": 0}
-    return {"output": f"value {data}", "signature44": 0}
+class SetTo(_buildable):
+    """Used with data.modify() when setting to a value
+
+    Args:
+        data (str): The value to be set.
+        index (int, optional): The index of a list that should be modified. Only use if the path is a list. Defaults to None.
+    """
+    def __init__(self, data: str, index: int = None):
+        self.data = data
+        self.index = index
+
+    def build(self):
+        if self.index is not None:
+            return f"{self.index} value {self.data}"
+        else:
+            return f"value {self.data}"
 
 
-def Negate(arg: str):
-    if isinstance(arg, enum.Enum):
-        return f"!{str(arg.name)}"
-    elif isinstance(arg, (int, float)):
-        return f"!{arg}"
+class Negate(_buildable):
+    """Negates an argument
+
+    Args:
+        arg: The argument to negate
+    """
+    def __init__(self, arg):
+        self.arg = arg
+
+    def build(self):
+        return f"!{Handler._translate(self.arg)}"
 
 
-def Range(min: Union[int, float] = None, max: Union[int, float] = None):
-    return f"{min}..{max}"
+class Range(_buildable):
+    """Defines a scoreboard range
+
+    Args:
+        min (int, optional): The minimum value the score should be (inclusive). If unspecified, the range will check for all scores equal to or below the maximum. Defaults to None.
+        max (int, optional): The maximum value the score should be (inclusive). If unspecified, the range will check for all scores equal to or below the minimum. Defaults to None.
+    """
+    def __init__(self, min: int = None, max: int = None):
+        if min is None and max is None:
+            Handler._warn("'min' and 'max' were not assigned")
+        self.min = min
+        self.max = max
+
+    def build(self):
+        return f"{self.min}..{self.max}"
 
 
-def Scoreboard(player: Union[Selector, str] = None, objective: str = None):
-    # Type checking
-    if not isinstance(player, (Selector, str)):
-        raise ValueError("'player' must be a string or selector object")
-    if not isinstance(objective, str):
-        raise ValueError("'objective' must be a string")
+class ClickEvent(_buildable):
+    """Used with JSON strings
 
-    # Check if "player" is a selector object, and if so, call build()
-    if isinstance(player, Selector):
-        return {"player": player.build(), "objective": objective, "signature18": 0}
-    # This won't run if if "player" is a selector object
-    return {"player": player, "objective": objective, "signature18": 0}
+    Args:
+        action (action_enum, optional): The action type.
+        value (str, optional): The argument of the action.
+    """
+    def __init__(self, action: action_enum, value: str):
+        # Check if an invalid action was used
+        if Handler._translate(action) in {"show_text", "show_item"}:
+            Handler._warn(f"{Handler._translate(action)} is exclusive to hover_event")
 
+        self.action = Handler._translate(action)
+        self.value = value
 
-def click_event(action: action_enum = None, value: str = None):
-    # Type checking
-    if not isinstance(action, action_enum):
-        raise ValueError(f"Unknown value for 'action': {action}")
-    if not isinstance(value, str):
-        raise ValueError(f"Expected string for 'value', got {type(value)}")
-
-    # Check if an invalid action was used
-    if action.value in {"show_text", "show_item", "show_entity"}:
-        raise ValueError(f"{action.value} is exclusive to hover_event")
-    return {"action": action.value, "value": value, "signature5": 0}
+    def build(self):
+        return {"action": self.action, "contents": self.value}
 
 
-def hover_event(action: action_enum = None, contents: str = None):
-    # Type checking
-    if not isinstance(action, action_enum):
-        raise ValueError(f"Unknown value for 'action': {action}")
-    if action.value not in {"show_text", "show_item"}:
-        raise ValueError(f"{action.value} is exclusive to click_event")
+class HoverEvent(_buildable):
+    """Used with JSON strings
 
-    if action.value == "show_text":
-        # Type checking
-        if not isinstance(contents, json_string):
-            raise ValueError(f"Expected json_string object for 'contents', got {type(contents)}")
-        return {"action": action.value, "contents": ast.literal_eval(contents.output), "signature42": 0}
+    Args:
+        action (action_enum, optional): The action type. Defaults to None.
+        text (str, optional): The text to show on hover. Only used if "action" is set to "show_text". Defaults to None.
+        item_id (str, optional): The item to show on hover. Only used if "action" is set to "show_item". Defaults to None.
+        item_tags (dict, optional): The tags the item should have. Defaults to None.
+    """
+    def __init__(self, action: action_enum = None, text: str = None, item_id: str = None, item_tags: dict = None):
+        # Check if an invalid action was used
+        if Handler._translate(action) not in {"show_text", "show_item"}:
+            Handler._warn(f"{Handler._translate(action)} is exclusive to click_event")
 
-    elif action.value == "show_item":
-        # Type checking
-        if not isinstance(contents, dict):
-            raise ValueError(f"Expected dictionary for 'contents', got {type(contents)}")
-        if "id" not in contents:
-            raise ValueError(f"Missing 'id' in 'contents'")
+        self.action = Handler._translate(action)
+        self.text = text
+        self.item_id = item_id
+        self.item_tags = item_tags
 
-        # Return the dict without the tag parameter if one isn't specified, otherwise, include it
-        if "tag" not in contents:
-            return {"action": action.value, "contents": {"id": contents["id"]}, "signature42": 0}
-        return {"action": action.value, "contents": {"id": contents["id"], "tag": contents["tag"]}, "signature42": 0}
-
-
-# Returns a tuple of 3 values as strings
-def abs_pos(x: Union[int, float], y: Union[int, float], z: Union[int, float]):
-    if not all(isinstance(arg, (int, float)) for arg in [x, y, z]):
-        raise ValueError("You must supply 3 numbers")
-    return (f"{x}", f"{y}", f"{z}")
+    def build(self):
+        if self.action == "show_text":
+            return {"action": "show_text", "contents": Handler._translate(self.text)}
+        elif self.action == "show_item":
+            if self.item_tags is not None:
+                return {"action": "show_item", "contents": ({"id": self.item_id, "count": Byte(1), "tag": Compound(self.item_tags).snbt()})}
+            else:
+                return {"action": "show_item", "contents": ({"id": self.item_id, "count": Byte(1)})}
 
 
-# Returns a tuple of 3 values as strings
-def rel_pos(x: Union[int, float], y: Union[int, float], z: Union[int, float]):
-    if not all(isinstance(arg, (int, float)) for arg in [x, y, z]):
-        raise ValueError("You must supply 3 numbers")
-    return (f"~{x or ''}", f"~{y or ''}", f"~{z or ''}")
+class AbsPos(_buildable, _position):
+    """Defines an absolute position (exact coordinates)
+
+    Args:
+        x (Union[int, float])
+        y (Union[int, float])
+        z (Union[int, float])
+
+    Raises:
+        ValueError: Raised when any of the arguments is not a number
+    """
+    def __init__(self, x: Union[int, float], y: Union[int, float], z: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [x, y, z]):
+            raise ValueError("You must supply 3 numbers")
+
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def build(self):
+        return f"{self.x} {self.y} {self.z}"
 
 
-# Returns a tuple of 3 values as strings
-def loc_pos(left: Union[int, float], up: Union[int, float], forward: Union[int, float]):
-    if not all(isinstance(arg, (int, float)) for arg in [left, up, forward]):
-        raise ValueError("You must supply 3 numbers")
-    return (f"^{left or ''}", f"^{up or ''}", f"^{forward or ''}")
+class RelPos(_buildable, _position):
+    """Defines a relative position (relative to an entity, block, etc.)
+
+    Args:
+        x (Union[int, float])
+        y (Union[int, float])
+        z (Union[int, float])
+
+    Raises:
+        ValueError: Raised when any of the arguments is not a number
+    """
+    def __init__(self, x: Union[int, float], y: Union[int, float], z: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [x, y, z]):
+            raise ValueError("You must supply 3 numbers")
+
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def build(self):
+        return f"~{self.x} ~{self.y} ~{self.z}"
 
 
-# Returns a tuple of 2 values as strings
-def abs_rot(y_rot: Union[int, float], x_rot: Union[int, float]):
-    if not all(isinstance(arg, (int, float)) for arg in [y_rot, x_rot]):
-        raise ValueError("You must supply 2 numbers")
-    return (f"{y_rot}", f"{x_rot}")
+class LocPos(_buildable, _position):
+    """Defines a local position (relatve to the direction an entity is facing)
+
+    Args:
+        x (Union[int, float])
+        y (Union[int, float])
+        z (Union[int, float])
+
+    Raises:
+        ValueError: Raised when any of the arguments is not a number
+    """
+    def __init__(self, x: Union[int, float], y: Union[int, float], z: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [x, y, z]):
+            raise ValueError("You must supply 3 numbers")
+
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def build(self):
+        return f"^{self.x} ^{self.y} ^{self.z}"
 
 
-# Returns a tuple of 2 values as strings
-def rel_rot(y_rot:  Union[int, float], x_rot:  Union[int, float]):
-    if not all(isinstance(arg, (int, float)) for arg in [y_rot, x_rot]):
-        raise ValueError("You must supply 2 numbers")
-    return (f"~{y_rot}", f"~{x_rot}")
+class AbsRot(_buildable, _position):
+    """Defines an absolute rotation
+
+    Args:
+        y_rot (Union[int, float])
+        x_rot (Union[int, float])
+
+    Raises:
+        ValueError: Raised when any of the arguments is not a number
+        """
+    def __init__(self, y_rot: Union[int, float], x_rot: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [y_rot, x_rot]):
+            raise ValueError("You must supply 2 numbers")
+
+        self.y_rot = y_rot
+        self.x_rot = x_rot
+
+    def build(self):
+        return f"{self.y_rot} {self.x_rot}"
+
+
+class RelRot(_buildable, _position):
+    """Defines a relative rotation (relative to the target's current rotation)
+
+    Args:
+        y_rot (Union[int, float])
+        x_rot (Union[int, float])
+
+    Raises:
+        ValueError: Raised when any of the arguments is not a number
+    """
+    def __init__(self, y_rot: Union[int, float], x_rot: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [y_rot, x_rot]):
+            raise ValueError("You must supply 2 numbers")
+
+        self.y_rot = y_rot
+        self.x_rot = x_rot
+
+    def build(self):
+        return f"~{self.y_rot} ~{self.x_rot}"

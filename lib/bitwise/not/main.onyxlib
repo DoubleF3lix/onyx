@@ -1,0 +1,3 @@
+scoreboard players operation $output onyx.bitwise = $input_1 onyx.bitwise
+scoreboard players add $output onyx.bitwise 1
+scoreboard players operation $output onyx.bitwise *= $-1 onyx.const
