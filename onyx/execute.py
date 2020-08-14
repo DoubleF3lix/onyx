@@ -1,5 +1,7 @@
-from onyx.enums import axis, anchor, dimension
-from onyx.selector import selector
+import os
+from .enums import axis, anchor, dimension
+from .selector import selector
+from .handler import Handler
 
 
 # Each method returns self to allow for method chaining
@@ -8,89 +10,83 @@ class execute:
     def __init__(self):
         self.output = "execute "
 
-    # execute align
-    # Merges multiple enum values into one clump. (axis.x, axis.y) => xy
+        # Save the old function path
+        self.old_func = Handler._active_func
+
+    def __enter__(self):
+        # Call the new function and save all the old commands
+        # Get the current function path without the function file itself
+        functionless_path = os.path.dirname(Handler._active_func)
+        if functionless_path.endswith("\\."):
+            functionless_path = functionless_path[:-1]
+        function_name = os.path.basename(os.path.normpath(Handler._active_func))
+        function_name_extensionless = os.path.splitext(function_name)[0]
+        differentiator = Handler._get_differentiator()
+
+        Handler._cmds.append(f"function {Handler._datapack_name}:generated/{function_name_extensionless}{differentiator}")
+        self.old_cmds = Handler._cmds
+        Handler._cmds = []
+
+        os.makedirs(os.path.join(functionless_path, "generated"), exist_ok=True)
+        Handler._active_func = os.path.join(functionless_path, "generated", function_name_extensionless + differentiator + ".mcfunction").replace("\\.\\", "\\")
+
+    def __exit__(self, excpt_type, excpt_value, traceback):
+        # Write the commands to the new file
+        Handler._write_function()
+        # Restore the old function settings
+        Handler._active_func = self.old_func
+        Handler._cmds = self.old_cmds
+
     def align(self, *args: axis):
         axes = []
         for arg in args:
-            if arg.value not in args:
-                axes.append(arg.value)
+            if Handler._translate(arg) not in args:
+                axes.append(Handler._translate(arg))
         self.output += f"align {''.join(axes)}"
         return self
 
-    # execute anchored
     def anchored(self, anchor_point: anchor):
-        self.output += f"anchored {anchor_point.value} "
+        self.output += f"anchored {Handler._translate(anchor_point)} "
         return self
 
-    # execute as
-    # Automatically builds the selector
-    # "as" is a reserved keyword
     def As(self, entity: selector):
-        if not isinstance(entity, selector):
-            raise ValueError(f"Expected selector object, got {type(entity)}")
-        self.output += f"as {entity.build()} "
+        self.output += f"as {Handler._translate(entity)} "
         return self
 
-    # execute at
-    # Automatically builds the selector
     def at(self, entity: selector):
-        if not isinstance(entity, selector):
-            raise ValueError(f"Expected selector object, got {type(entity)}")
-        self.output += f"at {entity.build()} "
+        self.output += f"at {Handler._translate(entity)} "
         return self
 
-    # execute as (entity) at (entity)
-    # Automatically builds the selector
     def as_at(self, entity: selector):
-        if not isinstance(entity, selector):
-            raise ValueError(f"Expected selector object, got {type(entity)}")
-        self.output += f"as {entity.build()} at @s "
+        self.output += f"as {Handler._translate(entity)} at @s "
         return self
 
-    # execute facing
-    # Automatically builds the selector if "entity" is passed
-    # Doesn't allow for "entity" and "pos" to both be passed
     def facing(self, entity: selector = None, pos: tuple = None):
-        if entity:
-            if pos:
+        if entity is not None:
+            if pos is not None:
                 raise ValueError("You can't provide both an entity and position")
-            if not isinstance(entity, selector):
-                raise ValueError(f"Expected selector object, got {type(entity)}")
-            self.output += f"facing entity {entity.build()} "
-        elif pos:
-            if not type(pos) is tuple or not len(pos) == 3:
-                raise ValueError("'pos' must be a tuple of 3 elements")
-            self.output += f"facing {' '.join(pos)} "
-        return self
-
-    # execute in
-    # "in" is a reserved keyword used for checking lists, tuples, etc.
-    def In(self, dimension_name: dimension):
-        self.output += f"in minecraft:{dimension_name.value} "
-        return self
-
-    # execute positioned
-    def positioned(self, pos: tuple):
-        if type(pos) is not tuple or len(pos) != 3:
-            raise ValueError("'pos' must be a tuple of 3 elements")
-        self.output += f"positioned {' '.join(pos)} "
-        return self
-
-    # execute rotated
-    # Automatically builds the selector if "entity" is passed
-    # Doesn't allow for "entity" and "rot" to both be passed
-    def rotated(self, entity: selector = None, rot: tuple = None):
-        if entity:
-            if rot:
-                raise ValueError("You can't provide both an entity and rotation values")
-            if not isinstance(entity, selector):
-                raise ValueError(f"Expected selector object, got {type(entity)}")
-            self.output += f"rotated as {entity.build()} "
-        elif rot:
-            if type(rot) is not tuple or len(rot) != 2:
-                raise ValueError("'rot' must be a tuple of 2 values")
-            self.output += f"rotated {' '.join(rot)} "
+            self.output += f"facing entity {Handler._translate(entity)} "
+        elif pos is not None:
+            self.output += f"facing {Handler._translate(pos)} "
         else:
-            raise ValueError("You must specify either an entity or rotation values")
+            raise ValueError("You must specify either an entity or position value")
+        return self
+
+    def In(self, dimension_name: dimension):
+        self.output += f"in {Handler._translate(dimension_name)} "
+        return self
+
+    def positioned(self, pos: tuple):
+        self.output += f"positioned {Handler._translate(pos)} "
+        return self
+
+    def rotated(self, entity: selector = None, rot: tuple = None):
+        if entity is not None:
+            if rot is not None:
+                raise ValueError("You can't provide both an entity and rotation values")
+            self.output += f"rotated as {Handler._translate(entity)} "
+        elif rot is not None:
+            self.output += f"rotated {Handler._translate(rot)} "
+        else:
+            raise ValueError("You must specify either an entity or rotation value(s)")
         return self

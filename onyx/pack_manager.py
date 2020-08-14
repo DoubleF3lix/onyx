@@ -26,7 +26,7 @@ class _function:
         self._function_path = os.path.join(self._function_path, function_name + ".mcfunction")
 
         # Initalize the Handler
-        Handler(self._function_path, self._datapack_path, self._datapack_name)
+        Handler(self._function_path, self._mcfunction_path, self._datapack_path, self._datapack_name)
 
         if loop:
             # Make the tick.json directory if it doesn't exist
@@ -52,6 +52,7 @@ class _function:
 
     def __enter__(self):
         Handler._active_func = self._function_path
+        return self
 
     def __exit__(self, excpt_type, excpt_value, traceback):
         Handler._write_function()

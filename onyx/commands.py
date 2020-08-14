@@ -88,16 +88,6 @@ def enchant(targets: selector, enchant_list: Union[list, enchants], level: int =
         Handler._cmds.append(f"enchant {Handler._translate(targets)} {enchant_list.value} {level or ''}")
 
 
-def using(execute_preset: execute, cmds: list):
-    """execute
-
-    Args:
-        execute_preset (execute): The preset to be used. Generated with 'execute()'
-        cmds (list): A list of commands that should be run when the condition is met.
-    """
-    Handler._move_commands(execute_preset, cmds)
-
-
 def gamemode(targets: selector, mode: mode):
     """
     Args:

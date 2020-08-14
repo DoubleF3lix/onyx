@@ -3,6 +3,6 @@
 *.pyc
 **__pycache__
 **.bat
-docs/
 **.txt
 **.toml
+docs/

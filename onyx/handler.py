@@ -21,8 +21,9 @@ class Handler:
     _init_cmds = []
     _loaded_libs = []
 
-    def __init__(self, function, datapack_path, datapack_name):
+    def __init__(self, function, mcfunction_path, datapack_path, datapack_name):
         Handler._active_func = function
+        Handler._active_mcfunc_path = mcfunction_path
         Handler._cmds = []
         Handler._datapack_path = datapack_path
         Handler._datapack_name = datapack_name
@@ -172,10 +173,10 @@ class Handler:
 
     @staticmethod
     def _translate(element, convert=False, selector=False):
-        from onyx.json_string import json_string
-        from onyx.execute import execute
-        from onyx.selector import selector
-        from onyx.util import _buildable
+        from .json_string import json_string
+        from .execute import execute
+        from .selector import selector
+        from .util import _buildable
 
         if isinstance(element, enum.Enum):
             return element.value
@@ -200,3 +201,17 @@ class Handler:
                 return " ".join(element)
         else:
             return element
+
+    @staticmethod
+    def _get_differentiator():
+        # Find the number to put at the end of the mcfunction name by looping through all numbers and checking if it exists
+        for differentiator in range(1, 32768):
+            functionless_path = os.path.dirname(Handler._active_func)
+            function_name = os.path.basename(os.path.normpath(Handler._active_func))
+            function_name_extensionless = os.path.splitext(function_name)[0]
+
+            if os.path.isfile(os.path.join(functionless_path, "generated", f"{function_name_extensionless}{differentiator}.mcfunction").replace("\\.\\", "\\")):
+                continue
+            # The loop will only exit if it finds a differentiator that isn't in use
+            else:
+                return str(differentiator)
