@@ -11,3 +11,4 @@ from onyx.scoreboard import Scoreboard
 from onyx.selector import selector
 from onyx.execute import execute
 from onyx.json_string import json_string
+from onyx.delay import delay

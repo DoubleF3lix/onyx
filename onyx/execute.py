@@ -23,7 +23,7 @@ class execute:
         function_name_extensionless = os.path.splitext(function_name)[0]
         differentiator = Handler._get_differentiator()
 
-        Handler._cmds.append(f"function {Handler._datapack_name}:generated/{function_name_extensionless}{differentiator}")
+        Handler._cmds.append(f"{self.output}function {Handler._datapack_name}:generated/{function_name_extensionless}{differentiator}")
         self.old_cmds = Handler._cmds
         Handler._cmds = []
 
