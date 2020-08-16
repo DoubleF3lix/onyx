@@ -188,7 +188,7 @@ class _Player:
         Handler._cmds.append(f"function {Handler._datapack_name}:lib/math/{trig_func}/main")
         Handler._cmds.append(f"scoreboard players operation {self.name} {self.scoreboard} = $output onyx.math")
 
-    def _multi_bitwise_two(self, operator_name, value_1, value_2):
+    def _multi_bitwise(self, operator_name, value_1, value_2):
         Handler.load_lib(lib.bitwise)
 
         if value_2 is None:
