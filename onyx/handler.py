@@ -164,7 +164,7 @@ class Handler:
                     init.write('\n'.join(cmd) + "\n")
                 elif isinstance(cmd, str):
                     init.write(cmd + "\n")
-            Handler._init_cmds.append(cmd)
+            Handler._init_cmds.extend(cmd)
 
     @staticmethod
     def _add_scoreboard(name, critera="dummy"):
