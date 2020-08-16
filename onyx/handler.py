@@ -149,7 +149,7 @@ class Handler:
 
     @staticmethod
     def _add_to_init(cmd):
-        # Make the tick.json directory if it doesn't exist
+        # Make the load.json directory if it doesn't exist
         load_dir = os.path.join(Handler._datapack_path, "data", "minecraft", "tags", "functions")
         os.makedirs(load_dir, exist_ok=True)
 
@@ -157,10 +157,11 @@ class Handler:
         with open(os.path.join(load_dir, "load.json"), "w") as load_json:
             json.dump({"values": [f"{Handler._datapack_name}:init"]}, load_json, indent=4)
 
+        # Adds to init.mcfunction
         if cmd not in Handler._init_cmds:
             with open(os.path.join(Handler._datapack_path, "data", Handler._datapack_name, "functions", "init.mcfunction"), "a") as init:
                 if isinstance(cmd, list):
-                    init.write('\n'.join(cmd))
+                    init.write('\n'.join(cmd) + "\n")
                 elif isinstance(cmd, str):
                     init.write(cmd + "\n")
             Handler._init_cmds.append(cmd)
