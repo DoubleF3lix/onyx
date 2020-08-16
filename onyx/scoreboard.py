@@ -65,6 +65,15 @@ class _Player:
     def modulo(self, value: Union[int, "_Player"]):
         self._multi_operator("%=", value)
 
+    def set_if_less(self, value: Union[int, "_Player"]):
+        self._multi_operator("<", value)
+
+    def set_if_greater(self, value: Union[int, "_Player"]):
+        self._multi_operator(">", value)
+
+    def swap(self, value: "_Player"):
+        self._multi_operator("><", value)
+
     def reset(self):
         Handler._cmds.append(f"scoreboard players reset {self.name} {self.scoreboard}")
 
@@ -160,19 +169,24 @@ class _Player:
         self._multi_bitwise("right_shift", value_1, value_2)
 
     def _multi_operator(self, operator, value, operator_name=None):
-        value = math.floor(value)
+        # Ignore the flooring if the value passed isn't an integer
+        if not isinstance(value, _Player):
+            value = math.floor(value)
+
         if operator in {"=", "+=", "-="}:
             if isinstance(value, _Player):
                 Handler._cmds.append(f"scoreboard players operation {self.name} {self.scoreboard} {operator} {value.name} {value.scoreboard}")
             else:
                 Handler._cmds.append(f"scoreboard players {operator_name} {self.name} {self.scoreboard} {value}")
-        elif operator in {"*=", "/=", "%="}:
+        elif operator in {"*=", "/=", "%=", "<", ">"}:
             if isinstance(value, _Player):
                 Handler._cmds.append(f"scoreboard players operation {self.name} {self.scoreboard} {operator} {value.name} {value.scoreboard}")
             else:
                 Handler._add_scoreboard("onyx.const")
                 Handler._add_to_init(f"scoreboard players set {value} onyx.const {value}")
                 Handler._cmds.append(f"scoreboard players operation {self.name} {self.scoreboard} {operator} {value} onyx.const")
+        elif operator == "><":
+            Handler._cmds.append(f"scoreboard players operation {self.name} {self.scoreboard} >< {value.name} {value.scoreboard}")
 
     def _multi_trig(self, trig_func, value, inverse=False):
         if inverse:
