@@ -204,7 +204,7 @@ class Handler:
                     q.append(json.dumps(Handler._translate(item)))
                 return q
             else:
-                return " ".join(element)
+                return " ".join(map(str, element))
         else:
             return element
 

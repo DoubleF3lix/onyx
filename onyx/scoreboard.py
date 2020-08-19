@@ -44,6 +44,7 @@ class Scoreboard:
     """
     def __init__(self, name: str, create: bool = False, critera: str = "dummy", display_name: json_string = None):
         self.name = Handler._translate(name)
+        self.create = create
         self.critera = Handler._translate(critera)
         self.display_name = Handler._translate(display_name, convert=True)
 
@@ -79,13 +80,14 @@ class Scoreboard:
         Returns:
             _Player: A new player object
         """
-        return _Player(name, self.name, self.critera)
+        return _Player(name, self.name, self.create, self.critera)
 
 
 class _Player:
-    def __init__(self, name, scoreboard, critera):
+    def __init__(self, name, scoreboard, created, critera):
         self.name = Handler._translate(name)
         self.scoreboard = scoreboard
+        self.is_created = created
         self.scoreboard_critera = critera
 
     def set(self, value: Union[int, "_Player"]):
@@ -159,7 +161,7 @@ class _Player:
     def enable(self):
         """Enables the score to be used in the trigger command
         """
-        if self.scoreboard_critera != "trigger":
+        if self.scoreboard_critera != "trigger" and self.is_created is True:
             Handler._warn(f"'{self.scoreboard}' should have 'trigger' critera")
         Handler._warn(f"scoreboard players enable {self.name} {self.scoreboard}")
 

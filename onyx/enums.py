@@ -6643,3 +6643,152 @@ class weather(enum.Enum):
     clear = "clear"
     rain = "rain"
     thunder = "thunder"
+
+class particle(enum.Enum):
+    """Particle list
+
+    * ambient_entity_effect
+    * angry_villager
+    * barrier
+    * block
+    * bubble
+    * cloud
+    * crit
+    * damage_indicator
+    * dragon_breath
+    * dripping_lava
+    * falling_lava
+    * landing_lava
+    * dripping_water
+    * falling_water
+    * dust
+    * effect
+    * elder_guardian
+    * enchanted_hit
+    * enchant
+    * end_rod
+    * entity_effect
+    * explosion_emitter
+    * explosion
+    * falling_dust
+    * firework
+    * fishing
+    * flame
+    * soul_fire_flame
+    * soul
+    * flash
+    * happy_villager
+    * composter
+    * heart
+    * instant_effect
+    * item
+    * item_slime
+    * item_snowball
+    * large_smoke
+    * lava
+    * mycelium
+    * note
+    * poof
+    * portal
+    * rain
+    * smoke
+    * sneeze
+    * spit
+    * squid_ink
+    * sweep_attack
+    * totem_of_undying
+    * underwater
+    * splash
+    * witch
+    * bubble_pop
+    * current_down
+    * bubble_column_up
+    * nautilus
+    * dolphin
+    * campfire_cosy_smoke
+    * campfire_signal_smoke
+    * dripping_honey
+    * falling_honey
+    * landing_honey
+    * falling_nectar
+    * ash
+    * crimson_spore
+    * warped_spore
+    * dripping_obsidian_tear
+    * falling_obsidian_tear
+    * landing_obsidian_tear
+    * reverse_portal
+    * white_ash
+    """
+    ambient_entity_effect = "minecraft:ambient_entity_effect"
+    angry_villager = "minecraft:angry_villager"
+    barrier = "minecraft:barrier"
+    block = "minecraft:block"
+    bubble = "minecraft:bubble"
+    cloud = "minecraft:cloud"
+    crit = "minecraft:crit"
+    damage_indicator = "minecraft:damage_indicator"
+    dragon_breath = "minecraft:dragon_breath"
+    dripping_lava = "minecraft:dripping_lava"
+    falling_lava = "minecraft:falling_lava"
+    landing_lava = "minecraft:landing_lava"
+    dripping_water = "minecraft:dripping_water"
+    falling_water = "minecraft:falling_water"
+    dust = "minecraft:dust"
+    effect = "minecraft:effect"
+    elder_guardian = "minecraft:elder_guardian"
+    enchanted_hit = "minecraft:enchanted_hit"
+    enchant = "minecraft:enchant"
+    end_rod = "minecraft:end_rod"
+    entity_effect = "minecraft:entity_effect"
+    explosion_emitter = "minecraft:explosion_emitter"
+    explosion = "minecraft:explosion"
+    falling_dust = "minecraft:falling_dust"
+    firework = "minecraft:firework"
+    fishing = "minecraft:fishing"
+    flame = "minecraft:flame"
+    soul_fire_flame = "minecraft:soul_fire_flame"
+    soul = "minecraft:soul"
+    flash = "minecraft:flash"
+    happy_villager = "minecraft:happy_villager"
+    composter = "minecraft:composter"
+    heart = "minecraft:heart"
+    instant_effect = "minecraft:instant_effect"
+    item = "minecraft:item"
+    item_slime = "minecraft:item_slime"
+    item_snowball = "minecraft:item_snowball"
+    large_smoke = "minecraft:large_smoke"
+    lava = "minecraft:lava"
+    mycelium = "minecraft:mycelium"
+    note = "minecraft:note"
+    poof = "minecraft:poof"
+    portal = "minecraft:portal"
+    rain = "minecraft:rain"
+    smoke = "minecraft:smoke"
+    sneeze = "minecraft:sneeze"
+    spit = "minecraft:spit"
+    squid_ink = "minecraft:squid_ink"
+    sweep_attack = "minecraft:sweep_attack"
+    totem_of_undying = "minecraft:totem_of_undying"
+    underwater = "minecraft:underwater"
+    splash = "minecraft:splash"
+    witch = "minecraft:witch"
+    bubble_pop = "minecraft:bubble_pop"
+    current_down = "minecraft:current_down"
+    bubble_column_up = "minecraft:bubble_column_up"
+    nautilus = "minecraft:nautilus"
+    dolphin = "minecraft:dolphin"
+    campfire_cosy_smoke = "minecraft:campfire_cosy_smoke"
+    campfire_signal_smoke = "minecraft:campfire_signal_smoke"
+    dripping_honey = "minecraft:dripping_honey"
+    falling_honey = "minecraft:falling_honey"
+    landing_honey = "minecraft:landing_honey"
+    falling_nectar = "minecraft:falling_nectar"
+    ash = "minecraft:ash"
+    crimson_spore = "minecraft:crimson_spore"
+    warped_spore = "minecraft:warped_spore"
+    dripping_obsidian_tear = "minecraft:dripping_obsidian_tear"
+    falling_obsidian_tear = "minecraft:falling_obsidian_tear"
+    landing_obsidian_tear = "minecraft:landing_obsidian_tear"
+    reverse_portal = "minecraft:reverse_portal"
+    white_ash = "minecraft:white_ash"

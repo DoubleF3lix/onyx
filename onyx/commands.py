@@ -4,7 +4,7 @@ from .enums import (advancement_action, selection, mode, difficulty, rule, encha
                     forceload_mode, structure, biome, sound_channel, container_type, container_slot, block, setblock_mode,
                     weather)
 
-from .util import AbsPos, RelPos, LocPos, Abs2DPos, Rel2DPos, Item
+from .util import AbsPos, RelPos, LocPos, Abs2DPos, Rel2DPos, Item, Particle
 from .handler import Handler
 
 from .execute import execute
@@ -187,6 +187,10 @@ def locatebiome(biome: biome):
         biome (biome): The biome to locate
     """
     Handler._cmds.append(f"locate {Handler._translate(biome)}")
+
+
+def particle(particle: Particle, force: bool = False, targets: selector = None):
+    Handler._cmds.append(f"particle {Handler._translate(particle)} {'force' if force else 'normal'} {Handler._translate(targets)}")
 
 
 def playsound(sound: str, sound_channel: sound_channel, targets: selector, position: Union[AbsPos, RelPos, LocPos], volume: int = 1, pitch: int = 1, min_volume: int = 1):

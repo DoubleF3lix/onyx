@@ -4,7 +4,7 @@ from nbtlib.tag import *
 from nbtlib import parse_nbt
 
 from .selector import selector
-from .enums import item, action as action_enum
+from .enums import item, action as action_enum, particle, item, block
 from .handler import Handler, _buildable, _position
 
 
@@ -330,3 +330,63 @@ class Item(_buildable):
             item_data["display"]["Lore"] = item_lore
 
         return f"{self.type}{item_data.snbt()}"
+
+
+class Particle(_buildable):
+    def __init__(self, particle_name: particle, position: AbsPos = None, delta: AbsPos = None, speed: int = None, count: int = None, motion: AbsPos = None,
+                 RGB: tuple = None, dust_color: tuple = None, dust_size: int = None, block_particle: block = None, item_particle: item = None,
+                 note_color: int = None, color_multiplier: int = None):
+        self.particle_name = Handler._translate(particle_name)
+        self.position = Handler._translate(position)
+        self.delta = Handler._translate(delta)
+        self.speed = Handler._translate(speed)
+        self.count = Handler._translate(count)
+        self.motion = Handler._translate(motion)
+        self.RGB = Handler._translate(RGB)
+        self.dust_color = Handler._translate(dust_color)
+        self.dust_size = Handler._translate(dust_size)
+        self.block_particle = Handler._translate(block_particle)
+        self.item_particle = Handler._translate(item_particle)
+        self.note_color = Handler._translate(note_color)
+        self.color_multiplier = Handler._translate(color_multiplier)
+
+    def build(self):
+        if self.motion is not None:
+            self.count = 0
+            self.delta = self.motion
+
+        if self.particle_name in {"entity_effect", "ambient_entity_effect"} and self.RGB is not None:
+            if self.color_multiplier is None:
+                Handler._warn("'color_multiplier' not specified with 'RGB'. Assuming value of '1'")
+                self.color_multiplier = 1
+            # <particle> <position> <R> <G> <B> <E> <count>
+            output = f"{self.particle_name} {self.position} {self.RGB} {self.color_multiplier} 0"
+        elif self.block_particle is not None:
+            # <particle> <block> <position> <dx> <dy> <dz> <speed> <count>
+            output = f"{self.particle_name} {self.block_particle} {self.position} {self.delta} {self.speed} {self.count}"
+        elif self.item_particle is not None:
+            # <particle> <item> <position> <dx> <dy> <dz> <speed> <count>
+            output = f"minecraft:item {self.item_particle} {self.position} {self.delta} {self.speed} {self.count}"
+        elif self.dust_color is not None:
+            if self.dust_size is None:
+                self.dust_size = 1.0
+            # <particle> <color> <particle_size> <position> <dx> <dy> <dz> <speed> <count>
+            output = f"minecraft:dust {self.dust_color} {self.dust_size} {self.position} {self.delta} {self.speed} {self.count}"
+        elif self.note_color is not None:
+            if self.color_multiplier is None:
+                Handler._warn("'color_multiplier' not specified with 'note_color'. Assuming value of '1'")
+                self.color_multiplier = 1
+            # <particle> <position> <note_color> <dy(0)> <dz(0)> <speed> <count(0)>
+            output = f"minecraft:note {self.position} {self.note_color} {self.color_multiplier} 0"
+        else:
+            if self.position is None:
+                Handler._warn("'position' was not specified")
+            if self.delta is None:
+                Handler._warn("'delta' was not specified")
+            if self.speed is None:
+                Handler._warn("'speed' was not specified")
+            if self.count is None:
+                Handler._warn("'count' was not specified")
+            output = f"{self.particle_name} {self.position} {self.delta} {self.speed} {self.count}"
+
+        return output
