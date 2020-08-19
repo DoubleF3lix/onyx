@@ -175,13 +175,12 @@ class _Player:
             Handler._cmds.append(f"scoreboard players operation $input onyx.math = {self.name} {self.scoreboard}")
             if isinstance(value, int):
                 Handler._cmds.append(f"scoreboard players set $exponent onyx.math {math.floor(value)}")
+                if value > 30:
+                    Handler._warn("An exponent higher than 30 will overflow")
             else:
                 Handler._cmds.append(f"scoreboard players operation $exponent onyx.math = {value.name} {value.scoreboard}")
             Handler._cmds.append(f"function {Handler._datapack_name}:lib/math/pow/main")
             Handler._cmds.append(f"scoreboard players operation {self.name} {self.scoreboard} = $output onyx.math")
-
-        if value > 30:
-            Handler._warn("An exponent higher than 30 will overflow")
 
     def sin(self, value: Union[int, float] = None):
         """Input is taken to a scale of 1 (automatically scaled to 10). Outputs to a scale of 10,000 (0.0197 => 197).
