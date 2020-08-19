@@ -1,6 +1,6 @@
 import os
 from typing import Union
-from .handler import Handler
+from onyx.handler import Handler
 
 
 class delay:

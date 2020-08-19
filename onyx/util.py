@@ -1,11 +1,11 @@
-from typing import Union
-import enum
 import json
-import nbtlib
+from typing import Union
 from nbtlib.tag import *
-from onyx.selector import selector
-from onyx.enums import action as action_enum
-from onyx.handler import Handler, _buildable, _position
+from nbtlib import parse_nbt
+
+from .selector import selector
+from .enums import item, action as action_enum
+from .handler import Handler, _buildable, _position
 
 
 class SetFrom(_buildable):
@@ -242,3 +242,91 @@ class RelRot(_buildable, _position):
 
     def build(self):
         return f"~{self.y_rot} ~{self.x_rot}"
+
+
+class Abs2DPos(_buildable, _position):
+    """Defines an absolute position without a y-coordinate
+
+    Args:
+        x_pos (Union[int, float])
+        y_pos (Union[int, float])
+    """
+    def __init__(self, x_pos: Union[int, float], z_pos: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [x_pos, z_pos]):
+            raise ValueError("You must supply 2 numbers")
+
+        self.x_pos = x_pos
+        self.z_pos = z_pos
+
+    def build(self):
+        return f"{self.x_pos} {self.z_pos}"
+
+
+class Rel2DPos(_buildable, _position):
+    """Defines an absolute position without a y-coordinate
+
+    Args:
+        x_pos (Union[int, float])
+        y_pos (Union[int, float])
+    """
+    def __init__(self, x_pos: Union[int, float], z_pos: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [x_pos, z_pos]):
+            raise ValueError("You must supply 2 numbers")
+
+        self.x_pos = x_pos
+        self.z_pos = z_pos
+
+    def build(self):
+        return f"~{self.x_pos} ~{self.z_pos}"
+
+
+class Item(_buildable):
+    """Item builder
+
+    Args:
+        item_type (item): The item name (stone, brick, etc.)
+        item_name (json_string): The custom name of the item. Defaults to None.
+    """
+    def __init__(self, item_type: item, item_name: "json_string" = None):
+        self.type = item_type
+        self.set_name(item_name)
+        self.lore = None
+        self.tags = None
+
+    def set_name(self, item_name: "json_string"):
+        """Set the name of the item
+
+        Args:
+            item_name (json_string): The custom name of the item.
+        """
+        if item_name is not None:
+            self.name = json.dumps(Handler._translate(item_name))
+        else:
+            self.name = None
+
+    def set_lore(self, *lore_lines: "json_string"):
+        """Overwrites all the old lore and replaces it with new lore
+
+        Args:
+            *lore_lines (json_string): The new lore to set
+        """
+        self.lore = Handler._translate(lore_lines, item=True)
+
+    def add_lore(self, *lore_lines: "json_string"):
+        """Adds to the existing item lore
+
+        Args:
+            *lore_lines (json_string): The new lore to add
+        """
+        self.lore.extend(Handler._translate(lore_lines, item=True))
+
+    def build(self):
+        item_data = Compound({"display": Compound()})
+        if self.name is not None:
+            item_name = parse_nbt(String(json.dumps(self.name)))
+            item_data["display"]["Name"] = item_name
+        if self.lore is not None:
+            item_lore = parse_nbt(str(self.lore))
+            item_data["display"]["Lore"] = item_lore
+
+        return f"{self.type}{item_data.snbt()}"

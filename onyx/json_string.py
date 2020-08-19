@@ -1,9 +1,9 @@
 import json
 import enum
-from onyx.enums import color as color_enum, key
-from onyx.selector import selector
-from onyx.handler import Handler
-from onyx.util import HoverEvent, ClickEvent, AbsPos
+from .enums import color as color_enum, key
+from .selector import selector
+from .handler import Handler
+from .util import HoverEvent, ClickEvent
 
 
 class json_string:
@@ -62,7 +62,7 @@ class json_string:
 
         if score is not None:
             if text:
-                Handler._warn(f"'score' will not display with specified 'text' parameter")
+                Handler._warn("'score' will not display with specified 'text' parameter")
             if not isinstance(score, dict):
                 raise ValueError(f"Expected dictionary for 'score', got {type(score)}")
             if "signature18" not in score:

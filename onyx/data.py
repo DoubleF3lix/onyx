@@ -1,7 +1,7 @@
 from typing import Union
-from onyx.handler import Handler
-from onyx.enums import data_operator
-from onyx.selector import selector
+from .handler import Handler
+from .enums import data_operator
+from .selector import selector
 
 
 def get(target: Union[str, tuple, selector], path: str = None, scale: Union[float, int] = None):
@@ -18,7 +18,7 @@ def get(target: Union[str, tuple, selector], path: str = None, scale: Union[floa
         container_type = "block"
     if isinstance(target, selector):
         container_type = "entity"
-    Handler._cmds.append(f"data get {container_type} {Handler._translate(target)} {Handler._translate(path) or ''} {Handler._translate(scale) or ''}")
+    Handler._cmds.append(f"data get {Handler._translate(container_type)} {Handler._translate(target)} {Handler._translate(path) or ''} {Handler._translate(scale) or ''}")
 
 
 def merge(target: Union[str, tuple, selector], nbt: str):
@@ -30,11 +30,14 @@ def merge(target: Union[str, tuple, selector], nbt: str):
     """
     if isinstance(target, str):
         container_type = "storage"
-    if isinstance(target, tuple):
+    elif isinstance(target, tuple):
         container_type = "block"
-    if isinstance(target, selector):
+    elif isinstance(target, selector):
         container_type = "entity"
-    Handler._cmds.append(f"data merge {container_type} {Handler._translate(target)} {Handler._translate(nbt)}")
+    else:
+        container_type = "storage"
+
+    Handler._cmds.append(f"data merge {Handler._translate(container_type)} {Handler._translate(target)} {Handler._translate(nbt)}")
 
 
 def modify(target: Union[str, tuple, selector], path: str, operation: data_operator, data_location: dict):
@@ -48,12 +51,14 @@ def modify(target: Union[str, tuple, selector], path: str, operation: data_opera
     """
     if isinstance(target, str):
         container_type = "storage"
-    if isinstance(target, tuple):
+    elif isinstance(target, tuple):
         container_type = "block"
-    if isinstance(target, selector):
+    elif isinstance(target, selector):
         container_type = "entity"
+    else:
+        container_type = "storage"
 
-    Handler._cmds.append(f"data modify {container_type} {Handler._translate(target)} {Handler._translate(path)} {Handler._translate(operation)} {Handler._translate(data_location)}")
+    Handler._cmds.append(f"data modify {Handler._translate(container_type)} {Handler._translate(target)} {Handler._translate(path)} {Handler._translate(operation)} {Handler._translate(data_location)}")
 
 
 def remove(target: Union[str, tuple, selector], path: str):
@@ -65,10 +70,11 @@ def remove(target: Union[str, tuple, selector], path: str):
     """
     if isinstance(target, str):
         container_type = "storage"
-    if isinstance(target, tuple):
+    elif isinstance(target, tuple):
         container_type = "block"
-        target = ' '.join(target)
-    if isinstance(target, selector):
+    elif isinstance(target, selector):
         container_type = "entity"
-        target = target.build()
-    Handler._cmds.append(f"data remove {container_type} {target} {path}")
+    else:
+        container_type = "storage"
+
+    Handler._cmds.append(f"data remove {Handler._translate(container_type)} {Handler._translate(target)} {Handler._translate(path)}")

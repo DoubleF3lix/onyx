@@ -1,9 +1,9 @@
 import enum
 from typing import Union
-from onyx.selector import selector
-from onyx.enums import bossbar_trait as trait_enum, style as style_enum, color as color_enum
-from onyx.json_string import json_string
-from onyx.handler import Handler
+from .selector import selector
+from .enums import bossbar_trait as trait_enum, style as style_enum, color as color_enum
+from .json_string import json_string
+from .handler import Handler
 
 
 def create(id: str, bossbar_name: json_string):

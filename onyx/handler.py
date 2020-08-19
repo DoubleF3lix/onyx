@@ -5,7 +5,7 @@ import random
 import shutil
 import json
 import enum
-from .enums import lib
+from onyx.enums import lib
 
 
 class _buildable:
@@ -173,7 +173,7 @@ class Handler:
             Handler._added_scoreboards.append(name)
 
     @staticmethod
-    def _translate(element, convert=False, selector=False):
+    def _translate(element, convert=False, item=False):
         from .json_string import json_string
         from .execute import execute
         from .selector import selector
@@ -193,11 +193,16 @@ class Handler:
         elif isinstance(element, bool):
             return str(element).lower()
         elif isinstance(element, (list, tuple)):
-            if selector:
-                r = []
-                for q in element:
-                    r.append(Handler._translate(q))
-                return r
+            if convert:
+                q = []
+                for item in element:
+                    q.append(Handler._translate(item))
+                return q
+            elif item:
+                q = []
+                for item in element:
+                    q.append(json.dumps(Handler._translate(item)))
+                return q
             else:
                 return " ".join(element)
         else:

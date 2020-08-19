@@ -1,5 +1,10 @@
 import onyx.bossbar
 import onyx.data
+import onyx.datapack
+import onyx.effect
+import onyx.experience
+import onyx.recipe
+import onyx.tag
 
 from onyx.pack_manager import pack
 

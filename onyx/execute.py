@@ -1,7 +1,9 @@
 import os
+from typing import Union
 from .enums import axis, anchor, dimension
 from .selector import selector
 from .handler import Handler
+from .util import AbsPos, LocPos, RelPos, AbsRot, RelRot
 
 
 # Each method returns self to allow for method chaining
@@ -38,6 +40,10 @@ class execute:
         Handler._cmds = self.old_cmds
 
     def align(self, *args: axis):
+        """
+        Args:
+            *args (axis): The axes to align with
+        """
         axes = []
         for arg in args:
             if Handler._translate(arg) not in args:
@@ -46,47 +52,83 @@ class execute:
         return self
 
     def anchored(self, anchor_point: anchor):
+        """
+        Args:
+            anchor_point (anchor): The anchor point (feet, eyes)
+        """
         self.output += f"anchored {Handler._translate(anchor_point)} "
         return self
 
     def As(self, entity: selector):
+        """"as" is a reserved keyword
+
+        Args:
+            entity (selector): The entity to execute as
+        """
         self.output += f"as {Handler._translate(entity)} "
         return self
 
     def at(self, entity: selector):
+        """
+        Args:
+            entity (selector): The entity to execute at
+        """
         self.output += f"at {Handler._translate(entity)} "
         return self
 
     def as_at(self, entity: selector):
+        """A combination of `As()` and `at()`
+        Args:
+            entity (selector): The entity to execute as and at
+        """
         self.output += f"as {Handler._translate(entity)} at @s "
         return self
 
-    def facing(self, entity: selector = None, pos: tuple = None):
+    def facing(self, entity: selector = None, pos: Union[AbsPos, LocPos, RelPos] = None):
+        """
+        Args:
+            entity (selector, optional): The entity to face. Defaults to None.
+            pos (Union[AbsPos, LocPos, RelPos], optional): The block to face. Defaults to None.
+        """
         if entity is not None:
             if pos is not None:
-                raise ValueError("You can't provide both an entity and position")
+                Handler._warn("Both 'entity' and 'pos' were specified. Ignoring 'pos'.")
             self.output += f"facing entity {Handler._translate(entity)} "
         elif pos is not None:
             self.output += f"facing {Handler._translate(pos)} "
         else:
-            raise ValueError("You must specify either an entity or position value")
+            Handler._warn("Neither 'entity' nor 'pos' were specified. Ignoring.")
         return self
 
-    def In(self, dimension_name: dimension):
+    def In(self, dimension_name: Union[dimension, str]):
+        """"in" is a reserved keyword
+
+        Args:
+            dimension_name (dimension): The dimension to execute in
+        """
         self.output += f"in {Handler._translate(dimension_name)} "
         return self
 
-    def positioned(self, pos: tuple):
+    def positioned(self, pos: Union[AbsPos, LocPos, RelPos]):
+        """
+        Args:
+            pos (Union[AbsPos, LocPos, RelPos]): The position to execute in
+        """
         self.output += f"positioned {Handler._translate(pos)} "
         return self
 
-    def rotated(self, entity: selector = None, rot: tuple = None):
+    def rotated(self, entity: selector = None, rot: Union[AbsRot, RelRot] = None):
+        """
+        Args:
+            entity (selector, optional): [description]. Defaults to None.
+            rot (Union[AbsRot, RelRot], optional): [description]. Defaults to None.
+        """
         if entity is not None:
             if rot is not None:
-                raise ValueError("You can't provide both an entity and rotation values")
+                Handler._warn("Both 'entity' and 'rot' specified. Ignoring 'rot'.")
             self.output += f"rotated as {Handler._translate(entity)} "
         elif rot is not None:
             self.output += f"rotated {Handler._translate(rot)} "
         else:
-            raise ValueError("You must specify either an entity or rotation value(s)")
+            Handler._warn("Neither 'entity' nor 'rot' were specified. Ignoring.")
         return self

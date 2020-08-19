@@ -1,7 +1,7 @@
 import enum
 from typing import Union
-from onyx.enums import at, sort, mode
-from onyx.handler import Handler, _buildable
+from .enums import at, sort, mode
+from .handler import Handler, _buildable
 
 
 class selector(_buildable):
