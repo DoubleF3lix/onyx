@@ -7,7 +7,7 @@ from onyx.json_string import json_string
 from onyx.enums import lib, scoreboard_trait, rendertype
 
 
-def reset_player(name: Union[selector, str]):
+def resetPlayer(name: Union[selector, str]):
     """Resets all scores for a player
 
     Args:
@@ -66,7 +66,7 @@ class Scoreboard:
         """
         Handler._cmds.append(f"scoreboard objectives modify {self.name} {Handler._translate(trait)} {Handler._translate(value)}")
 
-    def remove_all_players(self):
+    def remove_allPlayers(self):
         """Remove all players from a scoreboard
         """
         Handler._cmds.append(f"scoreboard objectives remove {self.name}")
@@ -78,78 +78,78 @@ class Scoreboard:
             name (Union[selector, str]): The selector/name of the player
 
         Returns:
-            _Player: A new player object
+            Player: A new player object
         """
-        return _Player(name, self.name, self.create, self.critera)
+        return Player(name, self.name, self.create, self.critera)
 
 
-class _Player:
+class Player:
     def __init__(self, name, scoreboard, created, critera):
         self.name = Handler._translate(name)
         self.scoreboard = scoreboard
         self.is_created = created
         self.scoreboard_critera = critera
 
-    def set(self, value: Union[int, "_Player"]):
+    def set(self, value: Union[int, "Player"]):
         """
         Args:
-            value (Union[int, _Player])
+            value (Union[int, Player])
         """
         self._multi_operator("=", value, "set")
 
-    def add(self, value: Union[int, "_Player"]):
+    def add(self, value: Union[int, "Player"]):
         """
         Args:
-            value (Union[int, _Player])
+            value (Union[int, Player])
         """
         self._multi_operator("+=", value, "add")
 
-    def subtract(self, value: Union[int, "_Player"]):
+    def subtract(self, value: Union[int, "Player"]):
         """
         Args:
-            value (Union[int, _Player])
+            value (Union[int, Player])
         """
         self._multi_operator("-=", value, "remove")
 
-    def multiply(self, value: Union[int, "_Player"]):
+    def multiply(self, value: Union[int, "Player"]):
         """
         Args:
-            value (Union[int, _Player])
+            value (Union[int, Player])
         """
         self._multi_operator("*=", value)
 
-    def divide(self, value: Union[int, "_Player"]):
+    def divide(self, value: Union[int, "Player"]):
         """
         Args:
-            value (Union[int, _Player])
+            value (Union[int, Player])
         """
         self._multi_operator("/=", value)
 
-    def modulo(self, value: Union[int, "_Player"]):
+    def modulo(self, value: Union[int, "Player"]):
         """
         Args:
-            value (Union[int, _Player])
+            value (Union[int, Player])
         """
         self._multi_operator("%=", value)
 
-    def set_if_less(self, value: Union[int, "_Player"]):
+    def set_if_less(self, value: Union[int, "Player"]):
         """Sets the score to the value if the score is lower than the value
         Args:
-            value (Union[int, _Player])
+            value (Union[int, Player])
         """
         self._multi_operator("<", value)
 
-    def set_if_greater(self, value: Union[int, "_Player"]):
+    def set_if_greater(self, value: Union[int, "Player"]):
         """Sets the score to the value if the score is greater than the value
         Args:
-            value (Union[int, _Player])
+            value (Union[int, Player])
         """
         self._multi_operator(">", value)
 
-    def swap(self, value: "_Player"):
+    def swap(self, value: "Player"):
         """
         Args:
-            value (Union[int, _Player])
+            value (Union[int, Player])
         """
         self._multi_operator("><", value)
 
@@ -165,10 +165,10 @@ class _Player:
             Handler._warn(f"'{self.scoreboard}' should have 'trigger' critera")
         Handler._warn(f"scoreboard players enable {self.name} {self.scoreboard}")
 
-    def pow(self, value: Union[int, "_Player"]):
+    def pow(self, value: Union[int, "Player"]):
         """Raises the score to the exponent value
         Args:
-            value (Union[int, _Player])
+            value (Union[int, Player])
         """
         if value == 2:
             Handler._cmds.append(f"scoreboard players operation {self.name} {self.scoreboard} *= {self.name} {self.scoreboard}")
@@ -269,72 +269,72 @@ class _Player:
             Handler._cmds.append(f"function {Handler._datapack_name}:lib/rng/main")
             Handler._cmds.append(f"scoreboard players operation {self.name} {self.scoreboard} = $output onyx.rng")
 
-    def NOT(self, value: Union[int, "_Player"]):
+    def NOT(self, value: Union[int, "Player"]):
         """
         Args:
-            value (Union[int, "_Player"]): The value to operaton on. If unspecified, the current value of the player is operated on.
+            value (Union[int, "Player"]): The value to operaton on. If unspecified, the current value of the player is operated on.
         """
         Handler.load_lib(lib.bitwise)
 
-        if isinstance(value, _Player):
+        if isinstance(value, Player):
             Handler._cmds.append(f"scoreboard players operation $input_1 onyx.bitwise = {self.name} {self.scoreboard}")
         else:
             Handler._cmds.append(f"scoreboard players set $input_1 onyx.bitwise {value}")
         Handler._cmds.append(f"function {Handler._datapack_name}:lib/bitwise/not/main")
         Handler._cmds.append(f"scoreboard players operation {self.name} {self.scoreboard} = $output onyx.bitwise")
 
-    def AND(self, value_1: Union[int, "_Player"], value_2: int = None):
+    def AND(self, value_1: Union[int, "Player"], value_2: int = None):
         """
         Args:
-            value_1 (Union[int, "_Player"]): The first value to operate on
+            value_1 (Union[int, "Player"]): The first value to operate on
             value_2 (int, optional): If unspecified, the value of "value_1" is moved to "value_2", and the value of the current player is assigned to "value_1". Defaults to None.
         """
         self._multi_bitwise("and", value_1, value_2)
 
-    def OR(self, value_1: Union[int, "_Player"], value_2: int = None):
+    def OR(self, value_1: Union[int, "Player"], value_2: int = None):
         """
         Args:
-            value_1 (Union[int, "_Player"]): The first value to operate on
+            value_1 (Union[int, "Player"]): The first value to operate on
             value_2 (int, optional): If unspecified, the value of "value_1" is moved to "value_2", and the value of the current player is assigned to "value_1". Defaults to None.
         """
         self._multi_bitwise("or", value_1, value_2)
 
-    def XOR(self, value_1: Union[int, "_Player"], value_2: int = None):
+    def XOR(self, value_1: Union[int, "Player"], value_2: int = None):
         """
         Args:
-            value_1 (Union[int, "_Player"]): The first value to operate on
+            value_1 (Union[int, "Player"]): The first value to operate on
             value_2 (int, optional): If unspecified, the value of "value_1" is moved to "value_2", and the value of the current player is assigned to "value_1". Defaults to None.
         """
         self._multi_bitwise("xor", value_1, value_2)
 
-    def LEFT_SHIFT(self, value_1: Union[int, "_Player"], value_2: int = None):
+    def LEFT_SHIFT(self, value_1: Union[int, "Player"], value_2: int = None):
         """
         Args:
-            value_1 (Union[int, "_Player"]): The value to shift.
+            value_1 (Union[int, "Player"]): The value to shift.
             value_2 (int, optional): The amount of bits to shift by. If unspecified, the value of "value_1" is moved to "value_2", and the value of the current player is assigned to "value_1". Defaults to None.
         """
         self._multi_bitwise("left_shift", value_1, value_2)
 
-    def RIGHT_SHIFT(self, value_1: Union[int, "_Player"], value_2: int = None):
+    def RIGHT_SHIFT(self, value_1: Union[int, "Player"], value_2: int = None):
         """
         Args:
-            value_1 (Union[int, "_Player"]): The value to shift.
+            value_1 (Union[int, "Player"]): The value to shift.
             value_2 (int, optional): The amount of bits to shift by. If unspecified, the value of "value_1" is moved to "value_2", and the value of the current player is assigned to "value_1". Defaults to None.
         """
         self._multi_bitwise("right_shift", value_1, value_2)
 
     def _multi_operator(self, operator, value, operator_name=None):
         # Ignore the flooring if the value passed isn't an integer
-        if not isinstance(value, _Player):
+        if not isinstance(value, Player):
             value = math.floor(value)
 
         if operator in {"=", "+=", "-="}:
-            if isinstance(value, _Player):
+            if isinstance(value, Player):
                 Handler._cmds.append(f"scoreboard players operation {self.name} {self.scoreboard} {operator} {value.name} {value.scoreboard}")
             else:
                 Handler._cmds.append(f"scoreboard players {operator_name} {self.name} {self.scoreboard} {value}")
         elif operator in {"*=", "/=", "%=", "<", ">"}:
-            if isinstance(value, _Player):
+            if isinstance(value, Player):
                 Handler._cmds.append(f"scoreboard players operation {self.name} {self.scoreboard} {operator} {value.name} {value.scoreboard}")
             else:
                 Handler._add_scoreboard("onyx.const")
@@ -359,9 +359,9 @@ class _Player:
 
     def _multi_bitwise(self, operator_name, value_1, value_2):
         # Ignore the flooring if the value passed isn't an integer
-        if not isinstance(value_1, _Player):
+        if not isinstance(value_1, Player):
             value_1 = math.floor(value_1)
-        if not isinstance(value_2, _Player):
+        if not isinstance(value_2, Player):
             value_2 = math.floor(value_2)
 
         Handler.load_lib(lib.bitwise)

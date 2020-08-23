@@ -4556,6 +4556,7 @@ class structure(enum.Enum):
 class sound_channel(enum.Enum):
     """Channel list for playsound command
 
+    * any
     * ambient
     * block
     * hostile
@@ -4567,6 +4568,7 @@ class sound_channel(enum.Enum):
     * voice
     * weather
     """
+    any = "*"
     ambient = "ambient"
     block = "block"
     hostile = "hostile"
@@ -6644,6 +6646,7 @@ class weather(enum.Enum):
     rain = "rain"
     thunder = "thunder"
 
+
 class particle(enum.Enum):
     """Particle list
 
@@ -6792,3 +6795,149 @@ class particle(enum.Enum):
     landing_obsidian_tear = "minecraft:landing_obsidian_tear"
     reverse_portal = "minecraft:reverse_portal"
     white_ash = "minecraft:white_ash"
+
+
+class schedule_mode(enum.Enum):
+    """
+    * append
+    * replace
+    """
+    append = "append"
+    replace = "replace"
+
+
+class team_trait(enum.Enum):
+    """
+    * collision_rule
+    * color
+    * death_message_visibility
+    * display_name
+    * friendly_fire
+    * nametag_visibility
+    * prefix
+    * see_friendly_invisibles
+    * suffix
+    """
+    collision_rule = "collisionRule"
+    color = "color"
+    death_message_visibility = "deathMessageVisibility"
+    display_name = "displayName"
+    friendly_fire = "friendlyFire"
+    nametag_visibility = "nametagVisibility"
+    prefix = "prefix"
+    see_friendly_invisibles = "seeFriendlyInvisibles"
+    suffix = "suffix"
+
+
+class collision_rule(enum.Enum):
+    """
+    * always
+    * never
+    * push_other_teams
+    * push_own_team
+    """
+    always = "always"
+    never = "never"
+    push_other_teams = "pushOtherTeams"
+    push_own_team = "pushOwnTeam"
+
+
+class death_message_visibility(enum.Enum):
+    """
+    * always
+    * hide_for_other_teams
+    * hide_for_own_team
+    * never
+    """
+    always = "always"
+    hide_for_other_teams = "hideForOtherTeams"
+    hide_for_own_team = "hideForOwnTeam"
+    never = "never"
+
+
+class nametag_visibility(enum.Enum):
+    """
+    * always
+    * hide_for_other_teams
+    * hide_for_own_team
+    * never
+    """
+    always = "always"
+    hide_for_other_teams = "hideForOtherTeams"
+    hide_for_own_team = "hideForOwnTeam"
+    never = "never"
+
+
+class border_damage(enum.Enum):
+    """
+    * amount
+    * buffer
+    """
+    amount = "amount"
+    buffer = "buffer"
+
+
+class border_warning(enum.Enum):
+    """
+    * distance
+    * time
+    """
+    distance = "distance"
+    time = "time"
+
+
+class loot_type(enum.Enum):
+    """
+    * fish
+    * kill
+    * loot
+    * mine
+    """
+    fish = "fish"
+    kill = "kill"
+    loot = "loot"
+    mine = "mine"
+
+
+class score_operator(enum.Enum):
+    """Score operators used in "execute if score"
+
+    * less_than
+    * less_than_or_equals
+    * equals
+    * greater_than
+    * greater_than_or_equals
+    * matches
+    """
+    less_than = "<"
+    less_than_or_equals = "<="
+    equals = "="
+    greater_than = ">"
+    greater_than_or_equals = ">="
+    matches = "matches"
+
+
+class store_type(enum.Enum):
+    """
+    * result
+    * success
+    """
+    result = "result"
+    success = "success"
+
+
+class data_type(enum.Enum):
+    """
+    * byte
+    * double
+    * float
+    * int
+    * long
+    * short
+    """
+    byte = "byte"
+    double = "double"
+    float = "float"
+    int = "int"
+    long = "long"
+    short = "short"

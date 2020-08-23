@@ -2,14 +2,15 @@ from typing import Union
 
 from .enums import (advancement_action, selection, mode, difficulty, rule, enchants, mask_mode, clone_mode, fill_mode,
                     forceload_mode, structure, biome, sound_channel, container_type, container_slot, block, setblock_mode,
-                    weather)
+                    weather, entity)
 
-from .util import AbsPos, RelPos, LocPos, Abs2DPos, Rel2DPos, Item, Particle
+from .util import AbsPos, Current2DPos, RelPos, LocPos, CurrentPos, Abs2DPos, Rel2DPos, Item, Particle
 from .handler import Handler
 
 from .execute import execute
 from .selector import selector
 from .json_string import json_string
+from .pack_manager import Function
 
 
 def send(cmd: str):
@@ -62,12 +63,12 @@ def comment(text: str, preline: int = 1, postline: int = 0):
         Handler._cmds.append("")
 
 
-def clone(corner1: Union[AbsPos, RelPos, LocPos, tuple, list], corner2: Union[AbsPos, RelPos, LocPos, tuple, list], location: Union[AbsPos, RelPos, LocPos, tuple, list], mask_mode: mask_mode = None, block_filter: str = None, clone_mode: clone_mode = None):
+def clone(corner1: Union[AbsPos, RelPos, LocPos, CurrentPos, tuple, list], corner2: Union[AbsPos, RelPos, LocPos, CurrentPos, tuple, list], location: Union[AbsPos, RelPos, LocPos, CurrentPos, tuple, list], mask_mode: mask_mode = None, block_filter: str = None, clone_mode: clone_mode = None):
     """
     Args:
-        corner1 (Union[AbsPos, RelPos, LocPos, tuple, list]): The first corner of the area to be cloned
-        corner2 (Union[AbsPos, RelPos, LocPos, tuple, list]): The second corner of the area to be cloned
-        location (Union[AbsPos, RelPos, LocPos, tuple, list]): The location where the first corner should be cloned to
+        corner1 (Union[AbsPos, RelPos, LocPos, CurrentPos, tuple, list]): The first corner of the area to be cloned
+        corner2 (Union[AbsPos, RelPos, CurrentPos, LocPos, tuple, list]): The second corner of the area to be cloned
+        location (Union[AbsPos, RelPos, CurrentPos, LocPos, tuple, list]): The location where the first corner should be cloned to
         mask_mode (mask_mode, optional): The mask mode (filtered, masked, and replace)
         block_filter (str, optional): The blocks to clone if "mask_mode" is set to "filtered". Defaults to None.
         clone_mode (clone_mode, optional): The clone mode (force, move, and normal). Defaults to None.
@@ -85,7 +86,7 @@ def clone(corner1: Union[AbsPos, RelPos, LocPos, tuple, list], corner2: Union[Ab
 def defaultgamemode(gamemode: mode):
     """
     Args:
-        gamemode (mode): The gamemode to set to.
+        gamemode (mode): The gamemode to set to
     """
     Handler._cmds.append(f"defaultgamemode {gamemode.value}")
 
@@ -93,7 +94,7 @@ def defaultgamemode(gamemode: mode):
 def difficulty(level: difficulty):
     """
     Args:
-        level (difficulty): The difficulty to set to.
+        level (difficulty): The difficulty to set to
     """
     Handler._cmds.append(f"difficulty {level.value}")
 
@@ -101,8 +102,8 @@ def difficulty(level: difficulty):
 def enchant(targets: selector, enchant_list: Union[list, enchants], level: int = None):
     """
     Args:
-        targets (selector): The players on whom the enchantment should be applied.
-        enchant_list (Union[list, enchants]): The enchantment to apply.
+        targets (selector): The players on whom the enchantment should be applied
+        enchant_list (Union[list, enchants]): The enchantment to apply
         level (int, optional): The level of the enchantment. Defaults to None.
     """
     if isinstance(enchant_list, list):
@@ -112,11 +113,11 @@ def enchant(targets: selector, enchant_list: Union[list, enchants], level: int =
         Handler._cmds.append(f"enchant {Handler._translate(targets)} {enchant_list.value} {level or ''}")
 
 
-def fill(corner1: Union[AbsPos, RelPos, LocPos, tuple, list], corner2: Union[AbsPos, RelPos, LocPos, tuple, list], block: str, fill_mode: fill_mode = None, replace_block: str = None):
+def fill(corner1: Union[AbsPos, RelPos, LocPos, CurrentPos, tuple, list], corner2: Union[AbsPos, RelPos, LocPos, CurrentPos, tuple, list], block: str, fill_mode: fill_mode = None, replace_block: str = None):
     """
     Args:
-        corner1 (Union[AbsPos, RelPos, LocPos, tuple, list]): The first corner of the area to fill
-        corner2 (Union[AbsPos, RelPos, LocPos, tuple, list]): The second corner of the area to fill
+        corner1 (Union[AbsPos, RelPos, LocPos, CurrentPos, tuple, list]): The first corner of the area to fill
+        corner2 (Union[AbsPos, RelPos, LocPos, CurrentPos, tuple, list]): The second corner of the area to fill
         block (str): The block to fill with
         fill_mode (fill_mode, optional): The fill mode (destroy, hollow, keep, outline, and replace). Defaults to None.
         replace_block (str, optional): The block to replace if "fill_mode" is set to "replace". Defaults to None.
@@ -136,6 +137,9 @@ def forceload(mode: forceload_mode, chunk_pos1: Union[Abs2DPos, Rel2DPos], chunk
     """
     Handler._cmds.append(f"forceload {Handler._translate(mode)} {Handler._translate(chunk_pos1)} {Handler._translate(chunk_pos2)}")
 
+
+def call(function: Function):
+    Handler._cmds.append(f"function {function._mcfunction_path}")
 
 def gamemode(targets: selector, mode: mode):
     """
@@ -190,20 +194,30 @@ def locatebiome(biome: biome):
 
 
 def particle(particle: Particle, force: bool = False, targets: selector = None):
+    """
+    Args:
+        particle (Particle): The particle itself and its attributes
+        force (bool, optional): Defaults to False.
+        targets (selector, optional): The player to display the particle to. Defaults to None.
+    """
     Handler._cmds.append(f"particle {Handler._translate(particle)} {'force' if force else 'normal'} {Handler._translate(targets)}")
 
 
-def playsound(sound: str, sound_channel: sound_channel, targets: selector, position: Union[AbsPos, RelPos, LocPos], volume: int = 1, pitch: int = 1, min_volume: int = 1):
+def playsound(sound: str, sound_channel: sound_channel, targets: selector, position: Union[AbsPos, RelPos, LocPos, CurrentPos], volume: int = 1, pitch: int = 1, min_volume: int = 1):
     """
     Args:
         sound (str): The sound to be played
         sound_channel (sound_channel): The channel the sound should be played through (music, neutral, ambient, etc.)
         targets (selector): The players the sound should be played to
-        position (Union[AbsPos, RelPos, LocPos]): Where the sound should be played
+        position (Union[AbsPos, RelPos, LocPos, CurrentPos]): Where the sound should be played
         volume (int, optional): How many blocks away from the position the sound should be audible. Defaults to None.
         pitch (int, optional): The pitch of the sound. Defaults to None.
         min_volume (int, optional): The minimum volume the sound should be played at. Defaults to None.
     """
+    if Handler._translate(sound_channel) == "*":
+        Handler._warn("'*' (any) sound channel is supported by playsound. Assuming 'master'.")
+        sound_channel = sound_channel.master
+
     if pitch > 2 and pitch < 0:
         Handler._warn("'pitch' should be between 0 and 2")
 
@@ -232,30 +246,30 @@ def say(text: str):
     Handler._cmds.append(f"say {text}")
 
 
-def setblock(position: Union[AbsPos, RelPos, LocPos], block: block, setblock_mode: setblock_mode = None):
+def setblock(position: Union[AbsPos, RelPos, LocPos, CurrentPos], block: block, setblock_mode: setblock_mode = None):
     """
     Args:
-        position (Union[AbsPos, RelPos, LocPos]): The block position
+        position (Union[AbsPos, RelPos, LocPos, CurrentPos]): The block position
         block (block): The block to place
         setblock_mode (setblock_mode, optional): The setblock mode (destroy, keep, replace). Defaults to None.
     """
     Handler._cmds.append(f"setblock {Handler._translate(position)} {Handler._translate(block)} {Handler._translate(setblock_mode)}")
 
 
-def setworldspawn(position: Union[AbsPos, RelPos, LocPos], angle: Union[int, float] = None):
+def setworldspawn(position: Union[AbsPos, RelPos, LocPos, CurrentPos], angle: Union[int, float] = None):
     """
     Args:
-        position (Union[AbsPos, RelPos, LocPos]): The coordinates of the new spawn
+        position (Union[AbsPos, RelPos, LocPos, CurrentPos]): The coordinates of the new spawn
         angle (Union[int, float], optional): The Y axis the player should be facing on spawn. Defaults to None.
     """
     Handler._cmds.append(f"setworldspawn {Handler._translate(position)} {Handler._translate(angle)}")
 
 
-def spawnpoint(targets: selector, position: Union[AbsPos, RelPos, LocPos], angle: Union[int, float] = None):
+def spawnpoint(targets: selector, position: Union[AbsPos, RelPos, LocPos, CurrentPos], angle: Union[int, float] = None):
     """
     Args:
         targets (selector): The players whose spawn should be set
-        position (Union[AbsPos, RelPos, LocPos]): The coordinates of the new spawn
+        position (Union[AbsPos, RelPos, LocPos, CurrentPos]): The coordinates of the new spawn
         angle (Union[int, float], optional): The Y axis the player should be facing on spawn. Defaults to None.
     """
     Handler._cmds.append(f"spawnpoint {Handler._translate(targets)} {Handler._translate(position)} {Handler._translate(angle)}")
@@ -268,6 +282,55 @@ def spectate(target: selector, source: selector = "@s"):
         source (selector, optional): The entity that should spectate. Defaults to "@s".
     """
     Handler._cmds.append(f"spectate {Handler._translate(target)} {Handler._translate(source)}")
+
+
+def spreadplayers(center: Union[Abs2DPos, Rel2DPos, Current2DPos], spread_distance: int, max_spread: int, targets: selector, respect_teams: bool = False, max_height: int = None):
+    if max_height is not None:
+        Handler._cmds.append(f"spreadplayers {Handler._translate(center)} {Handler._translate(spread_distance)} {Handler._translate(max_spread)} under {Handler._translate(max_height)} {Handler._translate(respect_teams)} {Handler._translate(targets)}")
+    else:
+        Handler._cmds.append(f"spreadplayers {Handler._translate(center)} {Handler._translate(spread_distance)} {Handler._translate(max_spread)} {Handler._translate(respect_teams)} {Handler._translate(targets)}")
+
+
+def stopsound(targets: selector, sound_channel: sound_channel = None, sound: str = None):
+    if sound_channel is not None and sound is None:
+        Handler._warn("'sound_channel' specified but not 'sound'. Ignoring.")
+        sound_channel = None
+
+    if sound_channel is None and sound is not None:
+        Handler._warn("'sound' specified but not 'sound_channel'. Assuming 'master' for 'sound_channel'.")
+        sound_channel = "master"
+
+    Handler._cmds.append(f"stopsound {Handler._translate(targets)} {Handler._translate(sound_channel)} {Handler._translate(sound)}")
+
+
+def summon(entity: entity, position: Union[selector, AbsPos, RelPos, LocPos, CurrentPos], nbt: str = None):
+    Handler._cmds.append(f"summon {Handler._translate(entity)} {Handler._translate(position)} {Handler._translate(nbt)}")
+
+
+def teleport(targets: selector, destination: Union[selector, AbsPos, RelPos, LocPos, CurrentPos], facing: Union[selector, AbsPos, RelPos, LocPos, CurrentPos] = None, facing_type: container_type = container_type.entity):
+    if facing is None:
+        Handler._cmds.append(f"teleport {Handler._translate(targets)} {Handler._translate(destination)}")
+    else:
+        # Get the container type
+        if Handler._translate(facing_type) == "storage":
+            Handler._warn("Container type 'storage' is not supported for 'teleport'. Assuming 'block'.")
+            facing = container_type.block
+        elif Handler._translate(facing).startswith("@"):
+            facing_type = container_type.entity
+        elif isinstance(facing, (AbsPos, RelPos, LocPos, CurrentPos)):
+            facing_type = container_type.block
+
+        # Modify the end of the command depending on whether or not the facing type is an entity
+        if Handler._translate(facing_type) == "entity":
+            cmd_suffix = f"facing entity {Handler._translate(facing)}"
+        else:
+            cmd_suffix = f"facing {Handler._translate(facing)}"
+
+        # Allows for facing a block or entity if the destination is a selector
+        if Handler._translate(destination).startswith("@"):
+            Handler._cmds.append(f"execute as {Handler._translate(targets)} at {Handler._translate(destination)} run tp @s ~ ~ ~ {cmd_suffix}")
+        else:
+            Handler._cmds.append(f"teleport {Handler._translate(targets)} {Handler._translate(destination)} {cmd_suffix}")
 
 
 def tellraw(targets: selector, text: json_string):

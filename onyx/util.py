@@ -82,7 +82,7 @@ class Range(_buildable):
         self.max = max
 
     def build(self):
-        return f"{self.min}..{self.max}"
+        return f"{self.min or ''}..{self.max or ''}"
 
 
 class ClickEvent(_buildable):
@@ -202,6 +202,13 @@ class LocPos(_buildable, _position):
         return f"^{self.x} ^{self.y} ^{self.z}"
 
 
+class CurrentPos(_buildable, _position):
+    """Defines the current position of an entity (~ ~ ~)
+    """
+    def build(self):
+        return "~ ~ ~"
+
+
 class AbsRot(_buildable, _position):
     """Defines an absolute rotation
 
@@ -280,6 +287,11 @@ class Rel2DPos(_buildable, _position):
         return f"~{self.x_pos} ~{self.z_pos}"
 
 
+class Current2DPos(_buildable, _position):
+    def build(self):
+        return "~ ~"
+
+
 class Item(_buildable):
     """Item builder
 
@@ -333,7 +345,24 @@ class Item(_buildable):
 
 
 class Particle(_buildable):
-    def __init__(self, particle_name: particle, position: AbsPos = None, delta: AbsPos = None, speed: int = None, count: int = None, motion: AbsPos = None,
+    """Defines a particle for use in particle command
+
+    Args:
+        particle_name (particle): The particle type (cloud, barrier, etc.)
+        position (AbsPos, optional): The position of the particle. Defaults to None.
+        delta (AbsPos, optional): The size of the particle area. Defaults to None.
+        speed (int, optional): How quickly the particle vanishes. Defaults to None.
+        count (int, optional): How many particles. Defaults to None.
+        motion (AbsPos, optional): The motion of a particle. Sets the count to 0 and nullifies the "delta" parameter. Defaults to None.
+        RGB (tuple, optional): Used for particle "entity_effect" and "ambient_entity_effect". Defaults to None.
+        dust_color (tuple, optional): The color of the "dust" particle. Only specify if "particle_name" is set to "dust". Defaults to None.
+        dust_size (int, optional): The size of the "dust" particle. Only specify if "dust_color" is also specified. Defaults to None.
+        block_particle (block, optional): Only specify if "particle_name" is "block". Defaults to None.
+        item_particle (item, optional): Only specify if "particle_name" is "item". Defaults to None.
+        note_color (int, optional): Only specify if "particle_name" is set to "note". Defaults to None.
+        color_multiplier (int, optional): Used as an extra modifier for "RGB" and "note_color". Defaults to None.
+    """
+    def __init__(self, particle_name: particle, position: Union[AbsPos, CurrentPos] = None, delta: AbsPos = None, speed: int = None, count: int = None, motion: AbsPos = None,
                  RGB: tuple = None, dust_color: tuple = None, dust_size: int = None, block_particle: block = None, item_particle: item = None,
                  note_color: int = None, color_multiplier: int = None):
         self.particle_name = Handler._translate(particle_name)

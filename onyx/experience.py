@@ -10,9 +10,6 @@ def add(targets: selector, amount: str):
         targets (selector): The players to give the XP to.
         amount (str): The amount of XP. Append it with "P" for points or "L" for levels.
     """
-    if not isinstance(targets, selector):
-        Handler._warn("'targets' should be a selector object")
-
     if amount.lower().startswith("p"):
         Handler._cmds.append(f"experience add {Handler._translate(targets)} {amount[:-1]} points")
     elif amount.lower().startswith("l"):
@@ -30,9 +27,6 @@ def remove(targets: selector, amount: str):
         amount (str): The amount of XP. Append it with "P" for points or "L" for levels.
 
     """
-    if not isinstance(targets, selector):
-        Handler._warn("'targets' should be a selector object")
-
     if amount.lower().startswith("p"):
         Handler._cmds.append(f"experience add {Handler._translate(targets)} -{amount[:-1]} points")
     elif amount.lower().startswith("l"):
@@ -47,9 +41,6 @@ def set(targets: selector, amount: str):
         targets (selector): The players to remove the XP from.
         amount (str): The amount of XP. Append it with "P" for points or "L" for levels.
     """
-    if not isinstance(targets, selector):
-        Handler._warn("'targets' should be a selector object")
-
     if amount.lower().startswith("p"):
         Handler._cmds.append(f"experience set {Handler._translate(targets)} {amount[:-1]} points")
     elif amount.lower().startswith("l"):
@@ -67,8 +58,6 @@ def reset(targets: selector):
     Args:
         targets (selector): The players to reset the XP of.
     """
-    if not isinstance(targets, selector):
-        Handler._warn("'targets' should be a selector object")
     Handler._cmds.append(f"experience add {Handler._translate(targets)} -2147483647 levels")
 
 
@@ -79,9 +68,6 @@ def get(targets: selector, query_type: enum.Enum):
         target (selector): The player to get the XP of.
         query_type (enum.Enum): Whether the levels or the points should be retrieved.
     """
-    if not isinstance(targets, selector):
-        Handler._warn("'targets' should be a selector object")
-
     if not isinstance(query_type, (enum.Enum, str)):
         Handler._warn("Invalid query type provided, assuming levels")
         Handler._cmds.append(f"experience query {Handler._translate(targets)} levels")

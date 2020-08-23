@@ -5,6 +5,7 @@ import random
 import shutil
 import json
 import enum
+from nbtlib.tag import *
 from onyx.enums import lib
 
 
@@ -176,18 +177,13 @@ class Handler:
     def _translate(element, convert=False, item=False):
         from .json_string import json_string
         from .execute import execute
-        from .selector import selector
         from .util import _buildable
+        from .pack_manager import Function
 
         if isinstance(element, enum.Enum):
             return element.value
         elif isinstance(element, _buildable):
             return element.build()
-        elif convert:
-            if isinstance(element, json_string):
-                return json.dumps(element.output)
-            else:
-                return json.dumps(["", {"text": element}])
         elif isinstance(element, (execute, json_string)):
             return element.output
         elif isinstance(element, bool):
@@ -205,6 +201,17 @@ class Handler:
                 return q
             else:
                 return " ".join(map(str, element))
+        elif convert:
+            if isinstance(element, json_string):
+                return json.dumps(element.output)
+            else:
+                return json.dumps(["", {"text": element}])
+        elif element is None:
+            return ""
+        elif isinstance(element, (Compound, List, String, Float, Double, Long, Int, Short, Byte)):
+            return element.snbt()
+        elif isinstance(element, Function):
+            return element._mcfunction_path
         else:
             return element
 

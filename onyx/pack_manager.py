@@ -1,11 +1,10 @@
 import os
 import json
 import shutil
-from typing import Union
-from onyx.handler import Handler
+from .handler import Handler
 
 
-class _function:
+class Function:
     def __init__(self, datapack_path, datapack_name, function_path, function_name, loop):
         self._datapack_path = datapack_path
         self._datapack_name = datapack_name
@@ -18,9 +17,9 @@ class _function:
         q = self._function_path.split(os.sep)
         q = q[q.index('functions') + 1:]
         if q[0] == ".":
-            self._mcfunction_path = function_name
+            self._mcfunction_path = f"{self._datapack_name}:{function_name}"
         else:
-            self._mcfunction_path = f"{f'/'.join(q)}/{function_name}"
+            self._mcfunction_path = f"{self._datapack_name}:{f'/'.join(q)}/{function_name}"
 
         # The file name itself is added after the directory is created to avoid a folder called "xyz.mcfunction" being created
         self._function_path = os.path.join(self._function_path, function_name + ".mcfunction")
@@ -86,4 +85,4 @@ class pack:
         print(f"Created new datapack: {self._datapack_name}")
 
     def function(self, function_path, function_name, loop=False):
-        return _function(self._datapack_path, self._datapack_name, function_path, function_name, loop)
+        return Function(self._datapack_path, self._datapack_name, function_path, function_name, loop)

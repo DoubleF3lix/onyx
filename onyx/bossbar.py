@@ -13,8 +13,6 @@ def create(id: str, bossbar_name: json_string):
         id (str): The bossbar ID.
         bossbar_name (json_string): The name of the bossbar.
     """
-    if not isinstance(bossbar_name, json_string):
-        Handler._warn("'bossbar_name' should be a json_string object.")
     Handler._cmds.append(f"bossbar add {Handler._translate(id)} {Handler._translate(bossbar_name, convert=True)}")
 
 
@@ -54,35 +52,24 @@ def set_trait(id: str, color: Union[color_enum, str] = None, max: int = None, na
         visible (bool, optional): Whether or not the bossbar is visible. Defaults to None.
     """
     if color is not None:
-        # Check if the provided color is supported by bossbars
         if isinstance(color, enum.Enum) and color.value not in {"blue", "green", "pink", "purple", "yellow", "white"}:
             Handler._warn(f"'color' was set to an invalid color: {color.value}")
         Handler._cmds.append(f"bossbar set {Handler._translate(id)} color {Handler._translate(color)}")
 
     if max is not None:
-        if not isinstance(max, int):
-            Handler._warn("'max' should be an integer")
         Handler._cmds.append(f"bossbar set {Handler._translate(id)} max {Handler._translate(max)}")
 
     if name is not None:
-        if not isinstance(name, json_string):
-            Handler._warn("'name' should be a json_string object")
         Handler._cmds.append(f"bossbar set minecraft:{Handler._translate(id)} name {Handler._translate(name, convert=True)}")
 
     if players is not None:
-        if not isinstance(players, selector):
-            Handler._warn("'players' should be a selector object")
         Handler._cmds.append(f"bossbar set minecraft:{Handler._translate(id)} players {Handler._translate(players)}")
 
     if style is not None:
         Handler._cmds.append(f"bossbar set minecraft:{Handler._translate(id)} style {Handler._translate(style)}")
 
     if value is not None:
-        if not isinstance(value, int) or value < 0:
-            Handler._warn("'value' should be an integer greater than -1")
         Handler._cmds.append(f"bossbar set minecraft:{Handler._translate(id)} value {Handler._translate(value)}")
 
     if visible is not None:
-        if not isinstance(visible, bool):
-            Handler._warn("'visible' should be a boolean")
         Handler._cmds.append(f"bossbar set minecraft:{Handler._translate(id)} max {Handler._translate(visible)}")

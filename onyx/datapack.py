@@ -7,8 +7,6 @@ def disable(datapack_name: str):
     Args:
         datapack_name (str): The name of the datapack to disable.
     """
-    if not isinstance(datapack_name, str):
-        Handler._warn(f"'datapack_name' should be a string")
     Handler._cmds.append(f"datapack disable \"file/{Handler._translate(datapack_name)}\"")
 
 
@@ -19,8 +17,6 @@ def enable(datapack_name: str, datapack_pos: position = None, relative_to: str =
         datapack_pos (position, optional): Where the datapack should be enabled (before, first, etc.). Defaults to None.
         relative_to (str, optional): The datapack that datapack_name should be enabled relative to. Only specify with "datapack_pos". Defaults to None.
     """
-    if not isinstance(datapack_name, str):
-        Handler._warn(f"'datapack_name' should be a string")
     if datapack_pos is not None:
         # Other options are first and last
         if Handler._translate(datapack_pos) in {"before", "after"}:
@@ -28,8 +24,6 @@ def enable(datapack_name: str, datapack_pos: position = None, relative_to: str =
                 Handler._warn("Specified 'datapack_pos' but not 'relative_to' so it was ignored")
                 Handler._cmds.append(f"datapack enable \"file/{datapack_name}\"")
             else:
-                if not isinstance(relative_to, str):
-                    Handler._warn(f"'relative_to' should be a string")
                 Handler._cmds.append(f"datapack enable \"file/{datapack_name}\" {Handler._translate(datapack_pos)} \"file/{relative_to}\"")
         else:
             Handler._cmds.append(f"datapack enable \"file/{datapack_name}\" {Handler._translate(datapack_pos)}")

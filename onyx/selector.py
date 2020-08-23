@@ -49,34 +49,8 @@ class selector(_buildable):
                 # Skip over the "self" and "selector_type" arguments
                 if key in {"self", "selector_type"}:
                     continue
-
-                elif key in {"advancements", "nbt", "predicate", "scores", "tag", "team", "type"}:
-                    if not isinstance(arg, (str, tuple)):
-                        Handler._warn(f"'{key}' should be a string or tuple")
-                    self._args[key] = arg
-
-                elif key in {"distance", "limit", "level"}:
-                    if arg == "level":
-                        if not isinstance(arg, int) and arg < 0:
-                            Handler._warn("'level' should be an integer greater than or equal to 0")
-                    else:
-                        if not isinstance(arg, (int, float)) and arg > 0:
-                            Handler._warn(f"'{key}' should be a number greater than or equal to 0")
-                    self._args[key] = arg
-
-                elif key in {"dx", "dz", "dy"}:
-                    if not isinstance(arg, int):
-                        Handler._warn(f"'{key}' should be an integer")
-                    self._args[key] = arg
-
                 elif key == "name":
                     self._args[key] = f"'{arg}'"
-
-                elif key in {"x", "y", "z", "x_rotation", "y_rotation"}:
-                    if not isinstance(arg, (int, float)):
-                        Handler._warn(f"'{key}' should be a number")
-                    self._args[key] = arg
-
                 # Negated arguments, enum arguments, and any custom arguments are handled here
                 else:
                     self._args[key] = Handler._translate(arg)

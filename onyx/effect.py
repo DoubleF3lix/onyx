@@ -10,9 +10,6 @@ def clear(targets: selector, effects_to_remove: Union[list, enum.Enum]):
         targets (selector): The entities to clear the effect from.
         effects_to_remove (Union[list, enum.Enum]): The effects to remove. If a list is provided, it will remove them all.
     """
-    if not isinstance(targets, selector):
-        Handler._warn("'targets' should be a selector object")
-
     if Handler._translate(effects_to_remove) == "all":
         effects_to_remove = ""
     if isinstance(effects_to_remove, list):
@@ -30,9 +27,6 @@ def give(targets: selector, effects: Union[list, enum.Enum], amplifier: int = No
         amplifier (int, optional): The level of the effect. Defaults to None.
         length (int, optional): The amount of seconds the effect should last for. Defaults to None.
     """
-    if not isinstance(targets, selector):
-        Handler._warn("'targets' should be a selector object")
-
     if isinstance(effects, list):
         for effect in effects:
             Handler._cmds.append(f"effect give {Handler._translate(targets)} {Handler._translate(effect)} {length or ''} {amplifier or ''}")
