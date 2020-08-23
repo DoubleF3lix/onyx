@@ -138,8 +138,13 @@ def forceload(mode: forceload_mode, chunk_pos1: Union[Abs2DPos, Rel2DPos], chunk
     Handler._cmds.append(f"forceload {Handler._translate(mode)} {Handler._translate(chunk_pos1)} {Handler._translate(chunk_pos2)}")
 
 
-def call(function: Function):
-    Handler._cmds.append(f"function {function._mcfunction_path}")
+def call(function: Union[Function, str]):
+    """
+    Args:
+        function (Function): The function to call
+    """
+    Handler._cmds.append(f"function {Handler._translate(function)}")
+
 
 def gamemode(targets: selector, mode: mode):
     """
@@ -285,6 +290,15 @@ def spectate(target: selector, source: selector = "@s"):
 
 
 def spreadplayers(center: Union[Abs2DPos, Rel2DPos, Current2DPos], spread_distance: int, max_spread: int, targets: selector, respect_teams: bool = False, max_height: int = None):
+    """Just like butter
+    Args:
+        center (Union[Abs2DPos, Rel2DPos, Current2DPos]): The center where the players should be spread around
+        spread_distance (int): The distance the players should be spread
+        max_spread (int): The maximum distance the players can be spread
+        targets (selector): The players who should be spread
+        respect_teams (bool, optional): Defaults to False.
+        max_height (int, optional): The maximum height the players should be placed on. Defaults to None.
+    """
     if max_height is not None:
         Handler._cmds.append(f"spreadplayers {Handler._translate(center)} {Handler._translate(spread_distance)} {Handler._translate(max_spread)} under {Handler._translate(max_height)} {Handler._translate(respect_teams)} {Handler._translate(targets)}")
     else:
@@ -292,6 +306,12 @@ def spreadplayers(center: Union[Abs2DPos, Rel2DPos, Current2DPos], spread_distan
 
 
 def stopsound(targets: selector, sound_channel: sound_channel = None, sound: str = None):
+    """
+    Args:
+        targets (selector): The players to stop the sound for
+        sound_channel (sound_channel, optional): The sound channel the sound is playing in. If unspecified, all sounds are stopped. Defaults to None.
+        sound (str, optional): The sound to stop. If unspecified, all sounds in the specified sound channel are stopped. Defaults to None.
+    """
     if sound_channel is not None and sound is None:
         Handler._warn("'sound_channel' specified but not 'sound'. Ignoring.")
         sound_channel = None
@@ -304,21 +324,34 @@ def stopsound(targets: selector, sound_channel: sound_channel = None, sound: str
 
 
 def summon(entity: entity, position: Union[selector, AbsPos, RelPos, LocPos, CurrentPos], nbt: str = None):
+    """
+    Args:
+        entity (entity): The entity type to summon
+        position (Union[selector, AbsPos, RelPos, LocPos, CurrentPos]): The position to spawn the entity at
+        nbt (str, optional): The NBT of the entity. Defaults to None.
+    """
     Handler._cmds.append(f"summon {Handler._translate(entity)} {Handler._translate(position)} {Handler._translate(nbt)}")
 
 
 def teleport(targets: selector, destination: Union[selector, AbsPos, RelPos, LocPos, CurrentPos], facing: Union[selector, AbsPos, RelPos, LocPos, CurrentPos] = None, facing_type: container_type = container_type.entity):
+    """
+    Args:
+        targets (selector): The targets to teleport
+        destination (Union[selector, AbsPos, RelPos, LocPos, CurrentPos]): The location to teleport the player.
+        facing (Union[selector, AbsPos, RelPos, LocPos, CurrentPos], optional): The location to face. Defaults to None.
+        facing_type (container_type, optional): Automatically assigned based on the parameter for "facing". Override when results aren't as expected. Defaults to container_type.entity.
+    """
     if facing is None:
         Handler._cmds.append(f"teleport {Handler._translate(targets)} {Handler._translate(destination)}")
     else:
         # Get the container type
         if Handler._translate(facing_type) == "storage":
             Handler._warn("Container type 'storage' is not supported for 'teleport'. Assuming 'block'.")
-            facing = container_type.block
+            facing = "block"
         elif Handler._translate(facing).startswith("@"):
-            facing_type = container_type.entity
+            facing_type = "entity"
         elif isinstance(facing, (AbsPos, RelPos, LocPos, CurrentPos)):
-            facing_type = container_type.block
+            facing_type = "block"
 
         # Modify the end of the command depending on whether or not the facing type is an entity
         if Handler._translate(facing_type) == "entity":
@@ -329,6 +362,9 @@ def teleport(targets: selector, destination: Union[selector, AbsPos, RelPos, Loc
         # Allows for facing a block or entity if the destination is a selector
         if Handler._translate(destination).startswith("@"):
             Handler._cmds.append(f"execute as {Handler._translate(targets)} at {Handler._translate(destination)} run tp @s ~ ~ ~ {cmd_suffix}")
+        # ALlows for teleporting to another entity while facing a block
+        elif isinstance(facing, (AbsPos, RelPos, LocPos, CurrentPos)):
+            Handler._cmds.append(f"execute positioned {Handler._translate(facing)} as {Handler._translate(destination)} facing entity @s feet positioned as @s positioned ^ ^ ^1 facing entity @s feet run tp {Handler._translate(targets)} ^ ^ ^1 ~ ~")
         else:
             Handler._cmds.append(f"teleport {Handler._translate(targets)} {Handler._translate(destination)} {cmd_suffix}")
 

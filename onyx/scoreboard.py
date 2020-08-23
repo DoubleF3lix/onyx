@@ -46,6 +46,8 @@ class Scoreboard:
         self.name = Handler._translate(name)
         self.create = create
         self.critera = Handler._translate(critera)
+        if display_name is None:
+            display_name = Handler._translate(name, convert=True)
         self.display_name = Handler._translate(display_name, convert=True)
 
         if create:
