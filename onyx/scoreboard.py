@@ -39,8 +39,8 @@ class Scoreboard:
     Args:
         name (str): The scoreboard name
         create (bool, optional): Whether or not the scoreboard should be created. Defaults to False.
-        critera (str, optional): The scoreboard critera. Should only be specified if "create" is "True". Defaults to "dummy".
-        display_name (json_string, optional): How the scoreboard should be displayed. Should only be specified if "create" is "True". Defaults to None.
+        critera (str, optional): The scoreboard critera. Should only be specified if ``create`` is ``True``. Defaults to ``dummy``.
+        display_name (json_string, optional): How the scoreboard should be displayed. Should only be specified if ``create`` is ``True``. Defaults to None.
     """
     def __init__(self, name: str, create: bool = False, critera: str = "dummy", display_name: json_string = None):
         self.name = Handler._translate(name)
@@ -274,7 +274,7 @@ class Player:
     def NOT(self, value: Union[int, "Player"]):
         """
         Args:
-            value (Union[int, "Player"]): The value to operaton on. If unspecified, the current value of the player is operated on.
+            value (Union[int, Player]): The value to operaton on. If unspecified, the current value of the player is operated on.
         """
         Handler.load_lib(lib.bitwise)
 
@@ -288,40 +288,40 @@ class Player:
     def AND(self, value_1: Union[int, "Player"], value_2: int = None):
         """
         Args:
-            value_1 (Union[int, "Player"]): The first value to operate on
-            value_2 (int, optional): If unspecified, the value of "value_1" is moved to "value_2", and the value of the current player is assigned to "value_1". Defaults to None.
+            value_1 (Union[int, Player]): The first value to operate on
+            value_2 (int, optional): If unspecified, the value of ``value_1`` is moved to ``value_2``, and the value of the current player is assigned to ``value_1``. Defaults to None.
         """
         self._multi_bitwise("and", value_1, value_2)
 
     def OR(self, value_1: Union[int, "Player"], value_2: int = None):
         """
         Args:
-            value_1 (Union[int, "Player"]): The first value to operate on
-            value_2 (int, optional): If unspecified, the value of "value_1" is moved to "value_2", and the value of the current player is assigned to "value_1". Defaults to None.
+            value_1 (Union[int, Player]): The first value to operate on
+            value_2 (int, optional): If unspecified, the value of ``value_1`` is moved to ``value_2``, and the value of the current player is assigned to ``value_1``. Defaults to None.
         """
         self._multi_bitwise("or", value_1, value_2)
 
     def XOR(self, value_1: Union[int, "Player"], value_2: int = None):
         """
         Args:
-            value_1 (Union[int, "Player"]): The first value to operate on
-            value_2 (int, optional): If unspecified, the value of "value_1" is moved to "value_2", and the value of the current player is assigned to "value_1". Defaults to None.
+            value_1 (Union[int, Player]): The first value to operate on
+            value_2 (int, optional): If unspecified, the value of ``value_1`` is moved to ``value_2``, and the value of the current player is assigned to ``value_1``. Defaults to None.
         """
         self._multi_bitwise("xor", value_1, value_2)
 
     def LEFT_SHIFT(self, value_1: Union[int, "Player"], value_2: int = None):
         """
         Args:
-            value_1 (Union[int, "Player"]): The value to shift.
-            value_2 (int, optional): The amount of bits to shift by. If unspecified, the value of "value_1" is moved to "value_2", and the value of the current player is assigned to "value_1". Defaults to None.
+            value_1 (Union[int, Player]): The value to shift.
+            value_2 (int, optional): The amount of bits to shift by. If unspecified, the value of ``value_1`` is moved to ``value_2``, and the value of the current player is assigned to ``value_1``. Defaults to None.
         """
         self._multi_bitwise("left_shift", value_1, value_2)
 
     def RIGHT_SHIFT(self, value_1: Union[int, "Player"], value_2: int = None):
         """
         Args:
-            value_1 (Union[int, "Player"]): The value to shift.
-            value_2 (int, optional): The amount of bits to shift by. If unspecified, the value of "value_1" is moved to "value_2", and the value of the current player is assigned to "value_1". Defaults to None.
+            value_1 (Union[int, Player]): The value to shift.
+            value_2 (int, optional): The amount of bits to shift by. If unspecified, the value of ``value_1`` is moved to ``value_2``, and the value of the current player is assigned to ``value_1``. Defaults to None.
         """
         self._multi_bitwise("right_shift", value_1, value_2)
 

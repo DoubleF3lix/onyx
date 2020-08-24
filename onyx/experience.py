@@ -8,7 +8,7 @@ def add(targets: selector, amount: str):
     """
     Args:
         targets (selector): The players to give the XP to.
-        amount (str): The amount of XP. Append it with "P" for points or "L" for levels.
+        amount (str): The amount of XP. Append it with ``P`` for points or ``L`` for levels.
     """
     if amount.lower().startswith("p"):
         Handler._cmds.append(f"experience add {Handler._translate(targets)} {amount[:-1]} points")
@@ -24,7 +24,7 @@ def remove(targets: selector, amount: str):
     """
     Args:
         targets (selector): The players to remove the XP from.
-        amount (str): The amount of XP. Append it with "P" for points or "L" for levels.
+        amount (str): The amount of XP. Append it with ``P`` for points or ``L`` for levels.
 
     """
     if amount.lower().startswith("p"):
@@ -35,11 +35,12 @@ def remove(targets: selector, amount: str):
         Handler._warn("No valid suffix provided, assuming levels")
         Handler._cmds.append(f"experience add {Handler._translate(targets)} -{amount} levels")
 
+
 def set(targets: selector, amount: str):
     """
     Args:
         targets (selector): The players to remove the XP from.
-        amount (str): The amount of XP. Append it with "P" for points or "L" for levels.
+        amount (str): The amount of XP. Append it with ``P`` for points or ``L`` for levels.
     """
     if amount.lower().startswith("p"):
         Handler._cmds.append(f"experience set {Handler._translate(targets)} {amount[:-1]} points")
@@ -76,7 +77,7 @@ def get(targets: selector, query_type: enum.Enum):
 
 
 def get_total_points(targets: selector):
-    """Loads the "calc_xp_points" library to calculate the total points of XP a player has
+    """Loads the ``calc_xp_points`` library to calculate the total points of XP a player has
 
     Args:
         targets (selector): The players whose points should be calculated.

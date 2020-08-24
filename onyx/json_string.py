@@ -12,7 +12,7 @@ class json_string:
         text (str, optional): Defaults to None.
         translate (str, optional): Defaults to None.
         With (list, optional): Defaults to None.
-        score (tuple, optional): Defaults to None.
+        score (Player, dict, optional): Defaults to None.
         selector (selector, optional): Defaults to None.
         keybind (key, optional): Defaults to None.
         nbt (str, optional): Defaults to None.

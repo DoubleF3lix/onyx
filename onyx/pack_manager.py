@@ -1,6 +1,7 @@
 import os
 import json
 import shutil
+import platform
 from .handler import Handler
 
 
@@ -58,7 +59,13 @@ class Function:
 
 
 class pack:
-    def __init__(self, path, override=True):
+    """Defines a new datapack
+
+    Args:
+        path (str): The path of the new datapack
+        override (bool, optional): Whether or not the old datapack should be deleted. Defaults to True.
+    """
+    def __init__(self, path: str, override=True):
         self._datapack_path = os.path.normpath(path)
         self._datapack_name = os.path.basename(os.path.normpath(self._datapack_path)).lower().replace(" ", "_")
 
@@ -84,5 +91,12 @@ class pack:
             print(f"Removed old datapack: {self._datapack_name}")
         print(f"Created new datapack: {self._datapack_name}")
 
-    def function(self, function_path, function_name, loop=False):
+    def function(self, function_path: str, function_name: str, loop=False):
+        """Defines a new function
+
+        Args:
+            function_path (str): The path of the function relative to the datapack ``functions`` folder
+            function_name (str): The name of the function
+            loop (bool, optional): Whether or not the function should be added to tick.json. Defaults to False.
+        """
         return Function(self._datapack_path, self._datapack_name, function_path, function_name, loop)

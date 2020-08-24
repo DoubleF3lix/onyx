@@ -78,7 +78,7 @@ class execute:
         return self
 
     def as_at(self, entity: selector):
-        """A combination of `As()` and `at()`
+        """A combination of ``As()`` and ``at()``
         Args:
             entity (selector): The entity to execute as and at
         """

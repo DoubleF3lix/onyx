@@ -1,7 +1,8 @@
 from typing import Union
 from .handler import Handler
 from .selector import selector
-from .enums import loot_type, AbsPos, RelPos, LocPos, CurrentPos, item, container_type
+from .util import AbsPos, RelPos, LocPos, CurrentPos
+from .enums import loot_type, item, container_type
 
 
 def _multi_loot(command_name, targets, loot_type, loot_table, killed_entity, mined_block, item_used):
@@ -30,10 +31,10 @@ def give(targets: selector, loot_type: loot_type, loot_table: str = None, killed
     Args:
         targets (selector): The entities to give the loot to
         loot_type (loot_type): The loot type (fish, kill, loot, mine)
-        loot_table (str, optional): The loot table to give. Only specify if "loot_type" is "fish" or "loot". Defaults to None.
-        killed_entity (selector, optional): Only specify if "loot_table" is "kill". Defaults to None.
-        mined_block (Union[AbsPos, RelPos, LocPos, CurrentPos], optional): Only specify if "loot_table" is "mine". Defaults to None.
-        item_used (Union[item, str], optional): The item used to break the block. Only specify if "loot_type" is "mine". Defaults to mainhand.
+        loot_table (str, optional): The loot table to give. Only specify if ``loot_type`` is ``fish`` or ``loot``. Defaults to None.
+        killed_entity (selector, optional): Only specify if ``loot_table`` is ``kill``. Defaults to None.
+        mined_block (Union[AbsPos, RelPos, LocPos, CurrentPos], optional): Only specify if ``loot_table`` is ``mine``. Defaults to None.
+        item_used (Union[item, str], optional): The item used to break the block. Only specify if ``loot_type`` is ``mine``. Defaults to mainhand.
     """
     _multi_loot("give", targets, loot_type, loot_table, killed_entity, mined_block, item_used)
 
@@ -43,10 +44,10 @@ def insert(block: Union[AbsPos, RelPos, LocPos, CurrentPos], loot_type: loot_typ
     Args:
         block (Union[AbsPos, RelPos, LocPos, CurrentPos]): The block to insert the loot into
         loot_type (loot_type): The loot type (fish, kill, loot, mine)
-        loot_table (str, optional): The loot table to give. Only specify if "loot_type" is "fish" or "loot". Defaults to None.
-        killed_entity (selector, optional): Only specify if "loot_table" is "kill". Defaults to None.
-        mined_block (Union[AbsPos, RelPos, LocPos, CurrentPos], optional): Only specify if "loot_table" is "mine". Defaults to None.
-        item_used (Union[item, str], optional): The item used to break the block. Only specify if "loot_type" is "mine". Defaults to mainhand.
+        loot_table (str, optional): The loot table to give. Only specify if ``loot_type`` is ``fish`` or ``loot``. Defaults to None.
+        killed_entity (selector, optional): Only specify if ``loot_table`` is ``kill``. Defaults to None.
+        mined_block (Union[AbsPos, RelPos, LocPos, CurrentPos], optional): Only specify if ``loot_table`` is ``mine``. Defaults to None.
+        item_used (Union[item, str], optional): The item used to break the block. Only specify if ``loot_type`` is ``mine``. Defaults to mainhand.
     """
     _multi_loot("insert", block, loot_type, loot_table, killed_entity, mined_block, item_used)
 
@@ -56,10 +57,10 @@ def spawn(location: Union[AbsPos, RelPos, LocPos, CurrentPos], loot_type: loot_t
     Args:
         location (Union[AbsPos, RelPos, LocPos, CurrentPos]): The coordinates to spawn the loot at
         loot_type (loot_type): The loot type (fish, kill, loot, mine)
-        loot_table (str, optional): The loot table to give. Only specify if "loot_type" is "fish" or "loot". Defaults to None.
-        killed_entity (selector, optional): Only specify if "loot_table" is "kill". Defaults to None.
-        mined_block (Union[AbsPos, RelPos, LocPos, CurrentPos], optional): Only specify if "loot_table" is "mine". Defaults to None.
-        item_used (Union[item, str], optional): The item used to break the block. Only specify if "loot_type" is "mine". Defaults to mainhand.
+        loot_table (str, optional): The loot table to give. Only specify if ``loot_type`` is ``fish`` or ``loot``. Defaults to None.
+        killed_entity (selector, optional): Only specify if ``loot_table`` is ``kill``. Defaults to None.
+        mined_block (Union[AbsPos, RelPos, LocPos, CurrentPos], optional): Only specify if ``loot_table`` is ``mine``. Defaults to None.
+        item_used (Union[item, str], optional): The item used to break the block. Only specify if ``loot_type`` is ``mine``. Defaults to mainhand.
     """
     _multi_loot("spawn", location, loot_type, loot_table, killed_entity, mined_block, item_used)
 
@@ -71,10 +72,10 @@ def replace(target_type: container_type, target: Union[selector, AbsPos, RelPos,
         target (Union[selector, AbsPos, RelPos, LocPos, CurrentPos]): The coordinates of the block or the selector of the entity
         slot (container_type): The slot to replace
         loot_type (loot_type): The loot type (fish, kill, loot, mine)
-        loot_table (str, optional): The loot table to give. Only specify if "loot_type" is "fish" or "loot". Defaults to None.
-        killed_entity (selector, optional): Only specify if "loot_table" is "kill". Defaults to None.
-        mined_block (Union[AbsPos, RelPos, LocPos, CurrentPos], optional): Only specify if "loot_table" is "mine". Defaults to None.
-        item_used (Union[item, str], optional): The item used to break the block. Only specify if "loot_type" is "mine". Defaults to mainhand.
+        loot_table (str, optional): The loot table to give. Only specify if ``loot_type`` is ``fish`` or ``loot``. Defaults to None.
+        killed_entity (selector, optional): Only specify if ``loot_table`` is ``kill``. Defaults to None.
+        mined_block (Union[AbsPos, RelPos, LocPos, CurrentPos], optional): Only specify if ``loot_table`` is ``mine``. Defaults to None.
+        item_used (Union[item, str], optional): The item used to break the block. Only specify if ``loot_type`` is ``mine``. Defaults to mainhand.
     """
     if Handler._translate(target_type) == "storage":
         Handler._warn("Container type 'storage' isn't supported for 'target_type'")

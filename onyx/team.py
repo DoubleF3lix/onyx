@@ -42,7 +42,7 @@ def leave(targets: selector):
 
 
 def list():
-    """Only useful with "execute store"
+    """Only useful with ``execute store``
     """
     Handler._cmds.append("team list")
 

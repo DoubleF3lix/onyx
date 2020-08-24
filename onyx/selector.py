@@ -63,8 +63,6 @@ class selector(_buildable):
                tag: str = None, team: str = None, type: str = None, x: int = None, y: int = None,
                z: int = None, x_rotation: Union[int, float] = None, y_rotation: Union[int, float] = None):
         """Modify arguments for an existing selector object.
-
-        Args: See "args" in the docstring of __init__().
         """
         self._args = {**self._args, **locals().items()}
         # Type checking isn't needed since _change_args already provides it

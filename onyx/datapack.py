@@ -15,7 +15,7 @@ def enable(datapack_name: str, datapack_pos: position = None, relative_to: str =
     Args:
         datapack_name (str): The name of the datapack to enable.
         datapack_pos (position, optional): Where the datapack should be enabled (before, first, etc.). Defaults to None.
-        relative_to (str, optional): The datapack that datapack_name should be enabled relative to. Only specify with "datapack_pos". Defaults to None.
+        relative_to (str, optional): The datapack that datapack_name should be enabled relative to. Only specify with ``datapack_pos``. Defaults to None.
     """
     if datapack_pos is not None:
         # Other options are first and last

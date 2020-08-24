@@ -70,7 +70,7 @@ def clone(corner1: Union[AbsPos, RelPos, LocPos, CurrentPos, tuple, list], corne
         corner2 (Union[AbsPos, RelPos, CurrentPos, LocPos, tuple, list]): The second corner of the area to be cloned
         location (Union[AbsPos, RelPos, CurrentPos, LocPos, tuple, list]): The location where the first corner should be cloned to
         mask_mode (mask_mode, optional): The mask mode (filtered, masked, and replace)
-        block_filter (str, optional): The blocks to clone if "mask_mode" is set to "filtered". Defaults to None.
+        block_filter (str, optional): The blocks to clone if `mask_mode` is set to `filtered`. Defaults to None.
         clone_mode (clone_mode, optional): The clone mode (force, move, and normal). Defaults to None.
     """
     if Handler._translate(mask_mode) == "filtered":
@@ -120,7 +120,7 @@ def fill(corner1: Union[AbsPos, RelPos, LocPos, CurrentPos, tuple, list], corner
         corner2 (Union[AbsPos, RelPos, LocPos, CurrentPos, tuple, list]): The second corner of the area to fill
         block (str): The block to fill with
         fill_mode (fill_mode, optional): The fill mode (destroy, hollow, keep, outline, and replace). Defaults to None.
-        replace_block (str, optional): The block to replace if "fill_mode" is set to "replace". Defaults to None.
+        replace_block (str, optional): The block to replace if ``fill_mode`` is set to ``replace``. Defaults to None.
     """
     if Handler._translate(fill_mode) == "replace" and replace_block is None:
         Handler._warn("'replace' fill mode specified but not 'replace_block'. Switching to 'normal' mode.")
@@ -284,7 +284,7 @@ def spectate(target: selector, source: selector = "@s"):
     """
     Args:
         target (selector): The entity to be spectated
-        source (selector, optional): The entity that should spectate. Defaults to "@s".
+        source (selector, optional): The entity that should spectate. Defaults to ``@s``.
     """
     Handler._cmds.append(f"spectate {Handler._translate(target)} {Handler._translate(source)}")
 
@@ -339,7 +339,7 @@ def teleport(targets: selector, destination: Union[selector, AbsPos, RelPos, Loc
         targets (selector): The targets to teleport
         destination (Union[selector, AbsPos, RelPos, LocPos, CurrentPos]): The location to teleport the player.
         facing (Union[selector, AbsPos, RelPos, LocPos, CurrentPos], optional): The location to face. Defaults to None.
-        facing_type (container_type, optional): Automatically assigned based on the parameter for "facing". Override when results aren't as expected. Defaults to container_type.entity.
+        facing_type (container_type, optional): Automatically assigned based on the parameter for ``facing``. Override when results aren't as expected. Defaults to container_type.entity.
     """
     if facing is None:
         Handler._cmds.append(f"teleport {Handler._translate(targets)} {Handler._translate(destination)}")

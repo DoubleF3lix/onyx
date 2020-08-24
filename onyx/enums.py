@@ -47,7 +47,7 @@ class at(enum.Enum):
 
 # Used for execute align
 class axis(enum.Enum):
-    """Used for `align` in execute command
+    """Used for ``align`` in execute command
 
     * x
     * y
@@ -60,7 +60,7 @@ class axis(enum.Enum):
 
 # Used for execute anchored
 class anchor(enum.Enum):
-    """Used for `anchored` in execute command
+    """Used for ``anchored`` in execute command
 
     * feet
     * eyes
@@ -70,7 +70,7 @@ class anchor(enum.Enum):
 
 
 class dimension(enum.Enum):
-    """Used for `in` in execute command
+    """Used for ``in`` in execute command
 
     * overworld
     * nether
@@ -159,7 +159,7 @@ class color(enum.Enum):
 
 # show_entity is not supported since it requires an external generator to convert the UUIDs, and it's just a broken mess all around.
 class action(enum.Enum):
-    """Used for text-component elements `HoverEvent` and `ClickEvent`
+    """Used for text-component elements ``HoverEvent`` and ``ClickEvent``
 
     * change_page
     * copy
@@ -179,7 +179,7 @@ class action(enum.Enum):
 
 
 class key(enum.Enum):
-    """Used for text-component element `keybind`
+    """Used for text-component element ``keybind``
 
     * jump
     * sneak
@@ -247,7 +247,7 @@ class key(enum.Enum):
 
 
 class advancement_action(enum.Enum):
-    """Used for the `action` value for the `attribute` command
+    """Used for the ``action`` value for the ``attribute`` command
 
     * grant
     * revoke
@@ -257,7 +257,7 @@ class advancement_action(enum.Enum):
 
 
 class selection(enum.Enum):
-    """Used for the `selection` value for the `attribute` command
+    """Used for the ``selection`` value for the ``attribute`` command
 
     * everything
     * From (`from` is a reserved keyword)
@@ -273,7 +273,7 @@ class selection(enum.Enum):
 
 
 class position(enum.Enum):
-    """Used in `datapack enable`
+    """Used in ``datapack enable``
 
     * after
     * before
@@ -373,7 +373,7 @@ class effects(enum.Enum):
 
 
 class data_operator(enum.Enum):
-    """Used for the `data` command
+    """Used for the ``data`` command
 
     * append
     * insert
@@ -588,6 +588,7 @@ class rendertype(enum.Enum):
 
 class mask_mode(enum.Enum):
     """Masked mode for clone command (first mode argument)
+
     * filtered
     * masked
     * replace
@@ -6900,7 +6901,7 @@ class loot_type(enum.Enum):
 
 
 class score_operator(enum.Enum):
-    """Score operators used in "execute if score"
+    """Score operators used in :code:`execute if score`
 
     * less_than
     * less_than_or_equals

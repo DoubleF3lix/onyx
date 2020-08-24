@@ -15,7 +15,7 @@ class SetFrom(_buildable):
         target (Union[str, tuple, selector]): The entity that the data should be retrieved from
         path (str): The data location
         index (int, optional): [description]. The index of the data. Only use if the path is a list. Defaults to None.
-        container_type (str, optional): Override for container type (entity, storage, or block). If unspecified, the container type will be assumed based off the value for "target". Defaults to None.
+        container_type (str, optional): Override for container type (entity, storage, or block). If unspecified, the container type will be assumed based off the value for ``target``. Defaults to None.
     """
     def __init__(self, target: Union[str, tuple, selector], path: str, index: int = None, container_type: str = None):
         if container_type:
@@ -109,8 +109,8 @@ class HoverEvent(_buildable):
 
     Args:
         action (action_enum, optional): The action type. Defaults to None.
-        text (str, optional): The text to show on hover. Only used if "action" is set to "show_text". Defaults to None.
-        item_id (str, optional): The item to show on hover. Only used if "action" is set to "show_item". Defaults to None.
+        text (str, optional): The text to show on hover. Only used if ``action`` is set to ``show_text``. Defaults to None.
+        item_id (str, optional): The item to show on hover. Only used if ``action`` is set to ``show_item``. Defaults to None.
         item_tags (dict, optional): The tags the item should have. Defaults to None.
     """
     def __init__(self, action: action_enum = None, text: str = None, item_id: str = None, item_tags: dict = None):
@@ -353,14 +353,14 @@ class Particle(_buildable):
         delta (AbsPos, optional): The size of the particle area. Defaults to None.
         speed (int, optional): How quickly the particle vanishes. Defaults to None.
         count (int, optional): How many particles. Defaults to None.
-        motion (AbsPos, optional): The motion of a particle. Sets the count to 0 and nullifies the "delta" parameter. Defaults to None.
-        RGB (tuple, optional): Used for particle "entity_effect" and "ambient_entity_effect". Defaults to None.
-        dust_color (tuple, optional): The color of the "dust" particle. Only specify if "particle_name" is set to "dust". Defaults to None.
-        dust_size (int, optional): The size of the "dust" particle. Only specify if "dust_color" is also specified. Defaults to None.
-        block_particle (block, optional): Only specify if "particle_name" is "block". Defaults to None.
-        item_particle (item, optional): Only specify if "particle_name" is "item". Defaults to None.
-        note_color (int, optional): Only specify if "particle_name" is set to "note". Defaults to None.
-        color_multiplier (int, optional): Used as an extra modifier for "RGB" and "note_color". Defaults to None.
+        motion (AbsPos, optional): The motion of a particle. Sets the count to 0 and nullifies the ``delta`` parameter. Defaults to None.
+        RGB (tuple, optional): Used for particle ``entity_effect`` and ``ambient_entity_effect``. Defaults to None.
+        dust_color (tuple, optional): The color of the ``dust`` particle. Only specify if ``particle_name`` is set to ``dust``. Defaults to None.
+        dust_size (int, optional): The size of the ``dust`` particle. Only specify if ``dust_color`` is also specified. Defaults to None.
+        block_particle (block, optional): Only specify if ``particle_name`` is ``block``. Defaults to None.
+        item_particle (item, optional): Only specify if ``particle_name`` is ``item``. Defaults to None.
+        note_color (int, optional): Only specify if "``article_name`` is set to ``note``. Defaults to None.
+        color_multiplier (int, optional): Used as an extra modifier for ``RGB`` and ``note_color``. Defaults to None.
     """
     def __init__(self, particle_name: particle, position: Union[AbsPos, CurrentPos] = None, delta: AbsPos = None, speed: int = None, count: int = None, motion: AbsPos = None,
                  RGB: tuple = None, dust_color: tuple = None, dust_size: int = None, block_particle: block = None, item_particle: item = None,
