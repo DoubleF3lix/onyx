@@ -185,6 +185,8 @@ class Handler:
         elif isinstance(element, _buildable):
             return element.build()
         elif isinstance(element, (execute, json_string)):
+            if convert:
+                return json.dumps(element.output)
             return element.output
         elif isinstance(element, bool):
             return str(element).lower()
@@ -202,10 +204,7 @@ class Handler:
             else:
                 return " ".join(map(str, element))
         elif convert:
-            if isinstance(element, json_string):
-                return json.dumps(element.output)
-            else:
-                return json.dumps(["", {"text": element}])
+            return json.dumps(["", {"text": element}])
         elif element is None:
             return ""
         elif isinstance(element, (Compound, List, String, Float, Double, Long, Int, Short, Byte)):

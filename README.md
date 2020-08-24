@@ -1,4 +1,4 @@
-# Credits:
+# Credits
 
 Language Design:
 * [Arcensoth](https://github.com/Arcensoth) (Design Ideas and Feedback, Implementation Ideas)
