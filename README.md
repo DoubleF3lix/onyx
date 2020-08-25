@@ -1,5 +1,4 @@
-# Onyx
-A python library to generate datapacks
+# Onyx - a python library to generate datapacks
 
 &nbsp;
 ## Installation
