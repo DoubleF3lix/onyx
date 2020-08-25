@@ -1,4 +1,4 @@
-# Onyx - a python library to generate datapacks
+![Onyx Banner](https://doublefelix.cf/images/onyx_banner.png)
 
 ## Installation
 The package can be installed with `pip`:
