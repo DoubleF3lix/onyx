@@ -2,7 +2,6 @@ from typing import Union
 from .enums import color as color_enum, key
 from .selector import selector
 from .handler import Handler
-from .util import HoverEvent, ClickEvent
 
 
 class json_string:
@@ -40,8 +39,6 @@ class json_string:
                   storage: str = None, extra: list = None, color: color_enum = None, font: str = None, bold: bool = None,
                   italic: bool = None, underlined: bool = None, strikethrough: bool = None, obfuscated: bool = None,
                   insertion: str = None, clickEvent: dict = None, hoverEvent: dict = None):
-
-        from .scoreboard import Player
 
         element = {}
         if text is not None:
