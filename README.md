@@ -1,5 +1,5 @@
 # Onyx
-> A python library to generate minecraft datapacks
+A python library to generate datapacks
 
 &nbsp;
 ## Installation
