@@ -3,7 +3,7 @@
 ## Installation
 The package can be installed with `pip`:
 ```
-pip install onyx-lib
+pip install onyx-mclib
 ```
 
 ## Getting Started
