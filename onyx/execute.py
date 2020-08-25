@@ -26,7 +26,21 @@ class execute:
         function_name_extensionless = os.path.splitext(function_name)[0]
         differentiator = Handler._get_differentiator()
 
-        Handler._cmds.append(f"{self.output}run function {Handler._datapack_name}:generated/{function_name_extensionless}{differentiator}")
+        # Add "generated" to the mcfunction path
+        Handler._active_mcfunc_path = Handler._active_mcfunc_path.split("/")
+        if len(Handler._active_mcfunc_path) > 1:
+            Handler._active_mcfunc_path.insert(-1, "generated")
+            Handler._active_mcfunc_path[-1] = Handler._active_mcfunc_path[-1] + differentiator
+        else:
+            Handler._active_mcfunc_path = "".join(Handler._active_mcfunc_path).split(":")
+            del Handler._active_mcfunc_path[-1]
+            Handler._active_mcfunc_path[0] = Handler._active_mcfunc_path[0] + ":"
+            Handler._active_mcfunc_path.append("generated")
+            Handler._active_mcfunc_path.append(function_name_extensionless + differentiator)
+
+        Handler._active_mcfunc_path = "/".join(Handler._active_mcfunc_path).replace(":/", ":")
+
+        Handler._cmds.append(f"{self.output}run function {Handler._active_mcfunc_path}")
         self.old_cmds = Handler._cmds
         Handler._cmds = []
 
