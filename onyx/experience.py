@@ -66,7 +66,7 @@ def reset(targets: selector):
 def get(targets: selector, query_type: enum.Enum):
     """
     Args:
-        target (selector): The player to get the XP of.
+        targets (selector): The players to get the XP of
         query_type (enum.Enum): Whether the levels or the points should be retrieved.
     """
     if not isinstance(query_type, (enum.Enum, str)):

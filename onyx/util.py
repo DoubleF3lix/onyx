@@ -205,7 +205,8 @@ class LocPos(_buildable, _position):
 class CurrentPos(_buildable, _position):
     """Defines the current position of an entity (~ ~ ~)
     """
-    def build(self):
+    @staticmethod
+    def build():
         return "~ ~ ~"
 
 
@@ -288,7 +289,8 @@ class Rel2DPos(_buildable, _position):
 
 
 class Current2DPos(_buildable, _position):
-    def build(self):
+    @staticmethod
+    def build():
         return "~ ~"
 
 

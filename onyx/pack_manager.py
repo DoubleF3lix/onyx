@@ -45,10 +45,10 @@ class Function:
                 # Get the function path, split it, and then keep only everything past /data/namespace/functions/
 
                 # Add the data to the list and dump it
-                current_data["values"].append(f"{datapack_name}:{self._mcfunction_path}")
+                current_data["values"].append(f"{self._mcfunction_path}")
                 json.dump(current_data, tick_json, indent=4)
 
-            Handler._status(f"Added function to tick.json: {datapack_name}:{self._mcfunction_path}")
+            Handler._status(f"Added function to tick.json: {self._mcfunction_path}")
 
     def __enter__(self):
         Handler._active_func = self._function_path

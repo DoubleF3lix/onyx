@@ -88,7 +88,7 @@ def defaultgamemode(gamemode: mode):
     Args:
         gamemode (mode): The gamemode to set to
     """
-    Handler._cmds.append(f"defaultgamemode {gamemode.value}")
+    Handler._cmds.append(f"defaultgamemode {Handler._translate(gamemode)}")
 
 
 def difficulty(level: difficulty):
@@ -96,7 +96,7 @@ def difficulty(level: difficulty):
     Args:
         level (difficulty): The difficulty to set to
     """
-    Handler._cmds.append(f"difficulty {level.value}")
+    Handler._cmds.append(f"difficulty {Handler._translate(level)}")
 
 
 def enchant(targets: selector, enchant_list: Union[list, enchants], level: int = None):
@@ -223,7 +223,7 @@ def playsound(sound: str, sound_channel: sound_channel, targets: selector, posit
         Handler._warn("'*' (any) sound channel is supported by playsound. Assuming 'master'.")
         sound_channel = sound_channel.master
 
-    if pitch > 2 and pitch < 0:
+    if 2 < pitch < 0:
         Handler._warn("'pitch' should be between 0 and 2")
 
     Handler._cmds.append(f"playsound {Handler._translate(sound)} {Handler._translate(sound_channel)} {Handler._translate(targets)} {Handler._translate(position)} {Handler._translate(volume)} {Handler._translate(pitch)} {Handler._translate(min_volume)}")
@@ -362,7 +362,7 @@ def teleport(targets: selector, destination: Union[selector, AbsPos, RelPos, Loc
         # Allows for facing a block or entity if the destination is a selector
         if Handler._translate(destination).startswith("@"):
             Handler._cmds.append(f"execute as {Handler._translate(targets)} at {Handler._translate(destination)} run tp @s ~ ~ ~ {cmd_suffix}")
-        # ALlows for teleporting to another entity while facing a block
+        # Allows for teleporting to another entity while facing a block
         elif isinstance(facing, (AbsPos, RelPos, LocPos, CurrentPos)):
             Handler._cmds.append(f"execute positioned {Handler._translate(facing)} as {Handler._translate(destination)} facing entity @s feet positioned as @s positioned ^ ^ ^1 facing entity @s feet run tp {Handler._translate(targets)} ^ ^ ^1 ~ ~")
         else:

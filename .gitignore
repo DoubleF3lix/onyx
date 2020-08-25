@@ -1,5 +1,5 @@
 .vscode/
-**.egg-info/**
+onyx_mclib.egg-info
 *.pyc
 **__pycache__
 **.bat
