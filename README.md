@@ -34,6 +34,12 @@ text = json_string().component("Hello, ").component(text="World!", color=color.g
 tellraw("@a", text)
 ```
 
+## See also
+Discord: [https://discord.gg/NcztW9T](https://discord.gg/NcztW9T)  
+PyPi: [https://pypi.org/project/onyx-mclib](https://pypi.org/project/onyx-mclib)  
+GitHub: [https://github.com/Double-Felix/Onyx](https://github.com/Double-Felix/Onyx)
+
+
 # Credits
 Language Design:
 * [Arcensoth](https://github.com/Arcensoth) (Design Ideas and Feedback, Implementation Ideas)
