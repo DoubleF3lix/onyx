@@ -1,14 +1,17 @@
-### Discord: **https://discord.gg/NcztW9T**
-### Documentation: **https://doublefelix.cf/onyx_docs/index.html** 
+# Onyx
+> A python library to generate minecraft datapacks
 
 &nbsp;
-# Getting Started
-First, make sure you have the package downloaded by running `pip install onyx` in your terminal. Then, make a new file (call it whatever) and at the top, add `from onyx import *` (this includes nbtlib). 
-
-From here, you'll need to define your datapack object. This can be done with `pack = pack(file_path)`. Now you can get started defining functions.
+## Installation
+The package can be installed with `pip`:
+```
+pip install onyx-lib
+```
 
 &nbsp;
-## Functions
+## Getting Started
+First, you'll need to define your datapack object. This can be done with `pack = pack(file_path)`. Now you can get started defining functions.
+
 A basic function should look something like this:
 ```python
 from onyx import *
@@ -38,7 +41,6 @@ tellraw("@a", text)
 
 &nbsp;
 # Credits
-
 Language Design:
 * [Arcensoth](https://github.com/Arcensoth) (Design Ideas and Feedback, Implementation Ideas)
 * the der discohund (Design Ideas, Implementation Ideas)
