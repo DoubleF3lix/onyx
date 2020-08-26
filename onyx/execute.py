@@ -15,6 +15,7 @@ class execute:
 
         # Save the old function path
         self.old_func = Handler._active_func
+        self.old_mcfunc = Handler._active_mcfunc_path
 
     def __enter__(self):
         # Call the new function and save all the old commands
@@ -52,6 +53,7 @@ class execute:
         Handler._write_function()
         # Restore the old function settings
         Handler._active_func = self.old_func
+        Handler._active_mcfunc_path = self.old_mcfunc
         Handler._cmds = self.old_cmds
 
     def align(self, *args: axis):

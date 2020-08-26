@@ -183,30 +183,36 @@ class LocPos(_buildable, _position):
     """Defines a local position (relatve to the direction an entity is facing)
 
     Args:
-        x (Union[int, float])
-        y (Union[int, float])
-        z (Union[int, float])
+        left (Union[int, float])
+        up (Union[int, float])
+        forward (Union[int, float])
 
     Raises:
         ValueError: Raised when any of the arguments is not a number
     """
-    def __init__(self, x: Union[int, float], y: Union[int, float], z: Union[int, float]):
-        if not all(isinstance(arg, (int, float)) for arg in [x, y, z]):
+    def __init__(self, left: Union[int, float], up: Union[int, float], forward: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [left, up, forward]):
             raise ValueError("You must supply 3 numbers")
 
-        self.x = x
-        self.y = y
-        self.z = z
+        self.left = left
+        self.up = up
+        self.forward = forward
 
     def build(self):
-        return f"^{self.x} ^{self.y} ^{self.z}"
+        return f"^{self.left} ^{self.up} ^{self.forward}"
 
 
 class CurrentPos(_buildable, _position):
-    """Defines the current position of an entity (~ ~ ~)
     """
-    @staticmethod
-    def build():
+    Args:
+        rotation (bool): Whether or not rotation should be included in this position (~ ~ ~ ~ ~). Defaults to False.
+    """
+    def __init__(self, rotation: bool = False):
+        self.rotation = rotation
+
+    def build(self):
+        if self.rotation is True:
+            return "~ ~ ~ ~ ~"
         return "~ ~ ~"
 
 
