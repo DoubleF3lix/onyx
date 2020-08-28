@@ -227,3 +227,9 @@ class Handler:
             # The loop will only exit if it finds a differentiator that isn't in use
             else:
                 return str(differentiator)
+
+    @staticmethod
+    def _is_none(element):
+        if element is "" or element is None:
+            return True
+        return False

@@ -6648,7 +6648,7 @@ class weather(enum.Enum):
     thunder = "thunder"
 
 
-class particle(enum.Enum):
+class particles(enum.Enum):
     """Particle list
 
     * ambient_entity_effect
