@@ -7,6 +7,7 @@ class delay:
     def __init__(self, delay_time: Union[str, int]):
         # Save the old function path
         self.old_func = Handler._active_func
+        self.old_mcfunc = Handler._active_mcfunc_path
 
         # Modify the time if there are any custom suffixes (just minutes and hours, since schedule only supports ticks, seconds, and days)
         if isinstance(delay_time, int):
@@ -27,7 +28,21 @@ class delay:
         function_name_extensionless = os.path.splitext(function_name)[0]
         differentiator = Handler._get_differentiator()
 
-        Handler._cmds.append(f"schedule function {Handler._datapack_name}:generated/{function_name_extensionless}{differentiator} {self.delay_time}")
+        # Add "generated" to the mcfunction path
+        Handler._active_mcfunc_path = Handler._active_mcfunc_path.split("/")
+        if len(Handler._active_mcfunc_path) > 1:
+            Handler._active_mcfunc_path.insert(-1, "generated")
+            Handler._active_mcfunc_path[-1] = Handler._active_mcfunc_path[-1] + differentiator
+        else:
+            Handler._active_mcfunc_path = "".join(Handler._active_mcfunc_path).split(":")
+            del Handler._active_mcfunc_path[-1]
+            Handler._active_mcfunc_path[0] = Handler._active_mcfunc_path[0] + ":"
+            Handler._active_mcfunc_path.append("generated")
+            Handler._active_mcfunc_path.append(function_name_extensionless + differentiator)
+
+        Handler._active_mcfunc_path = "/".join(Handler._active_mcfunc_path).replace(":/", ":")
+
+        Handler._cmds.append(f"schedule function {Handler._active_mcfunc_path} {self.delay_time}")
         self.old_cmds = Handler._cmds
         Handler._cmds = []
 
@@ -39,4 +54,5 @@ class delay:
         Handler._write_function()
         # Restore the old function settings
         Handler._active_func = self.old_func
+        Handler._active_mcfunc_path = self.old_mcfunc
         Handler._cmds = self.old_cmds

@@ -6942,3 +6942,18 @@ class data_type(enum.Enum):
     int = "int"
     long = "long"
     short = "short"
+
+
+class tag_type(enum.Enum):
+    """
+    * block
+    * entity
+    * fluid
+    * function
+    * item
+    """
+    block = "blocks"
+    entity = "entity_types"
+    fluid = "fluids"
+    function = "function"
+    item = "items"

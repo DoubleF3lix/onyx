@@ -21,6 +21,7 @@ class Handler:
     _added_scoreboards = []
     _init_cmds = []
     _loaded_libs = []
+    _disable_status = False
 
     def __init__(self, function, mcfunction_path, datapack_path, datapack_name):
         Handler._active_func = function
@@ -33,6 +34,7 @@ class Handler:
     def _write_function():
         with open(Handler._active_func, "a") as _function:
             _function.write('\n'.join(Handler._cmds))
+        Handler._status(f"Created function: {Handler._active_mcfunc_path}")
 
     # Print a warning in the terminal
     @staticmethod
@@ -46,10 +48,10 @@ class Handler:
         # Remove the last newline, then print the location and the warning text
         print(traceback_loc[:len(traceback_loc) - 1])
 
-    # Method is to make it more clear that it is for status messages
     @staticmethod
     def _status(text, end="\n"):
-        print(f"{text}", end=end)
+        if not Handler._disable_status:
+            print(f"{text}", end=end)
 
     # Used internally for presets
     @staticmethod
@@ -192,15 +194,9 @@ class Handler:
             return str(element).lower()
         elif isinstance(element, (list, tuple)):
             if convert:
-                q = []
-                for item in element:
-                    q.append(Handler._translate(item))
-                return q
+                return [Handler._translate(item) for item in element]
             elif item:
-                q = []
-                for item in element:
-                    q.append(json.dumps(Handler._translate(item)))
-                return q
+                return [json.dumps(Handler._translate(item)) for item in element]
             else:
                 return " ".join(map(str, element))
         elif convert:
@@ -230,6 +226,6 @@ class Handler:
 
     @staticmethod
     def _is_none(element):
-        if element is "" or element is None:
+        if element == "" or element is None:
             return True
         return False
