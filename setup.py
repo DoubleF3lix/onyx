@@ -5,11 +5,11 @@ with open("README.md", "r") as readme:
 
 setuptools.setup(
     name="onyx-mclib",
-    version="1.1.0",
+    version="1.1.1",
     description="A python library to create minecraft datapacks",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/DoubleFelix/onyx/",
+    url="https://github.com/Double-Felix/Onyx/",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
