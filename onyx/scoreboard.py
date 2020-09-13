@@ -7,7 +7,7 @@ from onyx.json_string import json_string
 from onyx.enums import lib, scoreboard_trait, rendertype
 
 
-def resetPlayer(name: Union[selector, str]):
+def reset_player(name: Union[selector, str]):
     """Resets all scores for a player
 
     Args:
@@ -68,7 +68,7 @@ class Scoreboard:
         """
         Handler._cmds.append(f"scoreboard objectives modify {self.name} {Handler._translate(trait)} {Handler._translate(value)}")
 
-    def remove_allPlayers(self):
+    def remove_all_players(self):
         """Remove all players from a scoreboard
         """
         Handler._cmds.append(f"scoreboard objectives remove {self.name}")
@@ -86,6 +86,8 @@ class Scoreboard:
 
 
 class Player:
+    """
+    """
     def __init__(self, name, scoreboard, created, critera):
         self.name = Handler._translate(name)
         self.scoreboard = scoreboard

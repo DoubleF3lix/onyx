@@ -59,7 +59,7 @@ class Handler:
         lib_files = []
 
         # Get the lib directory
-        lib_dir = os.path.normpath(pkg_resources.resource_filename("onyx"))
+        lib_dir = os.path.normpath(pkg_resources.resource_filename("onyx", "lib"))
         # Remove the unnessecary onyx that appears due to the above function call
         lib_dir = lib_dir.split(os.sep)
         lib_dir.reverse()
