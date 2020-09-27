@@ -5,7 +5,6 @@ onyx_mclib.egg-info
 **.bat
 **.txt
 **.toml
-docs/
 build/
 dist/
 build.bat

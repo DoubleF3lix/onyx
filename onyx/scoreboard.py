@@ -138,6 +138,7 @@ class Player:
 
     def set_if_less(self, value: Union[int, "Player"]):
         """Sets the score to the value if the score is lower than the value
+
         Args:
             value (Union[int, Player])
         """
@@ -145,6 +146,7 @@ class Player:
 
     def set_if_greater(self, value: Union[int, "Player"]):
         """Sets the score to the value if the score is greater than the value
+
         Args:
             value (Union[int, Player])
         """
@@ -171,6 +173,7 @@ class Player:
 
     def pow(self, value: Union[int, "Player"]):
         """Raises the score to the exponent value
+
         Args:
             value (Union[int, Player])
         """

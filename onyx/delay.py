@@ -4,6 +4,11 @@ from onyx.handler import Handler
 
 
 class delay:
+    """ Creates a delay in your functions
+
+    Args:
+        delay_time (Union[str, int]): The time to wait before the next part is run. Append with "t" for ticks (or just an integer), "s" for seconds, "m" for minutes, "h" for hours, and "d" for days.
+    """
     def __init__(self, delay_time: Union[str, int]):
         # Save the old function path
         self.old_func = Handler._active_func
