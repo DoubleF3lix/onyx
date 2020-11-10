@@ -33,7 +33,7 @@ class Handler:
     @staticmethod
     def _write_function():
         with open(Handler._active_func, "a") as _function:
-            _function.write('\n'.join(Handler._cmds))
+            _function.write('\n'.join(Handler._cmds) + "\n")
         Handler._status(f"Created function: {Handler._active_mcfunc_path}")
 
     # Print a warning in the terminal

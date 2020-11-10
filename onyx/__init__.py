@@ -10,7 +10,7 @@ import onyx.team
 import onyx.title
 import onyx.worldborder
 
-from onyx.pack_manager import pack
+from onyx.pack_manager import pack, function
 
 from onyx.enums import *
 from onyx.util import *

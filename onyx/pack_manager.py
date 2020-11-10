@@ -7,6 +7,24 @@ from .handler import Handler
 from .enums import tag_type
 
 
+class function:
+    """Defines a standalone function without a data pack (libs and things will NOT work)
+
+    Args:
+        path (str): The path of the function (raw path, include extension)
+    """
+    def __init__(self, path):
+        self._path = path
+        Handler(None, None, None, None)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, excpt_type, excpt_value, traceback):
+        with open(self._path, "w") as _file:
+            _file.write('\n'.join(Handler._cmds) + "\n")
+
+
 class Function:
     def __init__(self, datapack_path, datapack_name, function_path, function_name, loop):
         self._datapack_path = datapack_path
