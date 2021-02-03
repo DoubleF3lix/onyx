@@ -55,3 +55,10 @@ def translate(obj):
         return ""
     else:
         return obj
+
+def add_scoreboard(objective, criteria="dummy"):
+    from onyx.commands import Commands
+
+    if objective not in Commands.added_scoreboards:
+        Commands.push(f"scoreboard objectives add {objective} {criteria}", init=True)
+        Commands.added_scoreboards.append(objective)
