@@ -10,21 +10,26 @@ class DataPack:
         self.pack_data = {
             "name": name,
             "path": path,
-            "description": description,
+            "description": description or 'Data Pack',
             "format": version
         }
 
         self.pack_object = beet.DataPack(self.pack_data["name"])
         self.pack_object.pack_format = self.pack_data["format"]
         self.pack_object.description = self.pack_data["description"]
+        self.init_contents = []
 
         # Initalize the commands static class
-        Commands()
+        Commands(self)
     
-    def function(self, function_path: str, link: Callable):
-        return Function(function_path, link, self)
+    def function(self, function_path: str, link: Callable, init: bool = False, loop: bool = False):
+        return Function(function_path, link, init, loop, self)
 
     def generate(self, overwrite: bool = True, zipped: bool = False):
+        # Generate the initialization function file (make sure it has any commands in it, otherwise don't bother)
+        if self.init_contents:
+            self.pack_object[f"{snakify(self.pack_data['name'])}:_init"] = beet.Function(self.init_contents, tags=["minecraft:load"])
+
         # Determine the data pack output path
         if self.pack_data["path"] == None:
             pack_output_path = os.path.join(os.getcwd())
@@ -37,11 +42,19 @@ class DataPack:
 
 
 class Function:
-    def __init__(self, function_path: str, link: Callable, parent_pack: DataPack):
+    def __init__(self, function_path: str, link: Callable, is_init: bool, is_loop: bool, parent_pack: DataPack):
         self.function_path = function_path
         self.link = link
+        self.is_init = is_init
+        self.is_loop = is_loop
 
-        self.function_object = beet.Function([])
+        tags = []
+        if self.is_init == True:
+            tags.append("minecraft:load")
+        if self.is_loop == True:
+            tags.append("minecraft:tick")
+
+        self.function_object = beet.Function([], tags=tags)
 
         # link() just contains function calls which add to Commands.function_contents. 
         # The current function object gets these commands added to it.
