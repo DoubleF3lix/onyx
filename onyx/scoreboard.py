@@ -11,39 +11,39 @@ class PlayerOperator:
         self.key = key
 
     def __iadd__(self, other):
-        self.parent.operator = "+="
+        self.parent.__dict__["operator"] = "+="
         return other
 
     def __isub__(self, other):
-        self.parent.operator = "-="
+        self.parent.__dict__["operator"] = "-="
         return other
 
     def __imul__(self, other):
-        self.parent.operator = "*="
+        self.parent.__dict__["operator"] = "*="
         return other
 
     def __idiv__(self, other):
-        self.parent.operator = "/="
+        self.parent.__dict__["operator"] = "/="
         return other
 
     def __imod__(self, other):
-        self.parent.operator = "%="
+        self.parent.__dict__["operator"] = "%="
         return other
 
     # Swap operator (|)
     def __or__(self, other):
-        self.parent.operator = "><"
-        self.parent.__setitem__(self.key, other)
+        self.parent.__dict__["operator"] = "><"
+        self.parent.__setattr__(self.key, other)
         return other
 
     # Set (targets score) if (source is) less operator (<<=)
     def __ilshift__(self, other):
-        self.parent.operator = "<"
+        self.parent.__dict__["operator"] = "<"
         return other
 
     # Set (targets score) if (source is) greater operator (>>=)
     def __irshift__(self, other):        
-        self.parent.operator = ">"
+        self.parent.__dict__["operator"] = ">"
         return other
 
     def enable(self):
@@ -58,25 +58,25 @@ class PlayerOperator:
 
 class Scoreboard:
     def __init__(self, name: str, create: bool = False, criteria: str = "dummy", display_name: str = None):
-        self.name = name
-        self.create = create
-        self.criteria = criteria
-        self.display_name = translate(display_name)
+        self.__dict__["name"] = name
+        self.__dict__["create"] = create
+        self.__dict__["criteria"] = criteria
+        self.__dict__["display_name"] = translate(display_name)
 
         if self.create == True:
             Commands.push(f"scoreboard objectives add {self.name} {self.criteria} {self.display_name}", init=True)
 
         # self.operator is overwritten if anything except "=" is used
-        self.operator = "="
+        self.IGNORE_operator = "="
 
-    def __getitem__(self, key):
+    def __getattr__(self, key):
         return PlayerOperator(self, key)
 
-    def __setitem__(self, key, value):
+    def __setattr__(self, key, value):
         self._multi_operator(key, value, self.operator)
 
         # Restore the default operator to prepare for the next call
-        self.operator = "="
+        self.__dict__["operator"] = "="
 
     def _multi_operator(self, key, value, operator):
         if isinstance(value, int):

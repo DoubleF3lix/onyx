@@ -6,9 +6,9 @@ from onyx.scoreboard import Scoreboard as scoreboard
 from onyx.registries import *
 
 # I'm so sorry... (but also this is really cool and I'm kind of proud and ashamed at the same time. Proumed or ashoud or prashamed, I don't know, figure it out yourself ¯\_(ツ)_/¯)
-import onyx.text_component
 class BadHack:
     @property
     def component(self):
+        import onyx
         return onyx.text_component.TextComponent()
-TextComponent = BadHack().component
+text_component = BadHack().component
