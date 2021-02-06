@@ -10,41 +10,53 @@ class PlayerOperator:
         self.parent = parent
         self.key = key
 
-    def __iadd__(self, other):
+    def __iadd__(self, value):
         self.parent.__dict__["operator"] = "+="
-        return other
+        return value
 
-    def __isub__(self, other):
+    def add(self, value):
+        return self.__iadd__(value)
+
+    def __isub__(self, value):
         self.parent.__dict__["operator"] = "-="
-        return other
+        return value
 
-    def __imul__(self, other):
+    def subtract(self, value):
+        return self.__isub__(value)
+
+    def __imul__(self, value):
         self.parent.__dict__["operator"] = "*="
-        return other
+        return value
 
-    def __idiv__(self, other):
+    def multiply(self, value):
+        return self.__imul__(value)
+
+    def __idiv__(self, value):
         self.parent.__dict__["operator"] = "/="
-        return other
+        return value
 
-    def __imod__(self, other):
+    def divide(self, value):
+        return self.__idiv__(value)
+
+    def __imod__(self, value):
         self.parent.__dict__["operator"] = "%="
-        return other
+        return value
 
-    # Swap operator (|)
-    def __or__(self, other):
+    def modulo(self, value):
+        return self.__imod__(value)
+
+    def swap(self, value):
         self.parent.__dict__["operator"] = "><"
-        self.parent.__setattr__(self.key, other)
-        return other
-
-    # Set (targets score) if (source is) less operator (<<=)
-    def __ilshift__(self, other):
+        self.parent.__setattr__(self.key, value)
+        return value
+ 
+    def set_if_less(self, value):
         self.parent.__dict__["operator"] = "<"
-        return other
+        return value
 
-    # Set (targets score) if (source is) greater operator (>>=)
-    def __irshift__(self, other):        
+    def set_if_greater(self, value):        
         self.parent.__dict__["operator"] = ">"
-        return other
+        return value
 
     def enable(self):
         Commands.push(f"scoreboard players enable {translate(self.key)} {self.parent.name}")
@@ -67,12 +79,27 @@ class Scoreboard:
             Commands.push(f"scoreboard objectives add {self.name} {self.criteria} {self.display_name}", init=True)
 
         # self.operator is overwritten if anything except "=" is used
-        self.IGNORE_operator = "="
+        self.__dict__["operator"] = "="
+
+    def get_name(self):
+        return self.name
 
     def __getattr__(self, key):
+        return self.__getitem__(key)
+
+    def __getitem__(self, key):
         return PlayerOperator(self, key)
 
     def __setattr__(self, key, value):
+        return self.__setitem__(key, value)
+
+    def __setitem__(self, key, value):
+        if key.startswith("player_"):
+            key = key[7:]
+        elif key.startswith("_"):
+            key = f"#{key[1:]}"
+        else:
+            key = f"${key}"
         self._multi_operator(key, value, self.operator)
 
         # Restore the default operator to prepare for the next call
