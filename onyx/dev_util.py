@@ -1,5 +1,6 @@
-import re
 import json
+import re
+
 
 def convert_mcfunction_path(mcfunction_path):
     path = mcfunction_path.split(":")
@@ -13,13 +14,10 @@ def convert_mcfunction_path(mcfunction_path):
     }
 
 def snakify(text):
-    output = []
-    split_text = text.split(" ")
-    for part in split_text:
-        part = re.sub(r'[^A-Za-z_]', '', part)
-        output.append(part.lower())
+    return "_".join(re.sub(r'[^a-zA-Z0-9_]', '', q.lower()) for q in text.split(" "))
 
-    return '_'.join(output)
+def camelify(text):
+    return ''.join([q.lower().capitalize() if i != 0 else q.lower() for i, q in enumerate(re.sub("[^a-z0-9 ]", "", text.replace("_", " ").lower()).split(" "))])
 
 def dict_to_advancement_selector(arg):
     # {"thing/1": {"thing/12": True}, "thing/2": False}
@@ -44,8 +42,9 @@ def dict_to_score_selector(arg):
     return f"{{{', '.join(tmp)}}}"
 
 def translate(obj):
-    from onyx.class_types import Buildable
     import enum
+
+    from onyx.class_types import Buildable
 
     if isinstance(obj, Buildable):
         return obj.build()
@@ -60,5 +59,69 @@ def add_scoreboard(objective, criteria="dummy"):
     from onyx.commands import Commands
 
     if objective not in Commands.added_scoreboards:
-        Commands.push(f"scoreboard objectives add {objective} {criteria}", init=True)
         Commands.added_scoreboards.append(objective)
+        return Commands.push(f"scoreboard objectives add {objective} {criteria}", init=True)
+
+def convert_scoreboard_player_name(name):
+    from onyx.scoreboard import Player
+
+    if isinstance(name, Player):
+        name = name.name
+
+    if isinstance(name, str):
+        if name.startswith("player_"):
+            name = name[7:]
+        elif name.startswith("_"):
+            name = f"#{name[1:]}"
+        else:
+            name = f"${name}"
+    return translate(name)
+
+class TestUnit:
+    def __init__(self):
+        print()
+
+        self.total_test_count = 0
+        self.successful_tests = 0
+        self.failed_tests = []
+
+        self.report = []
+
+    def print_report(self):
+        print('\n'.join(self.report))
+        print(f"Total Tests Passed: {self.successful_tests}/{self.total_test_count}")
+        if self.successful_tests < self.total_test_count:
+            print("Failed Test Groups:")
+            print(''.join([q[:-1] for q in self.failed_tests]))
+        print()
+
+    def new(self, title, conditions):
+        self.report.append(title)
+
+        successes = 0
+        status_table = ["X", "✓"]
+        status = 0
+
+        largest_condition = max((len(q[0]) + len(q[2])) for q in conditions)
+
+        for condition in conditions:
+            if condition[1] == condition[2]:
+                successes += 1
+                status = 1
+
+            report_line = f"{condition[0]} == '{condition[2]}': {' ' * (largest_condition - (len(condition[0]) + len(condition[2])) + 5)} {status_table[status]}"
+            if status == 0:
+                report_line += f"{' ' * 4}Got Value: '{condition[2]}'"
+            self.report.append(report_line)
+            status = 0
+
+        self.total_test_count += len(conditions)
+        self.successful_tests += successes
+
+        if successes < len(conditions):
+            self.failed_tests.append(title)
+
+        self.report.append(f"Tests Passed: {successes}/{len(conditions)}")
+        self.report.append("=" * 40)
+
+        return successes

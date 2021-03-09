@@ -1,140 +1,138 @@
 from typing import Union
 from onyx.registries import scoreboard_display, scoreboard_trait, scoreboard_render_type
-from onyx.dev_util import translate, add_scoreboard
+from onyx.dev_util import translate, add_scoreboard, convert_scoreboard_player_name
 from onyx.commands import Commands
 from onyx.text_component import TextComponent
 
 
-class PlayerOperator:
-    def __init__(self, parent, key):
+class Player:
+    def __init__(self, parent, name):
         self.parent = parent
-        self.key = key
+        self.name = convert_scoreboard_player_name(name)
+
+    def set(self, value):
+        self.parent.operator = "="
+        return self.parent.handle_operator(self.name, value)
+
+    def __imatmul__(self, value):
+        return self.set(value)
+
+    def __str__(self):
+        return f"{self.name} {self.parent.name}"
 
     def __iadd__(self, value):
-        self.parent.__dict__["operator"] = "+="
-        return value
+        return self.add(value)
 
     def add(self, value):
-        return self.__iadd__(value)
+        self.parent.operator = "+="
+        return self.parent.handle_operator(self.name, value)
 
     def __isub__(self, value):
-        self.parent.__dict__["operator"] = "-="
-        return value
+        return self.subtract(value)
 
     def subtract(self, value):
-        return self.__isub__(value)
+        self.parent.operator = "-="
+        return self.parent.handle_operator(self.name, value)
 
     def __imul__(self, value):
-        self.parent.__dict__["operator"] = "*="
-        return value
+        return self.multiply(value)
 
     def multiply(self, value):
-        return self.__imul__(value)
+        self.parent.operator = "*="
+        return self.parent.handle_operator(self.name, value)
 
     def __idiv__(self, value):
-        self.parent.__dict__["operator"] = "/="
-        return value
+        return self.divide(value)
 
     def divide(self, value):
-        return self.__idiv__(value)
+        self.parent.operator = "/="
+        return self.parent.handle_operator(self.name, value)
 
     def __imod__(self, value):
-        self.parent.__dict__["operator"] = "%="
-        return value
+        return self.modulo(value)
 
     def modulo(self, value):
-        return self.__imod__(value)
+        self.parent.operator = "%="
+        return self.parent.handle_operator(self.name, value)
 
     def swap(self, value):
-        self.parent.__dict__["operator"] = "><"
-        self.parent.__setattr__(self.key, value)
-        return value
+        self.parent.operator = "><"
+        return self.parent.handle_operator(self.name, value)
  
     def set_if_less(self, value):
-        self.parent.__dict__["operator"] = "<"
-        return value
+        self.parent.operator = "<"
+        return self.parent.handle_operator(self.name, value)
 
-    def set_if_greater(self, value):        
-        self.parent.__dict__["operator"] = ">"
-        return value
+    def set_if_greater(self, value):    
+        self.parent.operator = ">"
+        return self.parent.handle_operator(self.name, value)
 
     def enable(self):
-        Commands.push(f"scoreboard players enable {translate(self.key)} {self.parent.name}")
+        return Commands.push(f"scoreboard players enable {translate(self.name)} {self.parent.name}")
 
     def get(self):
-        Commands.push(f"scoreboard players get {translate(self.key)} {self.parent.name}")
+        return Commands.push(f"scoreboard players get {translate(self.name)} {self.parent.name}")
 
     def reset(self):
-        Commands.push(f"scoreboard players reset {translate(self.key)} {self.parent.name}")
+        return Commands.push(f"scoreboard players reset {translate(self.name)} {self.parent.name}")
 
 
 class Scoreboard:
     def __init__(self, name: str, create: bool = False, criteria: str = "dummy", display_name: str = None):
-        self.__dict__["name"] = name
-        self.__dict__["create"] = create
-        self.__dict__["criteria"] = criteria
-        self.__dict__["display_name"] = translate(display_name)
+        self.name = name
+        self.create = create
+        self.criteria = criteria
+        self.display_name = translate(display_name)
 
         if self.create == True:
             Commands.push(f"scoreboard objectives add {self.name} {self.criteria} {self.display_name}", init=True)
 
         # self.operator is overwritten if anything except "=" is used
-        self.__dict__["operator"] = "="
+        self.operator = "="
+
+        # Used to keep track of existing players to de-dupe stuff
+        self.players = {}
+
+    def player(self, name: str):
+        if name not in self.players:
+            self.players[name] = Player(self, name)
+        return self.players[name]
 
     def get_name(self):
         return self.name
 
-    def __getattr__(self, key):
-        return self.__getitem__(key)
-
-    def __getitem__(self, key):
-        return PlayerOperator(self, key)
-
-    def __setattr__(self, key, value):
-        return self.__setitem__(key, value)
-
-    def __setitem__(self, key, value):
-        if key.startswith("player_"):
-            key = key[7:]
-        elif key.startswith("_"):
-            key = f"#{key[1:]}"
-        else:
-            key = f"${key}"
-        self._multi_operator(key, value, self.operator)
-
-        # Restore the default operator to prepare for the next call
-        self.__dict__["operator"] = "="
-
-    def _multi_operator(self, key, value, operator):
+    def handle_operator(self, name, value):
         if isinstance(value, int):
-            if operator in {"=", "+=", "-="}:
-                operator_name = {"=": "set", "+=": "add", "-=": "remove"}[operator]
-                Commands.push(f"scoreboard players {operator_name} {translate(key)} {self.name} {value}")
-            elif operator in {"*=", "/=", "<", ">"}:
-                add_scoreboard("onyx.const")
-                Commands.push(f"scoreboard players set ${value} onyx.const {value}", init=True)
-                Commands.push(f"scoreboard players operation {translate(key)} {self.name} {operator} ${value} onyx.const")
-            elif operator == "><":
+            if self.operator in {"=", "+=", "-="}:
+                operator_name = {"=": "set", "+=": "add", "-=": "remove"}[self.operator]
+                return Commands.push(f"scoreboard players {operator_name} {translate(name)} {self.name} {value}")
+            elif self.operator in {"*=", "/=", "%=",  "<", ">"}:
+                add_scoreboard("onyx.const"),
+                Commands.push(f"scoreboard players set ${value} onyx.const {value}", init=True),
+                return Commands.push(f"scoreboard players operation {translate(name)} {self.name} {self.operator} ${value} onyx.const")
+            elif self.operator == "><":
                 raise ValueError("Cannot swap between player score and integer")
         else:
-            if operator in {"=", "+=", "-=", "*=", "/=", "<", ">", "><"}:
-                Commands.push(f"scoreboard players operation {translate(key)} {self.name} {operator} {translate(value.key)} {value.parent.name}")
-            elif operator == "><":
-                Commands.push(f"scoreboard players operation {translate(key)} {self.name} >< {translate(value.key)} {value.parent.name}")
+            if self.operator in {"=", "+=", "-=", "*=", "/=", "%=", "<", ">", "><"}:
+                return Commands.push(f"scoreboard players operation {translate(name)} {self.name} {self.operator} {value.name} {value.parent.name}")
+
+        self.operator = "="
 
     def delete(self):
-        Commands.push(f"scoreboard objectives remove {self.name}")
+        return Commands.push(f"scoreboard objectives remove {self.name}")
 
     def reset(self):
-        Commands.push(f"scoreboard players reset * {self.name}")
+        return Commands.push(f"scoreboard players reset * {self.name}")
 
     def setdisplay(self, display: scoreboard_display):
-        Commands.push(f"scoreboard objectives setdisplay {translate(display)} {self.name}")
+        return Commands.push(f"scoreboard objectives setdisplay {translate(display)} {self.name}")
 
     def modify(self, trait: scoreboard_trait, value: Union[TextComponent, scoreboard_render_type]):
-        Commands.push(f"scoreboard objectives modify {self.name} {translate(trait)} {translate(value)}")
+        return Commands.push(f"scoreboard objectives modify {self.name} {translate(trait)} {translate(value)}")
 
     def create(self, overwrite: bool = False):
+        q = []
         if overwrite == True:
-            Commands.push(f"scoreboard objectives remove {self.name}")
-        Commands.push(f"scoreboard objectives add {self.name} {self.criteria} {self.display_name}")
+            q.append(Commands.push(f"scoreboard objectives remove {self.name}"))
+        q.append(Commands.push(f"scoreboard objectives add {self.name} {self.criteria} {self.display_name}"))
+        return q
