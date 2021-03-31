@@ -1,4 +1,4 @@
-from onyx.class_types import Buildable
+from onyx.class_types import Buildable, Pos, Rot
 from onyx.registries import click_event_action, hover_event_action
 from onyx.dev_util import translate
 from nbtlib.tag import *
@@ -13,7 +13,7 @@ class Range(Buildable):
         return f"{self.min or ''}..{self.max or ''}"
 
 
-class Position(Buildable):
+class Position(Buildable, Pos):
     def __init__(self, x: int = None, y: int = None, z: int = None):
         self.x = x
         self.y = y
@@ -21,6 +21,25 @@ class Position(Buildable):
 
     def build(self):
         return f"{self.x or ''} {self.y or ''} {self.z or ''}"
+
+
+class LocalPosition(Buildable, Pos):
+    def __init__(self, x: int = None, y: int = None, z: int = None):
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def build(self):
+        return f"{self.x or ''} {self.y or ''} {self.z or ''}"
+
+
+class Rotation(Buildable, Rot):
+    def __init__(self, x: int, y: int):
+        self.x = x
+        self.y = y
+
+    def build(self):
+        return f"{self.x} {self.y}"
 
 
 class ClickEvent(Buildable):

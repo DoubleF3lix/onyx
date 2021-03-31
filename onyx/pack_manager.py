@@ -56,12 +56,15 @@ class Function:
 
         self.function_object = beet.Function([], tags=tags)
 
-        # link() just contains function calls which add to Commands.function_contents. 
-        # The current function object gets these commands added to it.
-        # Then, the function is generated and Commands.function_contents is cleared to prepare for the next function. 
+        # Mark the active function for things like execute
+        Commands.active_function = self.function_path
+        # link() just contains function calls which add to Commands.function_contents.
         self.link()
+        # The current function object gets these commands added to it
         self.add(Commands.function_contents)
+        # Then, variables are reset to prepare for the next function
         Commands.function_contents = []
+        Commands.active_function = None
 
         if ":" not in function_path:
             function_path = f"{snakify(parent_pack.pack_data['name'])}:{function_path}"

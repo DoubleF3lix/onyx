@@ -123,3 +123,45 @@ class click_event_action(enum.Enum):
 class hover_event_action(enum.Enum):
     show_text = "show_text"
     show_item = "show_item"
+
+
+class axis(enum.Enum):
+    x = "x"
+    y = "y"
+    z = "z"
+
+
+class anchor(enum.Enum):
+    feet = "feet"
+    eyes = "eyes"
+
+
+class dimension(enum.Enum):
+    overworld = "overworld"
+    the_end = "the_end"
+    the_nether = "the_nether"
+
+
+class data_type(enum.Enum):
+    byte = "byte"
+    double = "double"
+    float = "float"
+    int = "int"
+    long = "long"
+    short = "short"
+
+
+class bossbar_location(enum.Enum):
+    max = "max"
+    value = "value"
+
+
+class execute_blocks_mask(enum.Enum):
+    all = "all"
+    masked = "masked"
+ 
+
+class source_type(enum.Enum):
+    block = "block"
+    entity = "entity"
+    storage = "storage"

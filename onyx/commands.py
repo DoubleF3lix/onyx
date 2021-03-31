@@ -24,6 +24,7 @@ class Commands:
         Commands.pack_object = pack_object
         Commands.added_scoreboards = []
         Commands.init_commands = []
+        Commands.active_function = None
 
         Commands.scoreboard = Scoreboard()
 

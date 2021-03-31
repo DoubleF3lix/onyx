@@ -43,8 +43,8 @@ def dict_to_score_selector(arg):
 
 def translate(obj):
     import enum
-
     from onyx.class_types import Buildable
+    from onyx.scoreboard import Player
 
     if isinstance(obj, Buildable):
         return obj.build()
@@ -52,6 +52,8 @@ def translate(obj):
         return obj.value
     elif obj is None:
         return ""
+    elif isinstance(obj, Player):
+        return str(obj)
     else:
         return obj
 
@@ -76,6 +78,14 @@ def convert_scoreboard_player_name(name):
         else:
             name = f"${name}"
     return translate(name)
+
+
+def get_integer_count_at_string_end(string):
+    string = str(string)[::-1]
+    for char_index in range(len(string)):
+        if not string[char_index].isdigit():
+            return char_index
+
 
 class TestUnit:
     def __init__(self):
@@ -108,6 +118,8 @@ class TestUnit:
             if condition[1] == condition[2]:
                 successes += 1
                 status = 1
+            else:
+                print(condition[1] + "\n" + condition[2] + "\n")
 
             report_line = f"{condition[0]} == '{condition[2]}': {' ' * (largest_condition - (len(condition[0]) + len(condition[2])) + 5)} {status_table[status]}"
             if status == 0:

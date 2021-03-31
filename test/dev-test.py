@@ -1,5 +1,4 @@
 import json
-
 import onyx
 from nbtlib.tag import *
 from onyx.dev_util import TestUnit
@@ -14,6 +13,7 @@ class DataPack(onyx.DataPack):
         self.function("scoreboards:testing/scoreboard_players", self.scoreboard_operators_test)
         self.function("text_components:testing/main", self.text_components_test)
         self.function("commands:testing/main", self.commands_test)
+        self.function("execute:testing/main", self.execute_test)
 
         self.test_unit.print_report()
 
@@ -80,7 +80,7 @@ class DataPack(onyx.DataPack):
         ])
 
     def text_components_test(self):
-        main_component = onyx.TextComponent().part(
+        main_component = onyx.text_component().part(
             text="pls",
             translate="translate:string",
             with_=["monkey", "ape"],
@@ -96,7 +96,7 @@ class DataPack(onyx.DataPack):
             block=(3, "~", "17"),
             entity="@a",
             storage="storage:location",
-            extra=onyx.TextComponent().part(text="extra_component", color="#328128"),
+            extra=onyx.text_component().part(text="extra_component", color="#328128"),
             color=onyx.color.blue,
             font="minecraft:default",
             bold=True,
@@ -107,7 +107,7 @@ class DataPack(onyx.DataPack):
             insertion="Hello!"
         )
 
-        click_event_component = onyx.TextComponent().part(
+        click_event_component = onyx.text_component().part(
             text="Click me to change page\n",
             click_event=onyx.ClickEvent(
                 onyx.click_event_action.change_page, "3")
@@ -129,7 +129,7 @@ class DataPack(onyx.DataPack):
                 onyx.click_event_action.suggest_command, "/say Hello")
         )
 
-        hover_event_component = onyx.TextComponent().part(
+        hover_event_component = onyx.text_component().part(
             text="Hover over me to show text\n",
             hover_event=onyx.HoverEvent(
                 onyx.hover_event_action.show_text, text="Hello")
@@ -154,7 +154,7 @@ class DataPack(onyx.DataPack):
             )
         )
 
-        index_component = onyx.TextComponent().part(
+        index_component = onyx.text_component().part(
             text="Part1"
         ).part(
             text="Part2"
@@ -162,7 +162,7 @@ class DataPack(onyx.DataPack):
             text="Part3"
         )
 
-        dict_component = onyx.TextComponent().part(
+        dict_component = onyx.text_component().part(
             dict = {
                 "text": "pls",
                 "translate": "translate:string",
@@ -179,7 +179,7 @@ class DataPack(onyx.DataPack):
                 "block": (3, "~", "17"),
                 "entity": "@a",
                 "storage": "storage:location",
-                "extra": onyx.TextComponent().part(text="extra_component", color="#328128"),
+                "extra": onyx.text_component().part(text="extra_component", color="#328128"),
                 "color": onyx.color.blue,
                 "font": "minecraft:default",
                 "bold": True,
@@ -199,11 +199,85 @@ class DataPack(onyx.DataPack):
             ("dict_component.build()", dict_component.build(), """["", {"text": "pls", "translate": "translate:string", "with_": ["monkey", "ape"], "score": {"objective": "objective", "name": "player", "value": 30}, "selector": "@a", "keybind": "advancements", "nbt": "NBT.Path", "interpret": true, "block": [3, "~", "17"], "entity": "@a", "storage": "storage:location", "extra": [{"text": "extra_component", "color": "#328128"}], "color": "blue", "font": "minecraft:default", "bold": true, "italic": true, "underlined": true, "strikethrough": true, "obfuscated": false, "insertion": "Hello!"}]""")
         ])
 
+    def execute_test(self):
+        # These functions have to be checked for manually
+        onyx.commands.say("before function1")
+        with onyx.execute().as_at("@s"):
+            onyx.commands.say("function1")
+
+            with onyx.execute().as_at("@s"):
+                onyx.commands.say("in function1, function2")
+
+        with onyx.execute().as_at("@s"):
+            onyx.commands.say("function3")
+        onyx.commands.say("after function3")
+
+        # unless isn't tested since it uses the exact same system as if, so if if works, unless does too
+        if_block_cmd = onyx.execute().if_.block("~ ~ ~", "minecraft:stone").build()
+        if_blocks_cmd = onyx.execute().if_.blocks("~ ~ ~", "~ ~1 ~", "~ ~ ~1", onyx.execute_blocks_mask.all).build()
+        if_data_cmd = onyx.execute().if_.data(onyx.source_type.block, "~ ~ ~", "Path").build()
+        if_entity_cmd = onyx.execute().if_.entity("@a").build()
+        if_predicate_cmd = onyx.execute().if_.predicate("namespace:predicate").build()
+        
+        dummy_scoreboard = onyx.scoreboard("objective")
+        dummy_player1 = dummy_scoreboard.player("player1")
+        dummy_player2 = dummy_scoreboard.player("player2")
+        if_score_eq_cmd = onyx.execute().if_.score(dummy_player1 == dummy_player2).build()
+        if_score_gt_eq_cmd = onyx.execute().if_.score(dummy_player1 >= dummy_player2).build()
+        if_score_gt_cmd = onyx.execute().if_.score(dummy_player1 > dummy_player2).build()
+        if_score_lt_eq_cmd = onyx.execute().if_.score(dummy_player1 <= dummy_player2).build()
+        if_score_lt_cmd = onyx.execute().if_.score(dummy_player1 < dummy_player2).build()
+        if_score_matches_cmd = onyx.execute().if_.score(dummy_player1 == onyx.Range(7, 18)).build()
+
+        # success store isn't tested since it uses the exact same system as result store, so if result store works, success does too
+        store_result_block_cmd = onyx.execute().store.result.block("~ ~ ~", "Path", onyx.data_type.byte, 0.1).build()
+        store_result_bossbar_cmd = onyx.execute().store.result.bossbar("minecraft:bossbar", onyx.bossbar_location.max).build()
+        store_result_entity_cmd = onyx.execute().store.result.entity("@s", "Path", onyx.data_type.byte, 0.1).build()
+        store_result_score_cmd = onyx.execute().store.result.score(onyx.scoreboard("objective").player("player")).build()
+        store_result_storage_cmd = onyx.execute().store.result.storage("storage:namespace", "Path", onyx.data_type.byte, 0.1).build()
+
+        rest_param_cmd = onyx.execute(
+        ).align(onyx.axis.x
+        ).align([onyx.axis.x, onyx.axis.y]
+        ).anchored(onyx.anchor.eyes
+        ).as_("@a"
+        ).at("@s"
+        ).as_at("@s"
+        ).facing(onyx.Position(3, 4, 5)
+        ).facing("@s", onyx.anchor.feet
+        ).positioned(onyx.Position(3, 4, 5)
+        ).positioned("@s"
+        ).rotated(onyx.Rotation(6, 7)
+        ).rotated("@s"
+        ).build()
+
+        self.test_unit.new("Execute Test:", [
+            ("if_block_cmd", if_block_cmd, """if block ~ ~ ~ minecraft:stone"""),
+            ("if_blocks_cmd", if_blocks_cmd, """if blocks ~ ~ ~ ~ ~1 ~ ~ ~ ~1 all"""),
+            ("if_data_cmd", if_data_cmd, """if data block ~ ~ ~ Path"""),
+            ("if_entity_cmd", if_entity_cmd, """if entity @a"""),
+            ("if_predicate_cmd", if_predicate_cmd, """if predicate namespace:predicate"""),
+            ("if_score_eq_cmd", if_score_eq_cmd, """if score $player1 objective = $player2 objective"""),
+            ("if_score_gt_eq_cmd", if_score_gt_eq_cmd, """if score $player1 objective >= $player2 objective"""),
+            ("if_score_gt_cmd", if_score_gt_cmd, """if score $player1 objective > $player2 objective"""),
+            ("if_score_lt_eq_cmd", if_score_lt_eq_cmd, """if score $player1 objective <= $player2 objective"""),
+            ("if_score_lt_cmd", if_score_lt_cmd, """if score $player1 objective < $player2 objective"""),
+            ("if_score_matches_cmd", if_score_matches_cmd, """if score $player1 objective matches 7..18"""),
+            ("store_result_block_cmd", store_result_block_cmd, """store result block ~ ~ ~ Path byte 0.1"""),
+            ("store_result_bossbar_cmd", store_result_bossbar_cmd, """store result bossbar minecraft:bossbar max"""),
+            ("store_result_entity_cmd", store_result_entity_cmd, """store result entity @s Path byte 0.1"""),
+            ("store_result_score_cmd", store_result_score_cmd, """store result score $player objective"""),
+            ("store_result_storage_cmd", store_result_storage_cmd, """store result storage storage:namespace Path byte 0.1"""),
+            ("rest_param_cmd", rest_param_cmd, """align x align xy anchored eyes as @a at @s as @s at @s facing 3 4 5 facing entity @s feet positioned 3 4 5 positioned as @s rotated 6 7 rotated as @s""")
+        ])
+        
     def commands_test(self):
+        say_cmd = onyx.commands.say("Dummy")
         gamemode_cmd = onyx.commands.gamemode(onyx.gamemode.creative, "@a")
-        tellraw_cmd = onyx.commands.tellraw("@a", onyx.TextComponent().part(text="Dummy"))
+        tellraw_cmd = onyx.commands.tellraw("@a", onyx.text_component().part(text="Dummy"))
 
         self.test_unit.new("Commands Test:", [
+            ("say_cmd", say_cmd, """say Dummy"""),
             ("gamemode_cmd", gamemode_cmd, """gamemode creative @a"""),
             ("tellraw_cmd", tellraw_cmd, """tellraw @a ["", {"text": "Dummy"}]""")
         ])
