@@ -31,7 +31,7 @@ class DataPack:
             self.pack_object[f"{snakify(self.pack_data['name'])}:_init"] = beet.Function(self.init_contents, tags=["minecraft:load"])
 
         # Determine the data pack output path
-        if self.pack_data["path"] == None:
+        if self.pack_data["path"] is None:
             pack_output_path = os.path.join(os.getcwd())
         else:
             pack_output_path = os.path.join(self.pack_data["path"])
@@ -49,9 +49,9 @@ class Function:
         self.is_loop = is_loop
 
         tags = []
-        if self.is_init == True:
+        if self.is_init:
             tags.append("minecraft:load")
-        if self.is_loop == True:
+        if self.is_loop:
             tags.append("minecraft:tick")
 
         self.function_object = beet.Function([], tags=tags)

@@ -118,7 +118,10 @@ class Execute:
         # If you are using more than 65,536 execute statements in one function, you need some serious help and a gamerule command
         for q in range(1, 65536):
             # Stop when it finds an unused number
-            if not Commands.active_function + f"/generated{q}" in Commands.pack_object.pack_object.functions:
+            if (
+                Commands.active_function + f"/generated{q}"
+                not in Commands.pack_object.pack_object.functions
+            ):
                 self.new_function_path = Commands.active_function + f"/generated{q}"
                 self.old_active_function = Commands.active_function
                 Commands.active_function = self.new_function_path

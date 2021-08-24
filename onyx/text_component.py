@@ -78,11 +78,8 @@ class TextComponent(Buildable):
         return self
 
     def build(self, is_extra: bool = False): 
-        translated_parts = []
-        for part in self.parts:
-            translated_parts.append(part.build())
-
-        if is_extra == False:
+        translated_parts = [part.build() for part in self.parts]
+        if not is_extra:
             return json.dumps([""] + translated_parts)
         else:
             return translated_parts

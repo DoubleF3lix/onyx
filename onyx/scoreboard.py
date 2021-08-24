@@ -138,7 +138,7 @@ class Scoreboard:
         self.criteria = criteria
         self.display_name = translate(display_name)
 
-        if self.create == True:
+        if self.create:
             Commands.push(f"scoreboard objectives add {self.name} {self.criteria} {self.display_name}", init=True)
 
         # self.operator is overwritten if anything except "=" is used
@@ -166,9 +166,8 @@ class Scoreboard:
                 return Commands.push(f"scoreboard players operation {translate(name)} {self.name} {self.operator} ${value} onyx.const")
             elif self.operator == "><":
                 raise ValueError("Cannot swap between player score and integer")
-        else:
-            if self.operator in {"=", "+=", "-=", "*=", "/=", "%=", "<", ">", "><"}:
-                return Commands.push(f"scoreboard players operation {translate(name)} {self.name} {self.operator} {value.name} {value.parent.name}")
+        elif self.operator in {"=", "+=", "-=", "*=", "/=", "%=", "<", ">", "><"}:
+            return Commands.push(f"scoreboard players operation {translate(name)} {self.name} {self.operator} {value.name} {value.parent.name}")
 
         self.operator = "="
 
@@ -186,7 +185,7 @@ class Scoreboard:
 
     def create(self, overwrite: bool = False):
         q = []
-        if overwrite == True:
+        if overwrite:
             q.append(Commands.push(f"scoreboard objectives remove {self.name}"))
         q.append(Commands.push(f"scoreboard objectives add {self.name} {self.criteria} {self.display_name}"))
         return q

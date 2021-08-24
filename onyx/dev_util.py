@@ -17,7 +17,12 @@ def snakify(text):
     return "_".join(re.sub(r'[^a-zA-Z0-9_]', '', q.lower()) for q in text.split(" "))
 
 def camelify(text):
-    return ''.join([q.lower().capitalize() if i != 0 else q.lower() for i, q in enumerate(re.sub("[^a-z0-9 ]", "", text.replace("_", " ").lower()).split(" "))])
+    return ''.join(
+        q.lower().capitalize() if i != 0 else q.lower()
+        for i, q in enumerate(
+            re.sub("[^a-z0-9 ]", "", text.replace("_", " ").lower()).split(" ")
+        )
+    )
 
 def dict_to_advancement_selector(arg):
     # {"thing/1": {"thing/12": True}, "thing/2": False}
@@ -35,10 +40,7 @@ def dict_to_advancement_selector(arg):
 
 def dict_to_score_selector(arg):
     # {scoreboardObj1: 3, scoreboardObj2: 4}
-    tmp = []
-    for key, item in arg.items():
-        tmp.append(f"{key}={translate(item)}")   
-
+    tmp = [f"{key}={translate(item)}" for key, item in arg.items()]
     return f"{{{', '.join(tmp)}}}"
 
 def translate(obj):
@@ -102,7 +104,7 @@ class TestUnit:
         print(f"Total Tests Passed: {self.successful_tests}/{self.total_test_count}")
         if self.successful_tests < self.total_test_count:
             print("Failed Test Groups:")
-            print(''.join([q[:-1] for q in self.failed_tests]))
+            print(''.join(q[:-1] for q in self.failed_tests))
         print()
 
     def new(self, title, conditions):
