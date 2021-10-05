@@ -40,27 +40,27 @@ class Selector(Buildable):
     def build(self):
         advancements, name, scores = None, None, None
 
-        if self.advancements is not None:
+        if self.advancements:
             advancements = dict_to_advancement_selector(self.advancements)
 
-        if self.name is not None:
+        if self.name:
             name = f"'{self.name}'"
 
-        if self.scores is not None:
+        if self.scores:
             scores = dict_to_score_selector(self.scores)
 
         output = []
         for key, item in vars(self).items():
-            if item is not None and key != "type":
+            if item and key != "type":
                 if key in {"gamemode", "level", "name", "tag", "team", "predicate"} and isinstance(item, list):
                     for arg in item:
                         output.append(f"{translate(key)}={translate(arg)}")
                 # This awful special case needs to exist because overwriting the class attributes makes building the selector more than once error out, and copying, overwriting, appending to output, and rewriting the copy back to the class attribute is even worse
-                elif key == "advancements" and advancements is not None:
+                elif key == "advancements" and advancements:
                     output.append(f"{translate(key)}={translate(advancements)}")
-                elif key == "name" and name is not None:
+                elif key == "name" and name:
                     output.append(f"{translate(key)}={translate(name)}")
-                elif key == "scores" and scores is not None:
+                elif key == "scores" and scores:
                     output.append(f"{translate(key)}={translate(scores)}")
                 else:
                     output.append(f"{translate(key)}={translate(item)}")

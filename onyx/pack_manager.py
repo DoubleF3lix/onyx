@@ -47,6 +47,7 @@ class Function:
         self.link = link
         self.is_init = is_init
         self.is_loop = is_loop
+        self.parent_pack = parent_pack
 
         tags = []
         if self.is_init == True:
@@ -72,3 +73,6 @@ class Function:
 
     def add(self, commands: list):
         self.function_object.lines.extend(commands)
+
+    def __call__(self):
+        return Commands.push(f"function {snakify(self.parent_pack.pack_data['name'])}:{self.function_path}")

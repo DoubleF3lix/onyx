@@ -1,7 +1,6 @@
 from onyx.commands import Commands
 import beet
-from onyx.class_types import Pos, Rot
-from onyx.util import Position, Rotation
+from onyx.class_types import Vector3, Vector2
 from onyx.scoreboard import Player
 from onyx.dev_util import translate
 from onyx.selector import Selector
@@ -17,15 +16,15 @@ class BaseCondition:
     def _add_args(self, type, *args):
         self.parent.output.append(f"{self.prefix} {type} {' '.join(translate(arg) for arg in args)}")
 
-    def block(self, position: Position, value: str):
+    def block(self, position: Vector3, value: str):
         self._add_args("block", position, value)
         return self.parent
 
-    def blocks(self, corner_1: Position, corner_2: Position, end_location: Position, mask: execute_blocks_mask):
+    def blocks(self, corner_1: Vector3, corner_2: Vector3, end_location: Vector3, mask: execute_blocks_mask):
         self._add_args("blocks", corner_1, corner_2, end_location, mask)
         return self.parent
 
-    def data(self, source_type: source_type, location: Union[str, Position, Selector], path: str):
+    def data(self, source_type: source_type, location: Union[str, Vector3, Selector], path: str):
         self._add_args("data", source_type, location, path)
         return self.parent
 
@@ -61,7 +60,7 @@ class BaseStore:
     def _add_args(self, type, *args):
         self.parent.output.append(f"store {self.prefix} {type} {' '.join(str(translate(arg)) for arg in args)}")
 
-    def block(self, location: Position, path: str, data_type: data_type, scale: Union[int, float]):
+    def block(self, location: Vector3, path: str, data_type: data_type, scale: Union[int, float]):
         self._add_args("block", location, path, data_type, scale)
         return self.parent
 
@@ -176,8 +175,8 @@ class Execute:
         self.output.append(f"as {translate(target)} at @s")
         return self
 
-    def facing(self, target: Union[Selector, Position], anchor: anchor = anchor.eyes):
-        if not isinstance(target, Pos):
+    def facing(self, target: Union[Selector, Vector3], anchor: anchor = anchor.eyes):
+        if not isinstance(target, Vector3):
             target = f"entity {translate(target)} {translate(anchor)}"
         self.output.append(f"facing {translate(target)}")
         return self
@@ -186,19 +185,19 @@ class Execute:
         self.output.append(f"in {translate(dimension)}")
         return self
 
-    def positioned(self, position: Union[Position, Selector]):
-        if not isinstance(position, Pos):
+    def positioned(self, position: Union[Vector3, Selector]):
+        if not isinstance(position, Vector3):
             position = f"as {translate(position)}"
         self.output.append(f"positioned {translate(position)}")
         return self
 
-    def rotated(self, rotation: Union[Rotation, Selector]):
+    def rotated(self, rotation: Union[Vector2, Selector]):
         # It's an entity
-        if not isinstance(rotation, Rot):
+        if not isinstance(rotation, Vector2):
             rotation = f"as {translate(rotation)}"
         self.output.append(f"rotated {translate(rotation)}")
         return self
 
-    # TODO I need to find schemas for this...
+    # TODO Make schemas for this
     def build(self):
         return ' '.join(self.output)

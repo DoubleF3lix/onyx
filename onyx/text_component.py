@@ -5,11 +5,10 @@ from onyx.selector import Selector
 from onyx.registries import keybind, color
 
 
-# Add textcomponentpart class which should be returned by a part function so each part can be modified individually (maybe access with index?)
 class TextComponentPart(Buildable):
     def __init__(self, text: str = None, translate: str = None, with_: list = None, score: dict = None, selector: Selector = None,
             keybind: keybind = None, nbt: str = None, interpret: bool = None, block: tuple = None, entity: Selector = None,
-            storage: str = None, extra: "TextComponent" = None, color: color = None, font: str = None, bold: bool = None,
+            storage: str = None, extra: list = None, color: color = None, font: str = None, bold: bool = None,
             italic: bool = None, underlined: bool = None, strikethrough: bool = None, obfuscated: bool = None,
             insertion: str = None, click_event: dict = None, hover_event: dict = None, dict: dict = None):
 
@@ -44,19 +43,20 @@ class TextComponentPart(Buildable):
         output = {}
 
         for key, item in vars(self).items():
-            if item is not None:
+            if item:
                 if key == "color":
                     if translate(item) == "pink":
                         item = "light_purple"
                     elif translate(item) == "purple":
                         item = "dark_purple"
                 elif key == "extra":
-                    item = self.extra.build(is_extra=True)
+                    item = [q.build(is_extra=True) for q in self.extra]
                 elif key in {"click_event", "hover_event"}:
                     key = camelify(key)
+                elif key == "with_":
+                    key = "with"
 
-                output[key] = translate(item)
-                 
+                output[key] = translate(item) if key not in {"extra", "with"} else item
         return output
 
 class TextComponent(Buildable):
@@ -68,7 +68,7 @@ class TextComponent(Buildable):
 
     def part(self, text: str = None, translate: str = None, with_: list = None, score: dict = None, selector: Selector = None,
             keybind: keybind = None, nbt: str = None, interpret: bool = None, block: tuple = None, entity: Selector = None,
-            storage: str = None, extra: "TextComponent" = None, color: color = None, font: str = None, bold: bool = None,
+            storage: str = None, extra: list = None, color: color = None, font: str = None, bold: bool = None,
             italic: bool = None, underlined: bool = None, strikethrough: bool = None, obfuscated: bool = None,
             insertion: str = None, click_event: dict = None, hover_event: dict = None, dict: dict = None):
 
@@ -78,11 +78,8 @@ class TextComponent(Buildable):
         return self
 
     def build(self, is_extra: bool = False): 
-        translated_parts = []
-        for part in self.parts:
-            translated_parts.append(part.build())
-
-        if is_extra == False:
+        translated_parts = [part.build() for part in self.parts]
+        if not is_extra:
             return json.dumps([""] + translated_parts)
         else:
             return translated_parts

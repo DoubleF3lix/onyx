@@ -77,39 +77,39 @@ class color(enum.Enum):
 
 
 class keybind(enum.Enum):
-    jump = "jump"
-    sneak = "sneak"
-    sprint = "sprint"
-    left = "left"
-    right = "right"
-    back = "back"
-    forward = "forward"
-    attack = "attack"
-    pick_item = "pick_item"
-    use = "use"
-    drop = "drop"
-    hotbar_1 = "hotbar.1"
-    hotbar_2 = "hotbar.2"
-    hotbar_3 = "hotbar.3"
-    hotbar_4 = "hotbar.4"
-    hotbar_5 = "hotbar.5"
-    hotbar_6 = "hotbar.6"
-    hotbar_7 = "hotbar.7"
-    hotbar_8 = "hotbar.9"
-    hotbar_9 = "hotbar.9"
-    load_toolbar_activator = "loadToolbarActivator"
-    save_toolbar_activator = "saveToolbarActivator"
-    player_list = "playerlist"
-    chat = "chat"
-    command = "command"
-    advancements = "advancements"
-    spectator_outlines = "spectatorOutlines"
-    outline_spectators = "spectatorOutlines"
-    screenshot = "screenshot"
-    smooth_camera = "smoothCamera"
-    cinematic_camera = "smoothCamera"
-    fullscreen = "fullscreen"
-    toggle_perspective = "togglePerspective"
+    jump = "key.jump"
+    sneak = "key.sneak"
+    sprint = "key.sprint"
+    left = "key.left"
+    right = "key.right"
+    back = "key.back"
+    forward = "key.forward"
+    attack = "key.attack"
+    pick_item = "key.pick_item"
+    use = "key.use"
+    drop = "key.drop"
+    hotbar_1 = "key.hotbar.1"
+    hotbar_2 = "key.hotbar.2"
+    hotbar_3 = "key.hotbar.3"
+    hotbar_4 = "key.hotbar.4"
+    hotbar_5 = "key.hotbar.5"
+    hotbar_6 = "key.hotbar.6"
+    hotbar_7 = "key.hotbar.7"
+    hotbar_8 = "key.hotbar.9"
+    hotbar_9 = "key.hotbar.9"
+    load_toolbar_activator = "key.loadToolbarActivator"
+    save_toolbar_activator = "key.saveToolbarActivator"
+    player_list = "key.playerlist"
+    chat = "key.chat"
+    command = "key.command"
+    advancements = "key.advancements"
+    spectator_outlines = "key.spectatorOutlines"
+    outline_spectators = "key.spectatorOutlines"
+    screenshot = "key.screenshot"
+    smooth_camera = "key.smoothCamera"
+    cinematic_camera = "key.smoothCamera"
+    fullscreen = "key.fullscreen"
+    toggle_perspective = "key.togglePerspective"
 
 
 class click_event_action(enum.Enum):
@@ -165,3 +165,102 @@ class source_type(enum.Enum):
     block = "block"
     entity = "entity"
     storage = "storage"
+
+
+class difficulty(enum.Enum):
+    peaceful = "peaceful"
+    easy = "easy"
+    normal = "normal"
+    hard = "hard"
+
+
+class experience_type(enum.Enum):
+    levels = "levels"
+    points = "points"
+
+
+class weather_type(enum.Enum):
+    clear = "clear"
+    rain = "rain"
+    thunder = "thunder"
+
+
+class sound_channel(enum.Enum):
+    any = "*"
+    ambient = "ambient"
+    block = "block"
+    hostile = "hostile"
+    master = "master"
+    music = "music"
+    neutral = "neutral"
+    player = "player"
+    record = "record"
+    voice = "voice"
+    weather = "weather"
+
+
+class setblock_mode(enum.Enum):
+    destroy = "destroy"
+    keep = "keep"
+    replace = "replace"
+
+
+class fill_mode(enum.Enum):
+    destroy = "destroy"
+    hollow = "hollow"
+    keep = "keep"
+    outline = "outline"
+    replace = "replace"
+
+
+class clone_mask_mode(enum.Enum):
+    filtered = "filtered"
+    masked = "masked"
+    replace = "replace"
+
+
+class clone_mode(enum.Enum):
+    force = "force"
+    move = "move"
+    normal = "normal"
+
+
+class time_query(enum.Enum):
+    day = "day"
+    daytime = "daytime"
+    gametime = "gametime"
+
+
+class time(enum.Enum):
+    day = "day"
+    midnight = "midnight"
+    night = "night"
+    noon = "noon"
+
+
+class team_attribute(enum.Enum):
+    collision_rule = "collisionRule"
+    color = "color"
+    death_message_visibility = "deathMessageVisibility"
+    display_name = "displayName"
+    friendly_fire = "friendlyFire"
+    nametag_visibility = "nametagVisibility"
+    prefix = "prefix"
+    see_friendly_invisibles = "seeFriendlyInvisibles"
+    suffix = "suffix"
+
+
+class collision_rule(enum.Enum):
+    always = "always"
+    never = "never"
+    push_other_teams = "pushOtherTeams"
+    push_own_team = "pushOwnTeam"
+
+
+class _team_visibility(enum.Enum):
+    always = "always"
+    hide_for_other_teams = "hideForOtherTeams"
+    hide_for_own_team = "hideForOwnTeam"
+    never = "never"
+death_message_visibility = _team_visibility
+nametag_visibility = _team_visibility
