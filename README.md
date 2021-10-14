@@ -1,4 +1,4 @@
-![Onyx Banner](https://doublefelix.cf/images/onyx_banner.png)
+![Onyx Banner](https://doublef3lix.github.io/images/onyx_banner.png)
 
 ## Installation
 The package can be installed with `pip`:
