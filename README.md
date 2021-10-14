@@ -1,7 +1,3 @@
-# ARCHIVED AND DEPCREATED
-Use https://github.com/DoubleF3lix/Allay instead.
-
-
 ## Installation
 The package can be installed with `pip`:
 ```
