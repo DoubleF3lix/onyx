@@ -1,71 +1,75 @@
-from typing import Union
-from onyx.registries import selector_type, gamemode, entity_sort
-from onyx.util import Range
-from onyx.dev_util import dict_to_score_selector, translate, dict_to_advancement_selector
-from onyx.class_types import Buildable
-from nbtlib.tag import Compound
+from .enums import at
+from .handler import Handler, _buildable
 
 
-class Selector(Buildable):
-    def __init__(self, type: selector_type = selector_type.all_entities, advancements: dict = None, 
-                       distance: Union[int, Range] = None, dx: int = None, dy: int = None, dz: int = None, 
-                       gamemode: gamemode = None, level: int = None, limit: int = None, name: str = None,
-                       nbt: Compound = None, predicate: Union[str, list] = None, scores: dict = None,
-                       sort: entity_sort = None, tag: Union[str, list] = None, team: Union[str, list] = None,
-                       x: int = None, y: int = None, z: int = None, x_rotation: Union[int, Range] = None,
-                       y_rotation: Union[int, Range] = None):
+class selector(_buildable):
+    """Defines a selector
 
-        self.type = type
-        self.advancements = advancements
-        self.distance = distance
-        self.dx = dx
-        self.dy = dy
-        self.dz = dz
-        self.gamemode = gamemode
-        self.level = level
-        self.limit = limit
-        self.name = name
-        self.nbt = nbt
-        self.predicate = predicate
-        self.scores = scores
-        self.sort = sort
-        self.tag = tag
-        self.team = team
-        self.x = x
-        self.y = y
-        self.z = z
-        self.x_rotation = x_rotation
-        self.y_rotation = y_rotation
+    Args:
+        selector_type (at): The selector type (@a, @p, etc.).
+        advancements (str, optional): Defaults to None.
+        distance (Union[int, float], optional): Defaults to None.
+        dx (Union[int, float], optional): Defaults to None.
+        dy (Union[int, float], optional): Defaults to None.
+        dz (Union[int, float], optional): Defaults to None.
+        gamemode (mode, optional): Defaults to None.
+        level (int, optional): Defaults to None.
+        limit (int, optional): Defaults to None.
+        name (str, optional): Defaults to None.
+        nbt (str, optional): Defaults to None.
+        predicate (str, optional): Defaults to None.
+        scores (str, optional): Defaults to None.
+        sort (sort, optional): Defaults to None.
+        tag (str, optional): Defaults to None.
+        team (str, optional): Defaults to None.
+        type (str, optional): Defaults to None.
+        x (int, optional): Defaults to None.
+        y (int, optional): Defaults to None.
+        z (int, optional): Defaults to None.
+        x_rotation (Union[int, float], optional): Defaults to None.
+        y_rotation (Union[int, float], optional): Defaults to None.
+    """
+    def __init__(self, selector_type: at, **kwargs):
+        self._selector_type = Handler._translate(selector_type)
+        self._args = {}
+        self._change_args(kwargs)
+
+    def _change_args(self, kwargs):
+        for key, arg in kwargs.items():
+            # Filter out the args that weren't assigned
+            if arg is not None:
+                # Skip over the "self" and "selector_type" arguments
+                if key in {"self", "selector_type"}:
+                    continue
+                elif key == "name":
+                    self._args[key] = f"'{arg}'"
+                # Negated arguments, enum arguments, and any custom arguments are handled here
+                else:
+                    self._args[key] = Handler._translate(arg)
+
+    # Merge the two dictionaries together, with the new one taking priority.
+    def modify(self, **kwargs):
+        """Modify arguments for an existing selector object.
+        """
+        self._args = {**self._args, **kwargs.items()}
+        # Type checking isn't needed since _change_args already provides it
+        self._change_args(self._args)
+
+    # Remove an element. Default arguments aren't provided because then they'd have to specify a value
+    def remove(self, *args):
+        for arg in args:
+            del self._args[arg]
 
     def build(self):
-        advancements, name, scores = None, None, None
+        _selector_args = []
+        for key, value in self._args.items():
+            if isinstance(value, tuple):
+                for arg in value:
+                    _selector_args.append(f"{key}={arg}")
+            else:
+                _selector_args.append(f"{key}={Handler._translate(value)}")
 
-        if self.advancements:
-            advancements = dict_to_advancement_selector(self.advancements)
-
-        if self.name:
-            name = f"'{self.name}'"
-
-        if self.scores:
-            scores = dict_to_score_selector(self.scores)
-
-        output = []
-        for key, item in vars(self).items():
-            if item and key != "type":
-                if key in {"gamemode", "level", "name", "tag", "team", "predicate"} and isinstance(item, list):
-                    for arg in item:
-                        output.append(f"{translate(key)}={translate(arg)}")
-                # This awful special case needs to exist because overwriting the class attributes makes building the selector more than once error out, and copying, overwriting, appending to output, and rewriting the copy back to the class attribute is even worse
-                elif key == "advancements" and advancements:
-                    output.append(f"{translate(key)}={translate(advancements)}")
-                elif key == "name" and name:
-                    output.append(f"{translate(key)}={translate(name)}")
-                elif key == "scores" and scores:
-                    output.append(f"{translate(key)}={translate(scores)}")
-                else:
-                    output.append(f"{translate(key)}={translate(item)}")
-
-        if output:
-            return f"{translate(self.type)}[{', '.join(output)}]"
-        else:
-            return translate(self.type)
+        # Don't include "[]" if no arguments were provided
+        if len(_selector_args) > 0:
+            return f"{self._selector_type}[{', '.join(_selector_args)}]"
+        return f"{self._selector_type}"

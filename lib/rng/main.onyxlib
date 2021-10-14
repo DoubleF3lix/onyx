@@ -1,0 +1,4 @@
+scoreboard players operation $range onyx.rng = $max onyx.rng
+scoreboard players operation $range onyx.rng -= $min onyx.rng
+execute if score $range onyx.rng matches ..-1 run function :datapack_name::lib/rng/wrap_around
+execute if score $range onyx.rng matches 0.. run function :datapack_name::lib/rng/normal_start

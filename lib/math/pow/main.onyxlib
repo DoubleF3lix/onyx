@@ -1,0 +1,4 @@
+scoreboard players remove $exponent onyx.math 1
+scoreboard players operation $output onyx.math = $input onyx.math
+execute if score $exponent onyx.math matches ..1 run scoreboard players operation $output onyx.math = $input onyx.math
+execute unless score $exponent onyx.math matches ..1 run function :datapack_name::lib/math/pow/add_exponent

@@ -1,0 +1,4 @@
+function :datapack_name::lib/rng/lcg
+execute store success score $is_in_range onyx.rng if score $output onyx.rng < $min onyx.rng
+execute if score $is_in_range onyx.rng matches 0 store success score $is_in_range onyx.rng if score $output onyx.rng > $max onyx.rng
+execute unless score $is_in_range onyx.rng matches 0 run function :datapack_name::lib/rng/wrap_around

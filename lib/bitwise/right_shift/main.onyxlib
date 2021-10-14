@@ -1,0 +1,6 @@
+scoreboard players operation $output onyx.bitwise = $input_1 onyx.bitwise
+scoreboard players set $input onyx.math 2
+scoreboard players operation $exponent onyx.math = $input_2 onyx.bitwise
+scoreboard players remove $exponent onyx.math 1
+function :datapack_name::lib/math/pow/main
+scoreboard players operation $output onyx.bitwise /= $output onyx.math

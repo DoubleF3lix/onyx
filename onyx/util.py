@@ -1,17 +1,83 @@
-from typing import Union
-from onyx.class_types import Buildable, Vector3, Vector2, Particle
-from onyx.registries import click_event_action, hover_event_action
-from onyx.split_registries.block import block
-from onyx.split_registries.item import item
-from onyx.split_registries.particle import particle
-from onyx.dev_util import dict_to_block_state, translate
-import nbtlib
-from nbtlib.tag import *
 import json
+from typing import Union
+from nbtlib.tag import *
+from nbtlib import parse_nbt
+
+from .selector import selector
+from .enums import item, action as action_enum, particles, item, block
+from .handler import Handler, _buildable, _position
 
 
-class Range(Buildable):
+class SetFrom(_buildable):
+    """Used with data.modify() when setting from an entity
+
+    Args:
+        target (Union[str, tuple, selector]): The entity that the data should be retrieved from
+        path (str): The data location
+        index (int, optional): [description]. The index of the data. Only use if the path is a list. Defaults to None.
+        container_type (str, optional): Override for container type (entity, storage, or block). If unspecified, the container type will be assumed based off the value for ``target``. Defaults to None.
+    """
+    def __init__(self, target: Union[str, tuple, selector], path: str, index: int = None, container_type: str = None):
+        if container_type:
+            self.container_type = container_type
+        else:
+            if isinstance(target, str):
+                self.container_type = "storage"
+            elif isinstance(target, tuple):
+                self.container_type = "block"
+                self.target = ' '.join(target)
+            elif isinstance(target, selector):
+                self.container_type = "entity"
+                self.target = target.build()
+
+    def build(self):
+        if self.index is not None:
+            return f"{self.index} from {self.container_type} {self.target} {self.path}"
+        else:
+            return f"from {self.container_type} {self.target} {self.path}"
+
+
+class SetTo(_buildable):
+    """Used with data.modify() when setting to a value
+
+    Args:
+        data (str): The value to be set.
+        index (int, optional): The index of a list that should be modified. Only use if the path is a list. Defaults to None.
+    """
+    def __init__(self, data: str, index: int = None):
+        self.data = data
+        self.index = index
+
+    def build(self):
+        if self.index is not None:
+            return f"{self.index} value {self.data}"
+        else:
+            return f"value {self.data}"
+
+
+class Negate(_buildable):
+    """Negates an argument
+
+    Args:
+        arg: The argument to negate
+    """
+    def __init__(self, arg):
+        self.arg = arg
+
+    def build(self):
+        return f"!{Handler._translate(self.arg)}"
+
+
+class Range(_buildable):
+    """Defines a scoreboard range
+
+    Args:
+        min (int, optional): The minimum value the score should be (inclusive). If unspecified, the range will check for all scores equal to or below the maximum. Defaults to None.
+        max (int, optional): The maximum value the score should be (inclusive). If unspecified, the range will check for all scores equal to or below the minimum. Defaults to None.
+    """
     def __init__(self, min: int = None, max: int = None):
+        if min is None and max is None:
+            Handler._warn("'min' and 'max' were not assigned")
         self.min = min
         self.max = max
 
@@ -19,174 +85,345 @@ class Range(Buildable):
         return f"{self.min or ''}..{self.max or ''}"
 
 
-class AbsPos(Buildable, Vector3):
-    def __init__(self, x: int = None, y: int = None, z: int = None):
-        super().__init__("", x, y, z)
+class ClickEvent(_buildable):
+    """Used with JSON strings
 
+    Args:
+        action (action_enum, optional): The action type.
+        value (str, optional): The argument of the action.
+    """
+    def __init__(self, action: action_enum, value: str):
+        # Check if an invalid action was used
+        if Handler._translate(action) in {"show_text", "show_item"}:
+            Handler._warn(f"{Handler._translate(action)} is exclusive to hover_event")
 
-class RelPos(Buildable, Vector3):
-    def __init__(self, x: int = None, y: int = None, z: int = None):
-        super().__init__("~", x, y, z)
-
-
-class LocPos(Buildable, Vector3):
-    def __init__(self, x: int = None, y: int = None, z: int = None):
-        super().__init__("^", x, y, z)
-
-
-class AbsPos2D(Buildable, Vector2):
-    def __init__(self, x: int = None, y: int = None):
-        super().__init__("", x, y)
-
-
-class RelPos2D(Buildable, Vector2):
-    def __init__(self, x: int = None, y: int = None):
-        super().__init__("~", x, y)
-
-
-class AbsRot(Buildable, Vector2):
-    def __init__(self, x: int = None, y: int = None):
-        super().__init__("", x, y)
-
-
-class RelRot(Buildable, Vector2):
-    def __init__(self, x: int = None, y: int = None):
-        super().__init__("~", x, y)
-
-
-class ClickEvent(Buildable):
-    def __init__(self, action: click_event_action, value: str):
-        self.action = translate(action)
+        self.action = Handler._translate(action)
         self.value = value
 
     def build(self):
-        return {"action": self.action, "value": self.value}
+        return {"action": self.action, "contents": self.value}
 
 
-class HoverEvent(Buildable):
-    def __init__(self, action: hover_event_action = None, text: str = None, item_id: item = None, item_tags: dict = None):
-        self.action = translate(action)
+class HoverEvent(_buildable):
+    """Used with JSON strings
+
+    Args:
+        action (action_enum, optional): The action type. Defaults to None.
+        text (str, optional): The text to show on hover. Only used if ``action`` is set to ``show_text``. Defaults to None.
+        item_id (str, optional): The item to show on hover. Only used if ``action`` is set to ``show_item``. Defaults to None.
+        item_tags (dict, optional): The tags the item should have. Defaults to None.
+    """
+    def __init__(self, action: action_enum = None, text: str = None, item_id: str = None, item_tags: dict = None):
+        # Check if an invalid action was used
+        if Handler._translate(action) not in {"show_text", "show_item"}:
+            Handler._warn(f"{Handler._translate(action)} is exclusive to click_event")
+
+        self.action = Handler._translate(action)
         self.text = text
         self.item_id = item_id
         self.item_tags = item_tags
 
     def build(self):
         if self.action == "show_text":
-            return {"action": "show_text", "contents": translate(self.text)}
+            return {"action": "show_text", "contents": Handler._translate(self.text)}
         elif self.action == "show_item":
-            if self.item_tags:
+            if self.item_tags is not None:
                 return {"action": "show_item", "contents": ({"id": self.item_id, "count": Byte(1), "tag": Compound(self.item_tags).snbt()})}
             else:
                 return {"action": "show_item", "contents": ({"id": self.item_id, "count": Byte(1)})}
 
 
-class Item(Buildable):
-    def __init__(self, item_type: item, item_name: "TextComponent" = None):
+class AbsPos(_buildable, _position):
+    """Defines an absolute position (exact coordinates)
+
+    Args:
+        x (Union[int, float])
+        y (Union[int, float])
+        z (Union[int, float])
+
+    Raises:
+        ValueError: Raised when any of the arguments is not a number
+    """
+    def __init__(self, x: Union[int, float], y: Union[int, float], z: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [x, y, z]):
+            raise ValueError("You must supply 3 numbers")
+
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def build(self):
+        return f"{self.x} {self.y} {self.z}"
+
+
+class RelPos(_buildable, _position):
+    """Defines a relative position (relative to an entity, block, etc.)
+
+    Args:
+        x (Union[int, float])
+        y (Union[int, float])
+        z (Union[int, float])
+
+    Raises:
+        ValueError: Raised when any of the arguments is not a number
+    """
+    def __init__(self, x: Union[int, float], y: Union[int, float], z: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [x, y, z]):
+            raise ValueError("You must supply 3 numbers")
+
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def build(self):
+        return f"~{self.x} ~{self.y} ~{self.z}"
+
+
+class LocPos(_buildable, _position):
+    """Defines a local position (relatve to the direction an entity is facing)
+
+    Args:
+        left (Union[int, float])
+        up (Union[int, float])
+        forward (Union[int, float])
+
+    Raises:
+        ValueError: Raised when any of the arguments is not a number
+    """
+    def __init__(self, left: Union[int, float], up: Union[int, float], forward: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [left, up, forward]):
+            raise ValueError("You must supply 3 numbers")
+
+        self.left = left
+        self.up = up
+        self.forward = forward
+
+    def build(self):
+        return f"^{self.left} ^{self.up} ^{self.forward}"
+
+
+class CurrentPos(_buildable, _position):
+    """
+    Args:
+        rotation (bool): Whether or not rotation should be included in this position (~ ~ ~ ~ ~). Defaults to False.
+    """
+    def __init__(self, rotation: bool = False):
+        self.rotation = rotation
+
+    def build(self):
+        if self.rotation is True:
+            return "~ ~ ~ ~ ~"
+        return "~ ~ ~"
+
+
+class AbsRot(_buildable, _position):
+    """Defines an absolute rotation
+
+    Args:
+        y_rot (Union[int, float])
+        x_rot (Union[int, float])
+
+    Raises:
+        ValueError: Raised when any of the arguments is not a number
+        """
+    def __init__(self, y_rot: Union[int, float], x_rot: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [y_rot, x_rot]):
+            raise ValueError("You must supply 2 numbers")
+
+        self.y_rot = y_rot
+        self.x_rot = x_rot
+
+    def build(self):
+        return f"{self.y_rot} {self.x_rot}"
+
+
+class RelRot(_buildable, _position):
+    """Defines a relative rotation (relative to the target's current rotation)
+
+    Args:
+        y_rot (Union[int, float])
+        x_rot (Union[int, float])
+
+    Raises:
+        ValueError: Raised when any of the arguments is not a number
+    """
+    def __init__(self, y_rot: Union[int, float], x_rot: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [y_rot, x_rot]):
+            raise ValueError("You must supply 2 numbers")
+
+        self.y_rot = y_rot
+        self.x_rot = x_rot
+
+    def build(self):
+        return f"~{self.y_rot} ~{self.x_rot}"
+
+
+class Abs2DPos(_buildable, _position):
+    """Defines an absolute position without a y-coordinate
+
+    Args:
+        x_pos (Union[int, float])
+        y_pos (Union[int, float])
+    """
+    def __init__(self, x_pos: Union[int, float], z_pos: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [x_pos, z_pos]):
+            raise ValueError("You must supply 2 numbers")
+
+        self.x_pos = x_pos
+        self.z_pos = z_pos
+
+    def build(self):
+        return f"{self.x_pos} {self.z_pos}"
+
+
+class Rel2DPos(_buildable, _position):
+    """Defines an absolute position without a y-coordinate
+
+    Args:
+        x_pos (Union[int, float])
+        y_pos (Union[int, float])
+    """
+    def __init__(self, x_pos: Union[int, float], z_pos: Union[int, float]):
+        if not all(isinstance(arg, (int, float)) for arg in [x_pos, z_pos]):
+            raise ValueError("You must supply 2 numbers")
+
+        self.x_pos = x_pos
+        self.z_pos = z_pos
+
+    def build(self):
+        return f"~{self.x_pos} ~{self.z_pos}"
+
+
+class Current2DPos(_buildable, _position):
+    @staticmethod
+    def build():
+        return "~ ~"
+
+
+class Item(_buildable):
+    """Item builder
+
+    Args:
+        item_type (item): The item name (stone, brick, etc.)
+        item_name (json_string): The custom name of the item. Defaults to None.
+    """
+    def __init__(self, item_type: item, item_name: "json_string" = None):
         self.type = item_type
         self.set_name(item_name)
         self.lore = None
         self.tags = None
 
-    def set_name(self, item_name: "TextComponent"):
-        if item_name:
-            self.name = json.dumps(translate(item_name))
+    def set_name(self, item_name: "json_string"):
+        """Set the name of the item
+
+        Args:
+            item_name (json_string): The custom name of the item.
+        """
+        if item_name is not None:
+            self.name = json.dumps(Handler._translate(item_name))
         else:
             self.name = None
 
-    def set_lore(self, *lore_lines: "TextComponent"):
-        self.lore = translate(lore_lines, json_dump_elements=True)
+    def set_lore(self, *lore_lines: "json_string"):
+        """Overwrites all the old lore and replaces it with new lore
 
-    def add_lore(self, *lore_lines: "TextComponent"):
-        self.lore.extend(translate(lore_lines, json_dump_elements=True))
+        Args:
+            *lore_lines (json_string): The new lore to set
+        """
+        self.lore = Handler._translate(lore_lines, item=True)
+
+    def add_lore(self, *lore_lines: "json_string"):
+        """Adds to the existing item lore
+
+        Args:
+            *lore_lines (json_string): The new lore to add
+        """
+        self.lore.extend(Handler._translate(lore_lines, item=True))
 
     def build(self):
         item_data = Compound({"display": Compound()})
-        if self.name:
-            item_name = nbtlib.parse_nbt(String(json.dumps(self.name)))
+        if self.name is not None:
+            item_name = parse_nbt(String(json.dumps(self.name)))
             item_data["display"]["Name"] = item_name
-        if self.lore:
-            item_lore = nbtlib.parse_nbt(str(self.lore))
+        if self.lore is not None:
+            item_lore = parse_nbt(str(self.lore))
             item_data["display"]["Lore"] = item_lore
 
         return f"{self.type}{item_data.snbt()}"
 
 
-def verify_optional_argument(particle_type, optional_argument):
-    if particle_type in {"dust", "minecraft:dust"}:
-        if optional_argument is None or len(optional_argument) != 4:
-            raise ValueError(f"'optional_particle_argument' must be set to a tuple of 4 elements with particle type '{particle_type}'")
-    elif particle_type in {"block", "minecraft:block", "falling_dust", "minecraft:falling_dust"}:
-        if optional_argument is None:
-            raise ValueError(f"'optional_particle_argument' must be set to a block with particle type '{particle_type}'")
-    elif particle_type in {"item", "minecraft:item"}:
-        if optional_argument is None:
-            raise ValueError(f"'optional_particle_argument' must be set to an item with particle type '{particle_type}'")
+class Particle(_buildable):
+    """Defines a particle for use in particle command
 
-
-class ParticleNormal(Buildable, Particle):
-    def __init__(self, particle_type: particle, position: Vector3, delta: tuple, speed: float, count: int, optional_particle_argument: Union[tuple, block, item] = None):
-        self.particle_type = translate(particle_type)
-        self.position = translate(position)
-        self.delta = translate(delta)
-        self.speed = translate(speed)
-        self.count = translate(count)
-        self.optional_particle_argument = translate(optional_particle_argument)
-
-        verify_optional_argument(particle_type, optional_particle_argument)
-
-        if self.position is None and self.delta:
-            raise ValueError("'delta' was defined but 'position' was not")
-
-    def build(self):
-        if self.optional_particle_argument:
-            return f"{self.particle_type} {self.optional_particle_argument} {self.position} {self.delta} {self.speed} {self.count}"
-        return f"{self.particle_type} {self.position} {self.delta} {self.speed} {self.count}"
-
-
-class ParticleEntityEffectModified(Buildable, Particle):
-    def __init__(self, particle_type: particle, position: Vector3, RGB: tuple, brightness: int = 128):
-        self.particle_type = translate(particle_type)
-        if self.particle_type not in {"entity_effect", "minecraft:entity_effect", "ambient_entity_effect", "minecraft:ambient_entity_effect"}:
-            raise ValueError("'particle_type' must be either 'entity_effect' or 'ambient_entity_effect'")
-        self.position = translate(position)
-        self.RGB = translate(RGB)
-        self.brightness = translate(brightness)
+    Args:
+        particle_name (particle): The particle type (cloud, barrier, etc.)
+        position (AbsPos, optional): The position of the particle. Defaults to None.
+        delta (AbsPos, optional): The size of the particle area. Defaults to None.
+        speed (int, optional): How quickly the particle vanishes. Defaults to None.
+        count (int, optional): How many particles. Defaults to None.
+        motion (AbsPos, optional): The motion of a particle. Sets the count to 0 and nullifies the ``delta`` parameter. Defaults to None.
+        RGB (tuple, optional): Used for particle ``entity_effect`` and ``ambient_entity_effect``. Defaults to None.
+        dust_color (tuple, optional): The color of the ``dust`` particle. Only specify if ``particle_name`` is set to ``dust``. Defaults to None.
+        dust_size (int, optional): The size of the ``dust`` particle. Only specify if ``dust_color`` is also specified. Defaults to None.
+        block_particle (block, optional): Only specify if ``particle_name`` is ``block``. Defaults to None.
+        item_particle (item, optional): Only specify if ``particle_name`` is ``item``. Defaults to None.
+        note_color (int, optional): Only specify if "``article_name`` is set to ``note``. Defaults to None.
+        color_multiplier (int, optional): Used as an extra modifier for ``RGB`` and ``note_color``. Defaults to None.
+    """
+    def __init__(self, particle_name: particles, position: Union[AbsPos, CurrentPos] = None, delta: AbsPos = None, speed: int = None, count: int = None, motion: AbsPos = None,
+                 RGB: tuple = None, dust_color: tuple = None, dust_size: int = None, block_particle: block = None, item_particle: item = None,
+                 note_color: int = None, color_multiplier: int = None):
+        self.particle_name = Handler._translate(particle_name)
+        self.position = Handler._translate(position)
+        self.delta = Handler._translate(delta)
+        self.speed = Handler._translate(speed)
+        self.count = Handler._translate(count)
+        self.motion = Handler._translate(motion)
+        self.RGB = Handler._translate(RGB)
+        self.dust_color = Handler._translate(dust_color)
+        self.dust_size = Handler._translate(dust_size)
+        self.block_particle = Handler._translate(block_particle)
+        self.item_particle = Handler._translate(item_particle)
+        self.note_color = Handler._translate(note_color)
+        self.color_multiplier = Handler._translate(color_multiplier)
 
     def build(self):
-        return f"{self.particle_type} {self.position} {self.RGB} {self.brightness} 0" # count
+        if not Handler._is_none(self.motion):
+            self.count = 0
+            self.delta = self.motion
 
+        if self.particle_name in {"entity_effect", "ambient_entity_effect"} and not Handler._is_none(self.RGB):
+            if self.color_multiplier is None:
+                Handler._warn("'color_multiplier' not specified with 'RGB'. Assuming value of '1'")
+                self.color_multiplier = 1
+            # <particle> <position> <R> <G> <B> <E> <count>
+            output = f"{self.particle_name} {self.position} {self.RGB} {self.color_multiplier} 0"
+        elif not Handler._is_none(self.block_particle):
+            # <particle> <block> <position> <dx> <dy> <dz> <speed> <count>
+            output = f"{self.particle_name} {self.block_particle} {self.position} {self.delta} {self.speed} {self.count}"
+        elif not Handler._is_none(self.item_particle):
+            # <particle> <item> <position> <dx> <dy> <dz> <speed> <count>
+            output = f"minecraft:item {self.item_particle} {self.position} {self.delta} {self.speed} {self.count}"
+        elif not Handler._is_none(self.dust_color):
+            if self.dust_size is None:
+                self.dust_size = 1.0
+            # <particle> <color> <particle_size> <position> <dx> <dy> <dz> <speed> <count>
+            output = f"minecraft:dust {self.dust_color} {self.dust_size} {self.position} {self.delta} {self.speed} {self.count}"
+        elif not Handler._is_none(self.note_color):
+            if Handler._is_none(self.color_multiplier):
+                Handler._warn("'color_multiplier' not specified with 'note_color'. Assuming value of '1'")
+                self.color_multiplier = 1
+            # <particle> <position> <note_color> <dy(0)> <dz(0)> <speed> <count(0)>
+            output = f"minecraft:note {self.position} {self.note_color} {self.color_multiplier} 0"
+        else:
+            if Handler._is_none(self.position):
+                Handler._warn("'position' was not specified")
+            if Handler._is_none(self.delta):
+                Handler._warn("'delta' was not specified")
+            if Handler._is_none(self.speed):
+                Handler._warn("'speed' was not specified")
+            if Handler._is_none(self.count):
+                Handler._warn("'count' was not specified")
+            output = f"{self.particle_name} {self.position} {self.delta} {self.speed} {self.count}"
 
-class ParticleMotion(Buildable, Particle):
-    def __init__(self, particle_type: particle, position: Vector3, motion: tuple, motion_multiplier: Union[int, float], optional_particle_argument: Union[tuple, block, item] = None):
-        self.particle_type = translate(particle_type)
-        self.position = translate(position)
-        self.motion = translate(motion)
-        self.motion_multiplier = translate(motion_multiplier)
-        self.optional_particle_argument = translate(optional_particle_argument)
-
-        verify_optional_argument(particle_type, optional_particle_argument)
-
-    def build(self):
-        if self.optional_particle_argument:
-            return f"{self.particle_type} {self.optional_particle_argument} {self.position} {self.motion} {self.motion_multiplier} 0"
-        return f"{self.particle_type} {self.position} {self.motion} {self.motion_multiplier} 0" # count
-
-
-class ParticleNoteModified(Buildable, Particle):
-    def __init__(self, position: Vector3, color_modifier: int, color_multiplier: int):
-        self.position = translate(position)
-        self.color_modifier = translate(color_modifier)
-        self.color_multiplier = translate(color_multiplier)
-
-    def build(self):
-        return f"minecraft:note {self.position} {self.color_modifier} 0 0 {self.color_multiplier} 0" # dy, dz, and count
-
-
-class BlockPredicate(Buildable):
-    def __init__(self, type: block, block_states: dict = None, nbt: Compound = None):
-        self.block = block
-        self.block_states = block_states
-        self.nbt = nbt
-
-    def build(self):
-        return f"{translate(block)}{translate(dict_to_block_state(self.block_states)) if self.block_states else ''}{translate(self.nbt) if self.nbt else ''}"
+        return output

@@ -1,203 +1,250 @@
-from onyx.commands import Commands
-import beet
-from onyx.class_types import Vector3, Vector2
-from onyx.scoreboard import Player
-from onyx.dev_util import translate
-from onyx.selector import Selector
-from onyx.registries import axis, anchor, bossbar_location, dimension, data_type, execute_blocks_mask, source_type
-from typing import Callable, Union
+import os
+from typing import Union
+from .enums import axis, anchor, dimension, block, container_type, score_operator, data_type, store_type, bossbar_trait
+from .selector import selector
+from .handler import Handler
+from .util import AbsPos, LocPos, RelPos, CurrentPos, AbsRot, RelRot
+from .scoreboard import Player
 
 
-class BaseCondition:
-    def __init__(self, parent, prefix):
-        self.parent = parent
-        self.prefix = prefix
-
-    def _add_args(self, type, *args):
-        self.parent.output.append(f"{self.prefix} {type} {' '.join(translate(arg) for arg in args)}")
-
-    def block(self, position: Vector3, value: str):
-        self._add_args("block", position, value)
-        return self.parent
-
-    def blocks(self, corner_1: Vector3, corner_2: Vector3, end_location: Vector3, mask: execute_blocks_mask):
-        self._add_args("blocks", corner_1, corner_2, end_location, mask)
-        return self.parent
-
-    def data(self, source_type: source_type, location: Union[str, Vector3, Selector], path: str):
-        self._add_args("data", source_type, location, path)
-        return self.parent
-
-    def entity(self, target: Selector):
-        self._add_args("entity", target)
-        return self.parent
-
-    # TODO predicate types
-    def predicate(self, predicate: str):
-        self._add_args("predicate", predicate)
-        return self.parent
-
-    def score(self, expression):
-        self._add_args("score", expression.build()) 
-        return self.parent
-
-
-class If(BaseCondition):
-    def __init__(self, parent):
-        super().__init__(parent, "if")
-
-
-class Unless(BaseCondition):
-    def __init__(self, parent):
-        super().__init__(parent, "unless")
-
-
-class BaseStore:
-    def __init__(self, parent, prefix):
-        self.parent = parent
-        self.prefix = prefix
-
-    def _add_args(self, type, *args):
-        self.parent.output.append(f"store {self.prefix} {type} {' '.join(str(translate(arg)) for arg in args)}")
-
-    def block(self, location: Vector3, path: str, data_type: data_type, scale: Union[int, float]):
-        self._add_args("block", location, path, data_type, scale)
-        return self.parent
-
-    # TODO bossbar linking (get namespace from object)
-    def bossbar(self, namespace: str, store_location: bossbar_location):
-        self._add_args("bossbar", namespace, store_location)
-        return self.parent
-
-    def entity(self, targets: Selector, path: str, data_type: data_type, scale: Union[int, float]):
-        self._add_args("entity", targets, path, data_type, scale)
-        return self.parent
-
-    def score(self, target: Player):
-        self._add_args("score", target)
-        return self.parent
-
-    def storage(self, location: str, path: str, data_type: data_type, scale: Union[int, float]):
-        self._add_args("storage", location, path, data_type, scale)
-        return self.parent
-
-
-class Result(BaseStore):
-    def __init__(self, parent):
-        super().__init__(parent, "result")
-
-
-class Success(BaseStore):
-    def __init__(self, parent):
-        super().__init__(parent, "success")
-
-
-class Store:
-    def __init__(self, parent):
-        self.result = Result(parent)
-        self.success = Success(parent)
-
-
-class Execute:
+# Each method returns self to allow for method chaining
+# Method chaining allows execute statements to be reused multiple times
+class execute:
     def __init__(self):
-        self.if_ = If(self)
-        self.unless = Unless(self)
-        self.store = Store(self)
+        self.output = "execute "
 
-        self.output = []
-        self.differentiator = 0
+        # Save the old function path
+        self.old_func = Handler._active_func
+        self.old_mcfunc = Handler._active_mcfunc_path
 
     def __enter__(self):
-        # Copy the old function contents and make a new object for the new function
-        self.old_function_contents = Commands.function_contents
-        Commands.function_contents = []
-        self.function_object = beet.Function([])
+        # Call the new function and save all the old commands
+        # Get the current function path without the function file itself
+        functionless_path = os.path.dirname(Handler._active_func)
+        if functionless_path.endswith("\\."):
+            functionless_path = functionless_path[:-1]
+        function_name = os.path.basename(os.path.normpath(Handler._active_func))
+        function_name_extensionless = os.path.splitext(function_name)[0]
+        differentiator = Handler._get_differentiator()
 
-        # Iterate to get a unique differentiator
-        # If you are using more than 65,536 execute statements in one function, you need some serious help and a gamerule command
-        for q in range(1, 65536):
-            # Stop when it finds an unused number
-            if not Commands.active_function + f"/generated{q}" in Commands.pack_object.pack_object.functions:
-                self.new_function_path = Commands.active_function + f"/generated{q}"
-                self.old_active_function = Commands.active_function
-                Commands.active_function = self.new_function_path
-                break
-
-        """ 
-        for q in range(1, 65536):
-            # Stop when it finds an unused number
-            if not Commands.active_function + f"/generated{q}" in Commands.pack_object.pack_object.functions:
-                # If the function is already in a generated block
-                if re.match(".*\/generated\d+$", Commands.active_function):
-                    # Remove all numbers at the end
-                    self.new_function_path = Commands.active_function[:-get_integer_count_at_string_end(Commands.active_function)] + str(q + 1)
-                # If the function is not already in a generated block
-                else:
-                    self.new_function_path = Commands.active_function + f"/generated{q}"
-                self.old_active_function = Commands.active_function
-                Commands.active_function = self.new_function_path
-                break
-        """
-        
-        # Contents of context manager are run, then __exit__ is called
-
-    def __exit__(self, exception_type, exception_value, traceback):
-        self.function_object.lines.extend(Commands.function_contents)
-        Commands.pack_object.pack_object[self.new_function_path] = self.function_object
-        Commands.function_contents = self.old_function_contents
-        Commands.active_function = self.old_active_function
-        Commands.push(f"execute {self.build()} run function {self.new_function_path}")
-
-    def run(self, command: Callable):
-        return Commands.push(f"execute {self.build()} run {translate(command)}")
-
-    def align(self, axes: Union[axis, tuple]):
-        if isinstance(axes, (list, tuple)):
-            axes = "".join(translate(axis) for axis in axes)
+        # Add "generated" to the mcfunction path
+        Handler._active_mcfunc_path = Handler._active_mcfunc_path.split("/")
+        if len(Handler._active_mcfunc_path) > 1:
+            Handler._active_mcfunc_path.insert(-1, "generated")
+            Handler._active_mcfunc_path[-1] = Handler._active_mcfunc_path[-1] + differentiator
         else:
-            axes = translate(axes)
-        self.output.append(f"align {translate(axes)}")
-        return self
-    
-    def anchored(self, anchor: anchor):
-        self.output.append(f"anchored {translate(anchor)}")
+            Handler._active_mcfunc_path = "".join(Handler._active_mcfunc_path).split(":")
+            del Handler._active_mcfunc_path[-1]
+            Handler._active_mcfunc_path[0] = Handler._active_mcfunc_path[0] + ":"
+            Handler._active_mcfunc_path.append("generated")
+            Handler._active_mcfunc_path.append(function_name_extensionless + differentiator)
+
+        Handler._active_mcfunc_path = "/".join(Handler._active_mcfunc_path).replace(":/", ":")
+
+        Handler._cmds.append(f"{self.output}run function {Handler._active_mcfunc_path}")
+        self.old_cmds = Handler._cmds
+        Handler._cmds = []
+
+        os.makedirs(os.path.join(functionless_path, "generated"), exist_ok=True)
+        Handler._active_func = os.path.join(functionless_path, "generated", function_name_extensionless + differentiator + ".mcfunction").replace("\\.\\", "\\")
+
+    def __exit__(self, excpt_type, excpt_value, traceback):
+        # Write the commands to the new file
+        Handler._write_function()
+        # Restore the old function settings
+        Handler._active_func = self.old_func
+        Handler._active_mcfunc_path = self.old_mcfunc
+        Handler._cmds = self.old_cmds
+
+    def align(self, *args: axis):
+        """
+        Args:
+            *args (axis): The axes to align with
+        """
+        axes = []
+        for arg in args:
+            if Handler._translate(arg) not in args:
+                axes.append(Handler._translate(arg))
+        self.output += f"align {''.join(axes)}"
         return self
 
-    def as_(self, target: Selector):
-        self.output.append(f"as {translate(target)}")
+    def anchored(self, anchor_point: anchor):
+        """
+        Args:
+            anchor_point (anchor): The anchor point (feet, eyes)
+        """
+        self.output += f"anchored {Handler._translate(anchor_point)} "
         return self
 
-    def at(self, target: Selector):
-        self.output.append(f"at {translate(target)}")
+    def As(self, entity: selector):
+        """"as" is a reserved keyword
+
+        Args:
+            entity (selector): The entity to execute as
+        """
+        self.output += f"as {Handler._translate(entity)} "
         return self
 
-    def as_at(self, target: Selector):
-        self.output.append(f"as {translate(target)} at @s")
+    def at(self, entity: selector):
+        """
+        Args:
+            entity (selector): The entity to execute at
+        """
+        self.output += f"at {Handler._translate(entity)} "
         return self
 
-    def facing(self, target: Union[Selector, Vector3], anchor: anchor = anchor.eyes):
-        if not isinstance(target, Vector3):
-            target = f"entity {translate(target)} {translate(anchor)}"
-        self.output.append(f"facing {translate(target)}")
+    def as_at(self, entity: selector):
+        """A combination of ``As()`` and ``at()``
+        Args:
+            entity (selector): The entity to execute as and at
+        """
+        self.output += f"as {Handler._translate(entity)} at @s "
         return self
 
-    def in_(self, dimension: dimension):
-        self.output.append(f"in {translate(dimension)}")
+    def facing(self, entity: selector = None, pos: Union[AbsPos, LocPos, RelPos, CurrentPos] = None):
+        """
+        Args:
+            entity (selector, optional): The entity to face. Defaults to None.
+            pos (Union[AbsPos, LocPos, RelPos, CurrentPos], optional): The block to face. Defaults to None.
+        """
+        if entity is not None:
+            if pos is not None:
+                Handler._warn("Both 'entity' and 'pos' were specified. Ignoring 'pos'.")
+            self.output += f"facing entity {Handler._translate(entity)} "
+        elif pos is not None:
+            self.output += f"facing {Handler._translate(pos)} "
+        else:
+            Handler._warn("Neither 'entity' nor 'pos' were specified. Ignoring.")
         return self
 
-    def positioned(self, position: Union[Vector3, Selector]):
-        if not isinstance(position, Vector3):
-            position = f"as {translate(position)}"
-        self.output.append(f"positioned {translate(position)}")
+    def In(self, dimension_name: Union[dimension, str]):
+        """"in" is a reserved keyword
+
+        Args:
+            dimension_name (dimension): The dimension to execute in
+        """
+        self.output += f"in {Handler._translate(dimension_name)} "
         return self
 
-    def rotated(self, rotation: Union[Vector2, Selector]):
-        # It's an entity
-        if not isinstance(rotation, Vector2):
-            rotation = f"as {translate(rotation)}"
-        self.output.append(f"rotated {translate(rotation)}")
+    def positioned(self, pos: Union[AbsPos, LocPos, RelPos, CurrentPos]):
+        """
+        Args:
+            pos (Union[AbsPos, LocPos, RelPos, CurrentPos]): The position to execute in
+        """
+        self.output += f"positioned {Handler._translate(pos)} "
         return self
 
-    # TODO Make schemas for this
-    def build(self):
-        return ' '.join(self.output)
+    def rotated(self, entity: selector = None, rot: Union[AbsRot, RelRot] = None):
+        """
+        Args:
+            entity (selector, optional): [description]. Defaults to None.
+            rot (Union[AbsRot, RelRot], optional): [description]. Defaults to None.
+        """
+        if entity is not None:
+            if rot is not None:
+                Handler._warn("Both 'entity' and 'rot' specified. Ignoring 'rot'.")
+            self.output += f"rotated as {Handler._translate(entity)} "
+        elif rot is not None:
+            self.output += f"rotated {Handler._translate(rot)} "
+        else:
+            Handler._warn("Neither 'entity' nor 'rot' were specified. Ignoring.")
+        return self
+
+    def if_block(self, position: Union[AbsPos, RelPos, LocPos, CurrentPos], block: Union[block, str]):
+        self._multi_block("if", position, block)
+        return self
+
+    def unless_block(self, position: Union[AbsPos, RelPos, LocPos, CurrentPos], block: Union[block, str]):
+        self._multi_block("unless", position, block)
+        return self
+
+    def if_blocks_match(self, corner1: Union[AbsPos, RelPos, LocPos, CurrentPos], corner2: Union[AbsPos, RelPos, LocPos, CurrentPos], location: Union[AbsPos, RelPos, LocPos, CurrentPos], include_air: bool = False):
+        self._multi_blocks("if", corner1, corner2, location, include_air)
+        return self
+
+    def unless_blocks_match(self, corner1: Union[AbsPos, RelPos, LocPos, CurrentPos], corner2: Union[AbsPos, RelPos, LocPos, CurrentPos], location: Union[AbsPos, RelPos, LocPos, CurrentPos], include_air: bool = False):
+        self._multi_blocks("unless", corner1, corner2, location, include_air)
+        return self
+
+    def if_data(self, container_type: container_type, location: Union[selector, AbsPos, RelPos, LocPos, CurrentPos, str], path: str):
+        self._multi_data("if", container_type, location, path)
+        return self
+
+    def unless_data(self, container_type: container_type, location: Union[selector, AbsPos, RelPos, LocPos, CurrentPos, str], path: str):
+        self._multi_data("unless", container_type, location, path)
+        return self
+
+    def if_entity(self, entity: selector):
+        self._multi_entity("if", entity)
+        return self
+
+    def unless_entity(self, entity: selector):
+        self._multi_entity("unless", entity)
+        return self
+
+    def if_predicate(self, predicate: str):
+        self._multi_predicate("if", predicate)
+        return self
+
+    def unless_predicate(self, predicate: str):
+        self._multi_predicate("unless", predicate)
+        return self
+
+    def if_score(self, score: Player, operator: score_operator, value: Union[int, Player]):
+        self._multi_score("if", score, operator, value)
+        return self
+
+    def unless_score(self, score: Player, operator: score_operator, value: Union[int, Player]):
+        self._multi_score("unless", score, operator, value)
+        return self
+
+    def store_block(self, store_type: store_type, position: Union[AbsPos, RelPos, LocPos, CurrentPos], path: str, data_type: data_type, scale: int = 1):
+        self.output += f"store {Handler._translate(store_type)} block {Handler._translate(position)} {Handler._translate(path)} {Handler._translate(data_type)} {Handler._translate(scale)} "
+
+    def store_bossbar(self, store_type: store_type, bossbar_id: str, attribute: bossbar_trait):
+        if Handler._translate(attribute) not in {"max", "value"}:
+            Handler._warn("Invalid value for 'attribute' specified. Assuming 'value'.")
+            attribute = "value"
+        self.output += f"store {Handler._translate(store_type)} bossbar {Handler._translate(bossbar_id)} {Handler._translate(attribute)} "
+
+    def store_entity(self, store_type: store_type, target: selector, path: str, data_type: data_type, scale: int = 1):
+        self.output += f"store {Handler._translate(store_type)} entity {Handler._translate(target)} {Handler._translate(path)} {Handler._translate(data_type)} {Handler._translate(scale)} "
+
+    def store_score(self, store_type: store_type, score: Player, objective: str = None):
+        if objective is None:
+            objective = score.scoreboard
+            score = score.name
+        self.output += f"store {Handler._translate(store_type)} score {Handler._translate(score)} {Handler._translate(objective)} "
+
+    def store_storage(self, store_type: store_type, location: str, path: str, data_type: data_type, scale: int = 1):
+        self.output += f"store {Handler._translate(store_type)} storage {Handler._translate(location)} {Handler._translate(path)} {Handler._translate(data_type)} {Handler._translate(scale)} "
+
+    def _multi_block(self, type, position, block):
+        self.output += f"{type} block {Handler._translate(position)} {Handler._translate(block)} "
+
+    def _multi_blocks(self, type, corner1, corner2, location, include_air):
+        if include_air is True:
+            mask_mode = "all"
+        else:
+            mask_mode = "masked"
+        self.output += f"{type} blocks {Handler._translate(corner1)} {Handler._translate(corner2)} {Handler._translate(location)} {Handler._translate(mask_mode)} "
+
+    def _multi_data(self, type, container_type, location, path):
+        self.output += f"{type} data {Handler._translate(container_type)} {Handler._translate(location)} {Handler._translate(path)} "
+
+    def _multi_entity(self, type, entity):
+        self.output += f"{type} entity {Handler._translate(entity)} "
+
+    def _multi_predicate(self, type, predicate):
+        self.output += f"{type} predicate {Handler._translate(predicate)} "
+
+    def _multi_score(self, type, score, operator, value):
+        if Handler._translate(operator) != "matches":
+            if isinstance(value, int):
+                Handler._add_scoreboard("onyx.const")
+                Handler._add_to_init(f"scoreboard players set {value} onyx.const {value}")
+                self.output += f"{type} score {Handler._translate(score.name)} {Handler._translate(score.scoreboard)} {Handler._translate(operator)} {Handler._translate(value)} onyx.const "
+            else:
+                self.output += f"{type} score {Handler._translate(score.name)} {Handler._translate(score.scoreboard)} {Handler._translate(operator)} {Handler._translate(value.name)} {Handler._translate(value.scoreboard)} "
+        else:
+            self.output += f"{type} score {Handler._translate(score.name)} {Handler._translate(score.scoreboard)} {Handler._translate(operator)} {Handler._translate(value)} "

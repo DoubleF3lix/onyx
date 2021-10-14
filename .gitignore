@@ -5,7 +5,6 @@ onyx_mclib.egg-info
 **.bat
 **.txt
 **.toml
-Onyx Testing Data Pack/
 build/
 dist/
 build.bat

@@ -1,0 +1,3 @@
+scoreboard players operation #seed onyx.rng *= #multiplier onyx.rng
+scoreboard players add #seed onyx.rng 12345
+scoreboard players operation $output onyx.rng = #seed onyx.rng

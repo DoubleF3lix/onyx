@@ -1,0 +1,7 @@
+execute if score #current_levels onyx.xp_points matches 17..31 run scoreboard players operation #temp1 onyx.xp_points *= #temp1 onyx.xp_points 
+execute if score #current_levels onyx.xp_points matches 17..31 run scoreboard players operation #temp1 onyx.xp_points *= $25 onyx.const
+execute if score #current_levels onyx.xp_points matches 17..31 run scoreboard players operation #temp1 onyx.xp_points /= $10 onyx.const
+execute if score #current_levels onyx.xp_points matches 17..31 run scoreboard players operation #temp2 onyx.xp_points *= $405 onyx.const
+execute if score #current_levels onyx.xp_points matches 17..31 run scoreboard players operation #temp2 onyx.xp_points /= $10 onyx.const
+execute if score #current_levels onyx.xp_points matches 17..31 run scoreboard players operation #temp1 onyx.xp_points -= #temp2 onyx.xp_points
+execute if score #current_levels onyx.xp_points matches 17..31 run scoreboard players operation #temp1 onyx.xp_points += $360 onyx.const
