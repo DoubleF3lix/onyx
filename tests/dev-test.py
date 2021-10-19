@@ -1,4 +1,5 @@
 import json
+import os
 
 import onyx
 from nbtlib.tag import *
@@ -20,14 +21,20 @@ class DataPack(onyx.DataPack):
         self.after_file_check()
 
     def after_file_check(self):
-        with open("Onyx Testing Data Pack\\pack.mcmeta", "r") as infile:
+        src = os.path.join(
+            os.path.dirname(os.path.dirname(onyx.__file__)), "Onyx Testing Data Pack"
+        )
+        with open(
+            os.path.join(src, "pack.mcmeta"),
+            "r",
+        ) as infile:
             assert (
                 infile.read()
                 == """{\n  "pack": {\n    "pack_format": 7,\n    "description": "Data Pack"\n  }\n}\n"""
             )
 
         with open(
-            "Onyx Testing Data Pack\\data\\testing\\functions\\commands.mcfunction", "r"
+            os.path.join(src, "data\\testing\\functions\\commands.mcfunction"), "r"
         ) as infile:
             assert (
                 infile.read()
@@ -35,7 +42,7 @@ class DataPack(onyx.DataPack):
             )
 
         with open(
-            "Onyx Testing Data Pack\\data\\testing\\functions\\execute.mcfunction", "r"
+            os.path.join(src, "data\\testing\\functions\\execute.mcfunction"), "r"
         ) as infile:
             assert (
                 infile.read()
@@ -43,7 +50,9 @@ class DataPack(onyx.DataPack):
             )
 
         with open(
-            "Onyx Testing Data Pack\\data\\testing\\functions\\scoreboard_operators.mcfunction",
+            os.path.join(
+                src, "data\\testing\\functions\\scoreboard_operators.mcfunction"
+            ),
             "r",
         ) as infile:
             assert (
@@ -52,7 +61,7 @@ class DataPack(onyx.DataPack):
             )
 
         with open(
-            "Onyx Testing Data Pack\\data\\testing\\advancements\\advancement.json", "r"
+            os.path.join(src, "data\\testing\\advancements\\advancement.json"), "r"
         ) as infile:
             assert infile.read() == "{}\n"
 
