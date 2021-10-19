@@ -23,7 +23,8 @@ class DataPack(onyx.DataPack):
     def after_file_check(self):
         print(os.getcwd())
         src = os.path.join(
-            os.path.dirname(os.path.dirname(onyx.__file__)), "Onyx Testing Data Pack"
+            os.path.dirname(os.path.dirname(os.path.dirname(onyx.__file__))),
+            "Onyx Testing Data Pack",
         )
         with open(
             os.path.join(src, "pack.mcmeta"),
@@ -35,7 +36,8 @@ class DataPack(onyx.DataPack):
             )
 
         with open(
-            os.path.join(src, "data\\testing\\functions\\commands.mcfunction"), "r"
+            os.path.join(src, "data", "testing", "functions", "commands.mcfunction"),
+            "r",
         ) as infile:
             assert (
                 infile.read()
@@ -43,7 +45,7 @@ class DataPack(onyx.DataPack):
             )
 
         with open(
-            os.path.join(src, "data\\testing\\functions\\execute.mcfunction"), "r"
+            os.path.join(src, "data", "testing", "functions", "execute.mcfunction"), "r"
         ) as infile:
             assert (
                 infile.read()
@@ -52,7 +54,7 @@ class DataPack(onyx.DataPack):
 
         with open(
             os.path.join(
-                src, "data\\testing\\functions\\scoreboard_operators.mcfunction"
+                src, "data", "testing", "functions", "scoreboard_operators.mcfunction"
             ),
             "r",
         ) as infile:
@@ -62,7 +64,8 @@ class DataPack(onyx.DataPack):
             )
 
         with open(
-            os.path.join(src, "data\\testing\\advancements\\advancement.json"), "r"
+            os.path.join(src, "data", "testing", "advancements", "advancement.json"),
+            "r",
         ) as infile:
             assert infile.read() == "{}\n"
 
