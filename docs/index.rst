@@ -5,22 +5,14 @@ onyx
    :maxdepth: 2
 
    bossbar
+   class_types
    commands
-   data
-   datapack
-   delay
-   effect
-   enums
+   dev_util
    execute
-   experience
-   json_string
    pack_manager
-   recipe
-   schedule
+   registries
+   split_registries
    scoreboard
    selector
-   tag
-   team
-   title
+   text_component
    util
-   worldborder

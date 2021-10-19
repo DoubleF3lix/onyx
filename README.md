@@ -1,55 +1,34 @@
-## Installation
-The package can be installed with `pip`:
-```
-pip install onyx-mclib
-```
+# Onyx
+A python library to create minecraft data packs
+
+## Documentation
+You can view the documentation [here](https://doublef3lix.github.io/onyx/index.html).
 
 ## Getting Started
-First, you'll need to define your datapack object. This can be done with `pack = pack(file_path)`. Now you can get started defining functions.
+First, install the package with `pip install onyx-mclib`.
+Next, create a python script and import onyx. It is also recommended you import all of `nbtlib.tag` like so: `from nbtlib.tag import *`.
 
-A basic function should look something like this:
+Here's a sample script to get you started:
 ```python
-from onyx import *
-pack = pack(file_path)
+import onyx
 
-main = pack.function("function/path", "function_name")
-with main:
-    say("Hello, World!")
-```
-You can make a function run every tick by using `pack.function("function_path", "function_name", loop=True)`.
+class MyPack(onyx.DataPack):
+    def __init__(self):
+        super().__init__("My data pack name")
 
-## Selectors
-Selectors are defined very similar to the normal game, and are done like so:
-```python
-alive_players_in_arena = selector(at.all_players, tag="alive", y=0, dy=63)
-```
-Onyx will automatically convert types, so if you don't want to define a selector for something simple, you can just pass in `"@a"` instead of `selector(at.all_players)`.
+        self.function("namespace:function", self.function_obj)
 
-## JSON Strings
-JSON strings (also known as text-components) have a builder design. They can be chained too, to seperate components with differing elements.
-```python
-text = json_string().component("Hello, ").component(text="World!", color=color.gold, bold=True, italic=True)
-tellraw("@a", text)
+        self.generate()
+
+    def function_obj(self):
+        onyx.commands.say("Hello, World!")
+
+MyPack()
 ```
 
-## See also
-Discord: [https://discord.gg/NcztW9T](https://discord.gg/NcztW9T)  
-PyPi: [https://pypi.org/project/onyx-mclib](https://pypi.org/project/onyx-mclib)  
-GitHub: [https://github.com/Double-Felix/Onyx](https://github.com/Double-Felix/Onyx)
-
-
-# Credits
-Language Design:
-* [Arcensoth](https://github.com/Arcensoth) (Design Ideas and Feedback, Implementation Ideas)
-* [fizzy](https://github.com/vberlier) (Creator of [nbtlib](https://github.com/vberlier/nbtlib), which was used to implement SNBT, and [mudkip](https://github.com/vberlier/mudkip), which was used to generate the docs)
-* Lue (Design Feedback, Implementation Ideas)
-* Not A2 (Design Feedback)
-* nphhpn (Feature Suggestions, Design Feedback, Implementation Ideas)
-* [PeerHeer](https://github.com/PeerHeer) (Feature Suggestions, Design Ideas and Feedback, Implemetation Assistance)
-* [Princess](https://github.com/noglass) (Design Feedback)
-* [Ravbug](https://www.ravbug.com) (Design Feedback, Implementation Ideas)
-* rx (Feature Suggestions, Design Feedback and Ideas)
-* SirBenet (Design Ideas and Feedback, Implementation Ideas)
-* the der discohund (Design Ideas, Implementation Ideas)
-* TheMrZZ (Design Ideas)
-* vdvman1 (Design Feedback, Implementation Assistance, Creator of [Phi](https://github.com/MinecraftPhi/MinecraftPhi-modules), which was almost completely copied for use in the `bitwise` and `rng` libraries)
+## Credits
+* [fizzy/vberlier](https://github.com/vberlier) - Creator of [nbtlib](https://github.com/vberlier/nbtlib), [beet](https://github.com/mcbeet/beet), and [mudkip](https://github.com/vberlier/mudkip), helped walk me through using GitHub actions
+* Lue, [fizzy/vberlier](https://github.com/vberlier) - Helping me unscrew git
+* Arcensoth, rx, vdvman1 - Library design help
+* Jayfin, Lue, lolad/lolgeny, MulverineX, Speedy2025 - Motivating me to work on this project after nearly abandoning it
+* You - For using this (hopefully, heh)
