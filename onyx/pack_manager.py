@@ -400,11 +400,16 @@ class DataPack(Stringable):
                 return_values["zip_object"] = zip
 
         if print_output_path:
-            print(f"Data pack {self.pack_data['name']} generated in '{output_path}'")
+            if not only_generate_zip_object:
+                print(
+                    f"Data pack {self.pack_data['name']} generated at '{output_path}{'.zip' if zipped else ''}'"
+                )
+            else:
+                print("Data pack generated as ZipFile object")
 
         if print_generation_time:
             print(
-                f"Pack generated in {round(return_values['generation_time'], 6)} seconds"
+                f"Data pack generated in {round(return_values['generation_time'], 6)} seconds"
             )
 
         return return_values

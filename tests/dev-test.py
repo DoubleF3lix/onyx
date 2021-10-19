@@ -17,7 +17,7 @@ class DataPack(onyx.DataPack):
 
         self.generate(print_generation_time=True)
 
-        # self.after_file_check()
+        self.after_file_check()
 
     def after_file_check(self):
         with open("Onyx Testing Data Pack\\pack.mcmeta", "r") as infile:
