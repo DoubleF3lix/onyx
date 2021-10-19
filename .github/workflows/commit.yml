@@ -1,8 +1,6 @@
-name: Commit
+name: Commit or Pull Request
 
-on:
-  push:
-    branches: [main]
+on: [push, pull_request]
 
 jobs:
   main:
