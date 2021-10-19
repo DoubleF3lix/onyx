@@ -28,7 +28,6 @@ MyPack()
 
 ## Credits
 * [fizzy/vberlier](https://github.com/vberlier) - Creator of [nbtlib](https://github.com/vberlier/nbtlib), [beet](https://github.com/mcbeet/beet), and [mudkip](https://github.com/vberlier/mudkip), helped walk me through using GitHub actions
-* Lue, [fizzy/vberlier](https://github.com/vberlier) - Helping me unscrew git
 * Arcensoth, rx, vdvman1 - Library design help
 * Jayfin, Lue, lolad/lolgeny, MulverineX, Speedy2025 - Motivating me to work on this project after nearly abandoning it
 * You - For using this (hopefully, heh)
