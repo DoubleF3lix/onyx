@@ -2,9 +2,6 @@
 onyx_mclib.egg-info
 *.pyc
 **__pycache__
-**.bat
-**.txt
-**.toml
+Onyx Testing Data Pack/
 build/
 dist/
-build.bat

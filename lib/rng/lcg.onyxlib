@@ -1,2 +1,0 @@
-function :datapack_name::lib/rng/lcg_raw
-scoreboard players operation $output onyx.rng /= #discard onyx.rng

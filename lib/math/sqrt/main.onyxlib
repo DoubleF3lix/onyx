@@ -1,5 +1,0 @@
-scoreboard players set $output onyx.math 0
-scoreboard players set #increment onyx.math 32768
-scoreboard players operation $input onyx.math *= #scale_factor onyx.math
-function :datapack_name::lib/math/sqrt/loop
-scoreboard players operation $input onyx.math /= #scale_factor onyx.math
