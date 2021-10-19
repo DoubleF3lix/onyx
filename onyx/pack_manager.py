@@ -41,6 +41,65 @@ class DataPack(Stringable):
 
         self.gen_time_start = time.time()
 
+    def generate(
+        self,
+        overwrite: bool = True,
+        zipped: bool = False,
+        only_generate_zip_object: bool = False,
+        print_output_path: bool = True,
+        print_generation_time: bool = True,
+    ) -> None:
+        """
+        generate - Generates the data pack
+
+        Args:
+            overwrite (bool, optional): Whether to overwrite the data pack if it already exists. Defaults to True.
+            zipped (bool, optional): Whether to generate a zipped data pack. If ``False``, a folder will be generated instead. Defaults to False.
+            only_generate_zip_object (bool, optional): If set, only returns a ``ZipFile`` object instead of generating a file/folder. Defaults to False.
+            print_output_path (bool, optional): Whether to print the output path of the data pack. Defaults to True.
+            print_generation_time (bool): Whether the generation time should be printed to the console. Defaults to False.
+        """
+        # Generate the initialization function file (make sure it has any commands in it, otherwise don't bother)
+        if self.init_contents:
+            self.pack_object[
+                f"{snakify(self.pack_data['name'])}:_init"
+            ] = beet.Function(self.init_contents, tags=["minecraft:load"])
+
+        # Determine the data pack output path
+        if self.pack_data["path"] is None:
+            pack_output_path = os.path.join(os.getcwd())
+        else:
+            pack_output_path = os.path.join(self.pack_data["path"])
+
+        return_values = {
+            "output_path": pack_output_path,
+            "generation_time": time.time() - self.gen_time_start,
+        }
+
+        if not only_generate_zip_object:
+            output_path = self.pack_object.save(
+                directory=pack_output_path, overwrite=overwrite, zipped=zipped
+            )
+        else:
+            with zipfile.ZipFile(snakify(self.pack_data["name"]) + ".zip", "w") as zip:
+                self.pack_object.dump(zip)
+                return_values["zip_object"] = zip
+
+        if print_output_path:
+            if not only_generate_zip_object:
+                print(
+                    f"Data pack {self.pack_data['name']} generated at '{output_path}{'.zip' if zipped else ''}'"
+                )
+            else:
+                print("Data pack generated as ZipFile object")
+
+        if print_generation_time:
+            print(
+                f"Data pack generated in {round(return_values['generation_time'], 6)} seconds"
+            )
+
+        return return_values
+
     def advancement(self, path: str, contents: dict) -> "Advancement":
         """
         advancement - Creates an advancement
@@ -355,64 +414,6 @@ class DataPack(Stringable):
             Worldgen_TemplatePool: A worldgen template pool object
         """
         return Worldgen_TemplatePool(path, contents, self)
-
-    def generate(
-        self,
-        overwrite: bool = True,
-        zipped: bool = False,
-        only_generate_zip_object: bool = False,
-        print_output_path: bool = True,
-        print_generation_time: bool = True,
-    ) -> None:
-        """
-        generate - Generates the data pack
-        Args:
-            overwrite (bool, optional): Whether to overwrite the data pack if it already exists. Defaults to True.
-            zipped (bool, optional): Whether to generate a zipped data pack. If ``False``, a folder will be generated instead. Defaults to False.
-            only_generate_zip_object (bool, optional): If set, only returns a ``ZipFile`` object instead of generating a file/folder. Defaults to False.
-            print_output_path (bool, optional): Whether to print the output path of the data pack. Defaults to True.
-            print_generation_time (bool): Whether the generation time should be printed to the console. Defaults to False.
-        """
-        # Generate the initialization function file (make sure it has any commands in it, otherwise don't bother)
-        if self.init_contents:
-            self.pack_object[
-                f"{snakify(self.pack_data['name'])}:_init"
-            ] = beet.Function(self.init_contents, tags=["minecraft:load"])
-
-        # Determine the data pack output path
-        if self.pack_data["path"] is None:
-            pack_output_path = os.path.join(os.getcwd())
-        else:
-            pack_output_path = os.path.join(self.pack_data["path"])
-
-        return_values = {
-            "output_path": pack_output_path,
-            "generation_time": time.time() - self.gen_time_start,
-        }
-
-        if not only_generate_zip_object:
-            output_path = self.pack_object.save(
-                directory=pack_output_path, overwrite=overwrite, zipped=zipped
-            )
-        else:
-            with zipfile.ZipFile(snakify(self.pack_data["name"]) + ".zip", "w") as zip:
-                self.pack_object.dump(zip)
-                return_values["zip_object"] = zip
-
-        if print_output_path:
-            if not only_generate_zip_object:
-                print(
-                    f"Data pack {self.pack_data['name']} generated at '{output_path}{'.zip' if zipped else ''}'"
-                )
-            else:
-                print("Data pack generated as ZipFile object")
-
-        if print_generation_time:
-            print(
-                f"Data pack generated in {round(return_values['generation_time'], 6)} seconds"
-            )
-
-        return return_values
 
     def __str__(self) -> str:
         """
