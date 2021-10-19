@@ -1,4 +1,0 @@
-scoreboard players add $output onyx.rng 2147483647
-scoreboard players add $output onyx.rng 1
-scoreboard players operation $output onyx.rng /= $2 onyx.const
-scoreboard players add $output onyx.rng 1073741824
