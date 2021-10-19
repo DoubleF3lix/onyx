@@ -23,7 +23,7 @@ class DataPack(onyx.DataPack):
     def after_file_check(self):
         print(os.getcwd())
         src = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.dirname(onyx.__file__))),
+            os.path.dirname(os.path.dirname(onyx.__file__)),
             "Onyx Testing Data Pack",
         )
         with open(
