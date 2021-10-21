@@ -5,7 +5,7 @@ with open("README.md", "r") as readme:
 
 setuptools.setup(
     name="onyx-mclib",
-    version="2.1.0",
+    version="2.1.1",
     description="A python library to create minecraft data packs",
     long_description=long_description,
     long_description_content_type="text/markdown",

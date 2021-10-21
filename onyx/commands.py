@@ -1503,6 +1503,19 @@ class Commands:
         )
 
     @staticmethod
+    def function(function: Union["Function", str]) -> str:
+        """
+        function - Executes a function
+
+        Args:
+            function (Union[Function, str]): The function to execute. An alternative to ``function <FunctionObj>`` is just ``<FunctionObj()>``.
+
+        Returns:
+            str: Command
+        """
+        return Commands.push(f"function {translate(function)}")
+    
+    @staticmethod
     def gamemode(mode: gamemode, players: Selector) -> str:
         """
         gamemode - Sets the gamemode of players

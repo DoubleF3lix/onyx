@@ -48,7 +48,7 @@ class DataPack(Stringable):
         only_generate_zip_object: bool = False,
         print_output_path: bool = True,
         print_generation_time: bool = True,
-    ) -> None:
+    ) -> dict:
         """
         generate - Generates the data pack
 
@@ -58,6 +58,9 @@ class DataPack(Stringable):
             only_generate_zip_object (bool, optional): If set, only returns a ``ZipFile`` object instead of generating a file/folder. Defaults to False.
             print_output_path (bool, optional): Whether to print the output path of the data pack. Defaults to True.
             print_generation_time (bool): Whether the generation time should be printed to the console. Defaults to False.
+
+        Returns:
+            dict: A dictionary containing the output path of the data pack, the generation time, and the ``ZipFile`` object if ``only_generate_zip_object`` is ``True``.
         """
         # Generate the initialization function file (make sure it has any commands in it, otherwise don't bother)
         if self.init_contents:
