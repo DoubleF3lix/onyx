@@ -125,6 +125,7 @@ class DataPack(Stringable):
     ) -> "Function":
         """
         function - Creates a function. If ``link`` returns ``str``, then that string is used as the function contents instead.
+
         Args:
             path (str): The path of the function. Given as ``namespace:path/to/file``, or ``path/to/file``. If no namespace is specified, then the snake case format of the data pack name will be used.
             link: (Union[Callable, str]): The python function to link to. All of the commands for this pack function should be in this python function. Alternatively, this function can return a string, or ``link`` can be a string itself, and that will be used as the function contents instead.
