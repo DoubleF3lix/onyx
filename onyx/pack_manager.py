@@ -1,7 +1,7 @@
 import os
 import time
 import zipfile
-from typing import Callable
+from typing import Callable, Union
 
 import beet
 
@@ -117,14 +117,19 @@ class DataPack(Stringable):
         return Advancement(path, contents, self)
 
     def function(
-        self, path: str, link: Callable, init: bool = False, loop: bool = False
+        self,
+        path: str,
+        link: Union[Callable, str],
+        init: bool = False,
+        loop: bool = False,
     ) -> "Function":
         """
-        function - Creates a function
-
+        function - Creates a function. If ``link`` returns ``str``, then that string is used as the function contents instead.
         Args:
             path (str): The path of the function. Given as ``namespace:path/to/file``, or ``path/to/file``. If no namespace is specified, then the snake case format of the data pack name will be used.
-            contents (dict): The contents of the function
+            link: (Union[Callable, str]): The python function to link to. All of the commands for this pack function should be in this python function. Alternatively, this function can return a string, or ``link`` can be a string itself, and that will be used as the function contents instead.
+            init (bool, optional): Whether this function should be run when the pack is loaded. Defaults to False.
+            loop (bool, optional): Whether this function should be run every tick. Defaults to False.
 
         Returns:
             Function: A function object
@@ -430,7 +435,7 @@ class DataPack(Stringable):
 
 class PackResource(Stringable):
     """
-    PackResource - Template class for all data pack objects
+    PackResource - Template class for all data pack objects. To get the contents, use ``PackResource.beet_obj.content``.
 
     Args:
         path (str): The path of the resource. Given as ``namespace:path/to/file``, or ``path/to/file``. If no namespace is specified, then the snake case format of the data pack name will be used.
@@ -479,7 +484,7 @@ class Function(PackResource):
 
     Args:
         path (str): The path of the function. Given as ``namespace:path/to/file``, or ``path/to/file``. If no namespace is specified, then the snake case format of the data pack name will be used.
-        link (Callable): The python function to link to. All of the commands for this pack function should be in this python function.
+        link (Union[Callable, str]): The python function to link to. All of the commands for this pack function should be in this python function. Alternatively, this function can return a string, or ``link`` can be a string itself, and that will be used as the function contents instead.
         is_init (bool): Whether or not the function should be called when the data pack loads
         is_loop (bool): Whether or not the function should be called every tick
         parent_pack (DataPack): The parent pack object
@@ -488,7 +493,7 @@ class Function(PackResource):
     def __init__(
         self,
         path: str,
-        link: Callable,
+        link: Union[Callable, str],
         is_init: bool,
         is_loop: bool,
         parent_pack: DataPack,
@@ -509,17 +514,44 @@ class Function(PackResource):
 
         # Mark the active function for things like execute
         Commands.active_function = self.path
-        # link() just contains function calls which add to Commands.function_contents.
-        self.link()
-        # The current function object gets these commands added to it
-        self.add(Commands.function_contents)
-        # Then, variables are reset to prepare for the next function
+
+        # Check if the function returned a string, and if so, use that for the function contents, otherwise assume function calls to onyx.commands were used
+        if type(self.link) == str:
+            function_contents = self.link
+        elif callable(self.link):
+            function_contents = self.link()
+
+        if type(function_contents) is not str:
+            function_contents = Commands.function_contents
+        else:
+            # This way it works for the add() method which uses a list
+            function_contents = function_contents.split("\n")
+
+        # Strip every command in the commands list
+        function_contents = [
+            element.strip().replace("\n", "") for element in function_contents
+        ]
+
+        # Check len higher than 0
+        if function_contents:
+            if function_contents[0] == "":
+                del function_contents[0]
+
+            if function_contents[-1] == "":
+                del function_contents[-1]
+
+        # Add the commands
+        self.add(function_contents)
+
+        # Prepare for the next function
         Commands.function_contents = []
         Commands.active_function = None
 
+        # Send the function object to the parent pack
         if ":" not in self.path:
             self.path = f"{snakify(parent_pack.pack_data['name'])}:{self.path}"
-        parent_pack.pack_object[self.path] = self.beet_object
+
+        self.send_object_to_parent_pack()
 
     def add(self, commands: list) -> None:
         """
@@ -547,6 +579,12 @@ class Function(PackResource):
             str: The function path
         """
         return self.path
+
+    def send_object_to_parent_pack(self) -> None:
+        """
+        send_object_to_parent_pack - Sends the function to the parent pack. You can call this manually to force update the function if you change the contents after generation.
+        """
+        self.parent_pack.pack_object[self.path] = self.beet_object
 
 
 class ItemModifier(PackResource):

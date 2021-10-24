@@ -5,9 +5,15 @@ from nbtlib.tag import *
 
 from onyx.class_types import Buildable, Particle, Vector2, Vector3
 from onyx.dev_util import dict_to_block_state, translate
-from onyx.registries import (attribute_modifier_mode, bossbar_location,
-                             click_event_action, data_type, hover_event_action,
-                             slot, source_type)
+from onyx.registries import (
+    attribute_modifier_mode,
+    bossbar_location,
+    click_event_action,
+    data_type,
+    hover_event_action,
+    slot,
+    source_type,
+)
 from onyx.split_registries.block import block
 from onyx.split_registries.item import item
 from onyx.split_registries.particle import particle
@@ -105,11 +111,8 @@ class RelPos2D(Buildable, Vector2):
         y (int, optional): Y coordinate. Defaults to None.
     """
 
-    def __init__(self, min: int = None, max: int = None):
-        if min is None and max is None:
-            Handler._warn("'min' and 'max' were not assigned")
-        self.min = min
-        self.max = max
+    def __init__(self, x: int = None, y: int = None) -> None:
+        super().__init__("", x, y)
 
 
 class AbsRot(Buildable, Vector2):

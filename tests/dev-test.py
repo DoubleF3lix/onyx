@@ -16,9 +16,21 @@ class DataPack(onyx.DataPack):
         self.function("testing:scoreboard_operators", self.scoreboard_operators_test)
         self.function("testing:text_components", self.text_components_test)
 
+        self.function(
+            "testing:direct_string_insertion",
+            "say Hello, World!\nsay This is a function!",
+        )
+        self.function("testing:indirect_string_insertion", self.write_string)
+
         self.generate(print_generation_time=True)
 
         self.after_file_check()
+
+    def write_string(self):
+        return """
+        say Hello, World!
+        say This is a function!
+        """
 
     def after_file_check(self):
         src = os.path.join(
@@ -61,6 +73,30 @@ class DataPack(onyx.DataPack):
                 infile.read()
                 == """scoreboard players set $fakeplayer name 8\nscoreboard players operation $fakeplayer name = $fakeplayer name\nscoreboard players add $fakeplayer name 8\nscoreboard players operation $fakeplayer name += $fakeplayer name\nscoreboard players remove $fakeplayer name 8\nscoreboard players operation $fakeplayer name -= $fakeplayer name\nscoreboard players operation $fakeplayer name *= $8 onyx.const\nscoreboard players operation $fakeplayer name *= $fakeplayer name\nscoreboard players operation $fakeplayer name /= $8 onyx.const\nscoreboard players operation $fakeplayer name /= $fakeplayer name\nscoreboard players operation $fakeplayer name %= $8 onyx.const\nscoreboard players operation $fakeplayer name %= $fakeplayer name\nscoreboard players operation $fakeplayer name >< $fakeplayer name\nscoreboard players operation $fakeplayer name < $8 onyx.const\nscoreboard players operation $fakeplayer name < $fakeplayer name\nscoreboard players operation $fakeplayer name > $8 onyx.const\nscoreboard players operation $fakeplayer name > $fakeplayer name\nscoreboard players enable $fakeplayer name\nscoreboard players get $fakeplayer name\nscoreboard players reset $fakeplayer name\n"""
             )
+
+        with open(
+            os.path.join(
+                src,
+                "data",
+                "testing",
+                "functions",
+                "direct_string_insertion.mcfunction",
+            ),
+            "r",
+        ) as infile:
+            assert infile.read() == "say Hello, World!\nsay This is a function!\n"
+
+        with open(
+            os.path.join(
+                src,
+                "data",
+                "testing",
+                "functions",
+                "indirect_string_insertion.mcfunction",
+            ),
+            "r",
+        ) as infile:
+            assert infile.read() == "say Hello, World!\nsay This is a function!\n"
 
         with open(
             os.path.join(src, "data", "testing", "advancements", "advancement.json"),

@@ -1514,7 +1514,7 @@ class Commands:
             str: Command
         """
         return Commands.push(f"function {translate(function)}")
-    
+
     @staticmethod
     def gamemode(mode: gamemode, players: Selector) -> str:
         """
