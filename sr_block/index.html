@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>onyx.split_registries.block &mdash; Python  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="onyx.split_registries.effect" href="../sr_effect/" />
+    <link rel="prev" title="onyx.split_registries.block_tag" href="../sr_block_tag/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../bossbar/">onyx.bossbar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../class_types/">onyx.class_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands/">onyx.commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../execute/">onyx.execute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pack_manager/">onyx.pack_manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registries/">onyx.registries</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../split_registries/">onyx.split_registries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sr_biome/">onyx.split_registries.biome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_block_tag/">onyx.split_registries.block_tag</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">onyx.split_registries.block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_effect/">onyx.split_registries.effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_enchantment/">onyx.split_registries.enchantment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_entity_tag/">onyx.split_registries.entity_tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_entity/">onyx.split_registries.entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_gamerule/">onyx.split_registries.gamerule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_item_tag/">onyx.split_registries.item_tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_item/">onyx.split_registries.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_particle/">onyx.split_registries.particle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_recipe/">onyx.split_registries.recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_structure/">onyx.split_registries.structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../scoreboard/">onyx.scoreboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../selector/">onyx.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../text_component/">onyx.text_component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util/">onyx.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../split_registries/">onyx.split_registries</a> &raquo;</li>
+      <li>onyx.split_registries.block</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/sr_block.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="onyx-split-registries-block">
+<h1>onyx.split_registries.block<a class="headerlink" href="#onyx-split-registries-block" title="Permalink to this headline"></a></h1>
+<span class="target" id="module-onyx.split_registries.block"></span><dl class="py class">
+<dt class="sig sig-object py" id="onyx.split_registries.block.block">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.split_registries.block.</span></span><span class="sig-name descname"><span class="pre">block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.split_registries.block.block" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>acacia_button</p></li>
+<li><p>acacia_door</p></li>
+<li><p>acacia_fence</p></li>
+<li><p>acacia_fence_gate</p></li>
+<li><p>acacia_leaves</p></li>
+<li><p>acacia_log</p></li>
+<li><p>acacia_planks</p></li>
+<li><p>acacia_pressure_plate</p></li>
+<li><p>acacia_sapling</p></li>
+<li><p>acacia_sign</p></li>
+<li><p>acacia_slab</p></li>
+<li><p>acacia_stairs</p></li>
+<li><p>acacia_trapdoor</p></li>
+<li><p>acacia_wall_sign</p></li>
+<li><p>acacia_wood</p></li>
+<li><p>activator_rail</p></li>
+<li><p>air</p></li>
+<li><p>allium</p></li>
+<li><p>amethyst_block</p></li>
+<li><p>amethyst_cluster</p></li>
+<li><p>ancient_debris</p></li>
+<li><p>andesite</p></li>
+<li><p>andesite_slab</p></li>
+<li><p>andesite_stairs</p></li>
+<li><p>andesite_wall</p></li>
+<li><p>anvil</p></li>
+<li><p>attached_melon_stem</p></li>
+<li><p>attached_pumpkin_stem</p></li>
+<li><p>azalea</p></li>
+<li><p>azalea_leaves</p></li>
+<li><p>azure_bluet</p></li>
+<li><p>bamboo</p></li>
+<li><p>bamboo_sapling</p></li>
+<li><p>barrel</p></li>
+<li><p>barrier</p></li>
+<li><p>basalt</p></li>
+<li><p>beacon</p></li>
+<li><p>bedrock</p></li>
+<li><p>bee_nest</p></li>
+<li><p>beehive</p></li>
+<li><p>beetroots</p></li>
+<li><p>bell</p></li>
+<li><p>big_dripleaf</p></li>
+<li><p>big_dripleaf_stem</p></li>
+<li><p>birch_button</p></li>
+<li><p>birch_door</p></li>
+<li><p>birch_fence</p></li>
+<li><p>birch_fence_gate</p></li>
+<li><p>birch_leaves</p></li>
+<li><p>birch_log</p></li>
+<li><p>birch_planks</p></li>
+<li><p>birch_pressure_plate</p></li>
+<li><p>birch_sapling</p></li>
+<li><p>birch_sign</p></li>
+<li><p>birch_slab</p></li>
+<li><p>birch_stairs</p></li>
+<li><p>birch_trapdoor</p></li>
+<li><p>birch_wall_sign</p></li>
+<li><p>birch_wood</p></li>
+<li><p>black_banner</p></li>
+<li><p>black_bed</p></li>
+<li><p>black_candle</p></li>
+<li><p>black_candle_cake</p></li>
+<li><p>black_carpet</p></li>
+<li><p>black_concrete</p></li>
+<li><p>black_concrete_powder</p></li>
+<li><p>black_glazed_terracotta</p></li>
+<li><p>black_shulker_box</p></li>
+<li><p>black_stained_glass</p></li>
+<li><p>black_stained_glass_pane</p></li>
+<li><p>black_terracotta</p></li>
+<li><p>black_wall_banner</p></li>
+<li><p>black_wool</p></li>
+<li><p>blackstone</p></li>
+<li><p>blackstone_slab</p></li>
+<li><p>blackstone_stairs</p></li>
+<li><p>blackstone_wall</p></li>
+<li><p>blast_furnace</p></li>
+<li><p>blue_banner</p></li>
+<li><p>blue_bed</p></li>
+<li><p>blue_candle</p></li>
+<li><p>blue_candle_cake</p></li>
+<li><p>blue_carpet</p></li>
+<li><p>blue_concrete</p></li>
+<li><p>blue_concrete_powder</p></li>
+<li><p>blue_glazed_terracotta</p></li>
+<li><p>blue_ice</p></li>
+<li><p>blue_orchid</p></li>
+<li><p>blue_shulker_box</p></li>
+<li><p>blue_stained_glass</p></li>
+<li><p>blue_stained_glass_pane</p></li>
+<li><p>blue_terracotta</p></li>
+<li><p>blue_wall_banner</p></li>
+<li><p>blue_wool</p></li>
+<li><p>bone_block</p></li>
+<li><p>bookshelf</p></li>
+<li><p>brain_coral</p></li>
+<li><p>brain_coral_block</p></li>
+<li><p>brain_coral_fan</p></li>
+<li><p>brain_coral_wall_fan</p></li>
+<li><p>brewing_stand</p></li>
+<li><p>brick_slab</p></li>
+<li><p>brick_stairs</p></li>
+<li><p>brick_wall</p></li>
+<li><p>bricks</p></li>
+<li><p>brown_banner</p></li>
+<li><p>brown_bed</p></li>
+<li><p>brown_candle</p></li>
+<li><p>brown_candle_cake</p></li>
+<li><p>brown_carpet</p></li>
+<li><p>brown_concrete</p></li>
+<li><p>brown_concrete_powder</p></li>
+<li><p>brown_glazed_terracotta</p></li>
+<li><p>brown_mushroom</p></li>
+<li><p>brown_mushroom_block</p></li>
+<li><p>brown_shulker_box</p></li>
+<li><p>brown_stained_glass</p></li>
+<li><p>brown_stained_glass_pane</p></li>
+<li><p>brown_terracotta</p></li>
+<li><p>brown_wall_banner</p></li>
+<li><p>brown_wool</p></li>
+<li><p>bubble_column</p></li>
+<li><p>bubble_coral</p></li>
+<li><p>bubble_coral_block</p></li>
+<li><p>bubble_coral_fan</p></li>
+<li><p>bubble_coral_wall_fan</p></li>
+<li><p>budding_amethyst</p></li>
+<li><p>cactus</p></li>
+<li><p>cake</p></li>
+<li><p>calcite</p></li>
+<li><p>campfire</p></li>
+<li><p>candle</p></li>
+<li><p>candle_cake</p></li>
+<li><p>carrots</p></li>
+<li><p>cartography_table</p></li>
+<li><p>carved_pumpkin</p></li>
+<li><p>cauldron</p></li>
+<li><p>cave_air</p></li>
+<li><p>cave_vines</p></li>
+<li><p>cave_vines_plant</p></li>
+<li><p>chain</p></li>
+<li><p>chain_command_block</p></li>
+<li><p>chest</p></li>
+<li><p>chipped_anvil</p></li>
+<li><p>chiseled_deepslate</p></li>
+<li><p>chiseled_nether_bricks</p></li>
+<li><p>chiseled_polished_blackstone</p></li>
+<li><p>chiseled_quartz_block</p></li>
+<li><p>chiseled_red_sandstone</p></li>
+<li><p>chiseled_sandstone</p></li>
+<li><p>chiseled_stone_bricks</p></li>
+<li><p>chorus_flower</p></li>
+<li><p>chorus_plant</p></li>
+<li><p>clay</p></li>
+<li><p>coal_block</p></li>
+<li><p>coal_ore</p></li>
+<li><p>coarse_dirt</p></li>
+<li><p>cobbled_deepslate</p></li>
+<li><p>cobbled_deepslate_slab</p></li>
+<li><p>cobbled_deepslate_stairs</p></li>
+<li><p>cobbled_deepslate_wall</p></li>
+<li><p>cobblestone</p></li>
+<li><p>cobblestone_slab</p></li>
+<li><p>cobblestone_stairs</p></li>
+<li><p>cobblestone_wall</p></li>
+<li><p>cobweb</p></li>
+<li><p>cocoa</p></li>
+<li><p>command_block</p></li>
+<li><p>comparator</p></li>
+<li><p>composter</p></li>
+<li><p>conduit</p></li>
+<li><p>copper_block</p></li>
+<li><p>copper_ore</p></li>
+<li><p>cornflower</p></li>
+<li><p>cracked_deepslate_bricks</p></li>
+<li><p>cracked_deepslate_tiles</p></li>
+<li><p>cracked_nether_bricks</p></li>
+<li><p>cracked_polished_blackstone_bricks</p></li>
+<li><p>cracked_stone_bricks</p></li>
+<li><p>crafting_table</p></li>
+<li><p>creeper_head</p></li>
+<li><p>creeper_wall_head</p></li>
+<li><p>crimson_button</p></li>
+<li><p>crimson_door</p></li>
+<li><p>crimson_fence</p></li>
+<li><p>crimson_fence_gate</p></li>
+<li><p>crimson_fungus</p></li>
+<li><p>crimson_hyphae</p></li>
+<li><p>crimson_nylium</p></li>
+<li><p>crimson_planks</p></li>
+<li><p>crimson_pressure_plate</p></li>
+<li><p>crimson_roots</p></li>
+<li><p>crimson_sign</p></li>
+<li><p>crimson_slab</p></li>
+<li><p>crimson_stairs</p></li>
+<li><p>crimson_stem</p></li>
+<li><p>crimson_trapdoor</p></li>
+<li><p>crimson_wall_sign</p></li>
+<li><p>crying_obsidian</p></li>
+<li><p>cut_copper</p></li>
+<li><p>cut_copper_slab</p></li>
+<li><p>cut_copper_stairs</p></li>
+<li><p>cut_red_sandstone</p></li>
+<li><p>cut_red_sandstone_slab</p></li>
+<li><p>cut_sandstone</p></li>
+<li><p>cut_sandstone_slab</p></li>
+<li><p>cyan_banner</p></li>
+<li><p>cyan_bed</p></li>
+<li><p>cyan_candle</p></li>
+<li><p>cyan_candle_cake</p></li>
+<li><p>cyan_carpet</p></li>
+<li><p>cyan_concrete</p></li>
+<li><p>cyan_concrete_powder</p></li>
+<li><p>cyan_glazed_terracotta</p></li>
+<li><p>cyan_shulker_box</p></li>
+<li><p>cyan_stained_glass</p></li>
+<li><p>cyan_stained_glass_pane</p></li>
+<li><p>cyan_terracotta</p></li>
+<li><p>cyan_wall_banner</p></li>
+<li><p>cyan_wool</p></li>
+<li><p>damaged_anvil</p></li>
+<li><p>dandelion</p></li>
+<li><p>dark_oak_button</p></li>
+<li><p>dark_oak_door</p></li>
+<li><p>dark_oak_fence</p></li>
+<li><p>dark_oak_fence_gate</p></li>
+<li><p>dark_oak_leaves</p></li>
+<li><p>dark_oak_log</p></li>
+<li><p>dark_oak_planks</p></li>
+<li><p>dark_oak_pressure_plate</p></li>
+<li><p>dark_oak_sapling</p></li>
+<li><p>dark_oak_sign</p></li>
+<li><p>dark_oak_slab</p></li>
+<li><p>dark_oak_stairs</p></li>
+<li><p>dark_oak_trapdoor</p></li>
+<li><p>dark_oak_wall_sign</p></li>
+<li><p>dark_oak_wood</p></li>
+<li><p>dark_prismarine</p></li>
+<li><p>dark_prismarine_slab</p></li>
+<li><p>dark_prismarine_stairs</p></li>
+<li><p>daylight_detector</p></li>
+<li><p>dead_brain_coral</p></li>
+<li><p>dead_brain_coral_block</p></li>
+<li><p>dead_brain_coral_fan</p></li>
+<li><p>dead_brain_coral_wall_fan</p></li>
+<li><p>dead_bubble_coral</p></li>
+<li><p>dead_bubble_coral_block</p></li>
+<li><p>dead_bubble_coral_fan</p></li>
+<li><p>dead_bubble_coral_wall_fan</p></li>
+<li><p>dead_bush</p></li>
+<li><p>dead_fire_coral</p></li>
+<li><p>dead_fire_coral_block</p></li>
+<li><p>dead_fire_coral_fan</p></li>
+<li><p>dead_fire_coral_wall_fan</p></li>
+<li><p>dead_horn_coral</p></li>
+<li><p>dead_horn_coral_block</p></li>
+<li><p>dead_horn_coral_fan</p></li>
+<li><p>dead_horn_coral_wall_fan</p></li>
+<li><p>dead_tube_coral</p></li>
+<li><p>dead_tube_coral_block</p></li>
+<li><p>dead_tube_coral_fan</p></li>
+<li><p>dead_tube_coral_wall_fan</p></li>
+<li><p>deepslate</p></li>
+<li><p>deepslate_brick_slab</p></li>
+<li><p>deepslate_brick_stairs</p></li>
+<li><p>deepslate_brick_wall</p></li>
+<li><p>deepslate_bricks</p></li>
+<li><p>deepslate_coal_ore</p></li>
+<li><p>deepslate_copper_ore</p></li>
+<li><p>deepslate_diamond_ore</p></li>
+<li><p>deepslate_emerald_ore</p></li>
+<li><p>deepslate_gold_ore</p></li>
+<li><p>deepslate_iron_ore</p></li>
+<li><p>deepslate_lapis_ore</p></li>
+<li><p>deepslate_redstone_ore</p></li>
+<li><p>deepslate_tile_slab</p></li>
+<li><p>deepslate_tile_stairs</p></li>
+<li><p>deepslate_tile_wall</p></li>
+<li><p>deepslate_tiles</p></li>
+<li><p>detector_rail</p></li>
+<li><p>diamond_block</p></li>
+<li><p>diamond_ore</p></li>
+<li><p>diorite</p></li>
+<li><p>diorite_slab</p></li>
+<li><p>diorite_stairs</p></li>
+<li><p>diorite_wall</p></li>
+<li><p>dirt</p></li>
+<li><p>dirt_path</p></li>
+<li><p>dispenser</p></li>
+<li><p>dragon_egg</p></li>
+<li><p>dragon_head</p></li>
+<li><p>dragon_wall_head</p></li>
+<li><p>dried_kelp_block</p></li>
+<li><p>dripstone_block</p></li>
+<li><p>dropper</p></li>
+<li><p>emerald_block</p></li>
+<li><p>emerald_ore</p></li>
+<li><p>enchanting_table</p></li>
+<li><p>end_gateway</p></li>
+<li><p>end_portal</p></li>
+<li><p>end_portal_frame</p></li>
+<li><p>end_rod</p></li>
+<li><p>end_stone</p></li>
+<li><p>end_stone_brick_slab</p></li>
+<li><p>end_stone_brick_stairs</p></li>
+<li><p>end_stone_brick_wall</p></li>
+<li><p>end_stone_bricks</p></li>
+<li><p>ender_chest</p></li>
+<li><p>exposed_copper</p></li>
+<li><p>exposed_cut_copper</p></li>
+<li><p>exposed_cut_copper_slab</p></li>
+<li><p>exposed_cut_copper_stairs</p></li>
+<li><p>farmland</p></li>
+<li><p>fern</p></li>
+<li><p>fire</p></li>
+<li><p>fire_coral</p></li>
+<li><p>fire_coral_block</p></li>
+<li><p>fire_coral_fan</p></li>
+<li><p>fire_coral_wall_fan</p></li>
+<li><p>fletching_table</p></li>
+<li><p>flower_pot</p></li>
+<li><p>flowering_azalea</p></li>
+<li><p>flowering_azalea_leaves</p></li>
+<li><p>frosted_ice</p></li>
+<li><p>furnace</p></li>
+<li><p>gilded_blackstone</p></li>
+<li><p>glass</p></li>
+<li><p>glass_pane</p></li>
+<li><p>glow_lichen</p></li>
+<li><p>glowstone</p></li>
+<li><p>gold_block</p></li>
+<li><p>gold_ore</p></li>
+<li><p>granite</p></li>
+<li><p>granite_slab</p></li>
+<li><p>granite_stairs</p></li>
+<li><p>granite_wall</p></li>
+<li><p>grass</p></li>
+<li><p>grass_block</p></li>
+<li><p>gravel</p></li>
+<li><p>gray_banner</p></li>
+<li><p>gray_bed</p></li>
+<li><p>gray_candle</p></li>
+<li><p>gray_candle_cake</p></li>
+<li><p>gray_carpet</p></li>
+<li><p>gray_concrete</p></li>
+<li><p>gray_concrete_powder</p></li>
+<li><p>gray_glazed_terracotta</p></li>
+<li><p>gray_shulker_box</p></li>
+<li><p>gray_stained_glass</p></li>
+<li><p>gray_stained_glass_pane</p></li>
+<li><p>gray_terracotta</p></li>
+<li><p>gray_wall_banner</p></li>
+<li><p>gray_wool</p></li>
+<li><p>green_banner</p></li>
+<li><p>green_bed</p></li>
+<li><p>green_candle</p></li>
+<li><p>green_candle_cake</p></li>
+<li><p>green_carpet</p></li>
+<li><p>green_concrete</p></li>
+<li><p>green_concrete_powder</p></li>
+<li><p>green_glazed_terracotta</p></li>
+<li><p>green_shulker_box</p></li>
+<li><p>green_stained_glass</p></li>
+<li><p>green_stained_glass_pane</p></li>
+<li><p>green_terracotta</p></li>
+<li><p>green_wall_banner</p></li>
+<li><p>green_wool</p></li>
+<li><p>grindstone</p></li>
+<li><p>hanging_roots</p></li>
+<li><p>hay_block</p></li>
+<li><p>heavy_weighted_pressure_plate</p></li>
+<li><p>honey_block</p></li>
+<li><p>honeycomb_block</p></li>
+<li><p>hopper</p></li>
+<li><p>horn_coral</p></li>
+<li><p>horn_coral_block</p></li>
+<li><p>horn_coral_fan</p></li>
+<li><p>horn_coral_wall_fan</p></li>
+<li><p>ice</p></li>
+<li><p>infested_chiseled_stone_bricks</p></li>
+<li><p>infested_cobblestone</p></li>
+<li><p>infested_cracked_stone_bricks</p></li>
+<li><p>infested_deepslate</p></li>
+<li><p>infested_mossy_stone_bricks</p></li>
+<li><p>infested_stone</p></li>
+<li><p>infested_stone_bricks</p></li>
+<li><p>iron_bars</p></li>
+<li><p>iron_block</p></li>
+<li><p>iron_door</p></li>
+<li><p>iron_ore</p></li>
+<li><p>iron_trapdoor</p></li>
+<li><p>jack_o_lantern</p></li>
+<li><p>jigsaw</p></li>
+<li><p>jukebox</p></li>
+<li><p>jungle_button</p></li>
+<li><p>jungle_door</p></li>
+<li><p>jungle_fence</p></li>
+<li><p>jungle_fence_gate</p></li>
+<li><p>jungle_leaves</p></li>
+<li><p>jungle_log</p></li>
+<li><p>jungle_planks</p></li>
+<li><p>jungle_pressure_plate</p></li>
+<li><p>jungle_sapling</p></li>
+<li><p>jungle_sign</p></li>
+<li><p>jungle_slab</p></li>
+<li><p>jungle_stairs</p></li>
+<li><p>jungle_trapdoor</p></li>
+<li><p>jungle_wall_sign</p></li>
+<li><p>jungle_wood</p></li>
+<li><p>kelp</p></li>
+<li><p>kelp_plant</p></li>
+<li><p>ladder</p></li>
+<li><p>lantern</p></li>
+<li><p>lapis_block</p></li>
+<li><p>lapis_ore</p></li>
+<li><p>large_amethyst_bud</p></li>
+<li><p>large_fern</p></li>
+<li><p>lava</p></li>
+<li><p>lava_cauldron</p></li>
+<li><p>lectern</p></li>
+<li><p>lever</p></li>
+<li><p>light</p></li>
+<li><p>light_blue_banner</p></li>
+<li><p>light_blue_bed</p></li>
+<li><p>light_blue_candle</p></li>
+<li><p>light_blue_candle_cake</p></li>
+<li><p>light_blue_carpet</p></li>
+<li><p>light_blue_concrete</p></li>
+<li><p>light_blue_concrete_powder</p></li>
+<li><p>light_blue_glazed_terracotta</p></li>
+<li><p>light_blue_shulker_box</p></li>
+<li><p>light_blue_stained_glass</p></li>
+<li><p>light_blue_stained_glass_pane</p></li>
+<li><p>light_blue_terracotta</p></li>
+<li><p>light_blue_wall_banner</p></li>
+<li><p>light_blue_wool</p></li>
+<li><p>light_gray_banner</p></li>
+<li><p>light_gray_bed</p></li>
+<li><p>light_gray_candle</p></li>
+<li><p>light_gray_candle_cake</p></li>
+<li><p>light_gray_carpet</p></li>
+<li><p>light_gray_concrete</p></li>
+<li><p>light_gray_concrete_powder</p></li>
+<li><p>light_gray_glazed_terracotta</p></li>
+<li><p>light_gray_shulker_box</p></li>
+<li><p>light_gray_stained_glass</p></li>
+<li><p>light_gray_stained_glass_pane</p></li>
+<li><p>light_gray_terracotta</p></li>
+<li><p>light_gray_wall_banner</p></li>
+<li><p>light_gray_wool</p></li>
+<li><p>light_weighted_pressure_plate</p></li>
+<li><p>lightning_rod</p></li>
+<li><p>lilac</p></li>
+<li><p>lily_of_the_valley</p></li>
+<li><p>lily_pad</p></li>
+<li><p>lime_banner</p></li>
+<li><p>lime_bed</p></li>
+<li><p>lime_candle</p></li>
+<li><p>lime_candle_cake</p></li>
+<li><p>lime_carpet</p></li>
+<li><p>lime_concrete</p></li>
+<li><p>lime_concrete_powder</p></li>
+<li><p>lime_glazed_terracotta</p></li>
+<li><p>lime_shulker_box</p></li>
+<li><p>lime_stained_glass</p></li>
+<li><p>lime_stained_glass_pane</p></li>
+<li><p>lime_terracotta</p></li>
+<li><p>lime_wall_banner</p></li>
+<li><p>lime_wool</p></li>
+<li><p>lodestone</p></li>
+<li><p>loom</p></li>
+<li><p>magenta_banner</p></li>
+<li><p>magenta_bed</p></li>
+<li><p>magenta_candle</p></li>
+<li><p>magenta_candle_cake</p></li>
+<li><p>magenta_carpet</p></li>
+<li><p>magenta_concrete</p></li>
+<li><p>magenta_concrete_powder</p></li>
+<li><p>magenta_glazed_terracotta</p></li>
+<li><p>magenta_shulker_box</p></li>
+<li><p>magenta_stained_glass</p></li>
+<li><p>magenta_stained_glass_pane</p></li>
+<li><p>magenta_terracotta</p></li>
+<li><p>magenta_wall_banner</p></li>
+<li><p>magenta_wool</p></li>
+<li><p>magma_block</p></li>
+<li><p>medium_amethyst_bud</p></li>
+<li><p>melon</p></li>
+<li><p>melon_stem</p></li>
+<li><p>moss_block</p></li>
+<li><p>moss_carpet</p></li>
+<li><p>mossy_cobblestone</p></li>
+<li><p>mossy_cobblestone_slab</p></li>
+<li><p>mossy_cobblestone_stairs</p></li>
+<li><p>mossy_cobblestone_wall</p></li>
+<li><p>mossy_stone_brick_slab</p></li>
+<li><p>mossy_stone_brick_stairs</p></li>
+<li><p>mossy_stone_brick_wall</p></li>
+<li><p>mossy_stone_bricks</p></li>
+<li><p>moving_piston</p></li>
+<li><p>mushroom_stem</p></li>
+<li><p>mycelium</p></li>
+<li><p>nether_brick_fence</p></li>
+<li><p>nether_brick_slab</p></li>
+<li><p>nether_brick_stairs</p></li>
+<li><p>nether_brick_wall</p></li>
+<li><p>nether_bricks</p></li>
+<li><p>nether_gold_ore</p></li>
+<li><p>nether_portal</p></li>
+<li><p>nether_quartz_ore</p></li>
+<li><p>nether_sprouts</p></li>
+<li><p>nether_wart</p></li>
+<li><p>nether_wart_block</p></li>
+<li><p>netherite_block</p></li>
+<li><p>netherrack</p></li>
+<li><p>note_block</p></li>
+<li><p>oak_button</p></li>
+<li><p>oak_door</p></li>
+<li><p>oak_fence</p></li>
+<li><p>oak_fence_gate</p></li>
+<li><p>oak_leaves</p></li>
+<li><p>oak_log</p></li>
+<li><p>oak_planks</p></li>
+<li><p>oak_pressure_plate</p></li>
+<li><p>oak_sapling</p></li>
+<li><p>oak_sign</p></li>
+<li><p>oak_slab</p></li>
+<li><p>oak_stairs</p></li>
+<li><p>oak_trapdoor</p></li>
+<li><p>oak_wall_sign</p></li>
+<li><p>oak_wood</p></li>
+<li><p>observer</p></li>
+<li><p>obsidian</p></li>
+<li><p>orange_banner</p></li>
+<li><p>orange_bed</p></li>
+<li><p>orange_candle</p></li>
+<li><p>orange_candle_cake</p></li>
+<li><p>orange_carpet</p></li>
+<li><p>orange_concrete</p></li>
+<li><p>orange_concrete_powder</p></li>
+<li><p>orange_glazed_terracotta</p></li>
+<li><p>orange_shulker_box</p></li>
+<li><p>orange_stained_glass</p></li>
+<li><p>orange_stained_glass_pane</p></li>
+<li><p>orange_terracotta</p></li>
+<li><p>orange_tulip</p></li>
+<li><p>orange_wall_banner</p></li>
+<li><p>orange_wool</p></li>
+<li><p>oxeye_daisy</p></li>
+<li><p>oxidized_copper</p></li>
+<li><p>oxidized_cut_copper</p></li>
+<li><p>oxidized_cut_copper_slab</p></li>
+<li><p>oxidized_cut_copper_stairs</p></li>
+<li><p>packed_ice</p></li>
+<li><p>peony</p></li>
+<li><p>petrified_oak_slab</p></li>
+<li><p>pink_banner</p></li>
+<li><p>pink_bed</p></li>
+<li><p>pink_candle</p></li>
+<li><p>pink_candle_cake</p></li>
+<li><p>pink_carpet</p></li>
+<li><p>pink_concrete</p></li>
+<li><p>pink_concrete_powder</p></li>
+<li><p>pink_glazed_terracotta</p></li>
+<li><p>pink_shulker_box</p></li>
+<li><p>pink_stained_glass</p></li>
+<li><p>pink_stained_glass_pane</p></li>
+<li><p>pink_terracotta</p></li>
+<li><p>pink_tulip</p></li>
+<li><p>pink_wall_banner</p></li>
+<li><p>pink_wool</p></li>
+<li><p>piston</p></li>
+<li><p>piston_head</p></li>
+<li><p>player_head</p></li>
+<li><p>player_wall_head</p></li>
+<li><p>podzol</p></li>
+<li><p>pointed_dripstone</p></li>
+<li><p>polished_andesite</p></li>
+<li><p>polished_andesite_slab</p></li>
+<li><p>polished_andesite_stairs</p></li>
+<li><p>polished_basalt</p></li>
+<li><p>polished_blackstone</p></li>
+<li><p>polished_blackstone_brick_slab</p></li>
+<li><p>polished_blackstone_brick_stairs</p></li>
+<li><p>polished_blackstone_brick_wall</p></li>
+<li><p>polished_blackstone_bricks</p></li>
+<li><p>polished_blackstone_button</p></li>
+<li><p>polished_blackstone_pressure_plate</p></li>
+<li><p>polished_blackstone_slab</p></li>
+<li><p>polished_blackstone_stairs</p></li>
+<li><p>polished_blackstone_wall</p></li>
+<li><p>polished_deepslate</p></li>
+<li><p>polished_deepslate_slab</p></li>
+<li><p>polished_deepslate_stairs</p></li>
+<li><p>polished_deepslate_wall</p></li>
+<li><p>polished_diorite</p></li>
+<li><p>polished_diorite_slab</p></li>
+<li><p>polished_diorite_stairs</p></li>
+<li><p>polished_granite</p></li>
+<li><p>polished_granite_slab</p></li>
+<li><p>polished_granite_stairs</p></li>
+<li><p>poppy</p></li>
+<li><p>potatoes</p></li>
+<li><p>potted_acacia_sapling</p></li>
+<li><p>potted_allium</p></li>
+<li><p>potted_azalea_bush</p></li>
+<li><p>potted_azure_bluet</p></li>
+<li><p>potted_bamboo</p></li>
+<li><p>potted_birch_sapling</p></li>
+<li><p>potted_blue_orchid</p></li>
+<li><p>potted_brown_mushroom</p></li>
+<li><p>potted_cactus</p></li>
+<li><p>potted_cornflower</p></li>
+<li><p>potted_crimson_fungus</p></li>
+<li><p>potted_crimson_roots</p></li>
+<li><p>potted_dandelion</p></li>
+<li><p>potted_dark_oak_sapling</p></li>
+<li><p>potted_dead_bush</p></li>
+<li><p>potted_fern</p></li>
+<li><p>potted_flowering_azalea_bush</p></li>
+<li><p>potted_jungle_sapling</p></li>
+<li><p>potted_lily_of_the_valley</p></li>
+<li><p>potted_oak_sapling</p></li>
+<li><p>potted_orange_tulip</p></li>
+<li><p>potted_oxeye_daisy</p></li>
+<li><p>potted_pink_tulip</p></li>
+<li><p>potted_poppy</p></li>
+<li><p>potted_red_mushroom</p></li>
+<li><p>potted_red_tulip</p></li>
+<li><p>potted_spruce_sapling</p></li>
+<li><p>potted_warped_fungus</p></li>
+<li><p>potted_warped_roots</p></li>
+<li><p>potted_white_tulip</p></li>
+<li><p>potted_wither_rose</p></li>
+<li><p>powder_snow</p></li>
+<li><p>powder_snow_cauldron</p></li>
+<li><p>powered_rail</p></li>
+<li><p>prismarine</p></li>
+<li><p>prismarine_brick_slab</p></li>
+<li><p>prismarine_brick_stairs</p></li>
+<li><p>prismarine_bricks</p></li>
+<li><p>prismarine_slab</p></li>
+<li><p>prismarine_stairs</p></li>
+<li><p>prismarine_wall</p></li>
+<li><p>pumpkin</p></li>
+<li><p>pumpkin_stem</p></li>
+<li><p>purple_banner</p></li>
+<li><p>purple_bed</p></li>
+<li><p>purple_candle</p></li>
+<li><p>purple_candle_cake</p></li>
+<li><p>purple_carpet</p></li>
+<li><p>purple_concrete</p></li>
+<li><p>purple_concrete_powder</p></li>
+<li><p>purple_glazed_terracotta</p></li>
+<li><p>purple_shulker_box</p></li>
+<li><p>purple_stained_glass</p></li>
+<li><p>purple_stained_glass_pane</p></li>
+<li><p>purple_terracotta</p></li>
+<li><p>purple_wall_banner</p></li>
+<li><p>purple_wool</p></li>
+<li><p>purpur_block</p></li>
+<li><p>purpur_pillar</p></li>
+<li><p>purpur_slab</p></li>
+<li><p>purpur_stairs</p></li>
+<li><p>quartz_block</p></li>
+<li><p>quartz_bricks</p></li>
+<li><p>quartz_pillar</p></li>
+<li><p>quartz_slab</p></li>
+<li><p>quartz_stairs</p></li>
+<li><p>rail</p></li>
+<li><p>raw_copper_block</p></li>
+<li><p>raw_gold_block</p></li>
+<li><p>raw_iron_block</p></li>
+<li><p>red_banner</p></li>
+<li><p>red_bed</p></li>
+<li><p>red_candle</p></li>
+<li><p>red_candle_cake</p></li>
+<li><p>red_carpet</p></li>
+<li><p>red_concrete</p></li>
+<li><p>red_concrete_powder</p></li>
+<li><p>red_glazed_terracotta</p></li>
+<li><p>red_mushroom</p></li>
+<li><p>red_mushroom_block</p></li>
+<li><p>red_nether_brick_slab</p></li>
+<li><p>red_nether_brick_stairs</p></li>
+<li><p>red_nether_brick_wall</p></li>
+<li><p>red_nether_bricks</p></li>
+<li><p>red_sand</p></li>
+<li><p>red_sandstone</p></li>
+<li><p>red_sandstone_slab</p></li>
+<li><p>red_sandstone_stairs</p></li>
+<li><p>red_sandstone_wall</p></li>
+<li><p>red_shulker_box</p></li>
+<li><p>red_stained_glass</p></li>
+<li><p>red_stained_glass_pane</p></li>
+<li><p>red_terracotta</p></li>
+<li><p>red_tulip</p></li>
+<li><p>red_wall_banner</p></li>
+<li><p>red_wool</p></li>
+<li><p>redstone_block</p></li>
+<li><p>redstone_lamp</p></li>
+<li><p>redstone_ore</p></li>
+<li><p>redstone_torch</p></li>
+<li><p>redstone_wall_torch</p></li>
+<li><p>redstone_wire</p></li>
+<li><p>repeater</p></li>
+<li><p>repeating_command_block</p></li>
+<li><p>respawn_anchor</p></li>
+<li><p>rooted_dirt</p></li>
+<li><p>rose_bush</p></li>
+<li><p>sand</p></li>
+<li><p>sandstone</p></li>
+<li><p>sandstone_slab</p></li>
+<li><p>sandstone_stairs</p></li>
+<li><p>sandstone_wall</p></li>
+<li><p>scaffolding</p></li>
+<li><p>sculk_sensor</p></li>
+<li><p>sea_lantern</p></li>
+<li><p>sea_pickle</p></li>
+<li><p>seagrass</p></li>
+<li><p>shroomlight</p></li>
+<li><p>shulker_box</p></li>
+<li><p>skeleton_skull</p></li>
+<li><p>skeleton_wall_skull</p></li>
+<li><p>slime_block</p></li>
+<li><p>small_amethyst_bud</p></li>
+<li><p>small_dripleaf</p></li>
+<li><p>smithing_table</p></li>
+<li><p>smoker</p></li>
+<li><p>smooth_basalt</p></li>
+<li><p>smooth_quartz</p></li>
+<li><p>smooth_quartz_slab</p></li>
+<li><p>smooth_quartz_stairs</p></li>
+<li><p>smooth_red_sandstone</p></li>
+<li><p>smooth_red_sandstone_slab</p></li>
+<li><p>smooth_red_sandstone_stairs</p></li>
+<li><p>smooth_sandstone</p></li>
+<li><p>smooth_sandstone_slab</p></li>
+<li><p>smooth_sandstone_stairs</p></li>
+<li><p>smooth_stone</p></li>
+<li><p>smooth_stone_slab</p></li>
+<li><p>snow</p></li>
+<li><p>snow_block</p></li>
+<li><p>soul_campfire</p></li>
+<li><p>soul_fire</p></li>
+<li><p>soul_lantern</p></li>
+<li><p>soul_sand</p></li>
+<li><p>soul_soil</p></li>
+<li><p>soul_torch</p></li>
+<li><p>soul_wall_torch</p></li>
+<li><p>spawner</p></li>
+<li><p>sponge</p></li>
+<li><p>spore_blossom</p></li>
+<li><p>spruce_button</p></li>
+<li><p>spruce_door</p></li>
+<li><p>spruce_fence</p></li>
+<li><p>spruce_fence_gate</p></li>
+<li><p>spruce_leaves</p></li>
+<li><p>spruce_log</p></li>
+<li><p>spruce_planks</p></li>
+<li><p>spruce_pressure_plate</p></li>
+<li><p>spruce_sapling</p></li>
+<li><p>spruce_sign</p></li>
+<li><p>spruce_slab</p></li>
+<li><p>spruce_stairs</p></li>
+<li><p>spruce_trapdoor</p></li>
+<li><p>spruce_wall_sign</p></li>
+<li><p>spruce_wood</p></li>
+<li><p>sticky_piston</p></li>
+<li><p>stone</p></li>
+<li><p>stone_brick_slab</p></li>
+<li><p>stone_brick_stairs</p></li>
+<li><p>stone_brick_wall</p></li>
+<li><p>stone_bricks</p></li>
+<li><p>stone_button</p></li>
+<li><p>stone_pressure_plate</p></li>
+<li><p>stone_slab</p></li>
+<li><p>stone_stairs</p></li>
+<li><p>stonecutter</p></li>
+<li><p>stripped_acacia_log</p></li>
+<li><p>stripped_acacia_wood</p></li>
+<li><p>stripped_birch_log</p></li>
+<li><p>stripped_birch_wood</p></li>
+<li><p>stripped_crimson_hyphae</p></li>
+<li><p>stripped_crimson_stem</p></li>
+<li><p>stripped_dark_oak_log</p></li>
+<li><p>stripped_dark_oak_wood</p></li>
+<li><p>stripped_jungle_log</p></li>
+<li><p>stripped_jungle_wood</p></li>
+<li><p>stripped_oak_log</p></li>
+<li><p>stripped_oak_wood</p></li>
+<li><p>stripped_spruce_log</p></li>
+<li><p>stripped_spruce_wood</p></li>
+<li><p>stripped_warped_hyphae</p></li>
+<li><p>stripped_warped_stem</p></li>
+<li><p>structure_block</p></li>
+<li><p>structure_void</p></li>
+<li><p>sugar_cane</p></li>
+<li><p>sunflower</p></li>
+<li><p>sweet_berry_bush</p></li>
+<li><p>tall_grass</p></li>
+<li><p>tall_seagrass</p></li>
+<li><p>target</p></li>
+<li><p>terracotta</p></li>
+<li><p>tinted_glass</p></li>
+<li><p>tnt</p></li>
+<li><p>torch</p></li>
+<li><p>trapped_chest</p></li>
+<li><p>tripwire</p></li>
+<li><p>tripwire_hook</p></li>
+<li><p>tube_coral</p></li>
+<li><p>tube_coral_block</p></li>
+<li><p>tube_coral_fan</p></li>
+<li><p>tube_coral_wall_fan</p></li>
+<li><p>tuff</p></li>
+<li><p>turtle_egg</p></li>
+<li><p>twisting_vines</p></li>
+<li><p>twisting_vines_plant</p></li>
+<li><p>vine</p></li>
+<li><p>void_air</p></li>
+<li><p>wall_torch</p></li>
+<li><p>warped_button</p></li>
+<li><p>warped_door</p></li>
+<li><p>warped_fence</p></li>
+<li><p>warped_fence_gate</p></li>
+<li><p>warped_fungus</p></li>
+<li><p>warped_hyphae</p></li>
+<li><p>warped_nylium</p></li>
+<li><p>warped_planks</p></li>
+<li><p>warped_pressure_plate</p></li>
+<li><p>warped_roots</p></li>
+<li><p>warped_sign</p></li>
+<li><p>warped_slab</p></li>
+<li><p>warped_stairs</p></li>
+<li><p>warped_stem</p></li>
+<li><p>warped_trapdoor</p></li>
+<li><p>warped_wall_sign</p></li>
+<li><p>warped_wart_block</p></li>
+<li><p>water</p></li>
+<li><p>water_cauldron</p></li>
+<li><p>waxed_copper_block</p></li>
+<li><p>waxed_cut_copper</p></li>
+<li><p>waxed_cut_copper_slab</p></li>
+<li><p>waxed_cut_copper_stairs</p></li>
+<li><p>waxed_exposed_copper</p></li>
+<li><p>waxed_exposed_cut_copper</p></li>
+<li><p>waxed_exposed_cut_copper_slab</p></li>
+<li><p>waxed_exposed_cut_copper_stairs</p></li>
+<li><p>waxed_oxidized_copper</p></li>
+<li><p>waxed_oxidized_cut_copper</p></li>
+<li><p>waxed_oxidized_cut_copper_slab</p></li>
+<li><p>waxed_oxidized_cut_copper_stairs</p></li>
+<li><p>waxed_weathered_copper</p></li>
+<li><p>waxed_weathered_cut_copper</p></li>
+<li><p>waxed_weathered_cut_copper_slab</p></li>
+<li><p>waxed_weathered_cut_copper_stairs</p></li>
+<li><p>weathered_copper</p></li>
+<li><p>weathered_cut_copper</p></li>
+<li><p>weathered_cut_copper_slab</p></li>
+<li><p>weathered_cut_copper_stairs</p></li>
+<li><p>weeping_vines</p></li>
+<li><p>weeping_vines_plant</p></li>
+<li><p>wet_sponge</p></li>
+<li><p>wheat</p></li>
+<li><p>white_banner</p></li>
+<li><p>white_bed</p></li>
+<li><p>white_candle</p></li>
+<li><p>white_candle_cake</p></li>
+<li><p>white_carpet</p></li>
+<li><p>white_concrete</p></li>
+<li><p>white_concrete_powder</p></li>
+<li><p>white_glazed_terracotta</p></li>
+<li><p>white_shulker_box</p></li>
+<li><p>white_stained_glass</p></li>
+<li><p>white_stained_glass_pane</p></li>
+<li><p>white_terracotta</p></li>
+<li><p>white_tulip</p></li>
+<li><p>white_wall_banner</p></li>
+<li><p>white_wool</p></li>
+<li><p>wither_rose</p></li>
+<li><p>wither_skeleton_skull</p></li>
+<li><p>wither_skeleton_wall_skull</p></li>
+<li><p>yellow_banner</p></li>
+<li><p>yellow_bed</p></li>
+<li><p>yellow_candle</p></li>
+<li><p>yellow_candle_cake</p></li>
+<li><p>yellow_carpet</p></li>
+<li><p>yellow_concrete</p></li>
+<li><p>yellow_concrete_powder</p></li>
+<li><p>yellow_glazed_terracotta</p></li>
+<li><p>yellow_shulker_box</p></li>
+<li><p>yellow_stained_glass</p></li>
+<li><p>yellow_stained_glass_pane</p></li>
+<li><p>yellow_terracotta</p></li>
+<li><p>yellow_wall_banner</p></li>
+<li><p>yellow_wool</p></li>
+<li><p>zombie_head</p></li>
+<li><p>zombie_wall_head</p></li>
+</ul>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../sr_block_tag/" class="btn btn-neutral float-left" title="onyx.split_registries.block_tag" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../sr_effect/" class="btn btn-neutral float-right" title="onyx.split_registries.effect" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

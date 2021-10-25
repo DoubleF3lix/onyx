@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>onyx.commands &mdash; Python  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="onyx.execute" href="../execute/" />
+    <link rel="prev" title="onyx.class_types" href="../class_types/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../bossbar/">onyx.bossbar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../class_types/">onyx.class_types</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">onyx.commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../execute/">onyx.execute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pack_manager/">onyx.pack_manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registries/">onyx.registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../split_registries/">onyx.split_registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scoreboard/">onyx.scoreboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../selector/">onyx.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../text_component/">onyx.text_component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util/">onyx.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+      <li>onyx.commands</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/commands.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-onyx.commands">
+<span id="onyx-commands"></span><h1>onyx.commands<a class="headerlink" href="#module-onyx.commands" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Bossbar">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Bossbar</span></span><a class="headerlink" href="#onyx.commands.Bossbar" title="Permalink to this definition"></a></dt>
+<dd><p>Bossbar commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Bossbar.list">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Bossbar.list" title="Permalink to this definition"></a></dt>
+<dd><p>list - Gets a list of all bossbars. Only useful with <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">store</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Data">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Data</span></span><a class="headerlink" href="#onyx.commands.Data" title="Permalink to this definition"></a></dt>
+<dd><p>Data commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Data.get">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Data.get" title="Permalink to this definition"></a></dt>
+<dd><p>get - Gets a piece of data from a source</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data_source</strong> (<a class="reference internal" href="../util/#onyx.util.DataSource" title="onyx.util.DataSource"><em>DataSource</em></a>) – The entity to get the data from. Only specify <code class="docutils literal notranslate"><span class="pre">source_type</span></code>, <code class="docutils literal notranslate"><span class="pre">location</span></code>, and <code class="docutils literal notranslate"><span class="pre">path</span></code> for the <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Data.merge">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Data.merge" title="Permalink to this definition"></a></dt>
+<dd><p>merge - Merges NBT with the data source</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_source</strong> (<a class="reference internal" href="../util/#onyx.util.DataSource" title="onyx.util.DataSource"><em>DataSource</em></a>) – The entity to merge the data with. Only specify <code class="docutils literal notranslate"><span class="pre">source_type</span></code> and <code class="docutils literal notranslate"><span class="pre">location</span></code> for the <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> object.</p></li>
+<li><p><strong>data</strong> (<em>Compound</em>) – The data to be merged with the entity. Use <code class="docutils literal notranslate"><span class="pre">nbtlib.Compound</span></code> or stringified NBT.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Data.modify">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">modify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insert_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Data.modify" title="Permalink to this definition"></a></dt>
+<dd><p>modify - Directly modify a piece of data on an entity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_source</strong> (<a class="reference internal" href="../util/#onyx.util.DataSource" title="onyx.util.DataSource"><em>DataSource</em></a>) – The entity to modify the data of. Only specify <code class="docutils literal notranslate"><span class="pre">source_type</span></code>, <code class="docutils literal notranslate"><span class="pre">location</span></code>, and <code class="docutils literal notranslate"><span class="pre">path</span></code> for the <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> object.</p></li>
+<li><p><strong>operation</strong> (<a class="reference internal" href="../registries/#onyx.registries.data_operator" title="onyx.registries.data_operator"><em>data_operator</em></a>) – How the data should be modified (append, insert, merge, prepend, or set). Use <code class="docutils literal notranslate"><span class="pre">set_from</span></code> if the data is being copied from another entity. Otherwise, use <code class="docutils literal notranslate"><span class="pre">set_value</span></code>.</p></li>
+<li><p><strong>value</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../util/#onyx.util.DataSource" title="onyx.util.DataSource"><em>DataSource</em></a><em>, </em><em>nbtlib.Base</em><em>]</em>) – Either another <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> object to copy data from, or the value to set the data to. Use <code class="docutils literal notranslate"><span class="pre">nbtlib.Base</span></code> or stringified NBT if setting to a specific value.</p></li>
+<li><p><strong>insert_index</strong> (<em>int</em><em>, </em><em>optional</em>) – The index of <code class="docutils literal notranslate"><span class="pre">path</span></code> to modify the data of. Only specify if <code class="docutils literal notranslate"><span class="pre">operation</span></code> is <code class="docutils literal notranslate"><span class="pre">insert</span></code>. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Data.remove">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Data.remove" title="Permalink to this definition"></a></dt>
+<dd><p>remove - Deletes a piece of data from an entity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data_source</strong> (<a class="reference internal" href="../util/#onyx.util.DataSource" title="onyx.util.DataSource"><em>DataSource</em></a>) – The data path to remove. Only specify <code class="docutils literal notranslate"><span class="pre">source_type</span></code>, <code class="docutils literal notranslate"><span class="pre">location</span></code>, and <code class="docutils literal notranslate"><span class="pre">path</span></code> for the <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Datapack">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Datapack</span></span><a class="headerlink" href="#onyx.commands.Datapack" title="Permalink to this definition"></a></dt>
+<dd><p>Datapack commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Datapack.disable">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">disable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pack_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Datapack.disable" title="Permalink to this definition"></a></dt>
+<dd><p>disable - Disables a data pack. Do not use this to have a data pack disable itself. You will not be able to re-enable it without running the command directly or without another data pack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pack_name</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="../pack_manager/#onyx.pack_manager.DataPack" title="onyx.pack_manager.DataPack"><em>DataPack</em></a><em>]</em>) – The data pack to disable. This can infer the data pack name from the <code class="docutils literal notranslate"><span class="pre">DataPack</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Datapack.enable">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">enable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pack_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_pack</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Datapack.enable" title="Permalink to this definition"></a></dt>
+<dd><p>enable - Enables a data pack</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pack_name</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="../pack_manager/#onyx.pack_manager.DataPack" title="onyx.pack_manager.DataPack"><em>DataPack</em></a><em>]</em>) – The pack to enable</p></li>
+<li><p><strong>mode</strong> (<a class="reference internal" href="../registries/#onyx.registries.datapack_enable_mode" title="onyx.registries.datapack_enable_mode"><em>datapack_enable_mode</em></a><em>, </em><em>optional</em>) – How the data pack should be enabled (prepend, append, first, or last). Defaults to None.</p></li>
+<li><p><strong>other_pack</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>&quot;DataPack&quot;</em><em>]</em><em>, </em><em>optional</em>) – A pack that this pack should be enabled relative to. Only use if <code class="docutils literal notranslate"><span class="pre">mode</span></code> is <code class="docutils literal notranslate"><span class="pre">after</span></code> or <code class="docutils literal notranslate"><span class="pre">before</span></code>. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Datapack.list">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Datapack.list" title="Permalink to this definition"></a></dt>
+<dd><p>list - Gets a list of all data packs. Only useful with <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">store</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Debug">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Debug</span></span><a class="headerlink" href="#onyx.commands.Debug" title="Permalink to this definition"></a></dt>
+<dd><p>Debug commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Debug.function">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Debug.function" title="Permalink to this definition"></a></dt>
+<dd><p>function - Debugs a function and stores relevant information in a text file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>function</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><a class="reference internal" href="../pack_manager/#onyx.pack_manager.Function" title="onyx.pack_manager.Function"><em>Function</em></a><em>]</em>) – The function to debug. This can infer the function name from the <code class="docutils literal notranslate"><span class="pre">Function</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Debug.start">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Debug.start" title="Permalink to this definition"></a></dt>
+<dd><p>start - Starts the debug mode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Debug.stop">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Debug.stop" title="Permalink to this definition"></a></dt>
+<dd><p>stop - Stops the debug mode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Effect">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Effect</span></span><a class="headerlink" href="#onyx.commands.Effect" title="Permalink to this definition"></a></dt>
+<dd><p>Effect commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Effect.clear">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Effect.clear" title="Permalink to this definition"></a></dt>
+<dd><p>clear - Clears an effect from the selected targets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The targets to clear the effect from</p></li>
+<li><p><strong>effect</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../sr_effect/#onyx.split_registries.effect.effect" title="onyx.split_registries.effect.effect"><em>effect</em></a><em>, </em><em>list</em><em>]</em><em>, </em><em>optional</em>) – The effects to remove. Set to a list of effects to remove multiple at once. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command(s)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[str, list]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Effect.give">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">give</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effect</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_particles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Effect.give" title="Permalink to this definition"></a></dt>
+<dd><p>give - Gives an effect to the selected targets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The targets to give the effect to</p></li>
+<li><p><strong>effect</strong> (<a class="reference internal" href="../sr_effect/#onyx.split_registries.effect.effect" title="onyx.split_registries.effect.effect"><em>effect</em></a>) – The effect to give</p></li>
+<li><p><strong>seconds</strong> (<em>int</em><em>, </em><em>optional</em>) – The duration of the effect. Defaults to 30.</p></li>
+<li><p><strong>amplifier</strong> (<em>int</em><em>, </em><em>optional</em>) – How strong the effect is. Defaults to 1.</p></li>
+<li><p><strong>show_particles</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not effect particles should be shown. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Experience">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Experience</span></span><a class="headerlink" href="#onyx.commands.Experience" title="Permalink to this definition"></a></dt>
+<dd><p>Experience commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Experience.add">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experience_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Experience.add" title="Permalink to this definition"></a></dt>
+<dd><p>add - Gives experience to a player</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The player(s) to give experience to</p></li>
+<li><p><strong>amount</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>str</em><em>]</em>) – The amount of experience to give. Supports both points with <code class="docutils literal notranslate"><span class="pre">300</span></code> and levels with <code class="docutils literal notranslate"><span class="pre">&quot;300L&quot;</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Experience.clear">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Experience.clear" title="Permalink to this definition"></a></dt>
+<dd><p>clear - Clears all experience from the player(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to clear experience from</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Experience.query">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">experience_type.levels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Experience.query" title="Permalink to this definition"></a></dt>
+<dd><p>query - Get the amount of experience from the player(s). Only useful with <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">store</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>player</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to get the experience of. If this selector targets multiple players, only the last targetted players experience will be saved.</p></li>
+<li><p><strong>type</strong> (<a class="reference internal" href="../registries/#onyx.registries.experience_type" title="onyx.registries.experience_type"><em>experience_type</em></a><em>, </em><em>optional</em>) – Levels or points. Defaults to experience_type.levels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Experience.set">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experience_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Experience.set" title="Permalink to this definition"></a></dt>
+<dd><p>set - Sets the player(s) experience</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to set the experience of</p></li>
+<li><p><strong>amount</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>str</em><em>]</em>) – What the experience should be set to. Supports both points with <code class="docutils literal notranslate"><span class="pre">300</span></code> and levels with <code class="docutils literal notranslate"><span class="pre">&quot;300L&quot;</span></code>.</p></li>
+<li><p><strong>experience_type</strong> (<a class="reference internal" href="../registries/#onyx.registries.experience_type" title="onyx.registries.experience_type"><em>experience_type</em></a><em>, </em><em>optional</em>) – Levels or points. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Forceload">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Forceload</span></span><a class="headerlink" href="#onyx.commands.Forceload" title="Permalink to this definition"></a></dt>
+<dd><p>Forceload commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Forceload.add">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Forceload.add" title="Permalink to this definition"></a></dt>
+<dd><p>add - Forceloads all chunks in the selected area</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos1</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector2" title="onyx.class_types.Vector2"><em>Vector2</em></a>) – The first corner of the selection area</p></li>
+<li><p><strong>pos2</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector2" title="onyx.class_types.Vector2"><em>Vector2</em></a><em>, </em><em>optional</em>) – The second corner of the selection area. If left unspecified, then the first corner is used as the second corner. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Forceload.query">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Forceload.query" title="Permalink to this definition"></a></dt>
+<dd><p>query - Check if a position is forceloaded</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>position</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector2" title="onyx.class_types.Vector2"><em>Vector2</em></a>) – The position to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Forceload.remove">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Forceload.remove" title="Permalink to this definition"></a></dt>
+<dd><p>remove - Remove all forceloaded chunks in the selected area</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos1</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector2" title="onyx.class_types.Vector2"><em>Vector2</em></a>) – The first corner of the selection area</p></li>
+<li><p><strong>pos2</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector2" title="onyx.class_types.Vector2"><em>Vector2</em></a><em>, </em><em>optional</em>) – The second corner of the selection area. If left unspecified, then the first corner is used as the second corner. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Forceload.remove_all">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">remove_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Forceload.remove_all" title="Permalink to this definition"></a></dt>
+<dd><p>remove_all - Remove all forceloaded chunks</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Item">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Item</span></span><a class="headerlink" href="#onyx.commands.Item" title="Permalink to this definition"></a></dt>
+<dd><p>Item commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Item.modify">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">modify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifier</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Item.modify" title="Permalink to this definition"></a></dt>
+<dd><p>modify - Apply a modifier to an item</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<a class="reference internal" href="../util/#onyx.util.DataSource" title="onyx.util.DataSource"><em>DataSource</em></a>) – The source of the item. Only specify <code class="docutils literal notranslate"><span class="pre">source_type</span></code>, <code class="docutils literal notranslate"><span class="pre">location</span></code>, and <code class="docutils literal notranslate"><span class="pre">path</span></code> (as a slot) for the <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> object.</p></li>
+<li><p><strong>modifier</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../pack_manager/#onyx.pack_manager.ItemModifier" title="onyx.pack_manager.ItemModifier"><em>ItemModifier</em></a><em>, </em><em>str</em><em>]</em>) – The modifier to apply</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Item.replace">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infer_replace_mode_override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Item.replace" title="Permalink to this definition"></a></dt>
+<dd><p>replace - Replaces an entity at the source with another item</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<a class="reference internal" href="../util/#onyx.util.DataSource" title="onyx.util.DataSource"><em>DataSource</em></a>) – The location of the item to replace</p></li>
+<li><p><strong>value</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#onyx.commands.Item" title="onyx.commands.Item"><em>Item</em></a><em>, </em><a class="reference internal" href="../util/#onyx.util.DataSource" title="onyx.util.DataSource"><em>DataSource</em></a><em>]</em>) – The item to replace the source. Set to an item to replace directly, or use a <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> object to replace it with an item from another source.</p></li>
+<li><p><strong>infer_replace_mode_override</strong> (<em>str</em><em>, </em><em>optional</em>) – Whether or not <code class="docutils literal notranslate"><span class="pre">from</span></code> or <code class="docutils literal notranslate"><span class="pre">with</span></code> should be used in the command is inferred from the type of <code class="docutils literal notranslate"><span class="pre">value</span></code>. If you’re not getting the right output, you can edit this manually by setting this. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Loot">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Loot</span></span><a class="headerlink" href="#onyx.commands.Loot" title="Permalink to this definition"></a></dt>
+<dd><p>Loot commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Loot.give">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">give</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loot_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">killed_entity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broken_with</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infer_context_override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Loot.give" title="Permalink to this definition"></a></dt>
+<dd><p>give - Give a player some loot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to give loot to</p></li>
+<li><p><strong>loot_table</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../pack_manager/#onyx.pack_manager.LootTable" title="onyx.pack_manager.LootTable"><em>LootTable</em></a><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – The loot table containing the loot you want to give. Defaults to None.</p></li>
+<li><p><strong>block</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a><em>, </em><em>optional</em>) – Either the block that was broken or where the loot should be placed in the case of <code class="docutils literal notranslate"><span class="pre">fish</span></code>. Defaults to None.</p></li>
+<li><p><strong>killed_entity</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a><em>, </em><em>optional</em>) – The entity that was killed. Defaults to None.</p></li>
+<li><p><strong>broken_with</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../sr_item/#onyx.split_registries.item.item" title="onyx.split_registries.item.item"><em>item</em></a><em>, </em><a class="reference internal" href="../registries/#onyx.registries.hand" title="onyx.registries.hand"><em>hand</em></a><em>]</em><em>, </em><em>optional</em>) – The item the block was broken with. Defaults to None.</p></li>
+<li><p><strong>infer_context_override</strong> (<em>str</em><em>, </em><em>optional</em>) – The context for the command is inferred from the parameters passed in. You can override this by setting this variable (should be <code class="docutils literal notranslate"><span class="pre">fish</span></code>, <code class="docutils literal notranslate"><span class="pre">mine</span></code>, <code class="docutils literal notranslate"><span class="pre">loot</span></code>, or <code class="docutils literal notranslate"><span class="pre">kill</span></code>). Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Loot.insert">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loot_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">killed_entity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broken_with</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infer_context_override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Loot.insert" title="Permalink to this definition"></a></dt>
+<dd><p>insert - Insert loot into a container</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a>) – The block to insert the items in</p></li>
+<li><p><strong>loot_table</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../pack_manager/#onyx.pack_manager.LootTable" title="onyx.pack_manager.LootTable"><em>LootTable</em></a><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – The loot table containing the loot you want to give. Defaults to None.</p></li>
+<li><p><strong>block</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a><em>, </em><em>optional</em>) – Either the block that was broken or where the loot should be placed in the case of <code class="docutils literal notranslate"><span class="pre">fish</span></code>. Defaults to None.</p></li>
+<li><p><strong>killed_entity</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a><em>, </em><em>optional</em>) – The entity that was killed. Defaults to None.</p></li>
+<li><p><strong>broken_with</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../sr_item/#onyx.split_registries.item.item" title="onyx.split_registries.item.item"><em>item</em></a><em>, </em><a class="reference internal" href="../registries/#onyx.registries.hand" title="onyx.registries.hand"><em>hand</em></a><em>]</em><em>, </em><em>optional</em>) – The item the block was broken with. Defaults to None.</p></li>
+<li><p><strong>infer_context_override</strong> (<em>str</em><em>, </em><em>optional</em>) – The context for the command is inferred from the parameters passed in. You can override this by setting this variable (should be <code class="docutils literal notranslate"><span class="pre">fish</span></code>, <code class="docutils literal notranslate"><span class="pre">mine</span></code>, <code class="docutils literal notranslate"><span class="pre">loot</span></code>, or <code class="docutils literal notranslate"><span class="pre">kill</span></code>). Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Loot.replace">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loot_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">killed_entity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broken_with</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infer_context_override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Loot.replace" title="Permalink to this definition"></a></dt>
+<dd><p>replace - Replace a slot in a container with loot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<a class="reference internal" href="../util/#onyx.util.DataSource" title="onyx.util.DataSource"><em>DataSource</em></a>) – The data location to put the items in. Only specify <code class="docutils literal notranslate"><span class="pre">source_type</span></code>, <code class="docutils literal notranslate"><span class="pre">location</span></code>, and <code class="docutils literal notranslate"><span class="pre">path</span></code> in the <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> object (where <code class="docutils literal notranslate"><span class="pre">path</span></code> is a slot name).</p></li>
+<li><p><strong>loot_table</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../pack_manager/#onyx.pack_manager.LootTable" title="onyx.pack_manager.LootTable"><em>LootTable</em></a><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – The loot table containing the loot you want to give. Defaults to None.</p></li>
+<li><p><strong>block</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a><em>, </em><em>optional</em>) – Either the block that was broken or where the loot should be placed in the case of <code class="docutils literal notranslate"><span class="pre">fish</span></code>. Defaults to None.</p></li>
+<li><p><strong>killed_entity</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a><em>, </em><em>optional</em>) – The entity that was killed. Defaults to None.</p></li>
+<li><p><strong>broken_with</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../sr_item/#onyx.split_registries.item.item" title="onyx.split_registries.item.item"><em>item</em></a><em>, </em><a class="reference internal" href="../registries/#onyx.registries.hand" title="onyx.registries.hand"><em>hand</em></a><em>]</em><em>, </em><em>optional</em>) – The item the block was broken with. Defaults to None.</p></li>
+<li><p><strong>infer_context_override</strong> (<em>str</em><em>, </em><em>optional</em>) – The context for the command is inferred from the parameters passed in. You can override this by setting this variable (should be <code class="docutils literal notranslate"><span class="pre">fish</span></code>, <code class="docutils literal notranslate"><span class="pre">mine</span></code>, <code class="docutils literal notranslate"><span class="pre">loot</span></code>, or <code class="docutils literal notranslate"><span class="pre">kill</span></code>). Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Loot.spawn">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">spawn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loot_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">killed_entity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broken_with</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infer_context_override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Loot.spawn" title="Permalink to this definition"></a></dt>
+<dd><p>spawn - Summons loot as items</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a>) – The location to spawn the items at</p></li>
+<li><p><strong>loot_table</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../pack_manager/#onyx.pack_manager.LootTable" title="onyx.pack_manager.LootTable"><em>LootTable</em></a><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – The loot table containing the loot you want to give. Defaults to None.</p></li>
+<li><p><strong>block</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a><em>, </em><em>optional</em>) – Either the block that was broken or where the loot should be placed in the case of <code class="docutils literal notranslate"><span class="pre">fish</span></code>. Defaults to None.</p></li>
+<li><p><strong>killed_entity</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a><em>, </em><em>optional</em>) – The entity that was killed. Defaults to None.</p></li>
+<li><p><strong>broken_with</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../sr_item/#onyx.split_registries.item.item" title="onyx.split_registries.item.item"><em>item</em></a><em>, </em><a class="reference internal" href="../registries/#onyx.registries.hand" title="onyx.registries.hand"><em>hand</em></a><em>]</em><em>, </em><em>optional</em>) – The item the block was broken with. Defaults to None.</p></li>
+<li><p><strong>infer_context_override</strong> (<em>str</em><em>, </em><em>optional</em>) – The context for the command is inferred from the parameters passed in. You can override this by setting this variable (should be <code class="docutils literal notranslate"><span class="pre">fish</span></code>, <code class="docutils literal notranslate"><span class="pre">mine</span></code>, <code class="docutils literal notranslate"><span class="pre">loot</span></code>, or <code class="docutils literal notranslate"><span class="pre">kill</span></code>). Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Perf">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Perf</span></span><a class="headerlink" href="#onyx.commands.Perf" title="Permalink to this definition"></a></dt>
+<dd><p>Perf commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Perf.start">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Perf.start" title="Permalink to this definition"></a></dt>
+<dd><p>start - Start capturing metrics on a server. This will automatically stop after 10 seconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Perf.stop">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Perf.stop" title="Permalink to this definition"></a></dt>
+<dd><p>stop - Stop capturing metrics on a server prematurely</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Recipe">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Recipe</span></span><a class="headerlink" href="#onyx.commands.Recipe" title="Permalink to this definition"></a></dt>
+<dd><p>Recipe commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Recipe.give">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">give</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipe</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Recipe.give" title="Permalink to this definition"></a></dt>
+<dd><p>give - Gives player(s) a recipe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to give the recipe to</p></li>
+<li><p><strong>recipe</strong> (<a class="reference internal" href="../sr_recipe/#onyx.split_registries.recipe.recipe" title="onyx.split_registries.recipe.recipe"><em>recipe</em></a>) – The recipe to give</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Recipe.take">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">take</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipe</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Recipe.take" title="Permalink to this definition"></a></dt>
+<dd><p>take - Takes a recipe from the player(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to take the recipe from</p></li>
+<li><p><strong>recipe</strong> (<a class="reference internal" href="../sr_recipe/#onyx.split_registries.recipe.recipe" title="onyx.split_registries.recipe.recipe"><em>recipe</em></a>) – The recipe to take</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Schedule">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Schedule</span></span><a class="headerlink" href="#onyx.commands.Schedule" title="Permalink to this definition"></a></dt>
+<dd><p>Schedule commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Schedule.clear">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Schedule.clear" title="Permalink to this definition"></a></dt>
+<dd><p>clear - Clear a function from the schedule</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>function</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../pack_manager/#onyx.pack_manager.Function" title="onyx.pack_manager.Function"><em>Function</em></a><em>, </em><em>str</em><em>]</em>) – The function to clear</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Schedule.function">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schedule_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">schedule_mode.replace</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Schedule.function" title="Permalink to this definition"></a></dt>
+<dd><p>function - Schedules a function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../pack_manager/#onyx.pack_manager.Function" title="onyx.pack_manager.Function"><em>Function</em></a><em>, </em><em>str</em><em>]</em>) – The function to schedule</p></li>
+<li><p><strong>time</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>str</em><em>]</em>) – The time to wait before the function runs. If <code class="docutils literal notranslate"><span class="pre">int</span></code>, unit is ticks. Ticks, seconds, minutes, hours, days, weeks are supported as a string. 3, “3t”, “3s”, “3m”, “3h”, “3d”, and “3w” are all supported values. Note that the unit will be converted to the closest matching neighbor. Ticks are left as ticks, minutes are converted to seconds, hours are converted to seconds, and weeks are converted to days.</p></li>
+<li><p><strong>schedule_mode</strong> (<a class="reference internal" href="../registries/#onyx.registries.schedule_mode" title="onyx.registries.schedule_mode"><em>schedule_mode</em></a><em>, </em><em>optional</em>) – Whether or not the functions existing schedule time or allow multiple schedules for the same function to exist at once. Defaults to schedule_mode.replace.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Scoreboard">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Scoreboard</span></span><a class="headerlink" href="#onyx.commands.Scoreboard" title="Permalink to this definition"></a></dt>
+<dd><p>Scoreboard commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Scoreboard.list_player_scores">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">list_player_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Scoreboard.list_player_scores" title="Permalink to this definition"></a></dt>
+<dd><p>list_player_scores - Get a list of all scores for a player</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>target</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to get the scores of</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Scoreboard.reset_player_scores">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">reset_player_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Scoreboard.reset_player_scores" title="Permalink to this definition"></a></dt>
+<dd><p>reset_player_scores - Reset all scores of the player(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>target</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to reset the scores of</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Scoreboard.list_objectives">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">list_objectives</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Scoreboard.list_objectives" title="Permalink to this definition"></a></dt>
+<dd><p>list_objectives - Get a list of all objectives. Only useful with <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">store</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Tag">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Tag</span></span><a class="headerlink" href="#onyx.commands.Tag" title="Permalink to this definition"></a></dt>
+<dd><p>Tag commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Tag.add">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Tag.add" title="Permalink to this definition"></a></dt>
+<dd><p>add - Add a tag to the target(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The targets to add the tag to</p></li>
+<li><p><strong>tag_name</strong> (<em>str</em>) – The tag to add</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Tag.list">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Tag.list" title="Permalink to this definition"></a></dt>
+<dd><p>list - Get a list of all tags on the target(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>targets</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The targets to get the tags of</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Tag.remove">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Tag.remove" title="Permalink to this definition"></a></dt>
+<dd><p>remove - Remove a tag from the target(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The targets to remove the tag from</p></li>
+<li><p><strong>tag_name</strong> (<em>str</em>) – The tag to remove</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Team">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Team</span></span><a class="headerlink" href="#onyx.commands.Team" title="Permalink to this definition"></a></dt>
+<dd><p>Team commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Team.add">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Team.add" title="Permalink to this definition"></a></dt>
+<dd><p>add - Creates a team</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the team</p></li>
+<li><p><strong>display_name</strong> (<a class="reference internal" href="../text_component/#onyx.text_component.TextComponent" title="onyx.text_component.TextComponent"><em>TextComponent</em></a><em>, </em><em>optional</em>) – The display name of the team. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Team.empty">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Team.empty" title="Permalink to this definition"></a></dt>
+<dd><p>empty - Empties a team</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – The team to empty</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Team.join">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">join</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Team.join" title="Permalink to this definition"></a></dt>
+<dd><p>join - Adds the target(s) to the team</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The team to add the target(s) to</p></li>
+<li><p><strong>targets</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The target(s) to add to the team</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Team.leave">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">leave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Team.leave" title="Permalink to this definition"></a></dt>
+<dd><p>leave - Removes the target(s) from their teams</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>targets</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The target(s) to remove from their teams</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Team.list">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Team.list" title="Permalink to this definition"></a></dt>
+<dd><p>list - Get a list of all players in a team</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – The team to get the list of players from. Defaults to None.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Team.modify">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">modify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Team.modify" title="Permalink to this definition"></a></dt>
+<dd><p>modify - Modifies a team’s attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The team to modify</p></li>
+<li><p><strong>attribute</strong> (<a class="reference internal" href="../registries/#onyx.registries.team_attribute" title="onyx.registries.team_attribute"><em>team_attribute</em></a>) – The attribute to modify</p></li>
+<li><p><strong>value</strong> (<em>Union</em><em>[</em><em>bool</em><em>, </em><a class="reference internal" href="../text_component/#onyx.text_component.TextComponent" title="onyx.text_component.TextComponent"><em>TextComponent</em></a><em>, </em><a class="reference internal" href="../registries/#onyx.registries.color" title="onyx.registries.color"><em>color</em></a><em>, </em><a class="reference internal" href="../registries/#onyx.registries.collision_rule" title="onyx.registries.collision_rule"><em>collision_rule</em></a><em>, </em><em>death_message_visibility</em><em>, </em><em>nametag_visibility</em><em>]</em>) – The value to set the attribute to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Team.remove">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Team.remove" title="Permalink to this definition"></a></dt>
+<dd><p>remove - Deletes a team</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – The team to delete</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Time">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Time</span></span><a class="headerlink" href="#onyx.commands.Time" title="Permalink to this definition"></a></dt>
+<dd><p>Time commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Time.add">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Time.add" title="Permalink to this definition"></a></dt>
+<dd><p>add - Adds time to the world</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>str</em>) – The amount of time to add. Seconds, minutes, hours, days, weeks are supported as a string. 3, “3s”, “3m”, “3h”, “3d”, and “3w” are all supported values. Note that all units will be converted to time units. See <a class="reference external" href="https://minecraft.fandom.com/wiki/Daylight_cycle#Conversions">this wiki page</a> for more info.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Time.query">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Time.query" title="Permalink to this definition"></a></dt>
+<dd><p>query - Get the current time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>type</strong> (<a class="reference internal" href="../registries/#onyx.registries.time_query" title="onyx.registries.time_query"><em>time_query</em></a>) – What type of time should be queried (day count, day time, or game time)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Time.set">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Time.set" title="Permalink to this definition"></a></dt>
+<dd><p>set - Sets the time of the world</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>str</em>) – <p>The amount to be set. Seconds, minutes, hours, days, weeks are supported as a string. 3, “3s”, “3m”, “3h”, “3d”, and “3w” are all supported values. Note that all units will be converted to time units. See <a class="reference external" href="https://minecraft.fandom.com/wiki/Daylight_cycle#Conversions">this wiki page</a> for more info.</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Title">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Title</span></span><a class="headerlink" href="#onyx.commands.Title" title="Permalink to this definition"></a></dt>
+<dd><p>Title commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Title.actionbar">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">actionbar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Title.actionbar" title="Permalink to this definition"></a></dt>
+<dd><p>actionbar - Sets text in the action bar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to show the text to</p></li>
+<li><p><strong>text</strong> (<a class="reference internal" href="../text_component/#onyx.text_component.TextComponent" title="onyx.text_component.TextComponent"><em>TextComponent</em></a>) – The text to show</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Title.clear">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Title.clear" title="Permalink to this definition"></a></dt>
+<dd><p>clear - Clear all titles</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to clear the titles of</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Title.reset">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Title.reset" title="Permalink to this definition"></a></dt>
+<dd><p>reset - Reset subtitle and title timings to their default value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to reset the subtitles and title timings of</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Title.subtitle">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">subtitle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_subtitle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Title.subtitle" title="Permalink to this definition"></a></dt>
+<dd><p>subtitle - Sets text as a subtitle</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to show the text to</p></li>
+<li><p><strong>text</strong> (<a class="reference internal" href="../text_component/#onyx.text_component.TextComponent" title="onyx.text_component.TextComponent"><em>TextComponent</em></a>) – The text to show</p></li>
+<li><p><strong>only_subtitle</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not the subtitle will be shown by itself. If <code class="docutils literal notranslate"><span class="pre">True</span></code>, a blank title will be created. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Title.times">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">times</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fadeIn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fadeOut</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Title.times" title="Permalink to this definition"></a></dt>
+<dd><p>times - Sets the fade in, stay, and fade out times for titles</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to modify the title timings of</p></li>
+<li><p><strong>fadeIn</strong> (<em>int</em>) – How long it takes for the text to fade in in ticks</p></li>
+<li><p><strong>stay</strong> (<em>int</em>) – How long the text will stay in ticks</p></li>
+<li><p><strong>fadeOut</strong> (<em>int</em>) – How long it takes for the text to fade out in ticks</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Title.title">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Title.title" title="Permalink to this definition"></a></dt>
+<dd><p>title - Sets text as a title</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to show the text to</p></li>
+<li><p><strong>text</strong> (<a class="reference internal" href="../text_component/#onyx.text_component.TextComponent" title="onyx.text_component.TextComponent"><em>TextComponent</em></a>) – The text to show</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Trigger">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Trigger</span></span><a class="headerlink" href="#onyx.commands.Trigger" title="Permalink to this definition"></a></dt>
+<dd><p>Trigger commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Trigger.add">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objective</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Trigger.add" title="Permalink to this definition"></a></dt>
+<dd><p>add - Adds to the score of a trigger objective</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>objective</strong> (<em>Union</em><em>[</em><em>str</em><em>,</em>) – The objective to add to the score of. Player is not specified as the scoreboard player is <code class="docutils literal notranslate"><span class="pre">&#64;s</span></code>.</p></li>
+<li><p><strong>value</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>]</em>) – The value to add</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Trigger.set">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objective</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Trigger.set" title="Permalink to this definition"></a></dt>
+<dd><p>sets - Sets a score of a trigger objective</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>objective</strong> (<em>Union</em><em>[</em><em>str</em><em>,</em>) – The objective to set the score of. Player is not specified as the scoreboard player is <code class="docutils literal notranslate"><span class="pre">&#64;s</span></code>.</p></li>
+<li><p><strong>value</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>]</em>) – The value to set</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Worldborder">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Worldborder</span></span><a class="headerlink" href="#onyx.commands.Worldborder" title="Permalink to this definition"></a></dt>
+<dd><p>Worldborder commands</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Worldborder.add">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Worldborder.add" title="Permalink to this definition"></a></dt>
+<dd><p>add - Increases the area of the world border</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distance</strong> (<em>int</em>) – The distance in blocks that will be added to the world border (even numbers will go to half blocks)</p></li>
+<li><p><strong>time</strong> (<em>int</em>) – How long it should take for the world border to transition to the new size. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Worldborder.center">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">center</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Worldborder.center" title="Permalink to this definition"></a></dt>
+<dd><p>center - Defines the center of the world border</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>position</strong> (<a class="reference internal" href="../util/#onyx.util.AbsPos2D" title="onyx.util.AbsPos2D"><em>AbsPos2D</em></a>) – The position to set the center of the world border to</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Worldborder.damage">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">damage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">per_block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Worldborder.damage" title="Permalink to this definition"></a></dt>
+<dd><p>damage - Sets the amount of damage done by the world border</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>per_block</strong> (<em>int</em><em>, </em><em>optional</em>) – How much damage should be done to the player per second per block that they move past the world border buffer. Defaults to None.</p></li>
+<li><p><strong>buffer_distance</strong> (<em>int</em><em>, </em><em>optional</em>) – How distance from the world border the player must be before taking damage. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Neither <code class="docutils literal notranslate"><span class="pre">per_block</span></code> nor <code class="docutils literal notranslate"><span class="pre">buffer_distance</span></code> are specified</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Worldborder.get">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Worldborder.get" title="Permalink to this definition"></a></dt>
+<dd><p>get - Gets the world border size. Only useful with <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">store</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Worldborder.set">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Worldborder.set" title="Permalink to this definition"></a></dt>
+<dd><p>set - Sets the world border size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distance</strong> (<em>int</em>) – The new size of the world border</p></li>
+<li><p><strong>time</strong> (<em>int</em>) – How long it should take for the world border to transition to the new size. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Worldborder.warning">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">warning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Worldborder.warning" title="Permalink to this definition"></a></dt>
+<dd><p>warning - Sets a world border warning</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distance</strong> (<em>int</em><em>, </em><em>optional</em>) – The distance the player has to be from the world border to start showing a red border.. Defaults to None.</p></li>
+<li><p><strong>time</strong> (<em>int</em><em>, </em><em>optional</em>) – The time in seconds the world border has to be away from the player before showing a red border. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Neither <code class="docutils literal notranslate"><span class="pre">distance</span></code> nor <code class="docutils literal notranslate"><span class="pre">time</span></code> are specified</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Commands</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.commands.Commands">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.commands.</span></span><span class="sig-name descname"><span class="pre">Commands</span></span><a class="headerlink" href="#onyx.commands.Commands" title="Permalink to this definition"></a></dt>
+<dd><p>Commands - A class containing all the commands in the game. Commands with many sub-commands are split into their own classes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.push">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.push" title="Permalink to this definition"></a></dt>
+<dd><p>push - Adds a command to the function contents. All function calls for commands go through this function at some point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>command</strong> (<em>str</em>) – The command to add</p></li>
+<li><p><strong>init</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not the command is added to the pack’s <code class="docutils literal notranslate"><span class="pre">_init.mcfunction</span></code>. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The command that was added</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.comment">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">comment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.comment" title="Permalink to this definition"></a></dt>
+<dd><p>comment - Adds a comment to the function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – The comment contents</p></li>
+<li><p><strong>preline</strong> (<em>int</em><em>, </em><em>optional</em>) – How many blank lines should be inserted before the comment. Defaults to 1.</p></li>
+<li><p><strong>postline</strong> (<em>int</em><em>, </em><em>optional</em>) – How many blank lines should be inserted after the comment. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.advancement">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">advancement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">should_revoke</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">advancement_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">advancement_source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.advancement" title="Permalink to this definition"></a></dt>
+<dd><p>advancement - Modify advancements on players</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>should_revoke</strong> (<em>bool</em>) – Whether or not the advancement specified should be revoked or not.</p></li>
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to modify the advancements of</p></li>
+<li><p><strong>advancement_mode</strong> (<a class="reference internal" href="../registries/#onyx.registries.advancement_mode" title="onyx.registries.advancement_mode"><em>advancement_mode</em></a>) – How the advancement should be modified (everything, from, only, through, until)</p></li>
+<li><p><strong>advancement_source</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../pack_manager/#onyx.pack_manager.Advancement" title="onyx.pack_manager.Advancement"><em>Advancement</em></a><em>, </em><em>optional</em>) – The source of the advancement that should be added or removed to players. Only specify if <code class="docutils literal notranslate"><span class="pre">advancement_mode</span></code> is NOT <code class="docutils literal notranslate"><span class="pre">everything</span></code>. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.attribute">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.attribute" title="Permalink to this definition"></a></dt>
+<dd><p>attribute - Modify attributes on entities</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The entities to modify the attributes of</p></li>
+<li><p><strong>attribute</strong> (<a class="reference internal" href="../registries/#onyx.registries.attribute" title="onyx.registries.attribute"><em>attribute</em></a>) – The attribute to modify</p></li>
+<li><p><strong>attribute_mode</strong> (<a class="reference internal" href="../registries/#onyx.registries.attribute_mode" title="onyx.registries.attribute_mode"><em>attribute_mode</em></a>) – How the attribute should be modified (get, get_base, set_base, add_modifier, etc.)</p></li>
+<li><p><strong>modifier</strong> (<a class="reference internal" href="../util/#onyx.util.AttributeModifier" title="onyx.util.AttributeModifier"><em>AttributeModifier</em></a><em>, </em><em>optional</em>) – The modifier to apply to the selected attribute. Only use with modifier advancement modes. Defaults to None.</p></li>
+<li><p><strong>scale</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>]</em><em>, </em><em>optional</em>) – The scale at which an attribute should be retrieved. Only useful with <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">store</span></code>. Defaults to 1.</p></li>
+<li><p><strong>base_value</strong> (<em>int</em><em>, </em><em>optional</em>) – The value for <code class="docutils literal notranslate"><span class="pre">base</span> <span class="pre">set</span></code>. Should only be specified if <code class="docutils literal notranslate"><span class="pre">attribute_mode</span></code> is <code class="docutils literal notranslate"><span class="pre">base</span> <span class="pre">set</span></code>. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.clear">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.clear" title="Permalink to this definition"></a></dt>
+<dd><p>clear - Clears an item from players</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to clear the item from</p></li>
+<li><p><strong>item</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../sr_item/#onyx.split_registries.item.item" title="onyx.split_registries.item.item"><em>item</em></a><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – The item to clear. Defaults to None.</p></li>
+<li><p><strong>max_count</strong> (<em>int</em><em>, </em><em>optional</em>) – The limit on how many items can be cleared. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.clone">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">clone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corner1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corner2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">clone_mask_mode.replace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clone_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">clone_mode.normal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.clone" title="Permalink to this definition"></a></dt>
+<dd><p>clone - Clone blocks in a selected area</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>corner1</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a>) – Corner 1 of the selection area</p></li>
+<li><p><strong>corner2</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a>) – Corner 2 of the selection area</p></li>
+<li><p><strong>location</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a>) – The location the selection area should be cloned to</p></li>
+<li><p><strong>mask_mode</strong> (<a class="reference internal" href="../registries/#onyx.registries.clone_mask_mode" title="onyx.registries.clone_mask_mode"><em>clone_mask_mode</em></a><em>, </em><em>optional</em>) – What blocks should be selected in the clone area. <code class="docutils literal notranslate"><span class="pre">filtered</span></code> removes blocks that don’t match the block/block tag specified in the <code class="docutils literal notranslate"><span class="pre">filter</span></code> argument. <code class="docutils literal notranslate"><span class="pre">masked</span></code> prevents air from overriding blocks at the location. <code class="docutils literal notranslate"><span class="pre">replace</span></code> replaces everything at the location. Defaults to clone_mask_mode.replace.</p></li>
+<li><p><strong>filter</strong> (<a class="reference internal" href="../util/#onyx.util.Block" title="onyx.util.Block"><em>Block</em></a><em>, </em><em>optional</em>) – Argument for <code class="docutils literal notranslate"><span class="pre">mask_mode</span></code>. Only specify if <code class="docutils literal notranslate"><span class="pre">mask_mode</span></code> is <code class="docutils literal notranslate"><span class="pre">filtered</span></code>. Defaults to None.</p></li>
+<li><p><strong>clone_mode</strong> (<a class="reference internal" href="../registries/#onyx.registries.clone_mode" title="onyx.registries.clone_mode"><em>clone_mode</em></a><em>, </em><em>optional</em>) – How the cloning should be done (force, move, or normal). Defaults to clone_mode.normal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.defaultgamemode">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">defaultgamemode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.defaultgamemode" title="Permalink to this definition"></a></dt>
+<dd><p>defaultgamemode - Sets the default game mode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mode</strong> (<a class="reference internal" href="../registries/#onyx.registries.gamemode" title="onyx.registries.gamemode"><em>gamemode</em></a>) – The gamemode to set as the default</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.difficulty">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">difficulty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">difficulty</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.difficulty" title="Permalink to this definition"></a></dt>
+<dd><p>difficulty - Sets the difficulty</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>difficulty</strong> (<a class="reference internal" href="../registries/#onyx.registries.difficulty" title="onyx.registries.difficulty"><em>difficulty</em></a>) – The difficulty to set</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.enchant">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">enchant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enchantment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.enchant" title="Permalink to this definition"></a></dt>
+<dd><p>enchant - Adds enchantments to the selected item on a player</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players whose selected item should be enchanted</p></li>
+<li><p><strong>enchantment</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../sr_enchantment/#onyx.split_registries.enchantment.enchantment" title="onyx.split_registries.enchantment.enchantment"><em>enchantment</em></a><em>, </em><em>dict</em><em>]</em>) – The enchantment to apply. Can either be specified as an enchantment or a dictionary. If dictionary, the keys are the enchantments and the values are the levels.</p></li>
+<li><p><strong>level</strong> (<em>int</em><em>, </em><em>optional</em>) – The level of the enchantment. Only specify if <code class="docutils literal notranslate"><span class="pre">enchantment</span></code> is not a dictionary. Defaults to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command(s)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[str, list]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.fill">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">fill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corner1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corner2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">fill_mode.replace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.fill" title="Permalink to this definition"></a></dt>
+<dd><p>fill - Fills all blocks in an area with a specified block</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>corner1</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a>) – Corner 1 of the selection area</p></li>
+<li><p><strong>corner2</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a>) – Corner 2 of the selection area</p></li>
+<li><p><strong>block</strong> (<a class="reference internal" href="../sr_block/#onyx.split_registries.block.block" title="onyx.split_registries.block.block"><em>block</em></a>) – The block to fill in the selection area</p></li>
+<li><p><strong>mode</strong> (<a class="reference internal" href="../registries/#onyx.registries.fill_mode" title="onyx.registries.fill_mode"><em>fill_mode</em></a><em>, </em><em>optional</em>) – How the fill should be done (destroy, hollow, keep, outline, replace). Defaults to fill_mode.replace.</p></li>
+<li><p><strong>replace_block</strong> (<a class="reference internal" href="../sr_block/#onyx.split_registries.block.block" title="onyx.split_registries.block.block"><em>block</em></a><em>, </em><em>optional</em>) – What blocks should be replaced. Only specify if <code class="docutils literal notranslate"><span class="pre">mode</span></code> is <code class="docutils literal notranslate"><span class="pre">replace</span></code>. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.function">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.function" title="Permalink to this definition"></a></dt>
+<dd><p>function - Executes a function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>function</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../pack_manager/#onyx.pack_manager.Function" title="onyx.pack_manager.Function"><em>Function</em></a><em>, </em><em>str</em><em>]</em>) – The function to execute. An alternative to <code class="docutils literal notranslate"><span class="pre">function</span> <span class="pre">&lt;FunctionObj&gt;</span></code> is just <code class="docutils literal notranslate"><span class="pre">&lt;FunctionObj()&gt;</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.gamemode">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">gamemode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.gamemode" title="Permalink to this definition"></a></dt>
+<dd><p>gamemode - Sets the gamemode of players</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<a class="reference internal" href="../registries/#onyx.registries.gamemode" title="onyx.registries.gamemode"><em>gamemode</em></a>) – The gamemode to set</p></li>
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to set the gamemode of</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.gamerule">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">gamerule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.gamerule" title="Permalink to this definition"></a></dt>
+<dd><p>gamerule - Modifies a gamerule</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rule</strong> (<a class="reference internal" href="../sr_gamerule/#onyx.split_registries.gamerule.gamerule" title="onyx.split_registries.gamerule.gamerule"><em>gamerule</em></a>) – The rule to modify</p></li>
+<li><p><strong>value</strong> (<em>Union</em><em>[</em><em>bool</em><em>, </em><em>int</em><em>, </em><em>str</em><em>]</em>) – The new value of the gamerule</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.give">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">give</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.give" title="Permalink to this definition"></a></dt>
+<dd><p>give - Gives an item to players</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to give the item to</p></li>
+<li><p><strong>item</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../sr_item/#onyx.split_registries.item.item" title="onyx.split_registries.item.item"><em>item</em></a><em>, </em><a class="reference internal" href="#onyx.commands.Item" title="onyx.commands.Item"><em>Item</em></a><em>]</em>) – The item to be given. If you need to specify item NBT, use an <code class="docutils literal notranslate"><span class="pre">Item</span></code> object.</p></li>
+<li><p><strong>count</strong> (<em>int</em><em>, </em><em>optional</em>) – How many of the item should be given. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.help">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.help" title="Permalink to this definition"></a></dt>
+<dd><p>help - Displays help for a command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command</strong> (<em>str</em><em>, </em><em>optional</em>) – The command to get help for. Defaults to None.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.kill">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">kill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_kill</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.kill" title="Permalink to this definition"></a></dt>
+<dd><p>kill - Kills entities</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The entities to kill</p></li>
+<li><p><strong>clean_kill</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, then a <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">merge</span></code> command is used instead to leave no trace of the entity (no particles, items, etc.). This will not work on players (it won’t fail, but it won’t do anything to them either). Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.list">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_uuids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.list" title="Permalink to this definition"></a></dt>
+<dd><p>list - Lists all online players</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>include_uuids</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not the UUID should be listed next to the player name. Defaults to False.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.locate">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">locate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">structure</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.locate" title="Permalink to this definition"></a></dt>
+<dd><p>locate - Get the distance to the nearest specified structure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>structure</strong> (<a class="reference internal" href="../sr_structure/#onyx.split_registries.structure.structure" title="onyx.split_registries.structure.structure"><em>structure</em></a>) – The structure to target</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.locatebiome">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">locatebiome</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">biome</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.locatebiome" title="Permalink to this definition"></a></dt>
+<dd><p>locatebiome - Get the distance to the nearest specified biome</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>biome</strong> (<a class="reference internal" href="../sr_biome/#onyx.split_registries.biome.biome" title="onyx.split_registries.biome.biome"><em>biome</em></a>) – The biome to target</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.me">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">me</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.me" title="Permalink to this definition"></a></dt>
+<dd><p>me - Display a message about the executor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The message to display</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.msg">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">msg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.msg" title="Permalink to this definition"></a></dt>
+<dd><p>msg - Messages a player</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to message</p></li>
+<li><p><strong>text</strong> (<em>str</em>) – The message to send</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.particle">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">particle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.particle" title="Permalink to this definition"></a></dt>
+<dd><p>particle - Displays a particle</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_settings</strong> (<em>Particle</em>) – Information about the particle itself</p></li>
+<li><p><strong>force</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the particle should be forced to render. Defaults to False.</p></li>
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a><em>, </em><em>optional</em>) – The players who can see the particle. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.playsound">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">playsound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sound</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.playsound" title="Permalink to this definition"></a></dt>
+<dd><p>playsound - Plays a sound</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sound</strong> (<em>str</em>) – The sound to play</p></li>
+<li><p><strong>channel</strong> (<a class="reference internal" href="../registries/#onyx.registries.sound_channel" title="onyx.registries.sound_channel"><em>sound_channel</em></a>) – The channel to play the sound on</p></li>
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to play the sound to</p></li>
+<li><p><strong>position</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a><em>, </em><em>optional</em>) – The position that the sound should be played from. Defaults to None.</p></li>
+<li><p><strong>volume</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>]</em><em>, </em><em>optional</em>) – How far away the sound can be heard in blocks. Defaults to None.</p></li>
+<li><p><strong>pitch</strong> (<em>float</em><em>, </em><em>optional</em>) – The pitch of the sound. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – Invalid sound channel (<code class="docutils literal notranslate"><span class="pre">stopsound</span></code> exclusive)</p></li>
+<li><p><strong>ValueError</strong> – Invalid pitch value (must be between 0 and 2)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.say">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">say</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.say" title="Permalink to this definition"></a></dt>
+<dd><p>say - Prints text to chat</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The text to print</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.seed">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">seed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.seed" title="Permalink to this definition"></a></dt>
+<dd><p>seed - Gets the world seed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.setblock">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">setblock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">setblock_mode.replace</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.setblock" title="Permalink to this definition"></a></dt>
+<dd><p>setblock - Sets a block</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a>) – The position to set the block at</p></li>
+<li><p><strong>block</strong> (<a class="reference internal" href="../util/#onyx.util.Block" title="onyx.util.Block"><em>Block</em></a>) – The block to set</p></li>
+<li><p><strong>mode</strong> (<a class="reference internal" href="../registries/#onyx.registries.setblock_mode" title="onyx.registries.setblock_mode"><em>setblock_mode</em></a><em>, </em><em>optional</em>) – How the block should be set (destroy, keep, replace). Defaults to setblock_mode.replace.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.setworldspawn">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">setworldspawn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.setworldspawn" title="Permalink to this definition"></a></dt>
+<dd><p>setworldspawn - Sets the world spawn</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a>) – The position to set the world spawn at</p></li>
+<li><p><strong>angle</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>]</em><em>, </em><em>optional</em>) – The Y (horizontal) angle that the players will spawn at. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.spawnpoint">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">spawnpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.spawnpoint" title="Permalink to this definition"></a></dt>
+<dd><p>spawnpoint - Sets the spawn point of specific players</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to set the spawn point of</p></li>
+<li><p><strong>position</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a>) – The position to set the spawn point at</p></li>
+<li><p><strong>angle</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>]</em><em>, </em><em>optional</em>) – The Y (horizontal) angle that the players will spawn at. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.spectate">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">spectate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&#64;s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">put_in_gamemode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.spectate" title="Permalink to this definition"></a></dt>
+<dd><p>spectate - Forces an entity to spectate another</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The entity which should be spectated</p></li>
+<li><p><strong>source</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a><em>, </em><em>optional</em>) – The entity that will be spectating the target. Defaults to “&#64;s”.</p></li>
+<li><p><strong>put_in_gamemode</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether the target should be put in spectator mode. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.spreadplayers">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">spreadplayers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spread_distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">respect_teams</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">under</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.spreadplayers" title="Permalink to this definition"></a></dt>
+<dd><p>spreadplayers - Spreads players around a point</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>center</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector2" title="onyx.class_types.Vector2"><em>Vector2</em></a>) – The point at which players should be spread around</p></li>
+<li><p><strong>spread_distance</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>]</em>) – The minimum distance between players</p></li>
+<li><p><strong>max_range</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>]</em>) – The maximum distance from the center that players should be spread to. This area is a square, not a circle.</p></li>
+<li><p><strong>respect_teams</strong> (<em>bool</em>) – Whether or not teams should be kept together</p></li>
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players that should be spread</p></li>
+<li><p><strong>under</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>]</em><em>, </em><em>optional</em>) – The maximum height players can be spread to. If undefined, players will be put as high as possible. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.stopsound">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">stopsound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sound</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.stopsound" title="Permalink to this definition"></a></dt>
+<dd><p>stopsound - Stops sound(s) for players</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players to stop the sound(s) for</p></li>
+<li><p><strong>channel</strong> (<a class="reference internal" href="../registries/#onyx.registries.sound_channel" title="onyx.registries.sound_channel"><em>sound_channel</em></a><em>, </em><em>optional</em>) – The channel to stop the sound(s) on. Defaults to None.</p></li>
+<li><p><strong>sound</strong> (<em>str</em><em>, </em><em>optional</em>) – The sound to stop. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.summon">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">summon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.summon" title="Permalink to this definition"></a></dt>
+<dd><p>summon - Summons an entity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<a class="reference internal" href="../sr_entity/#onyx.split_registries.entity.entity" title="onyx.split_registries.entity.entity"><em>entity</em></a>) – The identifier of the entity to summon</p></li>
+<li><p><strong>position</strong> (<a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a>) – The location that the entity should be summoned at</p></li>
+<li><p><strong>nbt</strong> (<em>Compound</em><em>, </em><em>optional</em>) – Any NBT that should be placed on the entity. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.teammsg">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">teammsg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.teammsg" title="Permalink to this definition"></a></dt>
+<dd><p>teammsg - Sends a message to the players team</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The message to send</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.teleport">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">teleport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">facing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.teleport" title="Permalink to this definition"></a></dt>
+<dd><p>teleport - Teleports entities to another entity or a location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The entities to teleport</p></li>
+<li><p><strong>destination</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a><em>, </em><a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a><em>]</em>) – The location or entity the targets should be teleported to</p></li>
+<li><p><strong>facing</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a><em>, </em><a class="reference internal" href="../class_types/#onyx.class_types.Vector3" title="onyx.class_types.Vector3"><em>Vector3</em></a><em>]</em><em>, </em><em>optional</em>) – The location or entity the targets should be facing. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.tellraw">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">tellraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">players</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.tellraw" title="Permalink to this definition"></a></dt>
+<dd><p>tellraw - Prints a text component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>players</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a>) – The players the text should be sent to</p></li>
+<li><p><strong>text</strong> (<a class="reference internal" href="../text_component/#onyx.text_component.TextComponent" title="onyx.text_component.TextComponent"><em>TextComponent</em></a>) – The text to print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.commands.Commands.weather">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">weather</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weather_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.commands.Commands.weather" title="Permalink to this definition"></a></dt>
+<dd><p>weather - Modifies the weather</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>weather_type</strong> (<a class="reference internal" href="../registries/#onyx.registries.weather_type" title="onyx.registries.weather_type"><em>weather_type</em></a>) – The weather that should be set</p></li>
+<li><p><strong>duration</strong> (<em>int</em><em>, </em><em>optional</em>) – How long the weather should last. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../class_types/" class="btn btn-neutral float-left" title="onyx.class_types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../execute/" class="btn btn-neutral float-right" title="onyx.execute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

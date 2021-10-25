@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>onyx.selector &mdash; Python  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="onyx.text_component" href="../text_component/" />
+    <link rel="prev" title="onyx.scoreboard" href="../scoreboard/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../bossbar/">onyx.bossbar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../class_types/">onyx.class_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands/">onyx.commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../execute/">onyx.execute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pack_manager/">onyx.pack_manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registries/">onyx.registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../split_registries/">onyx.split_registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scoreboard/">onyx.scoreboard</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">onyx.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../text_component/">onyx.text_component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util/">onyx.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+      <li>onyx.selector</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/selector.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-onyx.selector">
+<span id="onyx-selector"></span><h1>onyx.selector<a class="headerlink" href="#module-onyx.selector" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.selector.Selector">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.selector.</span></span><span class="sig-name descname"><span class="pre">Selector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">selector_type.all_entities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">advancements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamemode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">team</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.selector.Selector" title="Permalink to this definition"></a></dt>
+<dd><p>Selector - Represents a selector</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<a class="reference internal" href="../registries/#onyx.registries.selector_type" title="onyx.registries.selector_type"><em>selector_type</em></a><em>, </em><em>optional</em>) – The type of selector (<code class="docutils literal notranslate"><span class="pre">&#64;e</span></code>, <a href="#id1"><span class="problematic" id="id2">``</span></a>&#64;s`, etc.). Defaults to selector_type.all_entities.</p></li>
+<li><p><strong>advancements</strong> (<em>dict</em><em>, </em><em>optional</em>) – The advancements of the entity. Defaults to None.</p></li>
+<li><p><strong>distance</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><a class="reference internal" href="../util/#onyx.util.Range" title="onyx.util.Range"><em>Range</em></a><em>]</em><em>, </em><em>optional</em>) – The distance of the entity from a certain point. Defaults to None.</p></li>
+<li><p><strong>dx</strong> (<em>int</em><em>, </em><em>optional</em>) – How far away the entity can be from <code class="docutils literal notranslate"><span class="pre">x</span></code> in the positive X-axis. Defaults to None.</p></li>
+<li><p><strong>dy</strong> (<em>int</em><em>, </em><em>optional</em>) – How far away the entity can be from <code class="docutils literal notranslate"><span class="pre">y</span></code> in the positive Y-axis. Defaults to None.</p></li>
+<li><p><strong>dz</strong> (<em>int</em><em>, </em><em>optional</em>) – How far away the entity can be from <code class="docutils literal notranslate"><span class="pre">z</span></code> in the positive Z-axis. Defaults to None.</p></li>
+<li><p><strong>gamemode</strong> (<a class="reference internal" href="../registries/#onyx.registries.gamemode" title="onyx.registries.gamemode"><em>gamemode</em></a><em>, </em><em>optional</em>) – The gamemode of the entity. Defaults to None.</p></li>
+<li><p><strong>level</strong> (<em>int</em><em>, </em><em>optional</em>) – The experience points the entity must have. Defaults to None.</p></li>
+<li><p><strong>limit</strong> (<em>int</em><em>, </em><em>optional</em>) – The amount of entities that can be selected. Defaults to None.</p></li>
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – The name of the entity. Defaults to None.</p></li>
+<li><p><strong>nbt</strong> (<em>Compound</em><em>, </em><em>optional</em>) – The NBT of the entity. Defaults to None.</p></li>
+<li><p><strong>predicate</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>list</em><em>]</em><em>, </em><em>optional</em>) – The predicates that must apply to the entity. Defaults to None.</p></li>
+<li><p><strong>scores</strong> (<em>dict</em><em>, </em><em>optional</em>) – The scores of the entity. Should be given as a dictionary with the keys being the objectives and the values being the values. Defaults to None.</p></li>
+<li><p><strong>sort</strong> (<a class="reference internal" href="../registries/#onyx.registries.entity_sort" title="onyx.registries.entity_sort"><em>entity_sort</em></a><em>, </em><em>optional</em>) – How the entities will be sorted if multiple are selected. Defaults to None.</p></li>
+<li><p><strong>tag</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>list</em><em>]</em><em>, </em><em>optional</em>) – The tags of the entity. If this is a list, then multiple <code class="docutils literal notranslate"><span class="pre">tag</span></code> entries will be created in the selector. Example: <code class="docutils literal notranslate"><span class="pre">tag=[&quot;tag1&quot;,</span> <span class="pre">&quot;tag2&quot;]</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">tag=tag1,</span> <span class="pre">tag=2</span></code>. Defaults to None.</p></li>
+<li><p><strong>team</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>list</em><em>]</em><em>, </em><em>optional</em>) – The team of the entity. If this is a list, then multiple <code class="docutils literal notranslate"><span class="pre">team</span></code> entries will be created in the selector. Example: <code class="docutils literal notranslate"><span class="pre">team=[&quot;team1&quot;,</span> <span class="pre">&quot;team2&quot;]</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">team=team1,</span> <span class="pre">team=team2</span></code>. However, this selector will always fail, since an entity can only be on one team. As such, a list should only be specified if you’re negating multiple teams. Defaults to None.</p></li>
+<li><p><strong>x</strong> (<em>int</em><em>, </em><em>optional</em>) – The point on the X-axis of the entity. Defaults to None.</p></li>
+<li><p><strong>y</strong> (<em>int</em><em>, </em><em>optional</em>) – The point on the Y-axis of the entity. Defaults to None.</p></li>
+<li><p><strong>z</strong> (<em>int</em><em>, </em><em>optional</em>) – The point on the Z-axis of the entity. Defaults to None.</p></li>
+<li><p><strong>x_rotation</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><a class="reference internal" href="../util/#onyx.util.Range" title="onyx.util.Range"><em>Range</em></a><em>]</em><em>, </em><em>optional</em>) – The rotation of the entity on the X-axis (vertical). Defaults to None.</p></li>
+<li><p><strong>y_rotation</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><a class="reference internal" href="../util/#onyx.util.Range" title="onyx.util.Range"><em>Range</em></a><em>]</em><em>, </em><em>optional</em>) – The rotation of the entity on the Y-axis (horizontal). Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.selector.Selector.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.selector.Selector.build" title="Permalink to this definition"></a></dt>
+<dd><p>build - Returns the built selector</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The built selector</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../scoreboard/" class="btn btn-neutral float-left" title="onyx.scoreboard" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../text_component/" class="btn btn-neutral float-right" title="onyx.text_component" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

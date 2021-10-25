@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>onyx.scoreboard &mdash; Python  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="onyx.selector" href="../selector/" />
+    <link rel="prev" title="onyx.split_registries.structure" href="../sr_structure/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../bossbar/">onyx.bossbar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../class_types/">onyx.class_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands/">onyx.commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../execute/">onyx.execute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pack_manager/">onyx.pack_manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registries/">onyx.registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../split_registries/">onyx.split_registries</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">onyx.scoreboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../selector/">onyx.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../text_component/">onyx.text_component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util/">onyx.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+      <li>onyx.scoreboard</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/scoreboard.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-onyx.scoreboard">
+<span id="onyx-scoreboard"></span><h1>onyx.scoreboard<a class="headerlink" href="#module-onyx.scoreboard" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.scoreboard.Expression">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.scoreboard.</span></span><span class="sig-name descname"><span class="pre">Expression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left_side</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_side</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Expression" title="Permalink to this definition"></a></dt>
+<dd><p>Expression - Represents a scoreboard check expression used for <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">if/unless</span></code>. Do not create manually. Use the expression operators on a <code class="docutils literal notranslate"><span class="pre">Player</span></code> object instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>left_side</strong> (<em>str</em>) – A stringified <code class="docutils literal notranslate"><span class="pre">Player</span></code> object</p></li>
+<li><p><strong>operator</strong> (<em>str</em>) – A string containing the operator</p></li>
+<li><p><strong>right_side</strong> (<em>str</em>) – A stringified <code class="docutils literal notranslate"><span class="pre">Player</span></code> object</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Any function without an overridden operator can be added by doing the following:</p>
+<p>from onyx.scoreboard import Player
+# Overload an operator for swap
+Player.__ior__ = Player.swap</p>
+<p>A full list of potential operators to overload without breaking existing functionality is as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__ipow__</span></code> (<a href="#id1"><span class="problematic" id="id2">**</span></a>=)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__ilshift__</span></code> (&lt;&lt;=)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__irshift__</span></code> (&gt;&gt;=)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__iand__</span></code> (&amp;=)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__ior__</span></code> (<a href="#id3"><span class="problematic" id="id4">|</span></a>=)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__ixor__</span></code> (^=)</p></li>
+</ul>
+<p>This list may change at any time, and this functionality is not supported. Just replace the proper things in the above example and you’re good to go.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.scoreboard.</span></span><span class="sig-name descname"><span class="pre">Player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player" title="Permalink to this definition"></a></dt>
+<dd><p>Player - Represents a player on a scoreboard. Do not create manually. Use the <code class="docutils literal notranslate"><span class="pre">Scoreboard.player</span></code> method instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<a class="reference internal" href="#onyx.scoreboard.Scoreboard" title="onyx.scoreboard.Scoreboard"><em>Scoreboard</em></a>) – The parent <code class="docutils literal notranslate"><span class="pre">Scoreboard</span></code> object</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – The player name. Automatically converted. A prefix of <code class="docutils literal notranslate"><span class="pre">player_</span></code> is interpreted as a plain string. A prefix of <cite>_</cite> is interpreted as a hidden player. Anything else is interpreted as a non-player player. Example: <code class="docutils literal notranslate"><span class="pre">player_DoubleF3lix</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">DoubleF3lix</span></code>, <code class="docutils literal notranslate"><span class="pre">_DoubleF3lix</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">#DoubleF3lix</span></code>, and <code class="docutils literal notranslate"><span class="pre">DoubleF3lix</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">$DoubleF3lix</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.set" title="Permalink to this definition"></a></dt>
+<dd><p>set - Sets the value of the scoreboard player</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int</em>) – The value to set</p></li>
+<li><p><strong>init</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not this command should be put in the init function. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.add" title="Permalink to this definition"></a></dt>
+<dd><p>add - Adds the value to the scoreboard player</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – The value to add</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.subtract">
+<span class="sig-name descname"><span class="pre">subtract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.subtract" title="Permalink to this definition"></a></dt>
+<dd><p>subtract - Subtracts the value from the scoreboard player</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – The value to subtract</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.multiply">
+<span class="sig-name descname"><span class="pre">multiply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.multiply" title="Permalink to this definition"></a></dt>
+<dd><p>multiply - Multiplies a number or another players score to the scoreboard player. If an integer is specified, a constant player will be created and that will be multiplied.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – The value to multiply</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.divide">
+<span class="sig-name descname"><span class="pre">divide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.divide" title="Permalink to this definition"></a></dt>
+<dd><p>divide - Divides a number or another players score to the scoreboard player. If an integer is specified, a constant player will be created and that will be divided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – The value to divide</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.modulo">
+<span class="sig-name descname"><span class="pre">modulo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.modulo" title="Permalink to this definition"></a></dt>
+<dd><p>modulo - Applies a modulo a number or another players score to the scoreboard player. If an integer is specified, a constant player will be created and that will have the modulo applied. Essentially, this is <code class="docutils literal notranslate"><span class="pre">self</span> <span class="pre">%</span> <span class="pre">value</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – The value to apply a modulo with</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.swap">
+<span class="sig-name descname"><span class="pre">swap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.swap" title="Permalink to this definition"></a></dt>
+<dd><p>swap - Swaps the value of the scoreboard player with another player</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference internal" href="#onyx.scoreboard.Player" title="onyx.scoreboard.Player"><em>Player</em></a>) – The player to swap with</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.set_if_less">
+<span class="sig-name descname"><span class="pre">set_if_less</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.set_if_less" title="Permalink to this definition"></a></dt>
+<dd><p>set_if_less - Sets the scoreboard player to the value if it is less than it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference internal" href="#onyx.scoreboard.Player" title="onyx.scoreboard.Player"><em>Player</em></a>) – The value to compare against and set if it is less</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.set_if_greater">
+<span class="sig-name descname"><span class="pre">set_if_greater</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.set_if_greater" title="Permalink to this definition"></a></dt>
+<dd><p>set_if_greater - Sets the scoreboard player to the value if it is greater than it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference internal" href="#onyx.scoreboard.Player" title="onyx.scoreboard.Player"><em>Player</em></a>) – The value to compare against and set if it is greater</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.enable">
+<span class="sig-name descname"><span class="pre">enable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.enable" title="Permalink to this definition"></a></dt>
+<dd><p>enable - Enables the scoreboard player for <code class="docutils literal notranslate"><span class="pre">trigger</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.get" title="Permalink to this definition"></a></dt>
+<dd><p>get - Gets the value of the scoreboard player. Only useful with <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">store</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.reset" title="Permalink to this definition"></a></dt>
+<dd><p>reset - Removes the player from its parent scoreboard</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.if_equal">
+<span class="sig-name descname"><span class="pre">if_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.if_equal" title="Permalink to this definition"></a></dt>
+<dd><p>if_equal - Checks if the scoreboard player is equal to the given player. Used in <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">if/unless</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#onyx.scoreboard.Player" title="onyx.scoreboard.Player"><em>Player</em></a><em>, </em><em>int</em><em>, </em><a class="reference internal" href="../util/#onyx.util.Range" title="onyx.util.Range"><em>Range</em></a>) – The scoreboard player or value to compare against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An expression object representing the comparison</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#onyx.scoreboard.Expression" title="onyx.scoreboard.Expression">Expression</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.if_less_than">
+<span class="sig-name descname"><span class="pre">if_less_than</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.if_less_than" title="Permalink to this definition"></a></dt>
+<dd><p>if_less_than - Checks if the scoreboard player is less than the given player. Used in <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">if/unless</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference internal" href="#onyx.scoreboard.Player" title="onyx.scoreboard.Player"><em>Player</em></a>) – The scoreboard player to compare against. For checking numbers, use <code class="docutils literal notranslate"><span class="pre">if_equal</span></code> with a <code class="docutils literal notranslate"><span class="pre">Range</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An expression object representing the comparison</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#onyx.scoreboard.Expression" title="onyx.scoreboard.Expression">Expression</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.if_greater_than">
+<span class="sig-name descname"><span class="pre">if_greater_than</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.if_greater_than" title="Permalink to this definition"></a></dt>
+<dd><p>if_greater_than - Checks if the scoreboard player is greater than the given player. Used in <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">if/unless</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference internal" href="#onyx.scoreboard.Player" title="onyx.scoreboard.Player"><em>Player</em></a>) – The scoreboard player to compare against. For checking numbers, use <code class="docutils literal notranslate"><span class="pre">if_equal</span></code> with a <code class="docutils literal notranslate"><span class="pre">Range</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An expression object representing the comparison</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#onyx.scoreboard.Expression" title="onyx.scoreboard.Expression">Expression</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.if_less_than_or_equal">
+<span class="sig-name descname"><span class="pre">if_less_than_or_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.if_less_than_or_equal" title="Permalink to this definition"></a></dt>
+<dd><p>if_less_than_or_equal - Checks if the scoreboard player is less than or equal to the given player. Used in <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">if/unless</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference internal" href="#onyx.scoreboard.Player" title="onyx.scoreboard.Player"><em>Player</em></a>) – The scoreboard player to compare against. For checking numbers, use <code class="docutils literal notranslate"><span class="pre">if_equal</span></code> with a <code class="docutils literal notranslate"><span class="pre">Range</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An expression object representing the comparison</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#onyx.scoreboard.Expression" title="onyx.scoreboard.Expression">Expression</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Player.if_greater_than_or_equal">
+<span class="sig-name descname"><span class="pre">if_greater_than_or_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Player.if_greater_than_or_equal" title="Permalink to this definition"></a></dt>
+<dd><p>if_greater_than_or_equal - Checks if the scoreboard player is greater than or equal to the given player. Used in <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">if/unless</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference internal" href="#onyx.scoreboard.Player" title="onyx.scoreboard.Player"><em>Player</em></a>) – The scoreboard player to compare against. For checking numbers, use <code class="docutils literal notranslate"><span class="pre">if_equal</span></code> with a <code class="docutils literal notranslate"><span class="pre">Range</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An expression object representing the comparison</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#onyx.scoreboard.Expression" title="onyx.scoreboard.Expression">Expression</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.scoreboard.Scoreboard">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.scoreboard.</span></span><span class="sig-name descname"><span class="pre">Scoreboard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criteria</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dummy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Scoreboard" title="Permalink to this definition"></a></dt>
+<dd><p>Scoreboard - Represents a scoreboard objective.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the scoreboard</p></li>
+<li><p><strong>create</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not the scoreboard should be created. Defaults to False.</p></li>
+<li><p><strong>criteria</strong> (<em>str</em><em>, </em><em>optional</em>) – The criteria of the scoreboard. Only used if <code class="docutils literal notranslate"><span class="pre">create</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>. Defaults to “dummy”.</p></li>
+<li><p><strong>display_name</strong> (<a class="reference internal" href="../text_component/#onyx.text_component.TextComponent" title="onyx.text_component.TextComponent"><em>TextComponent</em></a><em>, </em><em>optional</em>) – The display name of the scoreboard. Only used if <code class="docutils literal notranslate"><span class="pre">create</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>. Defaults to None.</p></li>
+<li><p><strong>players</strong> (<em>dict</em><em>, </em><em>optional</em>) – A dictionary of players to values. Only used if <code class="docutils literal notranslate"><span class="pre">create</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Scoreboard.player">
+<span class="sig-name descname"><span class="pre">player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Scoreboard.player" title="Permalink to this definition"></a></dt>
+<dd><p>player - Returns a player object representing the given player. See documentation for <code class="docutils literal notranslate"><span class="pre">Player</span></code> for more information. If an object with the same name already exists, it will be returned instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – The player name. The player name. Automatically converted. A prefix of <code class="docutils literal notranslate"><span class="pre">player_</span></code> is interpreted as a plain string. A prefix of <cite>_</cite> is interpreted as a hidden player. Anything else is interpreted as a non-player player. Example: <code class="docutils literal notranslate"><span class="pre">player_DoubleF3lix</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">DoubleF3lix</span></code>, <code class="docutils literal notranslate"><span class="pre">_DoubleF3lix</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">#DoubleF3lix</span></code>, and <code class="docutils literal notranslate"><span class="pre">DoubleF3lix</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">$DoubleF3lix</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A player object representing the given player.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#onyx.scoreboard.Player" title="onyx.scoreboard.Player">Player</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Scoreboard.handle_operator">
+<span class="sig-name descname"><span class="pre">handle_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Scoreboard.handle_operator" title="Permalink to this definition"></a></dt>
+<dd><p>handle_operator - Handles are player operators (except expression)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The player name</p></li>
+<li><p><strong>value</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#onyx.scoreboard.Player" title="onyx.scoreboard.Player"><em>Player</em></a><em>, </em><em>int</em><em>]</em>) – The value passed as the right side of the operator (with the player being the left)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Swap operator was used with a number</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Scoreboard.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Scoreboard.delete" title="Permalink to this definition"></a></dt>
+<dd><p>delete - Deletes the scoreboard objective</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Scoreboard.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Scoreboard.reset" title="Permalink to this definition"></a></dt>
+<dd><p>reset - Resets all players on the scoreboard</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Scoreboard.setdisplay">
+<span class="sig-name descname"><span class="pre">setdisplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Scoreboard.setdisplay" title="Permalink to this definition"></a></dt>
+<dd><p>setdisplay - Sets this scoreboard on a display</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>display</strong> (<a class="reference internal" href="../registries/#onyx.registries.scoreboard_display" title="onyx.registries.scoreboard_display"><em>scoreboard_display</em></a>) – The display to set this scoreboard on</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Scoreboard.modify">
+<span class="sig-name descname"><span class="pre">modify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trait</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Scoreboard.modify" title="Permalink to this definition"></a></dt>
+<dd><p>modify - Modifies a scoreboard trait</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trait</strong> (<a class="reference internal" href="../registries/#onyx.registries.scoreboard_trait" title="onyx.registries.scoreboard_trait"><em>scoreboard_trait</em></a>) – Either <code class="docutils literal notranslate"><span class="pre">display_name</span></code> or <code class="docutils literal notranslate"><span class="pre">render_type</span></code></p></li>
+<li><p><strong>value</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../text_component/#onyx.text_component.TextComponent" title="onyx.text_component.TextComponent"><em>TextComponent</em></a><em>, </em><a class="reference internal" href="../registries/#onyx.registries.scoreboard_render_type" title="onyx.registries.scoreboard_render_type"><em>scoreboard_render_type</em></a><em>]</em>) – The new value of the attribute</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.scoreboard.Scoreboard.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.scoreboard.Scoreboard.create" title="Permalink to this definition"></a></dt>
+<dd><p>create - Creates the scoreboard</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the scoreboard is deleted and then recreated. Defaults to False.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../sr_structure/" class="btn btn-neutral float-left" title="onyx.split_registries.structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../selector/" class="btn btn-neutral float-right" title="onyx.selector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

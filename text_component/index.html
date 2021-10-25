@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>onyx.text_component &mdash; Python  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="onyx.util" href="../util/" />
+    <link rel="prev" title="onyx.selector" href="../selector/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../bossbar/">onyx.bossbar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../class_types/">onyx.class_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands/">onyx.commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../execute/">onyx.execute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pack_manager/">onyx.pack_manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registries/">onyx.registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../split_registries/">onyx.split_registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scoreboard/">onyx.scoreboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../selector/">onyx.selector</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">onyx.text_component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util/">onyx.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+      <li>onyx.text_component</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/text_component.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="onyx-text-component">
+<h1>onyx.text_component<a class="headerlink" href="#onyx-text-component" title="Permalink to this headline"></a></h1>
+<span class="target" id="module-onyx.text_component"></span><dl class="py class">
+<dt class="sig sig-object py" id="onyx.text_component.TextComponentPart">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.text_component.</span></span><span class="sig-name descname"><span class="pre">TextComponentPart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keybind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">italic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">underlined</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strikethrough</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obfuscated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insertion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">click_event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hover_event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.text_component.TextComponentPart" title="Permalink to this definition"></a></dt>
+<dd><p>TextComponentPart - Do not create manually. Instead, use the <code class="docutils literal notranslate"><span class="pre">TextComponent.part()</span></code> method. Defines an element in a text component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em><em>, </em><em>optional</em>) – The text of the text component. Defaults to None.</p></li>
+<li><p><strong>translate</strong> (<em>str</em><em>, </em><em>optional</em>) – A translation identifier. Defaults to None.</p></li>
+<li><p><strong>with</strong> (<em>list</em><em>, </em><em>optional</em>) – A list of text components to be inserted into the translation text. Defaults to None.</p></li>
+<li><p><strong>score</strong> (<em>dict</em><em>, </em><em>optional</em>) – Displays the score holder’s current score in an objective. Defaults to None.</p></li>
+<li><p><strong>selector</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a><em>, </em><em>optional</em>) – Displays all entities matched from a selector. Defaults to None.</p></li>
+<li><p><strong>keybind</strong> (<a class="reference internal" href="../registries/#onyx.registries.keybind" title="onyx.registries.keybind"><em>keybind</em></a><em>, </em><em>optional</em>) – Displays a keybind. Defaults to None.</p></li>
+<li><p><strong>nbt</strong> (<em>str</em><em>, </em><em>optional</em>) – The NBT path to look for when using <code class="docutils literal notranslate"><span class="pre">block</span></code>, <code class="docutils literal notranslate"><span class="pre">entity</span></code>, or <code class="docutils literal notranslate"><span class="pre">storage</span></code>. Defaults to None.</p></li>
+<li><p><strong>interpret</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not each NBT value should be parsed as a text component. Defaults to None.</p></li>
+<li><p><strong>block</strong> (<em>tuple</em><em>, </em><em>optional</em>) – The coordinates of a block to get the NBT from. Defaults to None.</p></li>
+<li><p><strong>entity</strong> (<a class="reference internal" href="../selector/#onyx.selector.Selector" title="onyx.selector.Selector"><em>Selector</em></a><em>, </em><em>optional</em>) – The selector matching an entity to get the NBT from. Defaults to None.</p></li>
+<li><p><strong>storage</strong> (<em>str</em><em>, </em><em>optional</em>) – The storage ID to get the NBT from. Defaults to None.</p></li>
+<li><p><strong>extra</strong> (<em>list</em><em>, </em><em>optional</em>) – A list of child text components. Defaults to None.</p></li>
+<li><p><strong>color</strong> (<a class="reference internal" href="../registries/#onyx.registries.color" title="onyx.registries.color"><em>color</em></a><em>, </em><em>optional</em>) – The color of <code class="docutils literal notranslate"><span class="pre">text</span></code>. Defaults to None.</p></li>
+<li><p><strong>font</strong> (<em>str</em><em>, </em><em>optional</em>) – The font used by <code class="docutils literal notranslate"><span class="pre">text</span></code>. Defaults to None.</p></li>
+<li><p><strong>bold</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not <code class="docutils literal notranslate"><span class="pre">text</span></code> should be bold. Defaults to None.</p></li>
+<li><p><strong>italic</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not <code class="docutils literal notranslate"><span class="pre">text</span></code> should be italic. Defaults to None.</p></li>
+<li><p><strong>underlined</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not <code class="docutils literal notranslate"><span class="pre">text</span></code> should be underlined. Defaults to None.</p></li>
+<li><p><strong>strikethrough</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not <code class="docutils literal notranslate"><span class="pre">text</span></code> should be stricken. Defaults to None.</p></li>
+<li><p><strong>obfuscated</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not <code class="docutils literal notranslate"><span class="pre">text</span></code> should be obfuscated. Defaults to None.</p></li>
+<li><p><strong>insertion</strong> (<em>str</em><em>, </em><em>optional</em>) – The text to be inserted into the chat when the text is shift clicked. Defaults to None.</p></li>
+<li><p><strong>click_event</strong> (<a class="reference internal" href="../util/#onyx.util.ClickEvent" title="onyx.util.ClickEvent"><em>ClickEvent</em></a><em>, </em><em>optional</em>) – Defines an event to run when the text is clicked on. Defaults to None.</p></li>
+<li><p><strong>hover_event</strong> (<a class="reference internal" href="../util/#onyx.util.HoverEvent" title="onyx.util.HoverEvent"><em>HoverEvent</em></a><em>, </em><em>optional</em>) – Defines a tooltip to be display when the text is hovered over. Defaults to None.</p></li>
+<li><p><strong>dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Import a text component directly into an object without using other parameters. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.text_component.TextComponentPart.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#onyx.text_component.TextComponentPart.build" title="Permalink to this definition"></a></dt>
+<dd><p>build - Returns the built text component part</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The built text component part</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.text_component.TextComponent">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.text_component.</span></span><span class="sig-name descname"><span class="pre">TextComponent</span></span><a class="headerlink" href="#onyx.text_component.TextComponent" title="Permalink to this definition"></a></dt>
+<dd><p>TextComponent - Defines a text component array</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.text_component.TextComponent.part">
+<span class="sig-name descname"><span class="pre">part</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keybind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">italic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">underlined</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strikethrough</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obfuscated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insertion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">click_event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hover_event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.text_component.TextComponent.part" title="Permalink to this definition"></a></dt>
+<dd><p>part - See TextComponentPart documentation for more info</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#onyx.text_component.TextComponent" title="onyx.text_component.TextComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextComponent</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self - The current TextComponent object. Allows for method chaining.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="onyx.text_component.TextComponent.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.text_component.TextComponent.build" title="Permalink to this definition"></a></dt>
+<dd><p>build - Returns a built text component</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>is_extra</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not the text component should be put inside an <code class="docutils literal notranslate"><span class="pre">extra</span></code> list. Defaults to False.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The built text component</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../selector/" class="btn btn-neutral float-left" title="onyx.selector" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../util/" class="btn btn-neutral float-right" title="onyx.util" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

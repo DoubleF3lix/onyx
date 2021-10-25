@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>onyx.split_registries.item_tag &mdash; Python  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="onyx.split_registries.item" href="../sr_item/" />
+    <link rel="prev" title="onyx.split_registries.gamerule" href="../sr_gamerule/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../bossbar/">onyx.bossbar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../class_types/">onyx.class_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands/">onyx.commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../execute/">onyx.execute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pack_manager/">onyx.pack_manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registries/">onyx.registries</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../split_registries/">onyx.split_registries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sr_biome/">onyx.split_registries.biome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_block_tag/">onyx.split_registries.block_tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_block/">onyx.split_registries.block</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_effect/">onyx.split_registries.effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_enchantment/">onyx.split_registries.enchantment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_entity_tag/">onyx.split_registries.entity_tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_entity/">onyx.split_registries.entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_gamerule/">onyx.split_registries.gamerule</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">onyx.split_registries.item_tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_item/">onyx.split_registries.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_particle/">onyx.split_registries.particle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_recipe/">onyx.split_registries.recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sr_structure/">onyx.split_registries.structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../scoreboard/">onyx.scoreboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../selector/">onyx.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../text_component/">onyx.text_component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util/">onyx.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../split_registries/">onyx.split_registries</a> &raquo;</li>
+      <li>onyx.split_registries.item_tag</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/sr_item_tag.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="onyx-split-registries-item-tag">
+<h1>onyx.split_registries.item_tag<a class="headerlink" href="#onyx-split-registries-item-tag" title="Permalink to this headline"></a></h1>
+<span class="target" id="module-onyx.split_registries.item_tag"></span><dl class="py class">
+<dt class="sig sig-object py" id="onyx.split_registries.item_tag.item_tag">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.split_registries.item_tag.</span></span><span class="sig-name descname"><span class="pre">item_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.split_registries.item_tag.item_tag" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>acacia_logs</p></li>
+<li><p>anvil</p></li>
+<li><p>arrows</p></li>
+<li><p>axolotl_tempt_items</p></li>
+<li><p>banners</p></li>
+<li><p>beacon_payment_items</p></li>
+<li><p>beds</p></li>
+<li><p>birch_logs</p></li>
+<li><p>boats</p></li>
+<li><p>buttons</p></li>
+<li><p>candles</p></li>
+<li><p>carpets</p></li>
+<li><p>cluster_max_harvestables</p></li>
+<li><p>coal_ores</p></li>
+<li><p>coals</p></li>
+<li><p>copper_ores</p></li>
+<li><p>creeper_drop_music_discs</p></li>
+<li><p>crimson_stems</p></li>
+<li><p>dark_oak_logs</p></li>
+<li><p>diamond_ores</p></li>
+<li><p>doors</p></li>
+<li><p>emerald_ores</p></li>
+<li><p>fences</p></li>
+<li><p>fishes</p></li>
+<li><p>flowers</p></li>
+<li><p>fox_food</p></li>
+<li><p>freeze_immune_wearables</p></li>
+<li><p>gold_ores</p></li>
+<li><p>ignored_by_piglin_babies</p></li>
+<li><p>iron_ores</p></li>
+<li><p>jungle_logs</p></li>
+<li><p>lapis_ores</p></li>
+<li><p>leaves</p></li>
+<li><p>lectern_books</p></li>
+<li><p>logs</p></li>
+<li><p>logs_that_burn</p></li>
+<li><p>music_discs</p></li>
+<li><p>non_flammable_wood</p></li>
+<li><p>oak_logs</p></li>
+<li><p>occludes_vibration_signals</p></li>
+<li><p>piglin_food</p></li>
+<li><p>piglin_loved</p></li>
+<li><p>piglin_repellents</p></li>
+<li><p>planks</p></li>
+<li><p>rails</p></li>
+<li><p>redstone_ores</p></li>
+<li><p>sand</p></li>
+<li><p>saplings</p></li>
+<li><p>signs</p></li>
+<li><p>slabs</p></li>
+<li><p>small_flowers</p></li>
+<li><p>soul_fire_base_blocks</p></li>
+<li><p>spruce_logs</p></li>
+<li><p>stairs</p></li>
+<li><p>stone_bricks</p></li>
+<li><p>stone_crafting_materials</p></li>
+<li><p>stone_tool_materials</p></li>
+<li><p>tall_flowers</p></li>
+<li><p>trapdoors</p></li>
+<li><p>walls</p></li>
+<li><p>warped_stems</p></li>
+<li><p>wooden_buttons</p></li>
+<li><p>wooden_doors</p></li>
+<li><p>wooden_fences</p></li>
+<li><p>wooden_pressure_plates</p></li>
+<li><p>wooden_slabs</p></li>
+<li><p>wooden_stairs</p></li>
+<li><p>wooden_trapdoors</p></li>
+<li><p>wool</p></li>
+</ul>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../sr_gamerule/" class="btn btn-neutral float-left" title="onyx.split_registries.gamerule" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../sr_item/" class="btn btn-neutral float-right" title="onyx.split_registries.item" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>onyx.registries &mdash; Python  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="onyx.split_registries" href="../split_registries/" />
+    <link rel="prev" title="onyx.pack_manager" href="../pack_manager/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../" class="icon icon-home"> Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../bossbar/">onyx.bossbar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../class_types/">onyx.class_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands/">onyx.commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../execute/">onyx.execute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pack_manager/">onyx.pack_manager</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">onyx.registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../split_registries/">onyx.split_registries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scoreboard/">onyx.scoreboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../selector/">onyx.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../text_component/">onyx.text_component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../util/">onyx.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+      <li>onyx.registries</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/registries.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="onyx-registries">
+<h1>onyx.registries<a class="headerlink" href="#onyx-registries" title="Permalink to this headline"></a></h1>
+<span class="target" id="module-onyx.registries"></span><dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.gamemode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">gamemode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.gamemode" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>survival</p></li>
+<li><p>creative</p></li>
+<li><p>spectator</p></li>
+<li><p>adventure</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.selector_type">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">selector_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.selector_type" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>all_players</p></li>
+<li><p>all_entities</p></li>
+<li><p>random_player</p></li>
+<li><p>nearest_player</p></li>
+<li><p>selected_entity</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.entity_sort">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">entity_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.entity_sort" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>arbitrary</p></li>
+<li><p>furthest</p></li>
+<li><p>nearest</p></li>
+<li><p>random</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.scoreboard_display">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">scoreboard_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.scoreboard_display" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>below_name</p></li>
+<li><p>list</p></li>
+<li><p>sidebar</p></li>
+<li><p>team_black</p></li>
+<li><p>team_dark_blue</p></li>
+<li><p>team_dark_green</p></li>
+<li><p>team_dark_aqua</p></li>
+<li><p>team_dark_red</p></li>
+<li><p>team_dark_purple</p></li>
+<li><p>team_gold</p></li>
+<li><p>team_gray</p></li>
+<li><p>team_dark_gray</p></li>
+<li><p>team_blue</p></li>
+<li><p>team_green</p></li>
+<li><p>team_aqua</p></li>
+<li><p>team_red</p></li>
+<li><p>team_light_purple</p></li>
+<li><p>team_yellow</p></li>
+<li><p>team_white</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.scoreboard_trait">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">scoreboard_trait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.scoreboard_trait" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>display_name</p></li>
+<li><p>render_type</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.scoreboard_render_type">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">scoreboard_render_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.scoreboard_render_type" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>hearts</p></li>
+<li><p>integer</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.color">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.color" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>black</p></li>
+<li><p>dark_blue</p></li>
+<li><p>dark_green</p></li>
+<li><p>dark_aqua</p></li>
+<li><p>dark_red</p></li>
+<li><p>dark_purple</p></li>
+<li><p>gold</p></li>
+<li><p>gray</p></li>
+<li><p>dark_gray</p></li>
+<li><p>blue</p></li>
+<li><p>green</p></li>
+<li><p>aqua</p></li>
+<li><p>red</p></li>
+<li><p>light_purple</p></li>
+<li><p>yellow</p></li>
+<li><p>white</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.keybind">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">keybind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.keybind" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>jump</p></li>
+<li><p>sneak</p></li>
+<li><p>sprint</p></li>
+<li><p>left</p></li>
+<li><p>right</p></li>
+<li><p>back</p></li>
+<li><p>forward</p></li>
+<li><p>attack</p></li>
+<li><p>pick_item</p></li>
+<li><p>use</p></li>
+<li><p>drop</p></li>
+<li><p>hotbar_1</p></li>
+<li><p>hotbar_2</p></li>
+<li><p>hotbar_3</p></li>
+<li><p>hotbar_4</p></li>
+<li><p>hotbar_5</p></li>
+<li><p>hotbar_6</p></li>
+<li><p>hotbar_7</p></li>
+<li><p>hotbar_8</p></li>
+<li><p>hotbar_9</p></li>
+<li><p>load_toolbar_activator</p></li>
+<li><p>save_toolbar_activator</p></li>
+<li><p>player_list</p></li>
+<li><p>chat</p></li>
+<li><p>command</p></li>
+<li><p>advancements</p></li>
+<li><p>spectator_outlines</p></li>
+<li><p>outline_spectators</p></li>
+<li><p>screenshot</p></li>
+<li><p>smooth_camera</p></li>
+<li><p>cinematic_camera</p></li>
+<li><p>fullscreen</p></li>
+<li><p>toggle_perspective</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.click_event_action">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">click_event_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.click_event_action" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>change_page</p></li>
+<li><p>copy_to_clipboard</p></li>
+<li><p>open_url</p></li>
+<li><p>run_command</p></li>
+<li><p>suggest_command</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.hover_event_action">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">hover_event_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.hover_event_action" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>show_text</p></li>
+<li><p>show_item</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.axis">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">axis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.axis" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>x</p></li>
+<li><p>y</p></li>
+<li><p>z</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.anchor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">anchor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.anchor" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>feet</p></li>
+<li><p>eyes</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.dimension">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">dimension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.dimension" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>overworld</p></li>
+<li><p>the_end</p></li>
+<li><p>the_nether</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.data_type">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">data_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.data_type" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>byte</p></li>
+<li><p>double</p></li>
+<li><p>float</p></li>
+<li><p>int</p></li>
+<li><p>long</p></li>
+<li><p>short</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.bossbar_location">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">bossbar_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.bossbar_location" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>max</p></li>
+<li><p>value</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.source_type">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">source_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.source_type" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>block</p></li>
+<li><p>entity</p></li>
+<li><p>storage</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.difficulty">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">difficulty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.difficulty" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>peaceful</p></li>
+<li><p>easy</p></li>
+<li><p>normal</p></li>
+<li><p>hard</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.experience_type">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">experience_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.experience_type" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>levels</p></li>
+<li><p>point</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.weather_type">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">weather_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.weather_type" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>clear</p></li>
+<li><p>rain</p></li>
+<li><p>thunder</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.sound_channel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">sound_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.sound_channel" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>any</p></li>
+<li><p>ambient</p></li>
+<li><p>block</p></li>
+<li><p>hostile</p></li>
+<li><p>master</p></li>
+<li><p>music</p></li>
+<li><p>neutral</p></li>
+<li><p>player</p></li>
+<li><p>record</p></li>
+<li><p>voice</p></li>
+<li><p>weather</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.setblock_mode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">setblock_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.setblock_mode" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>destroy</p></li>
+<li><p>keep</p></li>
+<li><p>replace</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.fill_mode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">fill_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.fill_mode" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>destroy</p></li>
+<li><p>hollow</p></li>
+<li><p>keep</p></li>
+<li><p>outline</p></li>
+<li><p>replace</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.clone_mask_mode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">clone_mask_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.clone_mask_mode" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>filtered</p></li>
+<li><p>masked</p></li>
+<li><p>replace</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.clone_mode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">clone_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.clone_mode" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>force</p></li>
+<li><p>move</p></li>
+<li><p>normal</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.time_query">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">time_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.time_query" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>day</p></li>
+<li><p>daytime</p></li>
+<li><p>gametime</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.time">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.time" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>day</p></li>
+<li><p>midnight</p></li>
+<li><p>night</p></li>
+<li><p>noon</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.team_attribute">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">team_attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.team_attribute" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>collision_rule</p></li>
+<li><p>color</p></li>
+<li><p>death_message_visibility</p></li>
+<li><p>display_name</p></li>
+<li><p>friendly_fire</p></li>
+<li><p>nametag_visibility</p></li>
+<li><p>prefix</p></li>
+<li><p>see_friendly_invisibles</p></li>
+<li><p>suffix</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.collision_rule">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">collision_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.collision_rule" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>always</p></li>
+<li><p>never</p></li>
+<li><p>push_other_teams</p></li>
+<li><p>push_own_team</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="onyx.registries.death_message_visibility">
+<span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">death_message_visibility</span></span><a class="headerlink" href="#onyx.registries.death_message_visibility" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">onyx.registries._team_visibility</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="onyx.registries.nametag_visibility">
+<span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">nametag_visibility</span></span><a class="headerlink" href="#onyx.registries.nametag_visibility" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">onyx.registries._team_visibility</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.advancement_mode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">advancement_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.advancement_mode" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>everything</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">from_</span></a></p></li>
+<li><p>only</p></li>
+<li><p>through</p></li>
+<li><p>until</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.attribute">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.attribute" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>armor</p></li>
+<li><p>armor_toughness</p></li>
+<li><p>attack_damage</p></li>
+<li><p>attack_knockback</p></li>
+<li><p>attack_speed</p></li>
+<li><p>flying_speed</p></li>
+<li><p>follow_range</p></li>
+<li><p>knockback_resistance</p></li>
+<li><p>luck</p></li>
+<li><p>max_health</p></li>
+<li><p>movement_speed</p></li>
+<li><p>jump_strength</p></li>
+<li><p>spawn_reinforcements</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.attribute_mode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">attribute_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.attribute_mode" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>get</p></li>
+<li><p>get_base</p></li>
+<li><p>set_base</p></li>
+<li><p>add_modifier</p></li>
+<li><p>get_modifier</p></li>
+<li><p>remove_modifier</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.attribute_modifier_mode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">attribute_modifier_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.attribute_modifier_mode" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>add</p></li>
+<li><p>multiply</p></li>
+<li><p>multiply_base</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.bossbar_query">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">bossbar_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.bossbar_query" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>max_value</p></li>
+<li><p>players</p></li>
+<li><p>value</p></li>
+<li><p>is_visible</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.bossbar_color">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">bossbar_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.bossbar_color" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>blue</p></li>
+<li><p>green</p></li>
+<li><p>pink</p></li>
+<li><p>purple</p></li>
+<li><p>red</p></li>
+<li><p>white</p></li>
+<li><p>yellow</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.bossbar_style">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">bossbar_style</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.bossbar_style" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>nothced_6</p></li>
+<li><p>notched_10</p></li>
+<li><p>notched_12</p></li>
+<li><p>notched_20</p></li>
+<li><p>progress</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.data_operator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">data_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.data_operator" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>append</p></li>
+<li><p>insert</p></li>
+<li><p>merge</p></li>
+<li><p>prepend</p></li>
+<li><p>set_from</p></li>
+<li><p>set_value</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.datapack_enable_mode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">datapack_enable_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.datapack_enable_mode" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>after</p></li>
+<li><p>before</p></li>
+<li><p>first</p></li>
+<li><p>last</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.loot_mode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">loot_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.loot_mode" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>fish</p></li>
+<li><p>kill</p></li>
+<li><p>loot</p></li>
+<li><p>mine</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.hand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">hand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.hand" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>offhand</p></li>
+<li><p>mainhand</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.slot">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">slot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.slot" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>armor_chest</p></li>
+<li><p>armor_feet</p></li>
+<li><p>armor_head</p></li>
+<li><p>armor_legs</p></li>
+<li><p>container_0</p></li>
+<li><p>container_1</p></li>
+<li><p>container_2</p></li>
+<li><p>container_3</p></li>
+<li><p>container_4</p></li>
+<li><p>container_5</p></li>
+<li><p>container_6</p></li>
+<li><p>container_7</p></li>
+<li><p>container_8</p></li>
+<li><p>container_9</p></li>
+<li><p>container_10</p></li>
+<li><p>container_11</p></li>
+<li><p>container_12</p></li>
+<li><p>container_13</p></li>
+<li><p>container_14</p></li>
+<li><p>container_15</p></li>
+<li><p>container_16</p></li>
+<li><p>container_17</p></li>
+<li><p>container_18</p></li>
+<li><p>container_19</p></li>
+<li><p>container_20</p></li>
+<li><p>container_21</p></li>
+<li><p>container_22</p></li>
+<li><p>container_23</p></li>
+<li><p>container_24</p></li>
+<li><p>container_25</p></li>
+<li><p>container_26</p></li>
+<li><p>container_27</p></li>
+<li><p>container_28</p></li>
+<li><p>container_29</p></li>
+<li><p>container_30</p></li>
+<li><p>container_31</p></li>
+<li><p>container_32</p></li>
+<li><p>container_33</p></li>
+<li><p>container_34</p></li>
+<li><p>container_35</p></li>
+<li><p>container_36</p></li>
+<li><p>container_37</p></li>
+<li><p>container_38</p></li>
+<li><p>container_39</p></li>
+<li><p>container_40</p></li>
+<li><p>container_41</p></li>
+<li><p>container_42</p></li>
+<li><p>container_43</p></li>
+<li><p>container_44</p></li>
+<li><p>container_45</p></li>
+<li><p>container_46</p></li>
+<li><p>container_47</p></li>
+<li><p>container_48</p></li>
+<li><p>container_49</p></li>
+<li><p>container_50</p></li>
+<li><p>container_51</p></li>
+<li><p>container_52</p></li>
+<li><p>container_53</p></li>
+<li><p>enderchest_0</p></li>
+<li><p>enderchest_1</p></li>
+<li><p>enderchest_2</p></li>
+<li><p>enderchest_3</p></li>
+<li><p>enderchest_4</p></li>
+<li><p>enderchest_5</p></li>
+<li><p>enderchest_6</p></li>
+<li><p>enderchest_7</p></li>
+<li><p>enderchest_8</p></li>
+<li><p>enderchest_9</p></li>
+<li><p>enderchest_10</p></li>
+<li><p>enderchest_11</p></li>
+<li><p>enderchest_12</p></li>
+<li><p>enderchest_13</p></li>
+<li><p>enderchest_14</p></li>
+<li><p>enderchest_15</p></li>
+<li><p>enderchest_16</p></li>
+<li><p>enderchest_17</p></li>
+<li><p>enderchest_18</p></li>
+<li><p>enderchest_19</p></li>
+<li><p>enderchest_20</p></li>
+<li><p>enderchest_21</p></li>
+<li><p>enderchest_22</p></li>
+<li><p>enderchest_23</p></li>
+<li><p>enderchest_24</p></li>
+<li><p>enderchest_25</p></li>
+<li><p>enderchest_26</p></li>
+<li><p>horse_0</p></li>
+<li><p>horse_1</p></li>
+<li><p>horse_2</p></li>
+<li><p>horse_3</p></li>
+<li><p>horse_4</p></li>
+<li><p>horse_5</p></li>
+<li><p>horse_6</p></li>
+<li><p>horse_7</p></li>
+<li><p>horse_8</p></li>
+<li><p>horse_9</p></li>
+<li><p>horse_10</p></li>
+<li><p>horse_11</p></li>
+<li><p>horse_12</p></li>
+<li><p>horse_13</p></li>
+<li><p>horse_14</p></li>
+<li><p>horse_armor</p></li>
+<li><p>horse_chest</p></li>
+<li><p>horse_saddle</p></li>
+<li><p>hotbar_0</p></li>
+<li><p>hotbar_1</p></li>
+<li><p>hotbar_2</p></li>
+<li><p>hotbar_3</p></li>
+<li><p>hotbar_4</p></li>
+<li><p>hotbar_5</p></li>
+<li><p>hotbar_6</p></li>
+<li><p>hotbar_7</p></li>
+<li><p>hotbar_8</p></li>
+<li><p>inventory_0</p></li>
+<li><p>inventory_1</p></li>
+<li><p>inventory_2</p></li>
+<li><p>inventory_3</p></li>
+<li><p>inventory_4</p></li>
+<li><p>inventory_5</p></li>
+<li><p>inventory_6</p></li>
+<li><p>inventory_7</p></li>
+<li><p>inventory_8</p></li>
+<li><p>inventory_9</p></li>
+<li><p>inventory_10</p></li>
+<li><p>inventory_11</p></li>
+<li><p>inventory_12</p></li>
+<li><p>inventory_13</p></li>
+<li><p>inventory_14</p></li>
+<li><p>inventory_15</p></li>
+<li><p>inventory_16</p></li>
+<li><p>inventory_17</p></li>
+<li><p>inventory_18</p></li>
+<li><p>inventory_19</p></li>
+<li><p>inventory_20</p></li>
+<li><p>inventory_21</p></li>
+<li><p>inventory_22</p></li>
+<li><p>inventory_23</p></li>
+<li><p>inventory_24</p></li>
+<li><p>inventory_25</p></li>
+<li><p>inventory_26</p></li>
+<li><p>villager_0</p></li>
+<li><p>villager_1</p></li>
+<li><p>villager_2</p></li>
+<li><p>villager_3</p></li>
+<li><p>villager_4</p></li>
+<li><p>villager_5</p></li>
+<li><p>villager_6</p></li>
+<li><p>villager_7</p></li>
+<li><p>weapon</p></li>
+<li><p>weapon_mainhand</p></li>
+<li><p>weapon_offhand</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="onyx.registries.schedule_mode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">onyx.registries.</span></span><span class="sig-name descname"><span class="pre">schedule_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#onyx.registries.schedule_mode" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>append</p></li>
+<li><p>replace</p></li>
+</ul>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../pack_manager/" class="btn btn-neutral float-left" title="onyx.pack_manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../split_registries/" class="btn btn-neutral float-right" title="onyx.split_registries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
