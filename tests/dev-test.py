@@ -108,6 +108,20 @@ class DataPack(onyx.DataPack):
         assert str(self) == "onyx_testing_data_pack"
         self.advancement("testing:advancement", {})
 
+        q = onyx.scoreboard(
+            "objective", players={"player1": 3, "player2": 2, "player3": 1}
+        )
+
+        from onyx.scoreboard import Player
+
+        assert isinstance(q.players["$player1"], Player)
+        assert isinstance(q.players["$player2"], Player)
+        assert isinstance(q.players["$player3"], Player)
+
+        assert (
+            q.players["$player1"].get() == "scoreboard players get $player1 objective"
+        )
+
     def scoreboard_operators_test(self):
         # Initalize scoreboard
         scoreboard = onyx.scoreboard("name")

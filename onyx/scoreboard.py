@@ -1,9 +1,11 @@
 from typing import Union
 
 from onyx.commands import Commands
-from onyx.dev_util import add_scoreboard, convert_scoreboard_player_name, translate
+from onyx.dev_util import (add_scoreboard, convert_scoreboard_player_name,
+                           translate)
 from onyx.pack_manager import Stringable
-from onyx.registries import scoreboard_display, scoreboard_render_type, scoreboard_trait
+from onyx.registries import (scoreboard_display, scoreboard_render_type,
+                             scoreboard_trait)
 from onyx.text_component import TextComponent
 from onyx.util import Range
 
@@ -62,7 +64,7 @@ class Player(Stringable):
 
     def __init__(self, parent: "Scoreboard", name: str) -> None:
         self.parent = parent
-        self.name = convert_scoreboard_player_name(name)
+        self.name = name
 
     def __str__(self) -> str:
         """
@@ -86,16 +88,22 @@ class Player(Stringable):
         """
         return self.set(value)
 
-    def set(self, value: int) -> "Player":
+    def set(self, value: int, init: bool = False) -> "Player":
         """
         set - Sets the value of the scoreboard player
 
         Args:
             value (int): The value to set
+            init (bool, optional): Whether or not this command should be put in the init function. Defaults to ``False``.
 
         Returns:
             str: Command
         """
+        if init:
+            return Commands.push(
+                f"scoreboard players set {self.name} {self.parent.name} {value}",
+                init=True,
+            )
         self.parent.operator = "="
         return self.parent.handle_operator(self.name, value)
 
@@ -428,6 +436,7 @@ class Scoreboard(Stringable):
         create (bool, optional): Whether or not the scoreboard should be created. Defaults to False.
         criteria (str, optional): The criteria of the scoreboard. Only used if ``create`` is ``True``. Defaults to "dummy".
         display_name (TextComponent, optional): The display name of the scoreboard. Only used if ``create`` is ``True``. Defaults to None.
+        players (dict, optional): A dictionary of players to values. Only used if ``create`` is ``True``. Defaults to None.
     """
 
     def __init__(
@@ -436,6 +445,7 @@ class Scoreboard(Stringable):
         create: bool = False,
         criteria: str = "dummy",
         display_name: TextComponent = None,
+        players: dict = None,
     ) -> None:
         self.name = name
         self.criteria = criteria
@@ -453,6 +463,10 @@ class Scoreboard(Stringable):
         # Used to keep track of existing players to de-dupe stuff
         self.players = {}
 
+        if players:
+            for name, value in players.items():
+                self.player(name).set(value, init=True)
+
     def player(self, name: str) -> Player:
         """
         player - Returns a player object representing the given player. See documentation for ``Player`` for more information. If an object with the same name already exists, it will be returned instead.
@@ -463,6 +477,7 @@ class Scoreboard(Stringable):
         Returns:
             Player: A player object representing the given player.
         """
+        name = convert_scoreboard_player_name(name)
         if name not in self.players:
             self.players[name] = Player(self, name)
         return self.players[name]
